@@ -7,37 +7,37 @@
  */
 
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-if ( ! function_exists( 'brigsby_shopofthings_enqueue_styles' ) ):
-	/**
-	 * Load CSS file.
-	 */
-      function brigsby_shopofthings_enqueue_styles() {
-      //     wp_enqueue_style( 'brigsby-shopofthings', trailingslashit( get_stylesheet_directory_uri() ) . 'style.css', array( 'brigsby-style' ), false );
-      }
-endif;
-add_action('wp_enqueue_scripts', 'brigsby_shopofthings_enqueue_styles', 20);
+// if ( ! defined( 'ABSPATH' ) ) {
+// 	exit;
+// }
+// if ( ! function_exists( 'brigsby_shopofthings_enqueue_styles' ) ):
+// 	/**
+// 	 * Load CSS file.
+// 	 */
+//       function brigsby_shopofthings_enqueue_styles() {
+//       //     wp_enqueue_style( 'brigsby-shopofthings', trailingslashit( get_stylesheet_directory_uri() ) . 'style.css', array( 'brigsby-style' ), false );
+//       }
+// endif;
+// add_action('wp_enqueue_scripts', 'brigsby_shopofthings_enqueue_styles', 20);
 
 
-// Right Sidebar
-function shopofthings_register_sidebars() {
+// // Right Sidebar
+// function shopofthings_register_sidebars() {
 
-    /* Register first sidebar name Primary Sidebar */
-    register_sidebar(
-        array(
-            'name'          => __( 'Right Shop Sidebar' ),
-            'id'            => 'shop-sidebar-right',
-            'description' => __( 'Shop Sidebar right' ),
-            'before_widget' => '<section id="%1$s" class="widget %2$s">',
-            'after_widget' => '</section>',
-            'before_title' => '<h2 class="widget-title">',
-            'after_title' => '</h2>'
-        )
-    );
-}
-add_action( 'widgets_init', 'shopofthings_register_sidebars' );
+//     /* Register first sidebar name Primary Sidebar */
+//     register_sidebar(
+//         array(
+//             'name'          => __( 'Right Shop Sidebar' ),
+//             'id'            => 'shop-sidebar-right',
+//             'description' => __( 'Shop Sidebar right' ),
+//             'before_widget' => '<section id="%1$s" class="widget %2$s">',
+//             'after_widget' => '</section>',
+//             'before_title' => '<h2 class="widget-title">',
+//             'after_title' => '</h2>'
+//         )
+//     );
+// }
+// add_action( 'widgets_init', 'shopofthings_register_sidebars' );
 
 
 // require_once '/var/www/vhosts/jan/shopofthings/wordpress/wp-content/geoip/vendor/autoload.php';
@@ -101,10 +101,6 @@ add_filter( 'woocommerce_min_password_strength', 'wpglorify_woocommerce_password
 function wpglorify_woocommerce_password_filter() {
       return 1;
 }
-
-
-add_filter( 'allow_subdirectory_install', create_function( '', 'return true;' ));
-
 
 
 
