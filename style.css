@@ -18,13 +18,13 @@ body {
 }
 
 
-.hgrid-span-6 {
-    width: 60% !important;
-}
+/*.hgrid-span-6 {*/
+/*    width: 60% !important;*/
+/*}*/
 
-.hgrid-span-3 {
-    width: 20% !important;
-}
+/*.hgrid-span-3 {*/
+/*    width: 20% !important;*/
+/*}*/
 
 
 .woocommerce.archive ul.products li.product, .woocommerce-page.archive ul.products li.product {
