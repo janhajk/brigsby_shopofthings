@@ -195,4 +195,71 @@ function sot_custom_loop_title() {
    echo '<h3 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '" style="height:55px;overflow-y:hidden"><a href="' . esc_url( $link ) . '" class="woocommerce-LoopProduct-link-title woocommerce-loop-product__title_ink">' . $title . '</a></h3>';
 }
 
+
+
+function hoot_set_current_layout( $sidebar ) {
+	$spans = apply_filters( 'hoot_main_layout_spans', array(
+		'none' => array(
+			'content' => 9,
+			'sidebar' => 0,
+		),
+		'full' => array(
+			'content' => 12,
+			'sidebar' => 0,
+		),
+		'full-width' => array(
+			'content' => 12,
+			'sidebar' => 0,
+		),
+		'narrow-right' => array(
+			'content' => 9,
+			'sidebar' => 3,
+		),
+		'wide-right' => array(
+			'content' => 8,
+			'sidebar' => 4,
+		),
+		'narrow-left' => array(
+			'content' => 9,
+			'sidebar' => 3,
+		),
+		'wide-left' => array(
+			'content' => 8,
+			'sidebar' => 4,
+		),
+		'narrow-left-left' => array(
+			'content' => 6,
+			'sidebar' => 3,
+		),
+		'narrow-left-right' => array(
+			'content' => 6,
+			'sidebar' => 3,
+		),
+		'narrow-right-left' => array(
+			'content' => 6,
+			'sidebar' => 3,
+		),
+		'narrow-right-right' => array(
+			'content' => 8,
+			'sidebar' => 2,
+		),
+		'default' => array(
+			'content' => 8,
+			'sidebar' => 4,
+		),
+	) );
+
+	/* Set the layout for current view */
+	global $hoot_theme;
+	$hoot_theme->currentlayout['layout'] = $sidebar;
+	if ( isset( $spans[ $sidebar ] ) ) {
+		$hoot_theme->currentlayout['content'] = $spans[ $sidebar ]['content'];
+		$hoot_theme->currentlayout['sidebar'] = $spans[ $sidebar ]['sidebar'];
+	} else {
+		$hoot_theme->currentlayout['content'] = $spans['default']['content'];
+		$hoot_theme->currentlayout['sidebar'] = $spans['default']['sidebar'];
+	}
+
+}
+
 ?>
