@@ -44,43 +44,13 @@ body {
  * ========================================================
  */
 .hgrid {
-  width: 100%;
   max-width: 1500px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
-.hgrid-stretch {
-  width: 100%;
+
+
+.hgrid-span-3 {
+  width: 15%;
 }
-.hgrid:after,
-.hgrid-stretch:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.hgrid:after,
-.hgrid-stretch:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-[class*="hgrid-span-"],
-[class*="hcolumn-"] {
-  padding: 0 30px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  float: left;
-  position: relative;
-}
-[class*="hgrid-span-"].full-width,
-[class*="hcolumn-"].full-width {
-  padding: 0;
-}
-.flush-columns {
-  margin: 0 -20px;
-}
-[class*="hcolumn-"] {
-  padding: 0 20px;
+.hgrid-span-6 {
+  width: 70%;
 }
