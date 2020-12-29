@@ -18,14 +18,14 @@ body {
 }
 
 
-/*.woocommerce.archive ul.products li.product, .woocommerce-page.archive ul.products li.product {*/
-/*    margin: 0;*/
-/*    padding: 5px;*/
-/*}*/
+.woocommerce.archive ul.products li.product, .woocommerce-page.archive ul.products li.product {
+    margin: 0;
+    padding: 5px;
+}
 
-/*.loop-meta {*/
-/* padding: 20px;*/
-/*}*/
+.loop-meta {
+ padding: 20px;
+}
 
 
 /**
@@ -44,5 +44,5 @@ body {
 }
 
 .sidebar li {
- border-bottom: 1px solid black;
+ border-bottom: 1px solid #3878AD;
 }
