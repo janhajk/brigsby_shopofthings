@@ -16,3 +16,12 @@
 body {
  font-size: 13px;
 }
+
+
+.hgrid-span-6 {
+    width: 60%;
+}
+
+.hgrid-span-3 {
+    width: 20%;
+}
