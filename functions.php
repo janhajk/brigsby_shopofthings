@@ -181,6 +181,18 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
 
 
+add_filter('woocommerce_after_shop_loop_item_title', 'sot_custom_product_title', 1, 1);
+function sot_custom_product_title($title) {
+      $len = strlen($title);
+      $title = substr($title, 0, 38);
+      if ($len >= 38) {
+            $title += '...';
+      }
+      return $title;
+}
+
+
+
 
 
 
