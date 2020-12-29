@@ -188,9 +188,6 @@ function sot_custom_loop_title() {
    $len = strlen($title);
    $link = apply_filters( 'woocommerce_loop_product_link', get_the_permalink(), $product );
    $title = substr($title, 0, 38);
-   if ($len >= 38) {
-         $title += '...';
-   }
    echo '<h3 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '"><a href="' . esc_url( $link ) . '" class="woocommerce-LoopProduct-link-title woocommerce-loop-product__title_ink">' . $title . '</a></h3>';
 }
 
