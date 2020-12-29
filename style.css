@@ -43,6 +43,6 @@ body {
  list-style: none;
 }
 
-.sidebar li {
+li.sidebar {
  border-bottom: 1px solid #3878AD;
 }

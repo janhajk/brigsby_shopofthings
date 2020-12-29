@@ -21,24 +21,6 @@
 // add_action('wp_enqueue_scripts', 'brigsby_shopofthings_enqueue_styles', 20);
 
 
-// // Right Sidebar
-// function shopofthings_register_sidebars() {
-
-//     /* Register first sidebar name Primary Sidebar */
-//     register_sidebar(
-//         array(
-//             'name'          => __( 'Right Shop Sidebar' ),
-//             'id'            => 'shop-sidebar-right',
-//             'description' => __( 'Shop Sidebar right' ),
-//             'before_widget' => '<section id="%1$s" class="widget %2$s">',
-//             'after_widget' => '</section>',
-//             'before_title' => '<h2 class="widget-title">',
-//             'after_title' => '</h2>'
-//         )
-//     );
-// }
-// add_action( 'widgets_init', 'shopofthings_register_sidebars' );
-
 
 // require_once '/var/www/vhosts/jan/shopofthings/wordpress/wp-content/geoip/vendor/autoload.php';
 // use GeoIp2\Database\Reader;
@@ -180,20 +162,20 @@ function wcs_custom_get_availability( $availability, $_product ) {
 }
 
 
-// remove_action('woocommerce_shop_loop_item_title','woocommerce_template_loop_product_title',10);
-// add_action('woocommerce_shop_loop_item_title','sot_custom_loop_title',10);
-// function sot_custom_loop_title() {
-//    $MAX_LEN = 60;
-//    global $product;
-//    $title = get_the_title();
-//    $len = strlen($title);
-//    $link = apply_filters( 'woocommerce_loop_product_link', get_the_permalink(), $product );
-//    $title = substr($title, 0, $MAX_LEN);
-//       if ($len >= $MAX_LEN) {
-//          $title .= '...';
-//    }
-//    echo '<h3 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '" style="height:55px;overflow-y:hidden"><a href="' . esc_url( $link ) . '" class="woocommerce-LoopProduct-link-title woocommerce-loop-product__title_ink">' . $title . '</a></h3>';
-// }
+remove_action('woocommerce_shop_loop_item_title','woocommerce_template_loop_product_title',10);
+add_action('woocommerce_shop_loop_item_title','sot_custom_loop_title',10);
+function sot_custom_loop_title() {
+   $MAX_LEN = 60;
+   global $product;
+   $title = get_the_title();
+   $len = strlen($title);
+   $link = apply_filters( 'woocommerce_loop_product_link', get_the_permalink(), $product );
+   $title = substr($title, 0, $MAX_LEN);
+      if ($len >= $MAX_LEN) {
+         $title .= '...';
+   }
+   echo '<h3 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '" style="height:55px;overflow-y:hidden"><a href="' . esc_url( $link ) . '" class="woocommerce-LoopProduct-link-title woocommerce-loop-product__title_ink">' . $title . '</a></h3>';
+}
 
 
 
