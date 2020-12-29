@@ -270,4 +270,14 @@ function hoot_set_current_layout( $sidebar ) {
 
 }
 
+
+
+// Change the Number of Columns Displayed Per Page
+add_filter( 'loop_shop_columns', 'lw_loop_shop_columns' );
+
+function lw_loop_shop_columns( $columns ) {
+ $columns = 4;
+ return $columns;
+}
+
 ?>
