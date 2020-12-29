@@ -30,3 +30,7 @@ body {
 .woocommerce.archive ul.products li.product, .woocommerce-page.archive ul.products li.product {
     margin: 0 !important;
 }
+
+.loop-meta {
+ padding: 20px;
+}
