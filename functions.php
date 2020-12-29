@@ -197,6 +197,14 @@ function sot_custom_loop_title() {
 
 
 
+
+/**
+ * OVerwrite the 'narrow-left-right' from 6/3/3 to 8/2/2
+ * 
+ * 
+ * 
+ * 
+ */
 function hoot_set_current_layout( $sidebar ) {
 	$spans = apply_filters( 'hoot_main_layout_spans', array(
 		'none' => array(
