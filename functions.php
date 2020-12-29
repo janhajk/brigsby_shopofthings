@@ -232,16 +232,16 @@ function hoot_set_current_layout( $sidebar ) {
 			'sidebar' => 3,
 		),
 		'narrow-left-right' => array(
-			'content' => 6,
-			'sidebar' => 3,
+			'content' => 8,
+			'sidebar' => 2,
 		),
 		'narrow-right-left' => array(
 			'content' => 6,
 			'sidebar' => 3,
 		),
 		'narrow-right-right' => array(
-			'content' => 8,
-			'sidebar' => 2,
+			'content' => 6,
+			'sidebar' => 3,
 		),
 		'default' => array(
 			'content' => 8,
