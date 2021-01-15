@@ -152,7 +152,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
          $availability['availability'] = __('Nur noch '.$product_stock.' auf Lager', 'woocommerce');
       }
       else if ($product_stock >= $DEFAULT_BIG_STOCK_THRESHOLD) {
-            $availability['availability'] = __('>'.$DEFAULT_BIG_STOCK_THRESHOLD.' sofort versandbereit', 'woocommerce');
+            $availability['availability'] = __('>'.$DEFAULT_BIG_STOCK_THRESHOLD.' sofort versandbereit ab eigenem Lager', 'woocommerce');
       }
       else if ($product_stock < $DEFAULT_LOW_STOCK_THRESHOLD) {
             $availability['availability'] = __('Nur noch '.$product_stock.' auf Lager', 'woocommerce');
