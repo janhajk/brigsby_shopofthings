@@ -46,3 +46,7 @@ body {
 .sidebar li {
  border-bottom: 1px solid #3878AD;
 }
+
+.reply-title {
+ font-weight: 400;
+}
