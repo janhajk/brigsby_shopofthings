@@ -266,7 +266,7 @@ function lw_loop_shop_columns( $columns ) {
 
 add_filter('woocommerce_get_price_html', 'sot_custom_price_exkl_mwst', $price, 10, 2);
 function sot_custom_price_exkl_mwst($price, $instance) {
-    return $price . '<pre style="display:none">'.print_r(wc_get_price_including_tax($instance), 1).'</pre>';
+    return $price . '<pre style="display:none">'.print_r(wc_get_price_excluding_tax($instance), 1).'</pre>';
 }
 
 ?>
