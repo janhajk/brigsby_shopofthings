@@ -273,14 +273,14 @@ function sot_custom_price_exkl_mwst($price, $instance) {
 
 
 /**
- * 
- * 
- * Show number of items in cart 
  *
- * 
- * 
- * 
- * 
+ *
+ * Show number of items in cart
+ *
+ *
+ *
+ *
+ *
  */
 
 
@@ -337,7 +337,7 @@ function woo_cart_but_count( $fragments ) {
 
     return $fragments;
 }
-add_filter( 'wp_nav_menu_top-menu_items', 'woo_cart_but_icon', 10, 2 ); // Change menu to suit - example uses 'top-menu'
+add_filter( 'wp_nav_menu_primary-menu_items', 'woo_cart_but_icon', 10, 2 ); // Change menu to suit - example uses 'top-menu'
 
 /**
  * Add WooCommerce Cart Menu Item Shortcode to particular menu
