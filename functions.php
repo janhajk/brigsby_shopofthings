@@ -167,7 +167,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
       $product_stock = $_product->get_stock_quantity();
 
 
-      if($product_stock == 0) {
+      if($product_stock <= 0) {
             if ($_product->get_backorders() == 'notify') {
                   $availability['availability'] = $_HTML_BACKORDER.__('Ab externem Lager', 'woocommerce');
             }
