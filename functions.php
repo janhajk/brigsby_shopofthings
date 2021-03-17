@@ -176,7 +176,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
       if($product_stock <= 0) {
             $lieferzeit = get_post_meta($id,'shopofthings_lieferzeit',true);
             // no stock but can backorder
-            if ($_product->get_backorders() == 'notify') {
+            if ($_product->get_backorders() != 'no') {
                   $availability['availability'] = $_HTML_BACKORDER.__('Ab externem Lager', 'woocommerce').'. Lieferzeit ca. '.(($lieferzeit == '') ? '20' : $lieferzeit). ' Tage';
             }
             // no backorder and no stock
@@ -198,16 +198,16 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
 
       if(($big_stock_available != '' && $product_stock >= $big_stock_available)){
-            $availability['availability'] = $_HTML_AVAILABLE.__($big_stock_available.'+ sofort versandbereit ab unserem Lager', 'woocommerce');
+            $availability['availability'] = $_HTML_AVAILABLE.__($big_stock_available.'+ Stück sofort versandbereit ab unserem Lager', 'woocommerce');
       }
       else if(($lowstock_available != '' && $product_stock <= $lowstock_available)){
-            $availability['availability'] = $_HTML_AVAILABLE.__($product_stock.' ab unserem Lager', 'woocommerce');
+            $availability['availability'] = $_HTML_AVAILABLE.__($product_stock.' Stück ab unserem Lager', 'woocommerce');
       }
       else if ($product_stock >= $DEFAULT_BIG_STOCK_THRESHOLD) {
-            $availability['availability'] = $_HTML_AVAILABLE.__($DEFAULT_BIG_STOCK_THRESHOLD.'+ sofort versandbereit ab unserem Lager', 'woocommerce');
+            $availability['availability'] = $_HTML_AVAILABLE.__($DEFAULT_BIG_STOCK_THRESHOLD.'+ Stück sofort versandbereit ab unserem Lager', 'woocommerce');
       }
       else if ($product_stock < $DEFAULT_LOW_STOCK_THRESHOLD) {
-            $availability['availability'] = $_HTML_AVAILABLE.__($product_stock.' ab unserem Lager', 'woocommerce');
+            $availability['availability'] = $_HTML_AVAILABLE.__($product_stock.' Stück ab unserem Lager', 'woocommerce');
       }
       else if ($product_stock > 0){
                         $availability['availability'] = $_HTML_AVAILABLE.__('Sofort versandbereit ab unserem Lager', 'woocommerce');
