@@ -167,7 +167,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
       $product_stock = $_product->get_stock_quantity();
 
       if($product_stock == 0) {
-            echo '<!-- <pre>'.print_r($_product,1).'</pre>-->';
+            echo('<!-- <pre>'.print_r($_product,1).'</pre> -->');
             $availability['availability'] = $_HTML_UNAVAILABLE.__('Momentan nicht an Lager', 'woocommerce');
       }
 
