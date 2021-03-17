@@ -168,8 +168,9 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
 
       if($product_stock <= 0) {
+            $lieferzeit = get_post_meta($id,'shopofthings_lieferzeit',true);
             if ($_product->get_backorders() == 'notify') {
-                  $availability['availability'] = $_HTML_BACKORDER.__('Ab externem Lager', 'woocommerce');
+                  $availability['availability'] = $_HTML_BACKORDER.__('Ab externem Lager', 'woocommerce').(($lieferzeit == '') ? '' : 'Lieferzeit ca. '.$lieferzeit. ' Tage');
             }
             else {
                   $availability['availability'] = $_HTML_UNAVAILABLE.__('Momentan nicht an Lager', 'woocommerce');
