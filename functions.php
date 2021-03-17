@@ -153,8 +153,8 @@ function wcs_custom_get_availability( $availability, $_product ) {
       $_UNICODE_CIRCLE_CROSS = '&#11199;';
 
       $_HTML_AVAILABLE = '<span style="color:#73c44d;font-size:1.5em"> '.$_UNICODE_CIRCLE_FILLED.'</span>&nbsp;';
-      $_HTML_BACKORDER = '<span style="color:black;font-size:1.5em">'.$_UNICODE_CIRCLE_HALF.'</span>&nbsp;';
-      $_HTML_UNAVAILABLE = '<span style="color:black;font-size:1.5em">'.$_UNICODE_CIRCLE_CROSS.'</span>&nbsp;';
+      $_HTML_BACKORDER = '<span style="color:#73c44d;font-size:1.5em">'.$_UNICODE_CIRCLE_HALF.'</span>&nbsp;';
+      $_HTML_UNAVAILABLE = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_CIRCLE_CROSS.'</span>&nbsp;';
 
       // Default Values
       $DEFAULT_BIG_STOCK_THRESHOLD = 10;
@@ -165,14 +165,15 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
       // Stock Quantity of current product
       $product_stock = $_product->get_stock_quantity();
-      $backorders = $_product->get_backorders();
-      $debug = '<script>('.print_r($backorders, true).');</script>';
 
-      if($product_stock == 0 && $backorders == 'notify') {
-            $availability['availability'] = $_HTML_BACKORDER.__('Ab externem Lager', 'woocommerce');
-      }
-      else if ($product_stock == 0) {
-            $availability['availability'] = $_HTML_UNAVAILABLE.__('Momentan nicht an Lager', 'woocommerce');
+
+      if($product_stock == 0) {
+            if ($_product->get_backorders() == 'notify') {
+                  $availability['availability'] = $_HTML_BACKORDER.__('Ab externem Lager', 'woocommerce');
+            }
+            else {
+                  $availability['availability'] = $_HTML_UNAVAILABLE.__('Momentan nicht an Lager', 'woocommerce');
+            }
       }
 
       // no availability or = zero return regular
