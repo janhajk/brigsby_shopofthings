@@ -146,6 +146,14 @@ s.parentNode.insertBefore(b, s);})();
  */
 add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
 function wcs_custom_get_availability( $availability, $_product ) {
+
+      $_UNICODE_CIRCLE_BULLET = '&#10687;';
+      $_UNICODE_CIRCLE_HALF = '&#9681;';
+      $_UNICODE_CIRCLE_FILLED ='&#9679;';
+
+      $_HTML_AVAILABLE = '<span style="color:#73c44d">'.$_UNICODE_CIRCLE_FILLED.'</span>';
+      $_HTML_BACKORDER = '<span style="color:black">'.$_UNICODE_CIRCLE_HALF.'</span>';
+
       // Default Values
       $DEFAULT_BIG_STOCK_THRESHOLD = 10;
       $DEFAULT_LOW_STOCK_THRESHOLD = 10;
@@ -156,7 +164,6 @@ function wcs_custom_get_availability( $availability, $_product ) {
       // Stock Quantity of current product
       $product_stock = $_product->get_stock_quantity();
 
-
       // no availability or = zero return regular
       if(!$product_stock) return $availability;
 
@@ -166,16 +173,20 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
 
       if(($big_stock_available != '' && $product_stock >= $big_stock_available)){
-            $availability['availability'] = __($big_stock_available.'+ sofort versandbereit ab unserem Lager', 'woocommerce');
+
+            $availability['availability'] = $_HTML_AVAILABLE.__($big_stock_available.'+ sofort versandbereit ab unserem Lager', 'woocommerce');
       }
       else if(($lowstock_available != '' && $product_stock <= $lowstock_available)){
-            $availability['availability'] = __($product_stock.' ab unserem Lager', 'woocommerce');
+            $availability['availability'] = $_HTML_AVAILABLE.__($product_stock.' ab unserem Lager', 'woocommerce');
       }
       else if ($product_stock >= $DEFAULT_BIG_STOCK_THRESHOLD) {
-            $availability['availability'] = __($DEFAULT_BIG_STOCK_THRESHOLD.'+ sofort versandbereit ab unserem Lager', 'woocommerce');
+            $availability['availability'] = $_HTML_AVAILABLE.__($DEFAULT_BIG_STOCK_THRESHOLD.'+ sofort versandbereit ab unserem Lager', 'woocommerce');
       }
       else if ($product_stock < $DEFAULT_LOW_STOCK_THRESHOLD) {
-            $availability['availability'] = __($product_stock.' ab unserem Lager', 'woocommerce');
+            $availability['availability'] = $_HTML_AVAILABLE.__($product_stock.' ab unserem Lager', 'woocommerce');
+      }
+      else if ($product_stock > 0){
+                        $availability['availability'] = $_HTML_AVAILABLE.__('Sofort versandbereit ab unserem Lager', 'woocommerce');
       }
     return $availability;
 }
