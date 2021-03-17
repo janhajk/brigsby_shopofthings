@@ -174,6 +174,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
             else {
                   $availability['availability'] = $_HTML_UNAVAILABLE.__('Momentan nicht an Lager', 'woocommerce');
             }
+            return $availability;
       }
 
       // no availability or = zero return regular
