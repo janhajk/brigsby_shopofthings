@@ -150,9 +150,11 @@ function wcs_custom_get_availability( $availability, $_product ) {
       $_UNICODE_CIRCLE_BULLET = '&#10687;';
       $_UNICODE_CIRCLE_HALF = '&#9681;';
       $_UNICODE_CIRCLE_FILLED ='&#9679;';
+      $_UNICODE_CIRCLE_CROSS = '&#11199;';
 
       $_HTML_AVAILABLE = '<span style="color:#73c44d;font-size:1.5em"> '.$_UNICODE_CIRCLE_FILLED.'</span>&nbsp;';
       $_HTML_BACKORDER = '<span style="color:black;font-size:1.5em">'.$_UNICODE_CIRCLE_HALF.'</span>&nbsp;';
+      $_HTML_UNAVAILABLE = '<span style="color:black;font-size:1.5em">'.$_UNICODE_CIRCLE_CROSS.'</span>&nbsp;';
 
       // Default Values
       $DEFAULT_BIG_STOCK_THRESHOLD = 10;
@@ -163,6 +165,10 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
       // Stock Quantity of current product
       $product_stock = $_product->get_stock_quantity();
+      
+      if($product_stock == 0) {
+            $availability['availability'] = $_HTML_UNAVAILABLE.__('Momentan nicht an Lager', 'woocommerce');
+      }
 
       // no availability or = zero return regular
       if(!$product_stock) return $availability;
@@ -173,7 +179,6 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
 
       if(($big_stock_available != '' && $product_stock >= $big_stock_available)){
-
             $availability['availability'] = $_HTML_AVAILABLE.__($big_stock_available.'+ sofort versandbereit ab unserem Lager', 'woocommerce');
       }
       else if(($lowstock_available != '' && $product_stock <= $lowstock_available)){
