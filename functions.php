@@ -168,7 +168,8 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
       // Backordered / on the way
       $onorder = get_post_meta($id,'shopofthings_onorder',true);
-      $onorder_txt = ($onorder != '') ? '<br/>'.$onorder.' beim Lieferanten bestellt': '-';
+      $onorder_txt = '';
+      if ($onorder != '') $onorder_txt = '<br/>'.$onorder.' beim Lieferanten bestellt';
 
 
       // if not on stock and backorder
@@ -184,7 +185,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
             }
             // also if negative do nothing (prevents from returning negative stock)
 
-            $availability['availability'].$onorder_txt;
+            $availability['availability'] .= $onorder_txt;
             return $availability;
       }
 
@@ -211,7 +212,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
       else if ($product_stock > 0){
                         $availability['availability'] = $_HTML_AVAILABLE.__('Sofort versandbereit ab unserem Lager', 'woocommerce');
       }
-      $availability['availability'].$onorder_txt;
+      $availability['availability'] .= $onorder_txt;
     return $availability;
 }
 
