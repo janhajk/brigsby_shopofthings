@@ -147,8 +147,8 @@ s.parentNode.insertBefore(b, s);})();
 add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
 function wcs_custom_get_availability( $availability, $_product ) {
       // Default Values
-      $DEFAULT_BIG_STOCK_THRESHOLD = 20;
-      $DEFAULT_LOW_STOCK_THRESHOLD = 2;
+      $DEFAULT_BIG_STOCK_THRESHOLD = 10;
+      $DEFAULT_LOW_STOCK_THRESHOLD = 10;
 
       // Product ID
       $id = $_product->get_id();
