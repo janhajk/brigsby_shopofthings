@@ -141,7 +141,7 @@ s.parentNode.insertBefore(b, s);})();
  * Woocommerce Availability
  *
  *
- *
+ * $_product obejct documentation: https://www.businessbloomer.com/woocommerce-easily-get-product-info-title-sku-desc-product-object
  *
  */
 add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
@@ -165,16 +165,26 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
       // Stock Quantity of current product
       $product_stock = $_product->get_stock_quantity();
+      
+      // Backordered / on the way
+      $onorder = get_post_meta($id,'shopofthings_onorder',true);
+      $onorder_txt = ($onorder != '' && (int) $onorder > 0) ? '<br/>'.$onorder.' beim Lieferanten bestellt': '';
 
 
+      // if not on stock and backorder
       if($product_stock <= 0) {
             $lieferzeit = get_post_meta($id,'shopofthings_lieferzeit',true);
+            // no stock but can backorder
             if ($_product->get_backorders() == 'notify') {
-                  $availability['availability'] = $_HTML_BACKORDER.__('Ab externem Lager', 'woocommerce').(($lieferzeit == '') ? '' : 'Lieferzeit ca. '.$lieferzeit. ' Tage');
+                  $availability['availability'] = $_HTML_BACKORDER.__('Ab externem Lager', 'woocommerce').(($lieferzeit == '') ? '' : '. Lieferzeit ca. '.$lieferzeit. ' Tage');
             }
+            // no backorder and no stock
             else {
                   $availability['availability'] = $_HTML_UNAVAILABLE.__('Momentan nicht an Lager', 'woocommerce');
             }
+            // also if negative do nothing (prevents from returning negative stock)
+            
+            $availability['availability'].$onorder_txt;
             return $availability;
       }
 
@@ -201,6 +211,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
       else if ($product_stock > 0){
                         $availability['availability'] = $_HTML_AVAILABLE.__('Sofort versandbereit ab unserem Lager', 'woocommerce');
       }
+      $availability['availability'].$onorder_txt;
     return $availability;
 }
 
