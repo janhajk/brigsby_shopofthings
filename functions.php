@@ -169,7 +169,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
       // Backordered / on the way
       $onorder = get_post_meta($id,'shopofthings_onorder',true);
       if ($product_stock < 0) $onorder = $onorder + $product_stock;
-      $onorder_txt = ($onorder != '' && (int) $onorder > 0) ? '<br/>'.$onorder.' Stück beim Lieferanten bestellt': '';
+      $onorder_txt = ($onorder != '' && (int) $onorder > 0) ? '<br/>'.$onorder.' Stück unterwegs von unserem Lieferanten': '';
 
 
       // if not on stock and backorder
