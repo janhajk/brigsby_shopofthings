@@ -151,8 +151,8 @@ function wcs_custom_get_availability( $availability, $_product ) {
       $_UNICODE_CIRCLE_HALF = '&#9681;';
       $_UNICODE_CIRCLE_FILLED ='&#9679;';
 
-      $_HTML_AVAILABLE = '<span style="color:#73c44d;font-size:1.5em"> '.$_UNICODE_CIRCLE_FILLED.'</span>';
-      $_HTML_BACKORDER = '<span style="color:black;font-size:1.5em"> '.$_UNICODE_CIRCLE_HALF.'</span>';
+      $_HTML_AVAILABLE = '<span style="color:#73c44d;font-size:1.5em"> '.$_UNICODE_CIRCLE_FILLED.'</span>&nbsp;';
+      $_HTML_BACKORDER = '<span style="color:black;font-size:1.5em">'.$_UNICODE_CIRCLE_HALF.'</span>&nbsp;';
 
       // Default Values
       $DEFAULT_BIG_STOCK_THRESHOLD = 10;
