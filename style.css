@@ -98,3 +98,10 @@ body {
         border-radius: 50%;
         padding: 1px;
 }
+
+
+
+/* Megamenu icon size */
+.rl-image-widget-image {
+      width: 150px;
+}
