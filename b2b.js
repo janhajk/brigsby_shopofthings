@@ -36,8 +36,23 @@ document.addEventListener('DOMContentLoaded', function() {
                   el.append(price);
             });
             jQuery('.woocommerce-price-suffix').each((i, el) => {
-                  jQuery(el).replaceWith('<b>exkl.</b> MWST');
+                  jQuery(el).replaceWith('exkl. MWST');
             });
+      };
+
+
+
+      let switchButtons = function(is_b2b) {
+            let active = b2b;
+            let passive = b2c;
+            if (!is_b2b) {
+                  active = b2c;
+                  passive = b2b;
+            }
+            active.style.backgroundColor = '#004a7f';
+            active.style.color = '#fff';
+            passive.style.backgroundColor = '#ebe9eb';
+            passive.style.color = '#515151';
       };
 
 
@@ -68,18 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
       b2c.className = 'button';
       b2b.title = 'Geschäftskundenpreise (exkl. MWST)';
       b2c.title = 'Privatkundenpreise (inkl. MWST)';
-      if (is_b2b) {
-            b2b.style.backgroundColor = '#004a7f';
-            b2b.style.color = '#fff';
-            b2c.style.backgroundColor = '#ebe9eb';
-            b2c.style.color = '#515151';
-      }
-      else {
-            b2c.style.backgroundColor = '#004a7f';
-            b2c.style.color = '#fff';
-            b2b.style.backgroundColor = '#ebe9eb';
-            b2b.style.color = '#515151';
-      }
+      switchButtons(is_b2b);
       container.appendChild(b2b);
       container.appendChild(b2c);
 
@@ -89,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
       b2b.addEventListener('click', () => {
             document.cookie = '_is_b2b=true';
             pricesExclMwst();
+            switchButtons(true);
       });
       b2c.addEventListener('click', () => {
             document.cookie = '_is_b2b=false';
