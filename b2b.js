@@ -55,6 +55,9 @@ document.addEventListener('DOMContentLoaded', function() {
             is_b2b = true;
             pricesExclMwst();
       }
+      else {
+            is_b2b = false;
+      }
 
       container.style.float = 'left';
 
