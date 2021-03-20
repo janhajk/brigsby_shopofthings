@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
             pricesExclMwst();
       }
 
-      span.style.float = 'left';
+      container.style.float = 'left';
 
 
       b2b.innerHTML = 'B2B';
