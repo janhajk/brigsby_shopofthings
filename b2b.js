@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   let currency = el.children().first();
                   let price = el.text();
                   price = price.replace('CHF', '');
+                  price = price.replace('\'', '');
                   price = parseFloat(price) / 1.077;
                   price = Math.round(price, 2);
                   el.empty();
