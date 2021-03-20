@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
       let container = document.createElement('span');
       let b2b = document.createElement('a');
       let b2c = document.createElement('a');
-      
-            container.style.float = 'left';
+
+      container.style.float = 'left';
 
 
       let getCookie = function(cname) {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
             var expires = "expires=" + d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-      }
+      };
 
 
       //, .woocommerce - price - suffix
@@ -100,12 +100,12 @@ document.addEventListener('DOMContentLoaded', function() {
       section.appendChild(container);
 
       b2b.addEventListener('click', () => {
-            document.cookie = '_is_b2b=true';
+            setCookie('_is_b2b', true, 3650);
             pricesExclMwst();
             switchButtons(true);
       });
       b2c.addEventListener('click', () => {
-            document.cookie = '_is_b2b=false';
+            setCookie('_is_b2b', false, 3650);
             window.location.reload(true);
       });
 
