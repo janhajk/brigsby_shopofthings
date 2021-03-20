@@ -46,19 +46,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // if cookie does not exist, create it
       if (is_b2b === '') {
+            is_b2b = false;
             document.cookie = '_is_b2b=false';
       }
 
       // change all prices to excl. MWST
       if (is_b2b === 'true') {
+            is_b2b = true;
             pricesExclMwst();
       }
+
+      span.style.float = 'left';
 
 
       b2b.innerHTML = 'B2B';
       b2c.innerHTML = 'B2C';
       b2b.className = 'button';
       b2c.className = 'button';
+      b2b.title = 'Geschäftskundenpreise (exkl. MWST)';
+      b2c.title = 'Privatkundenpreise (inkl. MWST)';
+      if (is_b2b) {
+            b2b.style.backgroundColor = '#004a7f';
+            b2b.style.color = '#fff';
+            b2c.style.backgroundColor = '#ebe9eb';
+            b2c.style.color = '#515151';
+      }
+      else {
+            b2c.style.backgroundColor = '#004a7f';
+            b2c.style.color = '#fff';
+            b2b.style.backgroundColor = '#ebe9eb';
+            b2b.style.color = '#515151';
+      }
       container.appendChild(b2b);
       container.appendChild(b2c);
 
@@ -67,9 +85,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
       b2b.addEventListener('click', () => {
             document.cookie = '_is_b2b=true';
+            pricesExclMwst();
       });
       b2c.addEventListener('click', () => {
             document.cookie = '_is_b2b=false';
+            window.location.reload(true);
       });
 
 });
