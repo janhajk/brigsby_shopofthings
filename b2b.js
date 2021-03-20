@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       //, .woocommerce - price - suffix
       let pricesExclMwst = function() {
+            if (window.location.pathname === '/cart/') return;
             jQuery('.woocommerce-Price-amount bdi').each((i, el) => {
                   el = jQuery(el);
                   let currency = el.children().first();
