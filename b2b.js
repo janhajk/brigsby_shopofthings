@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   price = price.replace('CHF', '');
                   price = price.replace('\'', '');
                   price = parseFloat(price) / 1.077;
-                  price = Math.round(price, 2);
+                  price = (price.toFixed(2)).toLocaleString('de-CH', { minimumFractionDigits: 2 });
                   el.empty();
                   el.append(currency);
                   el.append(price);
