@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
       let container = document.createElement('span');
       let b2b = document.createElement('a');
       let b2c = document.createElement('a');
+      
+            container.style.float = 'left';
 
 
       let getCookie = function(cname) {
@@ -20,6 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return "";
       };
+
+      let setCookie = function(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
 
 
       //, .woocommerce - price - suffix
@@ -58,15 +67,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // read cookie
       let is_b2b = getCookie('_is_b2b');
+      console.log(is_b2b);
 
       // if cookie does not exist, create it
-      if (is_b2b === '') {
+      if (is_b2b == '') {
             is_b2b = false;
-            document.cookie = '_is_b2b=false';
+            setCookie('_is_b2b', false, 3650);
       }
 
       // change all prices to excl. MWST
-      if (is_b2b === 'true') {
+      if (is_b2b == 'true') {
             is_b2b = true;
             pricesExclMwst();
       }
@@ -74,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
             is_b2b = false;
       }
 
-      container.style.float = 'left';
 
 
       b2b.innerHTML = 'B2B';
