@@ -418,7 +418,7 @@ function woo_cart_but_icon ( $items, $args ) {
  */
 function shopofthings_add_b2b_script() {
       // Register js file
-      wp_register_script( 'shopofthings-b2b', get_stylesheet_directory_uri().'/b2b.js', false, '1.0', true );
+      wp_register_script( 'shopofthings-b2b', get_stylesheet_directory_uri().'/b2b.js', false, '1.1', true );
 
       // Enqueue the registered script file
       wp_enqueue_script('shopofthings-b2b');
