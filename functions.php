@@ -173,9 +173,9 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
       // don't change anything for virtual products
       if ($product->get_virtual()) {
-            return $availability
+            return $availability;
 
-      };
+      }
 
 
       // if not on stock and backorder
