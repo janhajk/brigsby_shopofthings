@@ -173,7 +173,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
       // don't change anything for virtual products
       $is_virtual = $product->get_virtual();
-      print '<pre>'.print_r($is_virtual,1).'</pre>';
+      print 'is_virtual '.$is_virtual.' //';
       if ($is_virtual == true) {
             return $availability;
 
