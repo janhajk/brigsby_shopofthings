@@ -102,9 +102,11 @@ document.addEventListener('DOMContentLoaded', function() {
       section.appendChild(container);
 
       b2b.addEventListener('click', () => {
-            setCookie('_is_b2b', true, 3650);
-            pricesExclMwst();
-            switchButtons(true);
+            if (getCookie('_is_b2b') == 'false') {
+                  setCookie('_is_b2b', true, 3650);
+                  pricesExclMwst();
+                  switchButtons(true);
+            }
       });
       b2c.addEventListener('click', () => {
             setCookie('_is_b2b', false, 3650);
