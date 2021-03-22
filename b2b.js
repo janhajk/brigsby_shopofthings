@@ -69,16 +69,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // read cookie
       let is_b2b = getCookie('_is_b2b');
-      console.log(is_b2b);
 
       // if cookie does not exist, create it
       if (is_b2b == '') {
-            is_b2b = false;
-            setCookie('_is_b2b', false, 3650);
+            is_b2b = true;
+            setCookie('_is_b2b', true, 3650);
       }
 
       // change all prices to excl. MWST
-      if (is_b2b == 'true') {
+      if (is_b2b == 'true' || is_b2b === true) {
             is_b2b = true;
             pricesExclMwst();
       }
