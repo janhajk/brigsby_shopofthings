@@ -172,7 +172,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
       $onorder_txt = ($onorder != '' && (int) $onorder > 0) ? '<br/>'.$onorder.' Stück unterwegs von unserem Lieferanten': '';
 
       // don't change anything for virtual products
-      $is_virtual = _$product->get_virtual();
+      $is_virtual = $_product->get_virtual();
       if ($is_virtual == true) {
             // $availability['availability'] = $is_virtual;
             return $availability;
