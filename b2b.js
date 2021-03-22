@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       container.style.float = 'right';
       container.style.marginRight = '5px';
+      container.style.marginLeft = '5px';
 
 
       let getCookie = function(cname) {
@@ -61,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   active = b2c;
                   passive = b2b;
             }
-            active.style.backgroundColor = '#004a7f';
+            active.style.backgroundColor = '#01aef0';
             active.style.color = '#fff';
             passive.style.backgroundColor = '#ebe9eb';
             passive.style.color = '#515151';
