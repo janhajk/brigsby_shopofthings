@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
       let b2b = document.createElement('a');
       let b2c = document.createElement('a');
 
-      container.style.float = 'left';
+      container.style.float = 'right';
+      container.style.marginRight = '5px';
 
 
       let getCookie = function(cname) {
