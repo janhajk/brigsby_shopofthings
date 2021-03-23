@@ -231,6 +231,8 @@ function wcs_custom_get_availability( $availability, $_product ) {
  *
  * Stock status in Product Loop
  *
+ * $_product obejct documentation: https://www.businessbloomer.com/woocommerce-easily-get-product-info-title-sku-desc-product-object
+ *
  *
  * returns array(
  *    circle: <dom> for circle,
@@ -248,6 +250,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
       $_UNICODE_UNKNOWN = '&#65533;';
 
       $_HTML_AVAILABLE = '<span style="color:#73c44d;font-size:2em"> '.$_UNICODE_CIRCLE_FILLED.'</span>&nbsp;';
+      $_HTML_AVAILABLE_PARTLY = '<span style="color:#73c44d;font-size:2em"> '.$_UNICODE_CIRCLE_BULLET.'</span>&nbsp;';
       $_HTML_BACKORDER = '<span style="color:#73c44d;font-size:1.5em">'.$_UNICODE_CIRCLE_HALF.'</span>&nbsp;';
       $_HTML_UNAVAILABLE = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_CIRCLE_CROSS.'</span>&nbsp;';
       $_HTML_UNKNOWN = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_UNKNOWN.'</span>&nbsp;';
@@ -292,8 +295,12 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
             // no stock but can backorder
             if ($_product->get_backorders() != 'no') {
-                  $availability = $_HTML_BACKORDER.__('Ab externem Lager', 'woocommerce').'. Lieferzeit ca. '.$lieferzeit. ' Tage';
+                  $availability = 'Ab externem Lager. Lieferzeit ca. '.$lieferzeit. ' Tage';
                   $circle = $_HTML_BACKORDER;
+            }
+            else if ($_product->get_type() != 'simple') {
+                  $availability = 'Teilweise an eigenem Lager. Bitte Option wählen.';
+                  $circle = $_HTML_AVAILABLE_PARTLY;
             }
             // no backorder and no stock
             else {
