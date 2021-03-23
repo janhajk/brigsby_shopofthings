@@ -236,7 +236,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
  *
  */
 function sot_loop_item_stock($params, $product) {
-      print_r($product);
+      // print_r($product);
       // if ($product->get_id() == 4986) {
       //       print_r($params);
       // }
