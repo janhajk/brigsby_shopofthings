@@ -1,5 +1,9 @@
 <?php
 
+
+// https://storecustomizer.com/woocommerce-shop-page-hooks-visual-guide/
+
+
 /**
  * Brigsby - ShopOfThings
  *
@@ -222,6 +226,36 @@ function wcs_custom_get_availability( $availability, $_product ) {
 }
 
 
+
+/**
+ * 
+ * Stock status in Product Loop
+ * 
+ * 
+ * 
+ * 
+ */
+functin sot_loop_item_stock($params, $product) {
+      if ($product->get_id() == 4986) {
+            print_r($params);
+      }
+      return $params;
+}
+add_filter( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20, 2);
+
+
+
+
+
+/**
+ * 
+ * Auto shorten long titles in product loop
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 remove_action('woocommerce_shop_loop_item_title','woocommerce_template_loop_product_title',10);
 add_action('woocommerce_shop_loop_item_title','sot_custom_loop_title',10);
 function sot_custom_loop_title() {
@@ -426,6 +460,8 @@ function shopofthings_add_b2b_script() {
 
 // add script
 add_action('wp_enqueue_scripts', 'shopofthings_add_b2b_script');
+
+
 
 
 ?>
