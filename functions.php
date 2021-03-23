@@ -346,7 +346,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
  }
 function sot_loop_item_stock() {
       global $product;
-      if ($product->get_id() == 4986) {
+      if ($product->get_id() == 4986 || $product->get_id() == 16448) {
             $info = get_stock_info($product);
             echo '<div class="stock_quantity">'.$info['circle'].'</div>';
       }
