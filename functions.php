@@ -250,11 +250,11 @@ function wcs_custom_get_availability( $availability, $_product ) {
       $_UNICODE_CIRCLE_CROSS = '&#11199;';
       $_UNICODE_UNKNOWN = '&#65533;';
 
-      $_HTML_AVAILABLE = '<span style="color:#73c44d;font-size:2em"> '.$_UNICODE_CIRCLE_FILLED.'</span>&nbsp;';
-      $_HTML_AVAILABLE_PARTLY = '<span style="color:#73c44d;font-size:1.5em"> '.$_UNICODE_CIRCLE_BULLET.'</span>&nbsp;';
-      $_HTML_BACKORDER = '<span style="color:#73c44d;font-size:1.5em">'.$_UNICODE_CIRCLE_HALF.'</span>&nbsp;';
-      $_HTML_UNAVAILABLE = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_CIRCLE_CROSS.'</span>&nbsp;';
-      $_HTML_UNKNOWN = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_UNKNOWN.'</span>&nbsp;';
+      $_HTML_AVAILABLE = '<span style="color:#73c44d;font-size:2em"> '.$_UNICODE_CIRCLE_FILLED.'</span>';
+      $_HTML_AVAILABLE_PARTLY = '<span style="color:#73c44d;font-size:1.5em"> '.$_UNICODE_CIRCLE_BULLET.'</span>';
+      $_HTML_BACKORDER = '<span style="color:#73c44d;font-size:1.5em">'.$_UNICODE_CIRCLE_HALF.'</span>';
+      $_HTML_UNAVAILABLE = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_CIRCLE_CROSS.'</span>';
+      $_HTML_UNKNOWN = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_UNKNOWN.'</span';
 
 
       // Default Values
@@ -305,7 +305,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
             }
             // no backorder and no stock
             else {
-                  $availability = __('Momentan nicht an Lager', 'woocommerce');
+                  $availability = 'Momentan nicht an Lager';;
                   $circle = $_HTML_UNAVAILABLE;
             }
             return array(
@@ -356,7 +356,7 @@ function sot_loop_item_stock() {
       global $product;
       // if ($product->get_id() == 4986 || $product->get_id() == 16448) {
             $info = get_stock_info($product);
-            echo '<div style="float:right;position:relative;top:-210px title="'.$info['availability'].'">'.$info['circle'].'</div>';
+            echo '<div style="float:right;position:relative;top:-210px" title="'.$info['availability'].'">'.$info['circle'].'</div>';
       // }
 }
 add_action( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20, 2);
