@@ -346,10 +346,10 @@ function wcs_custom_get_availability( $availability, $_product ) {
  }
 function sot_loop_item_stock() {
       global $product;
-      if ($product->get_id() == 4986 || $product->get_id() == 16448) {
+      // if ($product->get_id() == 4986 || $product->get_id() == 16448) {
             $info = get_stock_info($product);
-            echo '<div class="stock_quantity">'.$info['circle'].'</div>';
-      }
+            echo '<div style="float:right;position:relative;top:-200px">'.$info['circle'].'</div>';
+      // }
 }
 add_action( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20, 2);
 
