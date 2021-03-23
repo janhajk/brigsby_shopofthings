@@ -243,6 +243,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
  */
  function get_stock_info ($_product) {
 
+      $_UNICODE_CIRCLE = '';
       $_UNICODE_CIRCLE_BULLET = '&#10687;';
       $_UNICODE_CIRCLE_HALF = '&#9681;';
       $_UNICODE_CIRCLE_FILLED ='&#9679;';
@@ -250,7 +251,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
       $_UNICODE_UNKNOWN = '&#65533;';
 
       $_HTML_AVAILABLE = '<span style="color:#73c44d;font-size:2em"> '.$_UNICODE_CIRCLE_FILLED.'</span>&nbsp;';
-      $_HTML_AVAILABLE_PARTLY = '<span style="color:#73c44d;font-size:2em"> '.$_UNICODE_CIRCLE_BULLET.'</span>&nbsp;';
+      $_HTML_AVAILABLE_PARTLY = '<span style="color:#73c44d;font-size:1.5em"> '.$_UNICODE_CIRCLE_BULLET.'</span>&nbsp;';
       $_HTML_BACKORDER = '<span style="color:#73c44d;font-size:1.5em">'.$_UNICODE_CIRCLE_HALF.'</span>&nbsp;';
       $_HTML_UNAVAILABLE = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_CIRCLE_CROSS.'</span>&nbsp;';
       $_HTML_UNKNOWN = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_UNKNOWN.'</span>&nbsp;';
