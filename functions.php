@@ -247,7 +247,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
       $_UNICODE_CIRCLE_CROSS = '&#11199;';
       $_UNICODE_UNKNOWN = '&#65533;';
 
-      $_HTML_AVAILABLE = '<span style="color:#73c44d;font-size:1.5em"> '.$_UNICODE_CIRCLE_FILLED.'</span>&nbsp;';
+      $_HTML_AVAILABLE = '<span style="color:#73c44d;font-size:2em"> '.$_UNICODE_CIRCLE_FILLED.'</span>&nbsp;';
       $_HTML_BACKORDER = '<span style="color:#73c44d;font-size:1.5em">'.$_UNICODE_CIRCLE_HALF.'</span>&nbsp;';
       $_HTML_UNAVAILABLE = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_CIRCLE_CROSS.'</span>&nbsp;';
       $_HTML_UNKNOWN = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_UNKNOWN.'</span>&nbsp;';
