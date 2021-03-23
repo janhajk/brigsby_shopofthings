@@ -286,7 +286,7 @@ add_action( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20
 add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
 function wcs_custom_get_availability( $availability, $_product ) {
       $info = get_stock_info($_product);
-      $availability['availability'] = join($info, '&nbsp;');
+      $availability['availability'] = '<div style="float:right;position:absolute;top:5px;right:7px" title="'.$info['availability'].'">'.join($info, '&nbsp;').'</div>';
       return $availability;
 }
 
