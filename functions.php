@@ -116,7 +116,7 @@ function oiw_add_fbpixel() {
 }
 
 
-/***** Adding Facebook Pixel *****/
+/***** Adding LinkedIn Script *****/
 add_action('wp_head', 'oiw_add_linkedin');
 
 function oiw_add_linkedin() {
@@ -256,7 +256,7 @@ s.parentNode.insertBefore(b, s);})();
       if($product_stock >= $big_stock_available){
             $availability = $big_stock_available.'+ Stück sofort versandbereit ab unserem Lager';
       }
-      else if($product_stock <= $lowstock_available){
+      else if($product_stock <= $low_stock_available){
             $availability = $product_stock.' Stück ab unserem Lager';
       }
       return array(
