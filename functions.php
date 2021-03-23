@@ -240,7 +240,7 @@ function sot_loop_item_stock($params, $product) {
       // if ($product->get_id() == 4986) {
       //       print_r($params);
       // }
-      return $params;
+      // return $params;
 }
 add_filter( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20, 2);
 
