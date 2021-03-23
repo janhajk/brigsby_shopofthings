@@ -235,14 +235,13 @@ function wcs_custom_get_availability( $availability, $_product ) {
  *
  *
  */
-function sot_loop_item_stock($params, $product) {
-      // print_r($product);
-      // if ($product->get_id() == 4986) {
-      //       print_r($params);
-      // }
-      // return $params;
+function sot_loop_item_stock() {
+      global $product;
+      if ($product->get_id() == 4986) {
+            echo '<div class="stock_quantity">'.$product->get_stock_quantity().'</div>';
+      }
 }
-// add_filter( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20, 2);
+add_action( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20, 2);
 
 
 
