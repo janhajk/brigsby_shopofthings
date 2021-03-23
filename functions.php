@@ -142,93 +142,6 @@ s.parentNode.insertBefore(b, s);})();
 
 /**
  *
- * Woocommerce Availability
- *
- *
- * $_product obejct documentation: https://www.businessbloomer.com/woocommerce-easily-get-product-info-title-sku-desc-product-object
- *
- */
-add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
-function wcs_custom_get_availability( $availability, $_product ) {
-
-      $_UNICODE_CIRCLE_BULLET = '&#10687;';
-      $_UNICODE_CIRCLE_HALF = '&#9681;';
-      $_UNICODE_CIRCLE_FILLED ='&#9679;';
-      $_UNICODE_CIRCLE_CROSS = '&#11199;';
-
-      $_HTML_AVAILABLE = '<span style="color:#73c44d;font-size:1.5em"> '.$_UNICODE_CIRCLE_FILLED.'</span>&nbsp;';
-      $_HTML_BACKORDER = '<span style="color:#73c44d;font-size:1.5em">'.$_UNICODE_CIRCLE_HALF.'</span>&nbsp;';
-      $_HTML_UNAVAILABLE = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_CIRCLE_CROSS.'</span>&nbsp;';
-
-      // Default Values
-      $DEFAULT_BIG_STOCK_THRESHOLD = 10;
-      $DEFAULT_LOW_STOCK_THRESHOLD = 10;
-
-      // Product ID
-      $id = $_product->get_id();
-
-      // Stock Quantity of current product
-      $product_stock = $_product->get_stock_quantity();
-
-      // Backordered / on the way
-      $onorder = get_post_meta($id,'shopofthings_onorder',true);
-      if ($product_stock < 0) $onorder = $onorder + $product_stock;
-      $onorder_txt = ($onorder != '' && (int) $onorder > 0) ? '<br/>'.$onorder.' Stück unterwegs von unserem Lieferanten': '';
-
-      // don't change anything for virtual products
-      if ($_product->get_virtual()) {
-            return $availability;
-      }
-
-
-      // if not on stock and backorder
-      if($product_stock <= 0) {
-            $lieferzeit = get_post_meta($id,'shopofthings_lieferzeit',true);
-            // no stock but can backorder
-            if ($_product->get_backorders() != 'no') {
-                  $availability['availability'] = $_HTML_BACKORDER.__('Ab externem Lager', 'woocommerce').'. Lieferzeit ca. '.(($lieferzeit == '') ? '20' : $lieferzeit). ' Tage';
-            }
-            // no backorder and no stock
-            else {
-                  $availability['availability'] = $_HTML_UNAVAILABLE.__('Momentan nicht an Lager', 'woocommerce');
-            }
-            // also if negative do nothing (prevents from returning negative stock)
-
-            $availability['availability'] .= $onorder_txt;
-            return $availability;
-      }
-
-      // no availability or = zero return regular
-      if(!$product_stock) return $availability;
-
-      // retrieve thresolds
-      $big_stock_available = get_post_meta($id,'product_bigstock_threshold',true);
-      $low_stock_available = get_post_meta($id,'product_lowstock_threshold',true);
-
-
-      if(($big_stock_available != '' && $product_stock >= $big_stock_available)){
-            $availability['availability'] = $_HTML_AVAILABLE.__($big_stock_available.'+ Stück sofort versandbereit ab unserem Lager', 'woocommerce');
-      }
-      else if(($lowstock_available != '' && $product_stock <= $lowstock_available)){
-            $availability['availability'] = $_HTML_AVAILABLE.__($product_stock.' Stück ab unserem Lager', 'woocommerce');
-      }
-      else if ($product_stock >= $DEFAULT_BIG_STOCK_THRESHOLD) {
-            $availability['availability'] = $_HTML_AVAILABLE.__($DEFAULT_BIG_STOCK_THRESHOLD.'+ Stück sofort versandbereit ab unserem Lager', 'woocommerce');
-      }
-      else if ($product_stock < $DEFAULT_LOW_STOCK_THRESHOLD) {
-            $availability['availability'] = $_HTML_AVAILABLE.__($product_stock.' Stück ab unserem Lager', 'woocommerce');
-      }
-      else if ($product_stock > 0){
-                        $availability['availability'] = $_HTML_AVAILABLE.__('Sofort versandbereit ab unserem Lager', 'woocommerce');
-      }
-      $availability['availability'] .= $onorder_txt;
-    return $availability;
-}
-
-
-
-/**
- *
  * Stock status in Product Loop
  *
  * $_product obejct documentation: https://www.businessbloomer.com/woocommerce-easily-get-product-info-title-sku-desc-product-object
@@ -360,6 +273,23 @@ function sot_loop_item_stock() {
       // }
 }
 add_action( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20, 2);
+
+
+/**
+ *
+ * Woocommerce Availability
+ *
+ *
+ * $_product obejct documentation: https://www.businessbloomer.com/woocommerce-easily-get-product-info-title-sku-desc-product-object
+ *
+ */
+add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
+function wcs_custom_get_availability( $availability, $_product ) {
+      $info = get_stock_info($_product);
+      $availability['availability'] = join($info, '&nbsp;');
+      return $availability;
+}
+
 
 
 
