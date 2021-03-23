@@ -228,14 +228,14 @@ function wcs_custom_get_availability( $availability, $_product ) {
 
 
 /**
- * 
+ *
  * Stock status in Product Loop
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  */
-functin sot_loop_item_stock($params, $product) {
+function sot_loop_item_stock($params, $product) {
       if ($product->get_id() == 4986) {
             print_r($params);
       }
@@ -248,13 +248,13 @@ add_filter( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20
 
 
 /**
- * 
+ *
  * Auto shorten long titles in product loop
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
  */
 remove_action('woocommerce_shop_loop_item_title','woocommerce_template_loop_product_title',10);
 add_action('woocommerce_shop_loop_item_title','sot_custom_loop_title',10);
