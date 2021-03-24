@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
       container.style.float = 'right';
       container.style.marginRight = '5px';
       container.style.marginLeft = '5px';
-      container.style.marginTop = '4px';
+      container.style.marginTop = '-4px';
 
 
       let getCookie = function(cname) {
