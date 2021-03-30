@@ -513,17 +513,17 @@ add_action('wp_enqueue_scripts', 'shopofthings_add_b2b_script');
 
 
 /**
- * 
+ *
  * Add tracking number to order on order-view
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  */
 <?php
 add_action( 'woocommerce_view_order', 'sot_order_view_add_tracking', 20 );
- 
-function sot_order_view_add_tracking( $order_id ){  
+
+function sot_order_view_add_tracking( $order_id ){
       $has_tracking = get_post_meta( $order_id, 'shopofthings_sendungsnummer', true );
       if ($has_tracking) { ?>
     <h4>Tracking Nummer</h4>
@@ -535,14 +535,15 @@ function sot_order_view_add_tracking( $order_id ){
             </tr>
         </tbody>
     </table>
-<?php }
+    <?php }
+}
 
 
 // display the extra data in the order admin panel
 function sot_display_tracking( $order ){  ?>
     <div class="order_data_column">
         <h4><?php _e( 'Extra Details' ); ?></h4>
-        <?php 
+        <?php
             echo '<p><strong>' . __( 'Sendungsnummer' ) . ':</strong>' . get_post_meta( $order->id, 'shopofthings_sendungsnummer', true ) . '</p>';
     </div>
 <?php }
