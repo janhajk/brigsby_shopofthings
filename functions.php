@@ -524,8 +524,8 @@ add_action('wp_enqueue_scripts', 'shopofthings_add_b2b_script');
 add_action( 'woocommerce_view_order', 'sot_order_view_add_tracking', 20 );
 
 function sot_order_view_add_tracking( $order_id ){
-      $has_tracking = get_post_meta( $order_id, 'shopofthings_sendungsnummer', true );
-      if ($has_tracking) { ?>
+    $has_tracking = get_post_meta( $order_id, 'shopofthings_sendungsnummer', true );
+    if ($has_tracking) { ?>
     <h4>Tracking Nummer</h4>
     <table class="woocommerce-table shop_table">
         <tbody>
@@ -542,9 +542,9 @@ function sot_order_view_add_tracking( $order_id ){
 // display the extra data in the order admin panel
 function sot_display_tracking( $order ){  ?>
     <div class="order_data_column">
-        <h4><?php _e( 'Extra Details' ); ?></h4>
+        <h4><?php __( 'Versand' ); ?></h4>
         <?php
-            echo '<p><strong>' . __( 'Sendungsnummer' ) . ':</strong>' . get_post_meta( $order->id, 'shopofthings_sendungsnummer', true ) . '</p>';
+            echo '<p><strong>' . __( 'Sendungsnummer' ) . ':</strong>' . get_post_meta( $order->id, 'shopofthings_sendungsnummer', true ) . '</p>'; ?>
     </div>
 <?php }
 add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tracking' );
