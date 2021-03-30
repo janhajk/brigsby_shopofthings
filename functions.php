@@ -539,15 +539,7 @@ function sot_order_view_add_tracking( $order_id ){
 }
 
 
-// display the extra data in the order admin panel
-function sot_display_tracking( $order ){  ?>
-    <div class="order_data_column">
-        <h4><?php __( 'Versand' ); ?></h4>
-        <?php
-            echo '<p><strong>' . __( 'Sendungsnummer' ) . ':</strong>' . get_post_meta( $order->id, 'shopofthings_sendungsnummer', true ) . '</p>'; ?>
-    </div>
-<?php }
-add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tracking' );
+
 
 
 ?>
