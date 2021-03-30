@@ -530,7 +530,7 @@ function sot_order_view_add_tracking( $order_id ){
         <tbody>
             <tr>
                 <td>Paket 1:</td>
-                <td><?php echo $has_tracking; ?></td>
+                <td><a href="https://service.post.ch/ekp-web/ui/entry/search/<?php echo $has_tracking; ?>" target="_blank"><?php echo $has_tracking; ?></a></td>
             </tr>
         </tbody>
     </table>
@@ -542,8 +542,7 @@ function sot_order_view_add_tracking( $order_id ){
 function sot_display_tracking( $order ){  ?>
     <div class="order_data_column">
         <h4><?php __( 'Versand' ); ?></h4>
-        <?php
-            echo '<p><strong>' . __( 'Sendungsnummer' ) . ':</strong>' . get_post_meta( $order->id, 'shopofthings_sendungsnummer', true ) . '</p>'; ?>
+        <?php echo '<p><strong>' . __( 'Sendungsnummer' ) . ':</strong>' . '<a href="https://service.post.ch/ekp-web/ui/entry/search/' . $has_tracking .'" target="_blank">' . $has_tracking . '</a></p>'; ?>
     </div>
 <?php }
 add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tracking' );
