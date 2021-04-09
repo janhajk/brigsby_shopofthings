@@ -98,3 +98,9 @@ body {
         border-radius: 50%;
         padding: 1px;
 }
+
+
+/* site logo no margin left */
+#site-logo-image img {
+      margin-left: 0px;
+}
