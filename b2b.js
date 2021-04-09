@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
       container.appendChild(b2b);
       container.appendChild(b2c);
 
-      let section = document.getElementById('search-2');
+      let section = document.getElementById('woocommerce_product_search_widget-4');
       section.appendChild(container);
 
       b2b.addEventListener('click', () => {

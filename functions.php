@@ -2,6 +2,7 @@
 
 
 // https://storecustomizer.com/woocommerce-shop-page-hooks-visual-guide/
+// https://www.businessbloomer.com/woocommerce-add-new-tab-account-page/
 
 
 /**
@@ -265,7 +266,9 @@ s.parentNode.insertBefore(b, s);})();
             'availability'=> $availability,
             'onorder'     => $onorder_txt
       );
- }
+}
+
+
 function sot_loop_item_stock() {
       global $product;
       // if ($product->get_id() == 4986 || $product->get_id() == 16448) {
@@ -324,7 +327,7 @@ function sot_custom_loop_title() {
 
 
 /**
- * OVerwrite the 'narrow-left-right' from 6/3/3 to 8/2/2
+ * Overwrite the 'narrow-left-right' from 6/3/3 to 8/2/2
  *
  *
  *
@@ -408,9 +411,9 @@ function lw_loop_shop_columns( $columns ) {
 
 
 //add_filter('woocommerce_get_price_html', 'sot_custom_price_exkl_mwst', $price, 10, 2);
-function sot_custom_price_exkl_mwst($price, $instance) {
-    return $price . '<br/><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">CHF</span>'.round(wc_get_price_excluding_tax($instance),2).' </bdi></span><small class="woocommerce-price-suffix">exkl. MWST</small>';
-}
+// function sot_custom_price_exkl_mwst($price, $instance) {
+//     return $price . '<br/><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">CHF</span>'.round(wc_get_price_excluding_tax($instance),2).' </bdi></span><small class="woocommerce-price-suffix">exkl. MWST</small>';
+// }
 
 
 
@@ -501,7 +504,7 @@ function woo_cart_but_icon ( $items, $args ) {
  */
 function shopofthings_add_b2b_script() {
       // Register js file
-      wp_register_script( 'shopofthings-b2b', get_stylesheet_directory_uri().'/b2b.js', false, '1.3', true );
+      wp_register_script( 'shopofthings-b2b', get_stylesheet_directory_uri().'/b2b.js', false, '1.4', true );
 
       // Enqueue the registered script file
       wp_enqueue_script('shopofthings-b2b');
