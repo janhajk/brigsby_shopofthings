@@ -572,11 +572,9 @@ function sot_display_quantity_minus() {
       echo '<button type="button" class="minus" >-</button>';
 }
 
-add_action( 'woocommerce_before_add_to_cart_quantity', 'sot_display_quantity_plus' );
-add_action( 'woocommerce_after_add_to_cart_quantity', 'sot_display_quantity_minus' );
-
-
-add_action( 'wp_footer', 'sot_add_cart_quantity_plus_minus' );
+// add_action( 'woocommerce_before_add_to_cart_quantity', 'sot_display_quantity_plus' );
+// add_action( 'woocommerce_after_add_to_cart_quantity', 'sot_display_quantity_minus' );
+// add_action( 'wp_footer', 'sot_add_cart_quantity_plus_minus' );
 
 function sot_add_cart_quantity_plus_minus() {
       // Only run this on the single product page
