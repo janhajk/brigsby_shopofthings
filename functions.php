@@ -557,16 +557,16 @@ add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tra
 
 
 /**
- * 
+ *
  * Titel vor Bundled Items
- * 
- * 
- * 
+ *
+ *
+ *
  */
- 
+
  add_action('woocommerce_before_bundled_items', 'sot_bundled_options_title', 20);
  function sot_bundled_options_title() {
-       echo '<h2>Wähle zusätzliche Optionen</h2>';
+       echo '<h3>Zusätzliche Optionen</h3>';
  }
 
 ?>
