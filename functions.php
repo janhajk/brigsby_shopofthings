@@ -568,31 +568,41 @@ add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tra
  function sot_bundled_options_title() {
        echo '<h3>Zusätzliche Optionen</h3>';
  }
- 
- 
- 
- 
+
+
+
+
  /**
-  * 
-  * 
-  * 
-  * 
-  * 
-  * 
+  *
+  * Move  Meta data (categorie, sku) to top of single-product page
+  *
+  *
+  *
+  *
   */
-  
- /**
- * @snippet       Show Categories on Single Product Page - WooCommerce
- */
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 add_action( 'woocommerce_single_product_summary', 'sot_show_categories_again_single_product', 1 );
- 
+
 function sot_show_categories_again_single_product() {
    global $product;
    ?>
-   <div class="product_meta">
-   <?php echo wc_get_product_category_list( $product->get_id(), ', ', '<span class="posted_in">' . _n( 'Category:', 'Categories:', count( $product->get_category_ids() ), 'woocommerce' ) . ' ', '</span>' ); ?> 
-   </div>
+<div class="product_meta">
+
+	<?php do_action( 'woocommerce_product_meta_start' ); ?>
+
+	<?php if ( wc_product_sku_enabled() && ( $product->get_sku() || $product->is_type( 'variable' ) ) ) : ?>
+
+		<span class="sku_wrapper"><?php esc_html_e( 'SKU:', 'woocommerce' ); ?> <span class="sku"><?php echo ( $sku = $product->get_sku() ) ? $sku : esc_html__( 'N/A', 'woocommerce' ); ?></span></span>
+
+	<?php endif; ?>
+
+	<?php echo wc_get_product_category_list( $product->get_id(), ', ', '<span class="posted_in">' . _n( 'Category:', 'Categories:', count( $product->get_category_ids() ), 'woocommerce' ) . ' ', '</span>' ); ?>
+
+	<?php echo wc_get_product_tag_list( $product->get_id(), ', ', '<span class="tagged_as">' . _n( 'Tag:', 'Tags:', count( $product->get_tag_ids() ), 'woocommerce' ) . ' ', '</span>' ); ?>
+
+	<?php do_action( 'woocommerce_product_meta_end' ); ?>
+
+</div>
    <?php
 }
 
