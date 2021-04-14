@@ -568,5 +568,32 @@ add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tra
  function sot_bundled_options_title() {
        echo '<h3>Zusätzliche Optionen</h3>';
  }
+ 
+ 
+ 
+ 
+ /**
+  * 
+  * 
+  * 
+  * 
+  * 
+  * 
+  */
+  
+ /**
+ * @snippet       Show Categories on Single Product Page - WooCommerce
+ */
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+add_action( 'woocommerce_single_product_summary', 'sot_show_categories_again_single_product', 1 );
+ 
+function sot_show_categories_again_single_product() {
+   global $product;
+   ?>
+   <div class="product_meta">
+   <?php echo wc_get_product_category_list( $product->get_id(), ', ', '<span class="posted_in">' . _n( 'Category:', 'Categories:', count( $product->get_category_ids() ), 'woocommerce' ) . ' ', '</span>' ); ?> 
+   </div>
+   <?php
+}
 
 ?>
