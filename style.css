@@ -104,3 +104,11 @@ body {
 #site-logo-image img {
       margin-left: 0px;
 }
+
+
+/* product bundle options */
+.summary-add-to-cart-form-bundle {
+      clear: right;
+      float: right;
+      width: 48%;
+}
