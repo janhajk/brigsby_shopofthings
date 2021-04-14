@@ -124,7 +124,7 @@ div.bundled_product_summary, .woocommerce div.product.bundled_product_summary {
 }
 
 
-div.bundled_product_summary:last-of-type, .woocommerce div.product.bundled_product_summary:last-of-type {
+div.bundled_item_optional:last-of-type {
     padding-bottom: 1.618rem !important;
     margin-bottom: 1.618rem !important;
 }
