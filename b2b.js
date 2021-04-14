@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
       let b2c = document.createElement('a');
 
       container.style.float = 'right';
-      container.style.marginRight = '5px';
-      container.style.marginLeft = '5px';
-      container.style.marginTop = '-4px';
+      // container.style.marginRight = '5px';
+      // container.style.marginLeft = '5px';
+      container.style.marginTop = '5px';
 
 
       let getCookie = function(cname) {
@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             jQuery('.woocommerce-price-suffix').each((i, el) => {
                   jQuery(el).replaceWith('exkl. MWST');
             });
+            // window.setTimeout(pricesExclMwst, 2000);
       };
 
 
