@@ -114,10 +114,9 @@ body {
 }
 
 .bundled_item_optional {
-      border-top: 1px solid gray;
       padding-top: 15px;
 }
 
-.bundled_item_optional:last-of-type {
-      border-bottom: 1px solid gray !important;
+div.bundled_product_summary, .woocommerce div.product.bundled_product_summary {
+    border-bottom: 1px solid rgba(0,0,0,0.1) !important;
 }
