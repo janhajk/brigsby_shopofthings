@@ -145,4 +145,7 @@ li>a.add_to_cart_button, a.compare.button {
       padding-right:3px !important;
 }
 
+li>span.price {
+      display:contents;
+}
 
