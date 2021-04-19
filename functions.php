@@ -606,4 +606,20 @@ function sot_show_categories_again_single_product() {
    <?php
 }
 
+
+
+/**
+ *
+ * Change add to cart icon
+ *
+ *
+ *
+ *
+ */
+
+add_filter('woocommerce_product_single_add_to_cart_text','sot_customize_add_to_cart_button_woocommerce');
+function sot_customize_add_to_cart_button_woocommerce(){
+      return "<span>&#128722;</span>";
+}
+
 ?>
