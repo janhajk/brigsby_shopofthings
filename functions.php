@@ -12,6 +12,13 @@
  */
 
 
+ // checks for woocommerce templates in woocommerce folder
+function sot_add_woocommerce_support() {
+    add_theme_support( 'woocommerce' ); // <<<< here
+}
+add_action( 'after_setup_theme', 'sot_add_woocommerce_support' );
+
+
 // if ( ! defined( 'ABSPATH' ) ) {
 // 	exit;
 // }
