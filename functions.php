@@ -617,7 +617,7 @@ function sot_show_categories_again_single_product() {
  *
  */
 
-add_filter('add_to_cart_text','sot_customize_add_to_cart_button_woocommerce');
+add_filter('woocommerce_product_add_to_cart_text','sot_customize_add_to_cart_button_woocommerce');
 function sot_customize_add_to_cart_button_woocommerce(){
       return '&#128722;';
       // return __('Add to cart', 'woocommer');
