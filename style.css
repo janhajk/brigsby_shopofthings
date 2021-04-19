@@ -150,13 +150,15 @@ li>span.price {
       display:contents !important;
 }
 
+
+
 /* line between product in product loop */
-ul>div.sot-divider-line {
+ul>li.product {
       border-right:1px solid rgba(0,0,0,0.3);
-      width:1px;
+      padding-top: 3px;
+      padding-bottom: 3px;
 }
 
-ul>.product.last>div.sot-divider-line {
+ul>li.product.last {
       border-right:none;
-      width:0px;
 }
