@@ -134,3 +134,15 @@ div.bundled_item_optional:last-of-type {
 }
 
 
+/* loop page button for compare and add to cart */
+li>a.add_to_cart_button {
+      float: left;
+}
+li>a.add_to_cart_button, a.compare.button {
+      float: left;
+      background:none;
+      padding:0;
+      padding-right:3px;
+}
+
+
