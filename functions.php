@@ -280,7 +280,7 @@ function sot_loop_item_stock() {
       global $product;
       // if ($product->get_id() == 4986 || $product->get_id() == 16448) {
             $info = get_stock_info($product);
-            echo '<div style="float:right;position:absolute;top:5px;right:7px" title="'.$info['availability'].'">'.$info['circle'].'</div>';
+            echo '<div style="float:right;position:absolute;top:7px;right:12px" title="'.$info['availability'].'">'.$info['circle'].'</div>';
       // }
 }
 add_action( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20, 2);
