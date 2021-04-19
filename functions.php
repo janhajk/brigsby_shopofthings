@@ -630,4 +630,17 @@ function sot_customize_add_to_cart_button_woocommerce(){
       // return __('Add to cart', 'woocommer');
 }
 
+
+
+
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+add_action( 'sot_woocommerce_before_shop_loop_item_item', 'woocommerce_template_loop_product_link_open', 10 );
+
+
 ?>
