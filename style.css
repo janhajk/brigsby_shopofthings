@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.35
+ Version:       1.0.36
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -153,14 +153,14 @@ li>div>span.price {
 
 
 /* line between product in product loop */
-ul>div>li.product>div {
+ul>li.product>div {
       border-right:1px solid rgba(0,0,0,0.3);
 }
-ul>div>li.product {
+ul>li.product {
       margin-top: 3px;
       margin-bottom: 3px;
 }
 
-ul>div>li.product.last {
+ul>li.product.last {
       border-right:none;
 }
