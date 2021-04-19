@@ -168,5 +168,5 @@ ul>li.product.last {
 
 /* font size of price */
 .price {
-      font-size: 1em;
+      font-size: 1em !important;
 }
