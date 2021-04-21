@@ -188,3 +188,21 @@ aside#sidebar-secondary {
       border-left: 1px solid #ddd;
       border-right: 1px solid #ddd;
 }
+
+
+/* info box */
+.sot_info_box {
+      border: none;
+      color: white; 
+      padding: 5px; 
+      text-align: center; 
+      text-decoration: none; 
+      display: inline-block; 
+      font-size: 16px; 
+      border-radius: 10px; 
+      background-color: #5dadf1;
+}
+a.sot_info_box:link {
+      color: white; 
+      text-decoration: none; 
+}
