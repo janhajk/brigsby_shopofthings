@@ -634,13 +634,44 @@ function sot_customize_add_to_cart_button_woocommerce(){
 
 
 /**
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
  */
 add_action( 'sot_woocommerce_before_shop_loop_item_item', 'woocommerce_template_loop_product_link_open', 10 );
 
+
+
+
+/**
+ *
+ * add Lorawan connectivity warning on categories for lorawan
+ *
+ *
+ *
+ *
+ */
+add_action( 'woocommerce_after_add_to_cart_form', 'sot_after_add_to_cart_form_connectivity' );
+
+function sot_after_add_to_cart_form_connectivity(){
+      global $product;
+      $ids = $product->get_category_ids();
+      if (in_array(653, $ids)) { // lorawan
+            if (!in_array(1182, $ids) && !in_array(1248, $ids) && !in_array(1179, $ids)) { // antenna, gateway, 
+                  if ($product->get_type() != 'subscription') {
+                  	?>
+                  	<div style="border: none; color: white; padding: 5px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 10px; background-color: #5dadf1;">
+                              <p style="padding: 0; margin: 0;">
+                                    <span style="float: left; font-size: 75px; line-height: 60px; padding-top: 4px; padding-right: 8px; color: red; padding-left: 3px;">!</span>
+                                    Für dieses Device brauchst Du ein Konnektivitätsplan. Dies kann entweder mittels eines <a href="https://shopofthings.ch/produkt-kategorie/typ/gateway/">LoRaWAN Gateways </a>sein, über das TTN Netzwerk oder über das Swisscom LoRaWAN (<a href="https://shopofthings.ch/shop/connectivity-2/connectivity-lorawan/1-jahr-swisscom-lpn-lorawan-connectivity-abo-yearly-payment/">bei uns erhältlich</a>).
+                              </p>
+                        </div>
+                  	<?php
+                  }
+            }
+      }
+}
 
 ?>
