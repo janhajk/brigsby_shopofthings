@@ -5,11 +5,16 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.54
+ Version:       1.0.55
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
 */
+
+
+a {
+      color: #5dadf1;
+}
 
 
 
@@ -205,4 +210,11 @@ aside#sidebar-secondary {
 .sot_info_box>a:link, .sot_info_box>a:visited {
       color: white;
       text-decoration: none;
+}
+
+
+/* menu items bullets */
+.sidebar-primary ul li li {
+        list-style-type: none;
+        list-style-position: inside;
 }
