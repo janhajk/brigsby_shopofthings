@@ -215,7 +215,7 @@ aside#sidebar-secondary {
       text-decoration: none;
 }
 
-.sot_info_box.sot_kapital {
+.sot_info_box>span.sot_kapital {
       float: left;
       font-size: 100px;
       line-height: 70px;
