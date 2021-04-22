@@ -663,7 +663,7 @@ function sot_after_add_to_cart_form_connectivity(){
                   if ($product->get_type() != 'subscription') {
                   	?>
                   	<div class="sot_info_box">
-                                    <span style="float: left; font-size: 75px; line-height: 60px; padding-top: 4px; padding-right: 8px; color: red; padding-left: 3px;">!</span>
+                                    <span style="float: left; font-size: 100px; line-height: 70px; padding-top: 4px; padding-right: 8px; color: gray; padding-left: 3px;">!</span>
                                     Um diese Gerät zu betreiben, brauchst Du ein LoRaWAN. Dies kannst Du mittels eines <a href="https://shopofthings.ch/produkt-kategorie/typ/gateway/">LoRaWAN Gateways </a>selber erstellen, Du kannst das TTN Netzwerk benutzen oder das Schweizweit flächendeckende Swisscom LoRaWAN verwenden (<a href="https://shopofthings.ch/shop/connectivity-2/connectivity-lorawan/1-jahr-swisscom-lpn-lorawan-connectivity-abo-yearly-payment/">bei uns erhältlich</a>).
                         </div>
                   	<?php
