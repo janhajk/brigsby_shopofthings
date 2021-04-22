@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.56
+ Version:       1.0.57
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -197,15 +197,18 @@ aside#sidebar-secondary {
 
 /* info box */
 .sot_info_box {
-      border: none;
-      color: white;
-      padding: 5px;
+      /*border: none;*/
+      /*color: white;*/
       text-align: center;
       text-decoration: none;
       display: inline-block;
-      font-size: 16px;
-      border-radius: 10px;
-      background-color: #5dadf1;
+      /*font-size: 16px;*/
+      /*border-radius: 10px;*/
+      background-color: #EAEAEA;
+      box-shadow: 4px 4px 20px 0px rgb(0 0 0 / 50%);
+      transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+      padding: 10px;
+      border-radius: 2px 2px 2px 2px;
 }
 .sot_info_box>a:link, .sot_info_box>a:visited {
       color: white;
