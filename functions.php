@@ -539,11 +539,11 @@ add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tra
 
 function sot_order_view_add_tracking( $order_id ){
     $metafield = get_post_meta( $order_id, 'shopofthings_sendungsnummer', true );
+    if (empty($metafield)) return;
     $metafield = json_decode($metafield, true);
     if (!is_array($metafield)) {
           $metafield = array($metafield);
-    }
-    if ($metafield[0] !== "") { ?>
+    } ?>
     <h4>Tracking Nummer</h4>
     <table class="woocommerce-table shop_table">
         <tbody>
@@ -555,7 +555,7 @@ function sot_order_view_add_tracking( $order_id ){
             <?php } ?>
         </tbody>
     </table>
-    <?php }
+    <?php
 }
 
 // display the extra data in the order admin panel
