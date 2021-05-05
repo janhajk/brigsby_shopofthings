@@ -252,6 +252,6 @@ input.product-search-field {
       margin-top:2px;
 }
 
-.product-search-results table.search-results tr, .product-search-results table.search-results tr td, .entry-content .product-search-results table.search-results tr td {
+.search-results .entry {
       border-top: 1px solid #AAA;
 }
