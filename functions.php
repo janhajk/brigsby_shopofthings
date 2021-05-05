@@ -543,7 +543,7 @@ function sot_order_view_add_tracking( $order_id ){
     if (!is_array($metafield)) {
           $metafield = array($metafield);
     }
-    if (is_array($metafield)) { ?>
+    if (count($metafield)) { ?>
     <h4>Tracking Nummer</h4>
     <table class="woocommerce-table shop_table">
         <tbody>
