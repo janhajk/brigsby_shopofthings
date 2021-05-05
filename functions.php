@@ -533,18 +533,23 @@ add_action('wp_enqueue_scripts', 'shopofthings_add_b2b_script');
  *
  *
  */
+ 
 add_action( 'woocommerce_view_order', 'sot_order_view_add_tracking', 20 );
+add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tracking' );
 
 function sot_order_view_add_tracking( $order_id ){
     $metafield = get_post_meta( $order_id, 'shopofthings_sendungsnummer', true );
+    $metafield = json_decode($metafield, true);
     if ($metafield) { ?>
     <h4>Tracking Nummer</h4>
     <table class="woocommerce-table shop_table">
         <tbody>
+            <?php for ($i = 0; i < count($metafield); $i++) { ?>
             <tr>
-                <td>Paket 1:</td>
-                <td><a href="https://service.post.ch/ekp-web/ui/entry/search/<?php echo $metafield; ?>" target="_blank"><?php echo $metafield; ?></a></td>
+                <td>Paket <?php echo ($i+1); ?>:</td>
+                <td><a href="https://service.post.ch/ekp-web/ui/entry/search/<?php echo $metafield[$i]; ?>" target="_blank"><?php echo $metafield[$i]; ?></a></td>
             </tr>
+            <?php } ?>
         </tbody>
     </table>
     <?php }
@@ -552,8 +557,9 @@ function sot_order_view_add_tracking( $order_id ){
 
 // display the extra data in the order admin panel
 function sot_display_tracking( $order ){  ?>
-    <?php $tn = get_post_meta( $order->id, 'shopofthings_sendungsnummer', true ); ?>
-    <?php if ($tn) { ?>
+    <?php $tn = get_post_meta( $order->id, 'shopofthings_sendungsnummer', true );
+    $tn = json_decode($tn, true);
+    if ($tn) { ?>
           <div class="order_data_column">
               <h4><?php __( 'Versand' ); ?></h4>
 
@@ -561,7 +567,7 @@ function sot_display_tracking( $order ){  ?>
           </div>
     <?php } ?>
 <?php }
-add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tracking' );
+
 
 
 
