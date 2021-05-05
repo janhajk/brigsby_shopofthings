@@ -536,14 +536,40 @@ add_action('wp_enqueue_scripts', 'shopofthings_add_b2b_script');
 add_action( 'woocommerce_view_order', 'sot_order_view_add_tracking', 20 );
 
 function sot_order_view_add_tracking( $order_id ){
-    $has_tracking = get_post_meta( $order_id, 'shopofthings_sendungsnummer', true );
-    if ($has_tracking) { ?>
+    $metafield = get_post_meta( $order_id, 'shopofthings_sendungsnummer', true );
+    if ($metafield) { ?>
     <h4>Tracking Nummer</h4>
     <table class="woocommerce-table shop_table">
         <tbody>
             <tr>
                 <td>Paket 1:</td>
-                <td><a href="https://service.post.ch/ekp-web/ui/entry/search/<?php echo $has_tracking; ?>" target="_blank"><?php echo $has_tracking; ?></a></td>
+                <td><a href="https://service.post.ch/ekp-web/ui/entry/search/<?php echo $metafield; ?>" target="_blank"><?php echo $metafield; ?></a></td>
+            </tr>
+        </tbody>
+    </table>
+    <?php }
+}
+
+
+/**
+ *
+ * Add Credential link to order
+ *
+ *
+ *
+ *
+ */
+add_action( 'woocommerce_view_order', 'sot_order_view_add_credentials', 20 );
+
+function sot_order_view_add_credentials( $order_id ){
+    $metafield = get_post_meta( $order_id, 'shopofthings_credentials_url', true );
+    if ($metafield) { ?>
+    <h4>Device Credentials</h4>
+    <table class="woocommerce-table shop_table">
+        <tbody>
+            <tr>
+                <td>URL</td>
+                <td><a href="<?php echo $metafield; ?>" target="_blank"><?php echo $metafield; ?></a></td>
             </tr>
         </tbody>
     </table>
