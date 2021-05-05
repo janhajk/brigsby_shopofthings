@@ -492,6 +492,9 @@ function woo_cart_but_count( $fragments ) {
 }
 add_filter( 'wp_nav_menu_primary_items', 'woo_cart_but_icon', 10, 2 ); // Change menu to suit - example uses 'top-menu'
 
+
+
+
 /**
  * Add WooCommerce Cart Menu Item Shortcode to particular menu
  */
@@ -659,8 +662,8 @@ function sot_after_add_to_cart_form_connectivity(){
       global $product;
       $ids = $product->get_category_ids();
       if (in_array(653, $ids)) { // lorawan
-            if (!in_array(1182, $ids) && !in_array(1248, $ids) && !in_array(1179, $ids)) { // antenna, gateway,
-                  if ($product->get_type() != 'subscription') {
+            if (!in_array(1182, $ids) && !in_array(1248, $ids) && !in_array(1179, $ids)) { // exclude antenna, gateway, zubehör
+                  if ($product->get_type() != 'subscription') { // exclude
                   	?>
                   	<div class="sot_info_box">
                                     <span class="sot_kapital">!</span>
