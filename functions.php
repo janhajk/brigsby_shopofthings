@@ -547,7 +547,7 @@ function sot_order_view_add_tracking( $order_id ){
     <h4>Tracking Nummer</h4>
     <table class="woocommerce-table shop_table">
         <tbody>
-            <?php for ($i = 0; i < count($metafield); $i++) { ?>
+            <?php for ($i = 0; $i < count($metafield); $i++) { ?>
             <tr>
                 <td>Paket <?php echo ($i+1); ?>:</td>
                 <td><a href="https://service.post.ch/ekp-web/ui/entry/search/<?php echo $metafield[$i]; ?>" target="_blank"><?php echo $metafield[$i]; ?></a></td>
