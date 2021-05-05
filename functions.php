@@ -550,6 +550,21 @@ function sot_order_view_add_tracking( $order_id ){
     <?php }
 }
 
+// display the extra data in the order admin panel
+function sot_display_tracking( $order ){  ?>
+    <?php $tn = get_post_meta( $order->id, 'shopofthings_sendungsnummer', true ); ?>
+    <?php if ($tn) { ?>
+          <div class="order_data_column">
+              <h4><?php __( 'Versand' ); ?></h4>
+
+              <?php echo '<p><strong>' . __( 'Sendungsnummer' ) . ':</strong>' . '<a href="https://service.post.ch/ekp-web/ui/entry/search/' . $tn  .'" target="_blank">' . $tn  . '</a></p>'; ?>
+          </div>
+    <?php } ?>
+<?php }
+add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tracking' );
+
+
+
 
 /**
  *
@@ -576,19 +591,6 @@ function sot_order_view_add_credentials( $order_id ){
     <?php }
 }
 
-
-// display the extra data in the order admin panel
-function sot_display_tracking( $order ){  ?>
-    <?php $tn = get_post_meta( $order->id, 'shopofthings_sendungsnummer', true ); ?>
-    <?php if ($tn) { ?>
-          <div class="order_data_column">
-              <h4><?php __( 'Versand' ); ?></h4>
-
-              <?php echo '<p><strong>' . __( 'Sendungsnummer' ) . ':</strong>' . '<a href="https://service.post.ch/ekp-web/ui/entry/search/' . $tn  .'" target="_blank">' . $tn  . '</a></p>'; ?>
-          </div>
-    <?php } ?>
-<?php }
-add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tracking' );
 
 
 
