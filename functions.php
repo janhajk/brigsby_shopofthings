@@ -533,13 +533,16 @@ add_action('wp_enqueue_scripts', 'shopofthings_add_b2b_script');
  *
  *
  */
- 
+
 add_action( 'woocommerce_view_order', 'sot_order_view_add_tracking', 20 );
 add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tracking' );
 
 function sot_order_view_add_tracking( $order_id ){
     $metafield = get_post_meta( $order_id, 'shopofthings_sendungsnummer', true );
     $metafield = json_decode($metafield, true);
+    if (!is_array($metafield)) {
+          $metafield = array($metafield);
+    }
     if ($metafield) { ?>
     <h4>Tracking Nummer</h4>
     <table class="woocommerce-table shop_table">
