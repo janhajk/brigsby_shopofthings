@@ -541,6 +541,7 @@ function sot_order_view_add_tracking( $order_id ){
     $metafield = get_post_meta( $order_id, 'shopofthings_sendungsnummer', true );
     if (empty($metafield)) return;
     $metafield = json_decode($metafield, true);
+    // old values from the olden days have to be turned into array
     if (!is_array($metafield)) {
           $metafield = array($metafield);
     } ?>
@@ -699,7 +700,7 @@ function sot_after_add_to_cart_form_connectivity(){
       global $product;
       $ids = $product->get_category_ids();
       if (in_array(653, $ids)) { // lorawan
-            if (!in_array(1182, $ids) && !in_array(1248, $ids) && !in_array(1179, $ids)) { // exclude antenna, gateway, zubehör
+            if (!in_array(1182, $ids) && !in_array(1248, $ids) && !in_array(1179, $ids) && !in_array(14069, $ids)) { // exclude antenna, gateway, zubehör
                   if ($product->get_type() != 'subscription') { // exclude
                   	?>
                   	<div class="sot_info_box">
