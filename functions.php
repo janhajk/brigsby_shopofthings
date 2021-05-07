@@ -699,8 +699,8 @@ add_action( 'woocommerce_after_add_to_cart_form', 'sot_after_add_to_cart_form_co
 function sot_after_add_to_cart_form_connectivity(){
       global $product;
       $ids = $product->get_category_ids();
-      if (in_array(653, $ids)) { // lorawan
-            if (!in_array(1182, $ids) && !in_array(1248, $ids) && !in_array(1179, $ids) && !in_array(14069, $ids)) { // exclude antenna, gateway, zubehör
+      if (in_array(653, $ids) && $product->get_id() !== 14069) { // lorawan, swsscom connectivity abo
+            if (!in_array(1182, $ids) && !in_array(1248, $ids) && !in_array(1179, $ids) ) { // exclude antenna, gateway, zubehör
                   if ($product->get_type() != 'subscription') { // exclude
                   	?>
                   	<div class="sot_info_box">
