@@ -251,7 +251,14 @@ input.product-search-field {
 .search-results>tbody>tr>td>a>.title {
       margin:0px !important;
 }
-
 .search-results .entry {
       border-top: 1px solid #AAA !important;
+}
+
+
+
+
+/* hide avatar in reviews */
+.woocommerce #reviews #comments ol.commentlist li img.avatar {
+      display: none;
 }
