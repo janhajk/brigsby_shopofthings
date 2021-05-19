@@ -125,7 +125,7 @@ function oiw_add_fbpixel() {
 
 
 /***** Adding LinkedIn Script *****/
-add_action('wp_head', 'oiw_add_linkedin');
+// add_action('wp_head', 'oiw_add_linkedin');
 
 function oiw_add_linkedin() {
 ?>
