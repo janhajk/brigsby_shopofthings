@@ -224,6 +224,12 @@ s.parentNode.insertBefore(b, s);})();
             else if ($_product->get_type() != 'simple') {
                   $availability = 'Teilweise an eigenem Lager. Bitte Option wählen.';
                   $circle = $_HTML_AVAILABLE_PARTLY;
+                  
+                  // show bundles as available if on thing is available
+                  if ($_product->get_type() == 'bundle') {
+                      $availability = 'Sofort versandbereit ab unserem Lager';
+                      $circle = $_HTML_AVAILABLE;      
+                  }
             }
             // no backorder and no stock
             else {
