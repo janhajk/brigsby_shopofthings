@@ -618,10 +618,10 @@ function sot_order_view_add_credentials( $order_id ){
  *
  */
 
- add_action('woocommerce_before_bundled_items', 'sot_bundled_options_title', 20);
- function sot_bundled_options_title() {
-       echo '<h3 style="border-bottom:1px solid rgba(0,0,0,0.1);padding-bottom:10px;">Zusätzliche Optionen</h3>';
- }
+//  add_action('woocommerce_before_bundled_items', 'sot_bundled_options_title', 20);
+//  function sot_bundled_options_title() {
+//        echo '<h3 style="border-bottom:1px solid rgba(0,0,0,0.1);padding-bottom:10px;">Zusätzliche Optionen</h3>';
+//  }
 
 
 
