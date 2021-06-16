@@ -23,7 +23,7 @@ if ( $upsells ) : ?>
 
 	<section class="up-sells upsells products">
 		<?php
-		$heading = apply_filters( 'woocommerce_product_upsells_products_heading', __( 'Often bought together with&hellip;', 'woocommerce' ) );
+		$heading = apply_filters( 'woocommerce_product_upsells_products_heading', 'Wird of zusammen gekauft' /*__( 'Often bought together with&hellip;'*/, 'woocommerce' ) );
 
 		if ( $heading ) :
 			?>
