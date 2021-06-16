@@ -624,6 +624,12 @@ function sot_order_view_add_credentials( $order_id ){
 //  }
 
 
+/**
+ * hide similar products 
+ * 
+ */
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
 
 
  /**
