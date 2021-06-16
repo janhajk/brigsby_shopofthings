@@ -625,10 +625,21 @@ function sot_order_view_add_credentials( $order_id ){
 
 
 /**
- * hide similar products 
- * 
+ * hide similar products
+ *
  */
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
+
+
+
+// define the woocommerce_product_upsells_products_heading callback 
+function sot_woocommerce_product_upsells_products_heading( $__ ){ 
+    return 'Wird of zusammen gekauft';
+} 
+
+//add the action 
+add_filter('woocommerce_product_upsells_products_heading', 'sot_woocommerce_product_upsells_products_heading', 10, 1)
 
 
 
