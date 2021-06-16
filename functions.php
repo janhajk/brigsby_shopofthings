@@ -639,7 +639,7 @@ function sot_woocommerce_product_upsells_products_heading( $__ ){
 }
 
 //add the action
-add_filter('woocommerce_product_upsells_products_heading', 'sot_woocommerce_product_upsells_products_heading', 10, 1)
+// add_filter('woocommerce_product_upsells_products_heading', 'sot_woocommerce_product_upsells_products_heading', 10, 1)
 
 
 
