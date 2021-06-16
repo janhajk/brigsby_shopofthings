@@ -23,7 +23,7 @@ if ( $upsells ) : ?>
 
 	<section class="up-sells upsells products">
 		<?php
-		$heading = apply_filters( 'woocommerce_product_upsells_products_heading', 'Wird of zusammen gekauft' /*__( 'Often bought together with&hellip;'*/, 'woocommerce' ) );
+		$heading = apply_filters( 'woocommerce_product_upsells_products_heading', 'Often bought together with' /*__( 'You may also like&hellip;'*/, 'woocommerce' ) );
 
 		if ( $heading ) :
 			?>
@@ -51,4 +51,4 @@ if ( $upsells ) : ?>
 	<?php
 endif;
 
-wp_reset_postdata(); 
+wp_reset_postdata();
