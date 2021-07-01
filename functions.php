@@ -794,6 +794,7 @@ function sot_devices_content() {
    $devices = get_user_meta(get_current_user_id(), 'sot_devices');
    echo "<h1>Under construction. coming soon...</h1><br/>";
    echo "Du hast ".sizeof($devices). " Devices in deinem Account hinterlegt";
+   echo "<p>".get_current_user_id()."</p>";
    ?>
     <h4>Deine Devices</h4>
     <table class="woocommerce-table shop_table">
