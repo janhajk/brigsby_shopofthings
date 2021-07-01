@@ -775,6 +775,7 @@ add_filter( 'query_vars', 'sot_devices_query_vars', 0 );
 
 // ------------------
 // 3. Insert the new endpoint into the My Account menu
+// with "YITH Customize my Account" Plugin, the link must be activated seprately
 
 function sot_add_devices_link_my_account( $menu_links ) {
       $menu_links = array_slice( $menu_links, 0, 5, true )
@@ -790,12 +791,30 @@ add_filter( 'woocommerce_account_menu_items', 'sot_add_devices_link_my_account',
 // 4. Add content to the new tab
 
 function sot_devices_content() {
-   echo '<h3>Your Devices</h3><p>coming soon...</p>';
-   echo "Du hast ".sizeof(get_user_meta(get_current_user_id(), 'sot_devices')). " Devices in deinem Account hinterlegt";
+   $devices = get_user_meta(get_current_user_id(), 'sot_devices');
+   echo "<h1>Under construction. coming soon...</h1><br/>";
+   echo "Du hast ".sizeof($devices). " Devices in deinem Account hinterlegt";
+   ?>
+    <h4>Deine Devices</h4>
+    <table class="woocommerce-table shop_table">
+         <thead>
+               <tr><th>devEUI</th><th></th><th>appEUI</th><th>appKey</th></tr>
+         </thead>
+        <tbody>
+            <?php for ($i = 0; $i < 2/*count($devices)*/; $i++) { ?>
+            <tr>
+                <td>devEUI<?php echo $i ?></td>
+                <td>devEUI<?php echo $i ?></td>
+                <td>devEUI<?php echo $i ?></td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <?php
 }
 
-add_action( 'woocommerce_account_devices_endpoint', 'sot_devices_content' );
 // Note: add_action must follow 'woocommerce_account_{your-endpoint-slug}_endpoint' format
+add_action( 'woocommerce_account_devices_endpoint', 'sot_devices_content' );
 
 
 
