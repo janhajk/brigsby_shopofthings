@@ -752,45 +752,47 @@ function sot_after_add_to_cart_form_connectivity(){
  * @author        Rodolfo Melogli
  * @compatible    WooCommerce 5.0
  */
-  
+
 // ------------------
 // 1. Register new endpoint (URL) for My Account page
 // Note: Re-save Permalinks or it will give 404 error
-  
+
 function sot_add_devices_endpoint() {
     add_rewrite_endpoint( 'devices', EP_ROOT | EP_PAGES );
 }
-  
+
 add_action( 'init', 'sot_add_devices_endpoint' );
-  
+
 // ------------------
 // 2. Add new query var
-  
+
 function sot_devices_query_vars( $vars ) {
     $vars[] = 'devices';
     return $vars;
 }
-  
+
 add_filter( 'query_vars', 'sot_devices_query_vars', 0 );
-  
+
 // ------------------
 // 3. Insert the new endpoint into the My Account menu
-  
-function sot_add_devices_link_my_account( $items ) {
-    $items['devices'] = 'My Devices';
-    return $items;
+
+function sot_add_devices_link_my_account( $menu_links ) {
+      $menu_links = array_slice( $menu_links, 0, 5, true ) 
+	+ array( 'devices' => 'devices' )
+	+ array_slice( $menu_links, 5, NULL, true );
+ 
+	return $menu_links;
 }
-  
-add_filter( 'woocommerce_account_menu_items', 'sot_add_devices_link_my_account' );
-  
+
+add_filter( 'woocommerce_account_menu_items', 'sot_add_devices_link_my_account', 99, 1 );
+
 // ------------------
 // 4. Add content to the new tab
-  
+
 function sot_devices_content() {
    echo '<h3>Your Devices</h3><p>coming soon...</p>';
-   echo do_shortcode( ' /* your shortcode here */ ' );
 }
-  
+
 add_action( 'woocommerce_account_devices_endpoint', 'sot_devices_content' );
 // Note: add_action must follow 'woocommerce_account_{your-endpoint-slug}_endpoint' format
 
