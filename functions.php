@@ -791,7 +791,7 @@ add_filter( 'woocommerce_account_menu_items', 'sot_add_devices_link_my_account',
 
 function sot_devices_content() {
    echo '<h3>Your Devices</h3><p>coming soon...</p>';
-   echo get_user_meta(get_current_user_id(), 'sot_devices');
+   echo sizeof(get_user_meta(get_current_user_id(), 'sot_devices'));
 }
 
 add_action( 'woocommerce_account_devices_endpoint', 'sot_devices_content' );
