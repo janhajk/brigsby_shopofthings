@@ -801,7 +801,7 @@ function sot_devices_content() {
                <tr><th>devEUI</th><th></th><th>appEUI</th><th>appKey</th></tr>
          </thead>
         <tbody>
-            <?php for ($i = 0; $i < 2/*count($devices)*/; $i++) { ?>
+            <?php for ($i = 0; $i < count($devices); $i++) { ?>
             <tr>
                 <td>devEUI<?php echo $i ?></td>
                 <td>devEUI<?php echo $i ?></td>
