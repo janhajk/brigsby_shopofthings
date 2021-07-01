@@ -793,8 +793,8 @@ add_filter( 'woocommerce_account_menu_items', 'sot_add_devices_link_my_account',
 function sot_devices_content() {
    $devices = get_user_meta(get_current_user_id(), 'sot_devices');
    if (!count($devices)) return;
-   
-   $devices = $devices[0];
+
+   $devices = json_decode($devices[0]);
    echo "<h1>Under construction. coming soon...</h1><br/>";
    echo "Du hast ".sizeof($devices). " Devices in deinem Account hinterlegt";
    echo "<p>".get_current_user_id()."</p>";
