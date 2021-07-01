@@ -796,7 +796,7 @@ function sot_devices_content() {
    echo "Du hast ".sizeof($devices). " Devices in deinem Account hinterlegt";
    echo "<p>".get_current_user_id()."</p>";
    echo "<pre>".print_r($devices, 1)."</pre>";
-   
+
    ?>
     <h4>Deine Devices</h4>
     <table class="woocommerce-table shop_table">
@@ -806,9 +806,9 @@ function sot_devices_content() {
         <tbody>
             <?php for ($i = 0; $i < count($devices); $i++) { ?>
             <tr>
-                <td><?php echo $devices[$i] ?></td>
-                <td><?php echo $i ?></td>
-                <td><?php echo $i ?></td>
+                <td><?php echo $devices[$i].devEui ?></td>
+                <td><?php echo $devices[$i].appEui ?></td>
+                <td><?php echo $devices[$i].devKey ?></td>
             </tr>
             <?php } ?>
         </tbody>
