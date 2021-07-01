@@ -809,9 +809,9 @@ function sot_devices_content() {
         <tbody>
             <?php for ($i = 0; $i < count($devices); $i++) { ?>
             <tr>
-                <td><?php echo $devices[$i]['devEui'] ?></td>
-                <td><?php echo $devices[$i]['appEui'] ?></td>
-                <td><?php echo $devices[$i]['devEui'] ?></td>
+                <td><?php echo $devices[$i]->devEui; ?></td>
+                <td><?php echo $devices[$i]->appEui; ?></td>
+                <td><?php echo $devices[$i]->devEui; ?></td>
             </tr>
             <?php } ?>
         </tbody>
