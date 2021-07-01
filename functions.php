@@ -544,6 +544,7 @@ add_action( 'woocommerce_view_order', 'sot_order_view_add_tracking', 20 );
 add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tracking' );
 
 function sot_order_view_add_tracking( $order_id ){
+      $POST_LINK = "https://service.post.ch/ekp-web/ui/entry/search/";
     $metafield = get_post_meta( $order_id, 'shopofthings_sendungsnummer', true );
     if (empty($metafield)) return;
     $metafield = json_decode($metafield, true);
@@ -557,7 +558,7 @@ function sot_order_view_add_tracking( $order_id ){
             <?php for ($i = 0; $i < count($metafield); $i++) { ?>
             <tr>
                 <td>Paket <?php echo ($i+1); ?>:</td>
-                <td><a href="https://service.post.ch/ekp-web/ui/entry/search/<?php echo $metafield[$i]; ?>" target="_blank"><?php echo $metafield[$i]; ?></a></td>
+                <td><a href="<?php echo $POST_LINK; echo $metafield[$i]; ?>" target="_blank"><?php echo $metafield[$i]; ?></a></td>
             </tr>
             <?php } ?>
         </tbody>
