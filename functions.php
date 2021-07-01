@@ -777,10 +777,10 @@ add_filter( 'query_vars', 'sot_devices_query_vars', 0 );
 // 3. Insert the new endpoint into the My Account menu
 
 function sot_add_devices_link_my_account( $menu_links ) {
-      $menu_links = array_slice( $menu_links, 0, 5, true ) 
+      $menu_links = array_slice( $menu_links, 0, 5, true )
 	+ array( 'devices' => 'devices' )
 	+ array_slice( $menu_links, 5, NULL, true );
- 
+
 	return $menu_links;
 }
 
@@ -791,6 +791,7 @@ add_filter( 'woocommerce_account_menu_items', 'sot_add_devices_link_my_account',
 
 function sot_devices_content() {
    echo '<h3>Your Devices</h3><p>coming soon...</p>';
+   echo get_user_meta(get_current_user_id(), 'sot_devices');
 }
 
 add_action( 'woocommerce_account_devices_endpoint', 'sot_devices_content' );
