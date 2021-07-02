@@ -797,7 +797,6 @@ function sot_devices_content() {
    $devices = json_decode($devices[0]);
    echo "<h1>Under construction. Coming soon...</h1><br/>";
    echo "Du hast ".sizeof($devices). " Devices in deinem Account hinterlegt";
-   echo "<p>".get_current_user_id()."</p>";
 //    echo "<pre>".print_r($devices, 1)."</pre>";
 
    ?>
