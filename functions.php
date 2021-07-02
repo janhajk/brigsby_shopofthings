@@ -779,7 +779,7 @@ add_filter( 'query_vars', 'sot_devices_query_vars', 0 );
 
 function sot_add_devices_link_my_account( $menu_links ) {
       $menu_links = array_slice( $menu_links, 0, 5, true )
-	+ array( 'devices' => 'devices' )
+	+ array( 'devices' => 'LoRaWAN Devices' )
 	+ array_slice( $menu_links, 5, NULL, true );
 
 	return $menu_links;
