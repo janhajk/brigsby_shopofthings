@@ -262,3 +262,8 @@ input.product-search-field {
 .woocommerce #reviews #comments ol.commentlist li img.avatar {
       display: none;
 }
+
+
+.footer .widget {
+      margin: 5px 0;
+}
