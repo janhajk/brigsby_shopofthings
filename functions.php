@@ -149,10 +149,10 @@ s.parentNode.insertBefore(b, s);})();
 
 
 
-/***** Adding Freshchat Script *****/
-add_action('wp_head', 'oiw_add_chat');
+/***** Adding Shop-Chat Script *****/
+add_action('wp_head', 'sot_add_chat');
 
-function oiw_add_chat() {
+function sot_add_chat() {
 ?>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
