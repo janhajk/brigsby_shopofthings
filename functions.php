@@ -150,19 +150,23 @@ s.parentNode.insertBefore(b, s);})();
 
 
 /***** Adding Freshchat Script *****/
-add_action('wp_head', 'oiw_add_freshchat');
+add_action('wp_head', 'oiw_add_chat');
 
-function oiw_add_freshchat() {
+function oiw_add_chat() {
 ?>
-<script>
-  function initFreshChat() {
-    window.fcWidget.init({
-      token: "2855ca82-9f8b-4208-ad3c-2fbdb2a37ab8",
-      host: "https://wchat.eu.freshchat.com"
-    });
-  }
-  function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.eu.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"Freshdesk Messaging-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6089081c5eb20e09cf374a89/1f4bkfcc5';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
 </script>
+<!--End of Tawk.to Script-->
 <?php
 }
 
