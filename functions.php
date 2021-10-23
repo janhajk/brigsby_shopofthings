@@ -148,6 +148,30 @@ s.parentNode.insertBefore(b, s);})();
 
 
 
+
+/***** Adding Freshchat Script *****/
+add_action('wp_head', 'oiw_add_freshchat');
+
+function oiw_add_freshchat() {
+?>
+<script>
+  function initFreshChat() {
+    window.fcWidget.init({
+      token: "06a9973a-2e8d-4719-b589-51a170b4e285",
+      host: "https://wchat.eu.freshchat.com"
+    });
+  }
+  function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.eu.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"Freshdesk Messaging-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
+</script>
+<?php
+}
+
+
+
+
+
+
+
 /**
  *
  * Stock status in Product Loop
