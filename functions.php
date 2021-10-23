@@ -154,14 +154,12 @@ add_action('wp_head', 'oiw_add_freshchat');
 
 function oiw_add_freshchat() {
 ?>
-<script>
-  function initFreshChat() {
-    window.fcWidget.init({
-      token: "06a9973a-2e8d-4719-b589-51a170b4e285",
-      host: "https://wchat.eu.freshchat.com"
-    });
-  }
-  function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.eu.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"Freshdesk Messaging-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
+<script type='text/javascript'>
+var fc_JS=document.createElement('script');
+fc_JS.type='text/javascript';
+fc_JS.src='https://wchat.eu.freshchat.com/js/widget.js?t='+Date.now();
+(document.body?document.body:document.getElementsByTagName('head')[0]).appendChild(fc_JS); 
+window.fcSettings = { token:'2855ca82-9f8b-4208-ad3c-2fbdb2a37ab8', host : 'https://wchat.eu.freshchat.com'};
 </script>
 <?php
 }
