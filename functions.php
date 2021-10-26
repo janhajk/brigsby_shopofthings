@@ -174,6 +174,17 @@ s0.parentNode.insertBefore(s1,s0);
 
 
 
+/**
+
+ * @snippet       Remove "Description" Title @ WooCommerce Single Product Tabs
+
+  */
+
+add_filter( 'woocommerce_product_description_heading', '__return_null' );
+
+
+
+
 
 
 /**
