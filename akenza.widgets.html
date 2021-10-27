@@ -1,0 +1,449 @@
+<link href="http://fonts.cdnfonts.com/css/maison-neue" rel="stylesheet">
+
+<style>
+    :root {
+              --primaryColor: #e02b10;
+        --secondaryColor: #428aa9;
+        --highlightColor: #f4c93b;
+        --lightGrey: ;
+        --darkGrey: ;
+        --backgroundColor: #191a21;
+        --font-main: "Maison Neue";
+        --font-quote: "Maison Neue";
+        --font-mono: "Maison Neue";
+        --font-mono-bol: "Maison Neue";
+        --font-title-1: "Maison Neue";
+        --font-title-2: "Maison Neue";
+        --font-title-3: "Maison Neue";
+        --font-text-1: "Maison Neue";
+        --font-size-title-xl: 4.125rem;
+        --font-size-title-l: 3.125rem;
+        --font-size-title-m: 2.125rem;
+        --font-size-title-s: 1.375rem;
+        --font-size-text-l: 1.375rem;
+        --font-size-text-m: 1.25rem;
+        --font-size-text-s: 1rem;
+        --font-size-text-xs: 0.9375rem;
+        --font-size-text-xxs: 0.875rem;
+        --font-size-text-xxs: 0.75rem;
+        --type-size-desktop: 1.0625rem;
+        --type-size-mobile: 1rem;
+        --side-column: 8.3vw;
+        --side-padding-xl: 12.6vw;
+        --side-padding-l: 8.3vw;
+        --side-padding-m: 8.3vw;
+        --side-padding-s: 1rem;
+        --side-padding-row: 1rem;
+        --padding-xs: 1rem;
+        --padding-s: 2rem;
+        --padding-m: 3rem;
+        --padding-l: 4rem;
+        --padding-xl: 5rem;
+        --color-cd-1: #ee2f2f;
+        --color-cd-2: #428aa9;
+        --color-highlight: #7ac110;
+        --color-secondary: #f1cf56;
+        --color-grey: #e8e8e8;
+        --color-background-light-1: #fffffa;
+        --color-background-light-2: #d9d4d3;
+        --color-background-dark-1: var(--backgroundColor);
+        --color-dark-accent: var(--primaryColor);
+        --color-dark-emphasis: var(--secondaryColor);
+        --color-dark-1: #595959;
+        --color-dark-2: #4b4b4b;
+        --color-light-accent: var(--primaryColor);
+        --color-light-emphasis: var(--secondaryColor);
+        --color-light-1: #dedede;
+        --color-light-2: #b4b4b4;
+        --color-success: #23c456;
+        --color-warning: #f4e107;
+        --text-color-1: var(--color-dark-1);
+        --text-color-2: var(--color-dark-2);
+        --color-emphasis: var(--primaryColor);
+        --color-button: var(--primaryColor);
+        --color-link: var(--primaryColor);
+        --p-1c: 8.3vw;
+        --image-border: 0.5rem;
+        --handheld: "(max-width: 512px)";
+    }
+    .elementor-21527 {
+        color: var(--color-light-1);
+        background: #f5f5f5;
+        background-color: var(--color-background-dark-1);
+        font-family: var(--font-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding:50px;
+        background-image: radial-gradient(hsla(0,0%,100%,.1) 5%,transparent 0);
+        background-size: 30px 30px;
+            font-feature-settings: "salt";
+    }
+    
+    h1 {
+        font-size: 2.75rem;
+    }
+    
+    h1, h2, h3, h4, h5 {
+        font-family: var(--font-title-1);
+    }
+    
+    
+    .plans-private, .plans-public, .plans-tab_wrapper {
+        grid-column: 1/-1;
+    }
+    .gg-3 {
+        grid-gap: 3rem;
+    }
+    @media (min-width: 513px)
+    .grid-12 {
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+    }
+    .grid-12 {
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        grid-template-rows: -webkit-max-content;
+        grid-template-rows: max-content;
+    }
+    .plans-private, .plans-public, .plans-tab_wrapper {
+        grid-column: 1/-1;
+    }
+    .gg-3 {
+        grid-gap: 3rem;
+    }
+    @media (min-width: 513px)
+    .grid-12 {
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+    }
+    .grid-12 {
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        grid-template-rows: -webkit-max-content;
+        grid-template-rows: max-content;
+    }
+      .plan-card, .plan-card:hover {
+        transition: all .2s ease-in-out;
+      }
+      .plan-card {
+        grid-column: span 4;
+        border-radius: var(--image-border);
+        background-color: var(--color-background-dark-1);
+        border: 1px solid var(--color-dark-2);
+        -webkit-transition: all .4s ease-in;
+        -moz-transition: all .4s ease-in;
+        -ms-transition: all .4s ease-in;
+        -o-transition: all .4s ease-in;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .plan-card_title {
+        padding: 1.5rem 1.5rem .5rem;
+        font-size: var(--font-size-title-s);
+        font-family: var(--font-title-2);
+        color: var(--primaryColor);
+      }
+      p.plan-card_description {
+        margin: 0!important;
+      }
+      .plan-card_description {
+        padding: .5rem 1.5rem 0;
+      }
+      @media (min-width: 416px) p, small {
+        line-height: 1.5;
+      }
+      article {
+        padding: 0;
+      }
+      .f-c-c {
+        flex-direction: column;
+      }
+      .f-r-c {
+        flex-direction: row;
+        justify-content: center;
+      }
+      .f-c-c, .f-r-c {
+        display: flex;
+        align-items: center;
+      }
+      .plan-card_price {
+        padding: 1.5rem;
+        color: #595959;
+      }
+      .plan-card_price {
+        border-top: 1px solid #4b4b4b;
+        border-bottom: 1px solid #4b4b4b;
+      }
+      .plan-card_price {
+        padding: 1.5rem;
+        color: #595959;
+      }
+      .price-wrapper {
+        flex: 40%;
+      }
+      .dfee, .mfee {
+        display: inline-block;
+        font-family: var(--font-title-1);
+        font-size: 1.375rem;
+      }
+      .mfee {
+        color: #dedede;
+      }
+      .price-wrapper>div:nth-of-type(2) {
+        font-size: .75rem;
+      }
+      .dfee {
+        color: #428aa9;
+      }
+      .tooltip {
+        position: relative;
+        display: inline-block;
+        font-size: 14px;
+        font-family: var(--font-text-1);
+        text-align: left;
+        border: none;
+      }
+      .plan-card_features {
+        color: var(--primaryColor);
+      }
+      .plan-card_features {
+        padding: 1.5rem 2rem;
+      }
+      ul.features {
+        font-family: var(--font-text-2);
+        list-style: none;
+        color: var(--color-light-2);
+        font-size: var(--font-size-text-xs);
+      }
+      li.feature {
+        margin: 0;
+        padding-bottom: .7rem;
+        text-indent: -1.9em;
+        padding-left: 1.7em;
+      }
+      li.feature:before {
+        list-style: none;
+        content: "";
+        width: 18px;
+        height: 18px;
+        padding-right: 1.75rem;
+        background-image: url(https://storage.googleapis.com/akenza-io-website-prod1-assets/assets/vectors/check-circle-white.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+      .plan-card-price, .plan-card_footer {
+        flex: 1;
+        flex-grow: 1;
+    }
+    .plan-card_footer {
+        padding: 1.5rem 2rem 2rem;
+    }
+    .button-1 {
+        font-family: var(--font-title-1);
+        letter-spacing: .4px;
+        padding: 8px 16px;
+        color: #fff;
+        background-color: var(--color-button);
+        border: 2px solid var(--color-button);
+        border-radius: 4px;
+        transition: all .75s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+</style>
+
+<div id="public" class="plans-tab_wrapper tabcontent" style="display: block;">
+    <section class="plans-public grid-12 gg-3">
+        <!-- card 1 -->
+        <article class="plan-card">
+            <div>
+                <section class="plan-card_header">
+                    <div class="plan-card_title">
+                        Elemental
+                    </div>
+                    <p class="plan-card_description">
+                        All the tools you need to build your proof of concept. Start with as little as one device and one connectivity.
+                    </p>
+                </section>
+                <section class="plan-card_features">
+                    <ul class="features">
+                        <li class="feature">Connectivity as a service
+                        </li>
+                        <li class="feature">1 connectivity integration
+                        </li>
+                        <li class="feature">Device type library
+                        </li>
+                        <li class="feature">Up to 5 rules
+                        </li>
+                        <li class="feature">Mail &amp; webhook output connector
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            <div>
+                <section class="plan-card_price f-r-c">
+                    <div class="price-wrapper f-c-c">
+                        <div class="mfee">0.-
+                        </div>
+                        <div>CHF base fee
+                        </div>
+                    </div>
+                    <div>+
+                    </div>
+                    <div class="price-wrapper f-c-c">
+                        <div class="dfee">2.40
+                            <!--<div class="tooltip">
+                <svg class="info-tooltip" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd">
+                  </path>
+                </svg>
+                <div class="tooltiptext">Additional carrier fees of CHF 0.85/device will incur if your are using a Swisscom LoRa integration.
+                </div>
+              </div>-->
+                        </div>
+                        <div>CHF per device
+                        </div>
+                    </div>
+                </section>
+                <section class="plan-card_footer">
+                    <div align="center"><a href="https://auth.akenza.io/register" style="			color: #ffffff;
+			background-color: #e02b10;
+			font-size: 19px;
+			border: 1px solid #e02b10;
+			border-radius: 4px;
+			padding: 8px 16px;
+			cursor: pointer">Try for free</a></div>
+                </section>
+            </div>
+        </article>
+        <!-- card 2 -->
+        <article class="plan-card">
+            <div>
+                <section class="plan-card_header">
+                    <div class="plan-card_title">
+                        Advanced
+                    </div>
+                    <p class="plan-card_description">
+                        Great for IoT projects with multiple connectivity technologies and integration requirements.
+                    </p>
+                </section>
+                <section class="plan-card_features">
+                    <ul class="features">
+                        <li class="feature">All Elemental features
+                        </li>
+                        <div class="pl-s">+
+                        </div>
+                        <li class="feature">Up to 3 connectivity integrations
+                        </li>
+                        <li class="feature">Create custom device types
+                        </li>
+                        <li class="feature">Unlimited rules
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            <div>
+                <section class="plan-card_price f-r-c">
+                    <div class="price-wrapper f-c-c">
+                        <div class="mfee">249.-
+                        </div>
+                        <div>CHF base fee
+                        </div>
+                    </div>
+                    <div>+
+                    </div>
+                    <div class="price-wrapper f-c-c">
+                        <div class="dfee">1.90
+                            <!--div class="tooltip">
+                <svg class="info-tooltip" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd">
+                  </path>
+                </svg>
+                <div class="tooltiptext">Additional carrier fees of CHF 0.85/device will incur if your are using a Swisscom LoRa integration.
+                </div>
+              </div>-->
+                        </div>
+                        <div>CHF per device
+                        </div>
+                    </div>
+                </section>
+                <section class="plan-card_footer">
+                    <div align="center"><a href="https://auth.akenza.io/register" style="			color: #ffffff;
+			background-color: #e02b10;
+			font-size: 19px;
+			border: 1px solid #e02b10;
+			border-radius: 4px;
+			padding: 8px 16px;
+			cursor: pointer">Try for free</a></div>
+                </section>
+            </div>
+        </article>
+        <!-- card 3 -->
+        <article class="plan-card">
+            <div>
+                <section class="plan-card_header">
+                    <div class="plan-card_title">
+                        Expert
+                    </div>
+                    <p class="plan-card_description">
+                        Advanced features for large scale IoT solutions and maximum customization.
+                    </p>
+                </section>
+                <section class="plan-card_features">
+                    <ul class="features">
+                        <li class="feature">All advanced features
+                        </li>
+                        <div class="pl-s">+
+                        </div>
+                        <li class="feature">Unlimited connectivity integrations
+                        </li>
+                        <li class="feature">SIM-Card Management
+                        </li>
+                        <li class="feature">Custom Rules
+                        </li>
+                        <li class="feature">Azure IoT Hub output connector
+                        </li>
+                        <li class="feature">WebSocket API
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            <div>
+                <section class="plan-card_price f-r-c">
+                    <div class="price-wrapper f-c-c">
+                        <div class="mfee">889.-
+                        </div>
+                        <div>CHF base fee
+                        </div>
+                    </div>
+                    <div class="pl-s">+
+                    </div>
+                    <div class="price-wrapper f-c-c">
+                        <div class="dfee">1.40
+                            <!--<div class="tooltip">
+                <svg class="info-tooltip" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd">
+                  </path>
+                </svg>
+                <div class="tooltiptext">Additional carrier fees of CHF 0.85/device will incur if your are using a Swisscom LoRa integration.
+                </div>
+              </div>-->
+                        </div>
+                        <div>CHF per device
+                        </div>
+                    </div>
+                </section>
+                <section class="plan-card_footer">
+                    <div align="center"><a href="https://auth.akenza.io/register" style="			color: #ffffff;
+			background-color: #e02b10;
+			font-size: 19px;
+			border: 1px solid #e02b10;
+			border-radius: 4px;
+			padding: 8px 16px;
+			cursor: pointer">Try for free</a></div>
+                </section>
+            </div>
+        </article>
+    </section>
+</div>
