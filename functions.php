@@ -239,13 +239,13 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
       }
 
       // unmanaged stock is always on stock
-      // if (!$product->get_manage_stock()) {
-      //       return array(
-      //             'circle'      => $_HTML_AVAILABLE,
-      //             'availability'=> 'sofort verfügbar',
-      //             'onorder'     => ''
-      //       );
-      // }
+      if (!$_product->get_manage_stock()) {
+            return array(
+                  'circle'      => $_HTML_AVAILABLE,
+                  'availability'=> 'sofort verfügbar',
+                  'onorder'     => ''
+            );
+      }
 
 
       // Stock Quantity of current product
