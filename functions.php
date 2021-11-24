@@ -803,7 +803,7 @@ function sot_after_add_to_cart_form_batteries(){
       if (in_array(653, $ids) && in_array(1060, $ids)) { // lorawan and elsys
       	?>
       	<div class="sot_info_box">
-                  Dieser Sensor kommt <span style="text-decoreation:underline">ohne</span> Batterien. Diese können <a href="/shop/prototyping/power/eve-er14505v-lisocl2-lithium-3-6v-batterie-aa-2600mah">hier</a> erworben werden.
+                  Dieser Sensor kommt <span style="text-decoration:underline">ohne</span> Batterien. Diese können <a href="/shop/prototyping/power/eve-er14505v-lisocl2-lithium-3-6v-batterie-aa-2600mah">hier</a> erworben werden.
             </div>
       	<?php
       }
