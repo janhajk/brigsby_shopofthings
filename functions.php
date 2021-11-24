@@ -777,7 +777,7 @@ function sot_after_add_to_cart_form_connectivity(){
                   	?>
                   	<div class="sot_info_box">
                                     <span class="sot_kapital">!</span>
-                                    Um diese Gerät zu betreiben, brauchst Du ein LoRaWAN. Dies kannst Du mittels eines <a href="https://shopofthings.ch/produkt-kategorie/typ/gateway/">LoRaWAN Gateways</a> selber erstellen, Du kannst das <a href="https://shopofthings.ch/shop/connectivity-2/connectivity-lorawan/loriot-lpn-lorawan-connectivity-abo-jaehrlicher-renewal/">LORIOT</a> oder TTN Netzwerk benutzen respektive das Schweizweit flächendeckende <a href="https://shopofthings.ch/shop/connectivity-2/connectivity-lorawan/1-jahr-swisscom-lpn-lorawan-connectivity-abo-yearly-payment">Swisscom LoRaWAN</a> verwenden. Alle Netze sind bei uns buchbar.
+                                    Um diese Gerät zu betreiben, brauchst Du ein LoRaWAN. Dies kannst Du mittels eines <a href="https://shopofthings.ch/produkt-kategorie/typ/gateway/">LoRaWAN Gateways</a> selber erstellen, Du kannst das <a href="https://shopofthings.ch/shop/connectivity-2/connectivity-lorawan/loriot-lpn-lorawan-connectivity-abo-jaehrlicher-renewal/">LORIOT</a> oder TTN Netzwerk benutzen respektive das Schweizweit flächendeckende <a href="https://shopofthings.ch/shop/connectivity-2/connectivity-lorawan/1-jahr-swisscom-lpn-lorawan-connectivity-abo-yearly-payment">Swisscom LoRaWAN</a> verwenden. Alle Netze sind bei uns käuflich.
                         </div>
                   	<?php
                   }
