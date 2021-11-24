@@ -787,6 +787,29 @@ function sot_after_add_to_cart_form_connectivity(){
 
 
 
+/**
+ *
+ * add battery warning on elsys devices
+ *
+ *
+ *
+ *
+ */
+add_action( 'woocommerce_after_add_to_cart_form', 'sot_after_add_to_cart_form_batteries' );
+
+function sot_after_add_to_cart_form_batteries(){
+      global $product;
+      $ids = $product->get_category_ids();
+      if (in_array(653, $ids) && in_array(1060, $ids)) { // lorawan and elsys
+      	?>
+      	<div class="sot_info_box">
+                  Dieser Sensor kommt ohne Batterien. Diese können <a href="/shop/prototyping/power/eve-er14505v-lisocl2-lithium-3-6v-batterie-aa-2600mah">hier</a> erworben werden.
+            </div>
+      	<?php
+      }
+}
+
+
 
 
 
