@@ -124,6 +124,31 @@ function oiw_add_fbpixel() {
 }
 
 
+
+
+/***** Adding mouseflow. see: https://eu.mouseflow.com/  *****/
+add_action('wp_head', 'oiw_add_mouseflow');
+
+function oiw_add_mouseflow() {
+?>
+<!-- Mouseflow Code -->
+      <script type="text/javascript">
+        window._mfq = window._mfq || [];
+        (function() {
+          var mf = document.createElement("script");
+          mf.type = "text/javascript"; mf.defer = true;
+          mf.src = "//cdn.mouseflow.com/projects/cdd365bf-3a34-4574-8d19-93407a72cace.js";
+          document.getElementsByTagName("head")[0].appendChild(mf);
+        })();
+      </script>
+<!-- End Mouseflow Code -->
+<?php
+}
+
+
+
+
+
 /***** Adding LinkedIn Script *****/
 // add_action('wp_head', 'oiw_add_linkedin');
 
