@@ -175,7 +175,7 @@ s.parentNode.insertBefore(b, s);})();
 
 
 /***** Adding Shop-Chat Script *****/
-// add_action('wp_head', 'sot_add_chat');
+add_action('wp_head', 'sot_add_chat');
 
 function sot_add_chat() {
 ?>
