@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.83
+ Version:       1.0.84
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -269,31 +269,44 @@ input.product-search-field {
 }
 
 
-/* hide title on swisscom brand page */
-.singular-page-27172 #loop-meta {
+/* hide title on brand pages */
+.singular-page-27172 #loop-meta,
+.singular-page-27223 #loop-meta
+{
     display: none;
 }
 
 #post-27172 p,
-#post-27172 li {
+#post-27172 li,
+#post-27223 p,
+#post-27223 li
+{
     font-size: 18px;
 }
 
 
-#post-27172 .ywsbs-price-detail {
+#post-27172 .ywsbs-price-detail,
+#post-27223 .ywsbs-price-detail
+{
       display: none;
 }
 
 
-#post-27172 .woocommerce-price-suffix {
+#post-27172 .woocommerce-price-suffix,
+#post-27223 .woocommerce-price-suffix
+{
       display: none;
 }
 
-#post-27172 .woocommerce-Price-currencySymbol {
+#post-27172 .woocommerce-Price-currencySymbol,
+#post-27223 .woocommerce-Price-currencySymbol
+{
     margin-right: 5px;
 }
 
-#post-27172 a {
+#post-27172 a,
+#post-27223 a
+{
       color: rgb(0, 74, 208);
 
 }
@@ -302,6 +315,11 @@ input.product-search-field {
 #post-27172 h1,
 #post-27172 h2,
 #post-27172 h3,
-#post-27172 h4 {
+#post-27172 h4,
+#post-27223 h1,
+#post-27223 h2,
+#post-27223 h3,
+#post-27223 h4
+{
     color:rgb(0, 17, 85);
 }
