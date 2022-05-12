@@ -267,3 +267,9 @@ input.product-search-field {
 .footer .widget {
       margin: 5px 0;
 }
+
+
+/* hide title on swisscom brand page */
+.singular-page-27172 #loop-meta {
+    display: none;
+}
