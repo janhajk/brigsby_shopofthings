@@ -91,8 +91,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-      b2b.innerHTML = 'B2B';
-      b2c.innerHTML = 'B2C';
+      b2b.innerHTML = 'exkl. MWST';
+      b2c.innerHTML = 'inkl. MWST';
       b2b.className = 'button';
       b2c.className = 'button';
       b2b.title = 'Geschäftskundenpreise (exkl. MWST)';
