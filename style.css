@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.92
+ Version:       1.0.93
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -279,6 +279,7 @@ input.product-search-field {
 
 /* hide title on brand pages */
 .singular-page-27172 #loop-meta,
+.singular-page-27425 #loop-meta,
 .singular-page-27223 #loop-meta
 {
     display: none;
@@ -287,6 +288,8 @@ input.product-search-field {
 /* bigger font */
 #post-27172 p,
 #post-27172 li,
+#post-27425 p,
+#post-27425 li,
 #post-27223 p,
 #post-27223 li
 {
@@ -296,21 +299,24 @@ input.product-search-field {
 
 /* hide extra price stuff */
 #post-27172 .ywsbs-price-detail,
-#post-27223 .ywsbs-price-detail
+#post-27223 .ywsbs-price-detail,
+#post-27425 .ywsbs-price-detail
 {
       display: none;
 }
 
 /* hide MWST */
 #post-27172 .woocommerce-price-suffix,
-#post-27223 .woocommerce-price-suffix
+#post-27223 .woocommerce-price-suffix,
+#post-27425 .woocommerce-price-suffix
 {
       display: none;
 }
 
 /* gap between CHF and price */
 #post-27172 .woocommerce-Price-currencySymbol,
-#post-27223 .woocommerce-Price-currencySymbol
+#post-27223 .woocommerce-Price-currencySymbol,
+#post-27425 .woocommerce-Price-currencySymbol
 {
     margin-right: 5px;
 }
@@ -343,3 +349,5 @@ input.product-search-field {
 {
       color: #f05d23;
 }
+
+
