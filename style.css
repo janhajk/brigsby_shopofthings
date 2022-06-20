@@ -360,6 +360,6 @@ input.product-search-field {
 .bundled_product_excerpt.product_excerpt {
       display: none;
 }
-.bundle_form.bundle_sells_form initialized {
+.bundle_form.bundle_sells_form.initialized {
       margin-bottom: 2em;
 }
