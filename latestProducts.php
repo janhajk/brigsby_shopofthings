@@ -1,5 +1,5 @@
 <?php /* Template Name: latestProducts */ ?>
-<?php 
+<?php
 // Loads the header.php template.
 get_header();
 ?>
@@ -8,7 +8,7 @@ get_header();
 // Dispay Loop Meta at top
 hoot_display_loop_title_content( 'pre', 'page.php' );
 if ( hoot_page_header_attop() ) {
-	get_template_part( 'template-parts/loop-meta' ); // Loads the template-parts/loop-meta.php template to display Title Area with Meta Info (of the loop)
+// 	get_template_part( 'template-parts/loop-meta' ); // Loads the template-parts/loop-meta.php template to display Title Area with Meta Info (of the loop)
 	hoot_display_loop_title_content( 'post', 'page.php' );
 }
 
