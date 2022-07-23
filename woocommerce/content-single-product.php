@@ -32,7 +32,7 @@ if ( post_password_required() ) {
 }
 ?>
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
-        <div id="sot-single-product">
+        <div id="sot-single-product-top">
               <?php
               /**
                * Hook: woocommerce_before_single_product_summary.
