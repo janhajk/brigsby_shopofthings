@@ -42,8 +42,8 @@ if ( post_password_required() ) {
                */
               do_action( 'woocommerce_before_single_product_summary' );
               ?>
-      
-              <div class="summary entry-summary">
+
+              <div class="summary entry-summary" style="vertical-align:top;width:33%;height:auto;float:none !important;position:absolute;top:0;right:0">
                       <?php
                      /**
                        * Hook: woocommerce_single_product_summary.
