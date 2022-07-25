@@ -365,16 +365,13 @@ input.product-search-field {
       font-size: 1em !important;
 }
 /* title */
+/* brigsby main theme somehow hides product titles?; for bundled items show them again */
 .bundle_sells_form.bundled_product_title .product_title {
       line-height: 1em !important;
-}
-
-/* brigsby main theme somehow hides product titles?; for bundled items show them again */
-.bundle_sells_form .bundled_product_title.product_title {
       display: block !important;
-      line-height: 3em !important;
       font-size: 1.1em !important;
 }
+
 /* but hide excerpt */
 .bundle_sells_form .bundled_product_excerpt.product_excerpt {
       display: none !important;
