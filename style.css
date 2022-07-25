@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.121
+ Version:       1.0.122
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -433,3 +433,11 @@ input.product-search-field {
 
 
 
+/* woocommerce product filter */
+.sot-filter .text {
+      color: rgb(119, 119, 119);
+}
+
+.sot-filter .wcpf-title {
+      color: rgb(15, 88, 148);
+}
