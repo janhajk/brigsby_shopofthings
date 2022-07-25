@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.112
+ Version:       1.0.113
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -352,34 +352,34 @@ input.product-search-field {
 
 
 /* Zubehör */
-.bundle_sells_form .bundled_product_images {
+.bundle_sells_form.bundled_product_images {
       width: 15%;
       float: left;
 }
-.bundle_sells_form .details {
+.bundle_sells_form.details {
       width: 80%;
       float: right;
 }
 /* Checkbox */
-.bundle_sells_form .bundled_product_optional_checkbox .price {
+.bundle_sells_form.bundled_product_optional_checkbox .price {
       font-size: 1em;
 }
 /* title */
-.bundle_sells_form .bundled_product_title.product_title {
+.bundle_sells_form.bundled_product_title.product_title {
       line-height: 1em;
 }
 
 /* brigsby main theme somehow hides product titles?; for bundled items show them again */
-.bundled_product_title .product_title {
+.bundled_product_title.product_title {
       display: block !important;
       line-height: 3em;
       font-size: 1.1em;;
 }
 /* but hide excerpt */
-.bundled_product_excerpt .product_excerpt {
+.bundled_product_excerpt.product_excerpt {
       display: none;
 }
-.bundle_form.bundle_sells_form .initialized {
+.bundle_form.bundle_sells_form.initialized {
       margin-bottom: 2em;
 }
 
