@@ -919,5 +919,24 @@ add_action( 'woocommerce_account_devices_endpoint', 'sot_devices_content' );
 
 
 
+// YITH Scrolling Bug Fix
+// See: https://wordpress.org/support/topic/problem-with-product-filters-for-woocommerce/
+if ( ! function_exists( 'yith_infs_customization_wc_product_filters' ) ) {
+	add_action( 'wp_enqueue_scripts', 'yith_infs_customization_wc_product_filters', 99 );
+	function yith_infs_customization_wc_product_filters() {
+		$js = "( function( $ ){
+				$( window ).on( 'wcpf_before_ajax_filtering', function(){
+					$( window ).unbind( 'yith_infs_start' );
+				});
+				
+				$( window ).on( 'wcpf_after_ajax_filtering', function(){
+					$( yith_infs.contentSelector ).yit_infinitescroll( infinite_scroll );
+				});
+                   } )( jQuery );";
+		wp_add_inline_script( 'yith-infs', $js );
+	}
+}
+
+
 
 ?>
