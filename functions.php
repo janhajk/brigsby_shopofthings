@@ -618,7 +618,7 @@ add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tra
 
 function sot_order_view_add_tracking( $order_id ){
     $POST_LINK = "https://service.post.ch/ekp-web/ui/entry/search/";
-    $metafield = get_post_meta( $order_id, 'shopofthings_sendungsnummer', true );
+    $metafield = get_post_meta( $order_id, 'thingware_sendungsnummer', true );
     if (empty($metafield)) return;
     $metafield = json_decode($metafield, true);
     // old values from the olden days have to be turned into array
@@ -641,7 +641,7 @@ function sot_order_view_add_tracking( $order_id ){
 
 // display the extra data in the order admin panel
 function sot_display_tracking( $order ){  ?>
-    <?php $tn = get_post_meta( $order->id, 'shopofthings_sendungsnummer', true );
+    <?php $tn = get_post_meta( $order->id, 'thingware_sendungsnummer', true );
     $tn = json_decode($tn, true);
     if ($tn) { ?>
           <div class="order_data_column">
@@ -928,7 +928,7 @@ if ( ! function_exists( 'yith_infs_customization_wc_product_filters' ) ) {
 				$( window ).on( 'wcpf_before_ajax_filtering', function(){
 					$( window ).unbind( 'yith_infs_start' );
 				});
-				
+
 				$( window ).on( 'wcpf_after_ajax_filtering', function(){
 					$( yith_infs.contentSelector ).yit_infinitescroll( infinite_scroll );
 				});
