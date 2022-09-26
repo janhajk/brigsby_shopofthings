@@ -235,7 +235,12 @@ aside#sidebar-secondary {
 
 
 
-/* search field */
+/*
+
+  search field
+  https://woocommerce.com/document/woocommerce-product-search/themes/customization/product-search-field/
+
+*/
 div.product-search-form {
      border: 1px solid #3787C7;
     box-shadow: 2px 5px 7px 2px rgb(0 0 0 / 50%);
@@ -255,27 +260,22 @@ div.product-search-form {
       display: none;
 }
 
-/* icon in search field */
-#product-search-form-0::before {
-    content: "\f00e";
-    font-size: 18px;
-    color: teal;
-    margin: -4px -7px;
-}
 
 input.product-search-field {
       color: rgb(68,68,68);
 }
 
-
 /* search results */
 .search-results>tbody>tr>td>a>.title {
-      margin:0px !important;
+      margin: 0px !important;
 }
 .search-results .entry {
       border-top: 1px solid #AAA !important;
 }
 
+
+
+/* ********* end search field ******************** */
 
 
 
