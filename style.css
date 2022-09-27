@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.130
+ Version:       1.0.131
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -195,7 +195,7 @@ aside#sidebar-secondary {
 }
 
 
-/* info box */
+/* info box bezüglich LoraWAN  */
 .sot_info_box {
       /*border: none;*/
       /*color: white;*/
@@ -209,6 +209,7 @@ aside#sidebar-secondary {
       transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
       padding: 10px;
       border-radius: 2px 2px 2px 2px;
+      margin-bottom: 1em;
 }
 .sot_info_box>a:link, .sot_info_box>a:visited {
       /*color: white;*/
