@@ -54,8 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             // window.setTimeout(pricesExclMwst, 2000);
       };
-      
-      
+
+
       let pricesExclMwstVariant = function() {
             if (window.location.pathname === '/cart/') return;
             jQuery('.woocommerce-variation-price .woocommerce-Price-amount bdi').each((i, el) => {
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // change all prices to excl. MWST
       if (is_b2b == 'true' || is_b2b === true) {
             is_b2b = true;
-            pricesExclMwst();
+            setTimeout(() => pricesExclMwst(), 10);
       }
       else {
             is_b2b = false;
