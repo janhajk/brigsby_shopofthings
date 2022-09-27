@@ -116,4 +116,10 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.reload(true);
       });
 
+      jQuery('.variations select').change(() => {
+            if (getCookie('_is_b2b') == 'true') {
+                  pricesExclMwst();
+            }
+      });
+
 });
