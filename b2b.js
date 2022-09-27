@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       jQuery('.variations select').change(() => {
             if (getCookie('_is_b2b') == 'true') {
-                  pricesExclMwst();
+                  setTimeout(()=> pricesExclMwst(), 10);
             }
       });
 
