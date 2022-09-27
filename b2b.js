@@ -54,6 +54,26 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             // window.setTimeout(pricesExclMwst, 2000);
       };
+      
+      
+      let pricesExclMwstVariant = function() {
+            if (window.location.pathname === '/cart/') return;
+            jQuery('.woocommerce-variation-price .woocommerce-Price-amount bdi').each((i, el) => {
+                  el = jQuery(el);
+                  let currency = el.children().first();
+                  let price = el.text();
+                  price = price.replace('CHF', '');
+                  price = price.replace('\'', '');
+                  price = parseFloat(price) / 1.077;
+                  price = (price.toFixed(2)).toLocaleString('de-CH', { minimumFractionDigits: 2 });
+                  el.empty();
+                  el.append(currency);
+                  el.append(price);
+            });
+            jQuery('.woocommerce-variation-price .woocommerce-price-suffix').each((i, el) => {
+                  jQuery(el).replaceWith('exkl. MWST');
+            });
+      };
 
 
 
@@ -118,7 +138,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
       jQuery('.variations select').change(() => {
             if (getCookie('_is_b2b') == 'true') {
-                  setTimeout(()=> pricesExclMwst(), 10);
+                  // there is a bug, where the variant price is somehow
+                  // loaded twice and instantly overwrites the changed value
+                  // tehrefore we load it 10ms after, this way it works
+                  setTimeout(() => pricesExclMwstVariant(), 10);
             }
       });
 
