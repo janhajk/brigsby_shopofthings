@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.129
+ Version:       1.0.130
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -469,4 +469,32 @@ input.product-search-field {
 /*Bug, where in variations add to cart is still beeing displayed but should be hidden*/
 .woocommerce-variation-add-to-cart-disabled {
       display: none;
+}
+
+
+
+/* format price on single product */
+/* variants */
+#sot-single-product-top .summary .single_variation .price {
+      font-size: 0.8em !important;
+}
+#sot-single-product-top .summary .single_variation .price .amount {
+      font-size: 1.9em !important;
+      font-weight: 600;
+}
+#sot-single-product-top .summary .single_variation .price .amount .woocommerce-Price-currencySymbol {
+      font-size: 0.8em;
+      margin-right: 0.5em;
+}
+/* regular */
+#sot-single-product-top .summary .price {
+      font-size: 0.8em !important;
+}
+#sot-single-product-top .summary .price .amount {
+      font-size: 1.9em !important;
+      font-weight: 600;
+}
+#sot-single-product-top .summary .price .amount .woocommerce-Price-currencySymbol {
+      font-size: 0.8em;
+      margin-right: 0.5em;
 }
