@@ -200,10 +200,11 @@ s0.parentNode.insertBefore(s1,s0);
 
 
 /**
-
+ *
  * @snippet       Remove "Description" Title @ WooCommerce Single Product Tabs
-
-  */
+ * 
+ * see https://njengah.com/woocommerce-hide-description-heading/
+ */
 
 add_filter( 'woocommerce_product_description_heading', '__return_null' );
 
@@ -355,8 +356,14 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
 }
 
 
+/**
+ * 
+ * get stock on product loop
+ * 
+ */
 function sot_loop_item_stock() {
       global $product;
+      // uncomment for testing it only on one product
       // if ($product->get_id() == 4986 || $product->get_id() == 16448) {
             $info = get_stock_info($product);
             echo '<div style="float:right;position:absolute;top:7px;right:12px" title="'.$info['availability'].'">'.$info['circle'].'</div>';
@@ -365,6 +372,13 @@ function sot_loop_item_stock() {
 add_action( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20, 2);
 
 
+
+
+/**
+ * 
+ * get stock onsingle product page
+ * 
+ */
 /**
  *
  * Woocommerce Availability
@@ -414,6 +428,7 @@ function sot_custom_loop_title() {
 
 /**
  * Overwrite the 'narrow-left-right' from 6/3/3 to 8/2/2
+ * defined in theme brigsby
  *
  *
  *
@@ -588,6 +603,8 @@ function woo_cart_but_icon ( $items, $args ) {
 /**
  *
  * Add B2B Javascript
+ * 
+ * inkl. MWST / exkl. MWST Buttons
  *
  *
  */
@@ -773,7 +790,7 @@ function sot_customize_add_to_cart_button_woocommerce(){
 
 /**
  *
- *
+ * ??
  *
  *
  *
