@@ -503,3 +503,10 @@ input.product-search-field {
       font-size: 0.8em;
       margin-right: 0.5em;
 }
+
+
+/* hide add to cart on akenza product page */
+#product-21527 .single_add_to_cart_button,
+.post-21527 .add_to_cart_button {
+      display: none;
+}
