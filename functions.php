@@ -202,7 +202,7 @@ s0.parentNode.insertBefore(s1,s0);
 /**
  *
  * @snippet       Remove "Description" Title @ WooCommerce Single Product Tabs
- * 
+ *
  * see https://njengah.com/woocommerce-hide-description-heading/
  */
 
@@ -357,9 +357,9 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
 
 
 /**
- * 
+ *
  * get stock on product loop
- * 
+ *
  */
 function sot_loop_item_stock() {
       global $product;
@@ -375,9 +375,9 @@ add_action( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20
 
 
 /**
- * 
+ *
  * get stock onsingle product page
- * 
+ *
  */
 /**
  *
@@ -603,7 +603,7 @@ function woo_cart_but_icon ( $items, $args ) {
 /**
  *
  * Add B2B Javascript
- * 
+ *
  * inkl. MWST / exkl. MWST Buttons
  *
  *
@@ -958,33 +958,33 @@ if ( ! function_exists( 'yith_infs_customization_wc_product_filters' ) ) {
 
 /**
  * Log database queries to the /wp-content/sql.log file.
- * 
+ *
  * @link https://wordpress.stackexchange.com/a/144353/90061
  */
-add_filter( 'query', function( $query ){
+// add_filter( 'query', function( $query ){
 
-	// Filter out everything that shouldn't be logged.
-// 	if ( 
-// 		stripos( $query, 'SELECT' ) !== FALSE ||
-// 		stripos( $query, 'SHOW' ) !== FALSE ||
-// 		stripos( $query, '_transient_' ) !== FALSE ||
-// 		stripos( $query, 'iap517_yoast_notifications' ) !== FALSE ||
-// 		stripos( $query, "WHERE `option_name` = 'cron'" ) !== FALSE ||
-// 		stripos( $query, 'iap517_actionscheduler' ) !== FALSE ||
-// 		stripos( $query, 'action_scheduler' ) !== FALSE
-// 	) {
-// 		return $query;
-// 	}
+// 	// Filter out everything that shouldn't be logged.
+// // 	if (
+// // 		stripos( $query, 'SELECT' ) !== FALSE ||
+// // 		stripos( $query, 'SHOW' ) !== FALSE ||
+// // 		stripos( $query, '_transient_' ) !== FALSE ||
+// // 		stripos( $query, 'iap517_yoast_notifications' ) !== FALSE ||
+// // 		stripos( $query, "WHERE `option_name` = 'cron'" ) !== FALSE ||
+// // 		stripos( $query, 'iap517_actionscheduler' ) !== FALSE ||
+// // 		stripos( $query, 'action_scheduler' ) !== FALSE
+// // 	) {
+// // 		return $query;
+// // 	}
 
-	$file =  WP_CONTENT_DIR . '/sql.log'; // Edit this filepath. 
-	@file_put_contents( 
-		$file, 
-		date( 'c' ) . ' - ' . $query . PHP_EOL, 
-		FILE_APPEND | LOCK_EX 
-	);
+// 	$file =  WP_CONTENT_DIR . '/sql.log'; // Edit this filepath.
+// 	@file_put_contents(
+// 		$file,
+// 		date( 'c' ) . ' - ' . $query . PHP_EOL,
+// 		FILE_APPEND | LOCK_EX
+// 	);
 
-    return $query;
-}, PHP_INT_MAX );
+//     return $query;
+// }, PHP_INT_MAX );
 
 
 
