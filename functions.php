@@ -617,7 +617,7 @@ function shopofthings_add_b2b_script() {
 }
 
 // add script
-add_action('wp_enqueue_scripts', 'shopofthings_add_b2b_script');
+// add_action('wp_enqueue_scripts', 'shopofthings_add_b2b_script');
 
 
 
