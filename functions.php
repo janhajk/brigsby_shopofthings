@@ -252,7 +252,18 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
 
       // return values
       $availability = '';
+      $availabilityX = ''; // ab externem Lager
       $circle = '';
+
+      // status
+      $canBackorder = $_product->get_backorders() != 'no';
+      $lieferzeit = get_post_meta($id, 'shopofthings_lieferzeit', true) ?: 20; // returns '' (empty string) if not set, in this case set default value
+      // Stock Quantity of current product
+      $product_stock = $_product->get_stock_quantity();
+      // Backordered / on the way
+      $onorder = get_post_meta($id, 'shopofthings_onorder', true) ?: 0;
+      // reduce backordered from ordered quantity
+      if ($product_stock < 0) $onorder = $onorder + $product_stock;
 
 
       // virtual products are always available
@@ -260,7 +271,9 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
             return array(
                   'circle'      => $_HTML_AVAILABLE,
                   'availability'=> 'sofort verfügbar',
-                  'onorder'     => ''
+                  'onorder'     => '',
+                  'canBackorder' => $canBackorder,
+                  'lieferzeit' => $lieferzeit
             );
       }
 
@@ -269,28 +282,22 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
             return array(
                   'circle'      => $_HTML_AVAILABLE,
                   'availability'=> 'sofort verfügbar',
-                  'onorder'     => ''
+                  'onorder'     => '',
+                  'canBackorder' => $canBackorder,
+                  'lieferzeit' => $lieferzeit
             );
       }
 
 
-      // Stock Quantity of current product
-      $product_stock = $_product->get_stock_quantity();
 
-      // Backordered / on the way
-      $onorder = get_post_meta($id,'shopofthings_onorder',true);
-      if ($onorder == '') $onorder = 0; // default value
-      if ($product_stock < 0) $onorder = $onorder + $product_stock;
       $onorder_txt = ((int) $onorder > 0) ? '<br/>'.$onorder.' Stück unterwegs von unserem Lieferanten': '';
 
 
-      // if not on stock and backorder
+      // if not on stock or backordered
       if($product_stock <= 0) {
-            $lieferzeit = get_post_meta($id, 'shopofthings_lieferzeit', true); // returns '' (empty string) if not set
-            if ($lieferzeit == '') $lieferzeit = 20; // default value
 
             // no stock but can backorder
-            if ($_product->get_backorders() != 'no') {
+            if ($canBackorder) {
                   $availability = 'Ab externem Lager. Lieferzeit ca. '.$lieferzeit. ' Tage';
                   $circle = $_HTML_BACKORDER;
             }
@@ -313,7 +320,9 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
             return array(
                   'circle'      => $circle,
                   'availability'=> $availability,
-                  'onorder'     => $onorder_txt
+                  'onorder'     => $onorder_txt,
+                  'canBackorder' => $canBackorder,
+                  'lieferzeit' => $lieferzeit
             );
       }
 
@@ -322,7 +331,9 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
             return array(
                   'circle'      => $_HTML_UNKNOWN,
                   'availability'=> 'unbekannt',
-                  'onorder'     => $onorder_txt
+                  'onorder'     => $onorder_txt,
+                  'canBackorder' => $canBackorder,
+                  'lieferzeit' => $lieferzeit
             );
       }
 
@@ -351,7 +362,9 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
       return array(
             'circle'      => $circle,
             'availability'=> $availability,
-            'onorder'     => $onorder_txt
+            'onorder'     => $onorder_txt,
+            'canBackorder' => $canBackorder,
+            'lieferzeit' => $lieferzeit
       );
 }
 
@@ -390,7 +403,11 @@ add_action( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20
 add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
 function wcs_custom_get_availability( $availability, $_product ) {
       $info = get_stock_info($_product);
-      $availability['availability'] = join($info, '&nbsp;');
+      // $availability['availability'] = join($info, '&nbsp;');
+      $availability['availability'] = join(array_slice($info,0,3), '&nbsp;');
+      if ($info['canBackorder']) {
+            $availability['availability'] .= '<br /><span style="color:gray">Weitere Mengen verfügbar ab externem Lager mit einer Lieferzeit von ca. '.$availability['lieferzeit']. ' Tagen.</span>';
+      }
       return $availability;
 }
 
