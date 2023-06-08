@@ -256,7 +256,7 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
       $circle = '';
 
       // status
-      $canBackorder = $_product->get_backorders() != 'no';
+      $canBackorder = $_product->backorders_allowed();
       $lieferzeit = get_post_meta($id, 'shopofthings_lieferzeit', true) ?: 20; // returns '' (empty string) if not set, in this case set default value
       // Stock Quantity of current product
       $product_stock = (int) $_product->get_stock_quantity();
