@@ -413,6 +413,9 @@ function wcs_custom_get_availability( $availability, $_product ) {
       if ($info['canBackorder'] && $info['stock'] > 0) {
             $availability['availability'] .= '<br /><span style="">Weitere Mengen verfügbar ab externem Lager mit einer Lieferzeit von ca. '.$info['lieferzeit']. ' Tagen.</span>';
       }
+      if (!$info['canBackorder'] && $info['stock'] > 0) {
+            $availability['availability'] .= '<br /><span style="">Weitere Mengen auf Anfrage.</span>';
+      }
       return $availability;
 }
 
