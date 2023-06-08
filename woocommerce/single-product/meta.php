@@ -24,10 +24,10 @@ global $product;
 <div class="product_meta">
 
       <?php
-      $brands = wp_get_post_terms( $product->get_id(), 'brands' );
+      $brands = $product->get_attribute('brand') );
 	error_log('$brands is '.print_r($brands,true));
       if ( ! is_wp_error( $brands ) && ! empty( $brands ) ) {
-          echo '<div class="product_brand">' . esc_html( $brands[0]->name ) . '</div>';
+          echo '<div class="product_brands">' . esc_html( $brands[0]->name ) . '</div>';
       }
       ?>
 
