@@ -25,7 +25,7 @@ global $product;
 
       <?php
       $brands = wp_get_post_terms( $product->get_id(), 'brands' );
-	error_log(print_r($brands,1));
+	error_log('$brands is '.print_r($brands,true));
       if ( ! is_wp_error( $brands ) && ! empty( $brands ) ) {
           echo '<div class="product_brand">' . esc_html( $brands[0]->name ) . '</div>';
       }
