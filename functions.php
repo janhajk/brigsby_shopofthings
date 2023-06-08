@@ -406,7 +406,7 @@ function wcs_custom_get_availability( $availability, $_product ) {
       // $availability['availability'] = join($info, '&nbsp;');
       $availability['availability'] = join(array_slice($info,0,3), '&nbsp;');
       if ($info['canBackorder']) {
-            $availability['availability'] .= '<br /><span style="color:gray">Weitere Mengen verfügbar ab externem Lager mit einer Lieferzeit von ca. '.$info['lieferzeit']. ' Tagen.</span>';
+            $availability['availability'] .= '<br /><span style="">Weitere Mengen verfügbar ab externem Lager mit einer Lieferzeit von ca. '.$info['lieferzeit']. ' Tagen.</span>';
       }
       return $availability;
 }
