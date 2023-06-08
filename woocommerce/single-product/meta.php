@@ -23,13 +23,13 @@ global $product;
 ?>
 <div class="product_meta">
 
-    <?php
-    $brands = wp_get_post_terms( $product->get_id(), 'brands' ); // Change 'brand' to your brand taxonomy, if it's different.
-    
-    if ( ! is_wp_error( $brands ) && ! empty( $brands ) ) {
-        echo '<div class="product_brand">' . esc_html( $brands[0]->name ) . '</div>';
-    }
-    ?>
+      <?php
+      $brands = wp_get_post_terms( $product->get_id(), 'brands' );
+	error_log(print_r($brands,1));
+      if ( ! is_wp_error( $brands ) && ! empty( $brands ) ) {
+          echo '<div class="product_brand">' . esc_html( $brands[0]->name ) . '</div>';
+      }
+      ?>
 
 	<?php do_action( 'woocommerce_product_meta_start' ); ?>
 
