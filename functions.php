@@ -257,7 +257,8 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
 
       // status
       $canBackorder = $_product->backorders_allowed() ?: false;
-      $lieferzeit = get_post_meta($id, 'shopofthings_lieferzeit', true) ?: 20; // returns '' (empty string) if not set, in this case set default value
+      $lieferzeit = get_post_meta($id, 'shopofthings_lieferzeit', true) ?: '20'; // returns '' (empty string) if not set, in this case set default value
+      $lieferzeitType = preg_match('/^\d+(-\d+)?$/', $lieferzeit) ? 'days' : 'custom';
       // Stock Quantity of current product
       $product_stock = (int) $_product->get_stock_quantity() ?: 0;
       // Backordered / on the way
@@ -274,7 +275,8 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
                   'onorder'     => '',
                   'canBackorder' => $canBackorder,
                   'lieferzeit' => $lieferzeit,
-                  'stock' => $product_stock
+                  'lieferzeitType' => $lieferzeitType,
+                  'stock' => $product_stock,
             );
       }
 
@@ -286,6 +288,7 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
                   'onorder'     => '',
                   'canBackorder' => $canBackorder,
                   'lieferzeit' => $lieferzeit,
+                  'lieferzeitType' => $lieferzeitType,
                   'stock' => $product_stock
             );
       }
@@ -325,6 +328,7 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
                   'onorder'     => $onorder_txt,
                   'canBackorder' => $canBackorder,
                   'lieferzeit' => $lieferzeit,
+                  'lieferzeitType' => $lieferzeitType,
                   'stock' => $product_stock
             );
       }
@@ -337,6 +341,7 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
                   'onorder'     => $onorder_txt,
                   'canBackorder' => $canBackorder,
                   'lieferzeit' => $lieferzeit,
+                  'lieferzeitType' => $lieferzeitType,
                   'stock' => $product_stock
             );
       }
@@ -369,6 +374,7 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
             'onorder'     => $onorder_txt,
             'canBackorder' => $canBackorder,
             'lieferzeit' => $lieferzeit,
+            'lieferzeitType' => $lieferzeitType,
             'stock' => $product_stock
       );
 }
