@@ -63,7 +63,7 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 					<div class="product-main-content">					
 					<?php wc_get_template_part( 'content', 'single-product' ); ?>
 					</div>
-					echo '<a class="show-more-content" href="#">Mehr anzeigen</a>';
+					<a class="show-more-content" href="#">Mehr anzeigen</a>;
 
 
 				<?php endwhile; ?>
