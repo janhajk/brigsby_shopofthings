@@ -60,11 +60,7 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 
 				<?php while ( have_posts() ) : the_post(); ?>
 
-					<div class="product-main-content">					
 					<?php wc_get_template_part( 'content', 'single-product' ); ?>
-					</div>
-					<a class="show-more-content" href="#">Mehr anzeigen</a>;
-
 
 				<?php endwhile; ?>
 
