@@ -526,3 +526,7 @@ input.product-search-field {
 .landing-page .loop-meta .entry-title {
     font-size: 3em !important;
 }
+
+.landing-page .loop-description {
+      display: none;
+}
