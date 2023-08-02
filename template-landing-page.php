@@ -1,11 +1,11 @@
 <?php
 /*
-Template Name: No Sidebar
+Template Name: Landing Page
 */
 ?>
 
 
-<?php 
+<?php
 // Loads the header.php template.
 get_header();
 ?>
