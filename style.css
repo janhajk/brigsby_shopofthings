@@ -519,3 +519,8 @@ input.product-search-field {
       font-weight: bold;
       margin-left: 5px;
 }
+
+
+.landing-page .entry-title {
+    font-size: 3em;
+}
