@@ -524,5 +524,5 @@ input.product-search-field {
 
 /* bigger title font on landing pages */
 .landing-page .loop-meta .entry-title {
-    font-size: 3em;
+    font-size: 3em !important;
 }
