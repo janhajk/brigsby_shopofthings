@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Landing Page
+Template Name: Landing Pages
 */
 ?>
 
@@ -14,7 +14,7 @@ get_header();
 // Dispay Loop Meta at top
 hoot_display_loop_title_content( 'pre', 'single.php' );
 if ( hoot_page_header_attop() ) {
-	get_template_part( 'template-parts/loop-meta' ); // Loads the template-parts/loop-meta.php template to display Title Area with Meta Info (of the loop)
+	// get_template_part( 'template-parts/loop-meta' ); // Loads the template-parts/loop-meta.php template to display Title Area with Meta Info (of the loop)
 	hoot_display_loop_title_content( 'post', 'single.php' );
 }
 
@@ -22,7 +22,7 @@ if ( hoot_page_header_attop() ) {
 do_action( 'hoot_template_before_content_grid', 'single.php' );
 ?>
 
-<div class="hgrid main-content-grid">
+<div class="hgrid main-content-grid landing-page">
 
 	<?php
 	// Template modification Hook
