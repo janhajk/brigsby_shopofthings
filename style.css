@@ -377,6 +377,12 @@ input.product-search-field {
 }
 
 
+
+
+/*---------------------*/
+/* Bundle Sells */
+/*---------------------*/
+
 /* Zubehör */
 .bundle_form.bundle_sells_form {
       margin-bottom: 30px !important;
@@ -411,6 +417,10 @@ input.product-search-field {
 .bundle_sells_form .bundle_form.bundle_sells_form.initialized {
       margin-bottom: 2em !important;
 }
+.bundle_form.bundle_sells_form .shipping-notice {
+      display: none;
+}
+.b
 
 
 
