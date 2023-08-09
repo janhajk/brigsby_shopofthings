@@ -189,12 +189,13 @@ function sot_show_product_meta_custom() {
       if ($tags) {
             echo '<tr><th scope="row">' . $tags_label . '</th><td>' . $tags . '</td></tr>';
       }
-      
+
       // Produktkennzeichen Anzeige
       $produktkennzeichen = $product->get_attribute('pa_produktkennzeichen');
       if ($produktkennzeichen) {
-          echo '<tr><th scope="row">' . __('Produktkennzeichen:', 'shopofthings') . '</th><td>' . $produktkennzeichen . '</td></tr>';
+          echo '<tr><td colspan="2">' . $produktkennzeichen . '</td></tr>';
       }
+
 
 
       // Lagerverfügbarkeit
