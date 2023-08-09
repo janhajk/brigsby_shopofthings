@@ -303,7 +303,7 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
 
             // no stock but can backorder
             if ($canBackorder) {
-                  $availability = 'Ab externem Lager. <br />Lieferzeit ca. '.$lieferzeit. ' Tage';
+                  $availability = 'Externes Lager: ca. '.$lieferzeit. ' Tage';
                   $circle = $_HTML_BACKORDER;
             }
             // TODO: simple is not correctly displaying data for variable products
