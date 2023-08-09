@@ -190,10 +190,18 @@ function sot_show_product_meta_custom() {
             echo '<tr><th scope="row">' . $tags_label . '</th><td>' . $tags . '</td></tr>';
       }
 
-      // Produktkennzeichen Anzeige
+      // Produktkennzeichen Anzeige (mit icon)
       $produktkennzeichen = $product->get_attribute('pa_produktkennzeichen');
       if ($produktkennzeichen) {
-          echo '<tr><td colspan="2" style="text-align: center;">' . $produktkennzeichen . '</td></tr>';
+          $thumbnail_id = get_term_meta($product->get_attribute('pa_produktkennzeichen'), 'thumbnail_id', true);
+          $thumbnail_url = wp_get_attachment_url($thumbnail_id);
+
+          if ($thumbnail_url) {
+              echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center;"><img src="' . esc_url($thumbnail_url) . '" alt="Produktkennzeichen Thumbnail" title="' . esc_attr($produktkennzeichen) . '"></td></tr>';
+          } else {
+              // Falls es kein Thumbnail gibt, können Sie den Text wie zuvor anzeigen oder diesen Block weglassen, um nichts anzuzeigen
+              echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center;">' . $produktkennzeichen . '</td></tr>';
+          }
       }
 
 
