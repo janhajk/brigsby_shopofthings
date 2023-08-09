@@ -132,7 +132,7 @@ function display_sorted_categories($product_id) {
     // Kategorien alphabetisch sortieren
     sort($all_lines);
 
-    return '<th scope="row">Kategorien:</th><td>' . join('<br>', $all_lines) . '</td>';
+    return '<th scope="row">' . __( 'Kategorien:', 'textdomain' ) . '</th><td>' . join('<br>', $all_lines) . '</td>';
 }
 
 
