@@ -26,8 +26,6 @@
     border: none;
     padding: 8px;
     text-align: left;
-}
-
-.product-meta-table th {
-    font-weight: bold;
+    text-transform: none; /* Entfernt Kapitälchen */
+    font-weight: normal;  /* Setzt den Text auf normal statt fett */
 }
