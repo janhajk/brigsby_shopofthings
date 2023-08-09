@@ -1,24 +1,6 @@
 <?php
 
 
-const COPY_TO_CLIPBOARD_JS = "
-            <script>
-            function copyToClipboard(element) {
-                var text = element.innerText;
-                var textarea = document.createElement('textarea');
-                textarea.value = text;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                alert('" . __('SKU kopiert:', 'your-text-domain') . "' + text);
-            }
-            </script>
-            ";
-
-
-
-
 /**
  *
  *
