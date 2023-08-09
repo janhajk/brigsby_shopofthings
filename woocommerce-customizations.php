@@ -128,10 +128,10 @@ function display_sorted_categories($product_id) {
   *
   */
 function sot_show_product_meta_custom() {
-    global $product;
-
-    // JavaScript zum Kopieren von Text in die Zwischenablage
-    $copyToClipboardJS = "
+      global $product;
+      
+      // JavaScript zum Kopieren von Text in die Zwischenablage
+      $copyToClipboardJS = "
             <script>
             function copyToClipboard(element) {
                 var text = element.innerText;
@@ -145,46 +145,49 @@ function sot_show_product_meta_custom() {
             }
             </script>
                 ";
-
-    echo $copyToClipboardJS; // Das JS-Script einfügen
-
-    // Start der Tabelle
-    echo '<table class="product-meta-table"><tbody>';
-
-    // SKU Anzeige
-    $sku = $product->get_sku();
-    if ($sku) {
+      
+      echo $copyToClipboardJS; // Das JS-Script einfügen
+      
+      // Start der Tabelle
+      echo '<table class="product-meta-table"><tbody>';
+      
+      // SKU Anzeige
+      $sku = $product->get_sku();
+      if ($sku) {
         if (isSKU($sku)) {
             echo '<tr><th scope="row">' . __('SKU:', 'shopofthings') . '</th><td><span class="sku" title="' . skuToSpelling($sku) . '" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
         } else {
             echo '<tr><th scope="row">' . __('SKU:', 'shopofthings') . '</th><td><span class="sku" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
         }
-    }
-
-    // Herstellernummer Anzeige
-    $herstellernummer = $product->get_attribute('pa_herstellernummer');
-    if ($herstellernummer) {
+      }
+      
+      // Herstellernummer Anzeige
+      $herstellernummer = $product->get_attribute('pa_herstellernummer');
+      if ($herstellernummer) {
         echo '<tr><th scope="row">' . __('P/N:', 'shopofthings') . '</th><td>' . $herstellernummer . '</td></tr>';
-    }
-
-    // Marke Anzeige
-    $marke = $product->get_attribute('pa_brand');
-    if ($marke) {
+      }
+      
+      // Marke Anzeige
+      $marke = $product->get_attribute('pa_brand');
+      if ($marke) {
         $marke_link = get_term_link($marke, 'pa_brand');  // Erstellt einen Link zur Marke
         echo '<tr><th scope="row">' . __('Marke:', 'shopofthings') . '</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a></td></tr>';
-    }
-
-    // Kategorien Anzeige
-    echo '<tr>' . display_sorted_categories($product->get_id()) . '</tr>';
-
-    // Tags, falls benötigt
-    $tags = wc_get_product_tag_list($product->get_id(), ', ', '<span class="tagged_as">' . _n('Tag:', 'Tags:', count($product->get_tag_ids()), 'woocommerce') . ' ', '</span>');
-    if ($tags) {
-        echo '<tr><th scope="row">' . __('Tags:', 'shopofthings') . '</th><td>' . $tags . '</td></tr>';
-    }
-
-    // Ende der Tabelle
-    echo '</tbody></table>';
+      }
+      
+      // Kategorien Anzeige
+      echo '<tr>' . display_sorted_categories($product->get_id()) . '</tr>';
+      
+      // Tags, falls benötigt
+      $tag_count = count($product->get_tag_ids());
+      $tags_label = _n('Tag:', 'Tags:', $tag_count, 'shopofthings');
+      $tags = wc_get_product_tag_list($product->get_id(), ', ');
+      if ($tags) {
+      echo '<tr><th scope="row">' . $tags_label . '</th><td>' . $tags . '</td></tr>';
+      }
+      
+      
+      // Ende der Tabelle
+      echo '</tbody></table>';
 }
 
 
