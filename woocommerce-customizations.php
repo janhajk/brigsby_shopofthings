@@ -140,7 +140,7 @@ function sot_show_product_meta_custom() {
                 textarea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
-                alert('" . __('SKU kopiert:', 'your-text-domain') . "' + text);
+                alert('" . __('SKU kopiert:', 'shopofthings') . "' + text);
             }
             </script>
                 ";
@@ -154,23 +154,23 @@ function sot_show_product_meta_custom() {
     $sku = $product->get_sku();
     if ($sku) {
         if (isSKU($sku)) {
-            echo '<tr><th scope="row">' . __('SKU:', 'your-text-domain') . '</th><td><span class="sku" title="' . skuToSpelling($sku) . '" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
+            echo '<tr><th scope="row">' . __('SKU:', 'shopofthings') . '</th><td><span class="sku" title="' . skuToSpelling($sku) . '" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
         } else {
-            echo '<tr><th scope="row">' . __('SKU:', 'your-text-domain') . '</th><td><span class="sku" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
+            echo '<tr><th scope="row">' . __('SKU:', 'shopofthings') . '</th><td><span class="sku" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
         }
     }
 
     // Herstellernummer Anzeige
     $herstellernummer = $product->get_attribute('pa_herstellernummer');
     if ($herstellernummer) {
-        echo '<tr><th scope="row">' . __('P/N:', 'your-text-domain') . '</th><td>' . $herstellernummer . '</td></tr>';
+        echo '<tr><th scope="row">' . __('P/N:', 'shopofthings') . '</th><td>' . $herstellernummer . '</td></tr>';
     }
 
     // Marke Anzeige
     $marke = $product->get_attribute('pa_brand');
     if ($marke) {
         $marke_link = get_term_link($marke, 'pa_brand');  // Erstellt einen Link zur Marke
-        echo '<tr><th scope="row">' . __('Marke:', 'your-text-domain') . '</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a></td></tr>';
+        echo '<tr><th scope="row">' . __('Marke:', 'shopofthings') . '</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a></td></tr>';
     }
 
     // Kategorien Anzeige
@@ -179,7 +179,7 @@ function sot_show_product_meta_custom() {
     // Tags, falls benötigt
     $tags = wc_get_product_tag_list($product->get_id(), ', ', '<span class="tagged_as">' . _n('Tag:', 'Tags:', count($product->get_tag_ids()), 'woocommerce') . ' ', '</span>');
     if ($tags) {
-        echo '<tr><th scope="row">' . __('Tags:', 'your-text-domain') . '</th><td>' . $tags . '</td></tr>';
+        echo '<tr><th scope="row">' . __('Tags:', 'shopofthings') . '</th><td>' . $tags . '</td></tr>';
     }
 
     // Ende der Tabelle
