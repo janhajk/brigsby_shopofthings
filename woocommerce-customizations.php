@@ -75,11 +75,15 @@ function display_sorted_categories($product_id) {
     $solution_package_id = get_term_by('slug', 'solution-package', 'product_cat')->term_id;
 
     $all_lines = array();
-    $path_mapper = array();
 
     foreach($terms as $term) {
         // Kategorie mit dem Slug 'brands' und ihre untergeordneten Kategorien überspringen
         if ($term->term_id == $brands_term_id || $term->parent == $brands_term_id) {
+            continue;
+        }
+
+        // Top-Kategorien ohne Unterkategorien ausschließen (außer 'solution-package')
+        if ($term->parent == 0 && !get_term_children($term->term_id, 'product_cat') && $term->term_id != $solution_package_id) {
             continue;
         }
 
@@ -95,15 +99,12 @@ function display_sorted_categories($product_id) {
             $current_term = get_term($current_term->parent, 'product_cat');
         }
 
-        // Check, ob der Pfad bereits existiert und überschreibt, wenn der aktuelle Pfad spezifischer ist
-        $root_category = explode(' > ', $line[0])[0];
-        if (!isset($path_mapper[$root_category]) || count($line) > count($path_mapper[$root_category])) {
-            $path_mapper[$root_category] = $line;
+        // Nur Kategorienpfade hinzufügen, die bis zur tiefsten Ebene gehen
+        if (!get_term_children($term->term_id, 'product_cat')) {
+            // Zeile formatieren
+            $formatted_line = join(' > ', $line);
+            $all_lines[] = $formatted_line;
         }
-    }
-
-    foreach ($path_mapper as $line) {
-        $all_lines[] = join(' > ', $line);
     }
 
     // Kategorien alphabetisch sortieren
@@ -111,6 +112,7 @@ function display_sorted_categories($product_id) {
 
     return '<th scope="row">Kategorien:</th><td>' . join('<br>', $all_lines) . '</td>';
 }
+
 
 
 
