@@ -55,6 +55,45 @@ function isSKU($sku) {
 }
 
 
+function display_sorted_categories($product_id) {
+    $terms = wp_get_post_terms($product_id, 'product_cat', array("fields" => "all"));
+    $sorted_terms = array();
+
+    foreach($terms as $term) {
+        if($term->parent == 0) { // Überprüfen, ob es sich um eine Top-Kategorie handelt
+            $sorted_terms[$term->term_id] = array($term);
+        } else {
+            if(!isset($sorted_terms[$term->parent])){
+                $sorted_terms[$term->parent] = array(get_term($term->parent, 'product_cat'));
+            }
+            $sorted_terms[$term->parent][] = $term;
+        }
+    }
+
+    $output = '';
+    foreach($sorted_terms as $parent_term_id => $children_terms) {
+        $line = array();
+
+        // Das Hauptelement zuerst hinzufügen
+        $parent_term = get_term($parent_term_id, 'product_cat');
+        $line[] = $parent_term->name;
+
+        // Füge untergeordnete Begriffe hinzu
+        foreach($children_terms as $child_term) {
+            if($child_term->term_id != $parent_term_id) {
+                $line[] = $child_term->name;
+            }
+        }
+
+        // Zeile formatieren
+        $formatted_line = join(' > ', $line);
+        $output .= '<tr><th scope="row">Kategorie:</th><td>' . $formatted_line . '</td></tr>';
+    }
+
+    return $output;
+}
+
+
  /**
   *
   * Move  Meta data (categorie, sku) to top of single-product page
@@ -100,11 +139,11 @@ function sot_show_product_meta_custom() {
     // Herstellernummer Anzeige
     $herstellernummer = $product->get_attribute('pa_herstellernummer');
     if ($herstellernummer) {
-        echo '<tr><th scope="row">Herstellernummer:</th><td>' . $herstellernummer . '</td></tr>';
+        echo '<tr><th scope="row">P/N:</th><td>' . $herstellernummer . '</td></tr>';
     }
 
     // Kategorien Anzeige
-    echo '<tr><th scope="row">Produktkategorien:</th><td>' . wc_get_product_category_list($product->get_id()) . '</td></tr>';
+    echo display_sorted_categories($product->get_id());
 
     // Tags, falls benötigt
     $tags = wc_get_product_tag_list($product->get_id(), ', ', '<span class="tagged_as">' . _n('Tag:', 'Tags:', count($product->get_tag_ids()), 'woocommerce') . ' ', '</span>');
@@ -134,3 +173,5 @@ function enqueue_custom_styles() {
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_styles');
+
+
