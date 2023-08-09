@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.161
+ Version:       1.0.162
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -444,13 +444,13 @@ body .wc-tabs-wrapper {
 
 
 
- @media (max-width:700px){
+ @media (max-width:800px){
       .woocommerce-product-gallery {
             width: 100% !important;
       }
 
       body .wc-tabs-wrapper {
-            width: 100% !important;
+            width: 800% !important;
       }
 
       .entry-summary {
@@ -541,33 +541,5 @@ body .wc-tabs-wrapper {
 }
 
 
-
-
-
-
-
-
-
-.hgrid {
-    display: flex;
-    flex-wrap: wrap; /* Erlaubt den Kinderelementen, auf die nächste Zeile zu brechen, wenn nicht genug Platz vorhanden ist */
-}
-
-#content {
-    flex: 1; /* Nimmt die gesamte verbleibende Breite des Containers ein */
-    min-width: 0; /* Verhindert Überlappung oder Dehnung durch Kinderelemente */
-}
-
-#sidebar-primary {
-    flex-basis: 25%; /* Nimmt standardmäßig 25% des Containers ein */
-    max-width: 300px; /* Kann nicht breiter als 300px werden */
-}
-
-/* Media Query für Bildschirmbreiten von 700px und darunter */
-@media (max-width: 700px) {
-    #content, #sidebar-primary {
-        flex-basis: 100%; /* Nimmt die volle Breite des Containers ein */
-    }
-}
 
 
