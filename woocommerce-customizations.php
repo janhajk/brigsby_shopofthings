@@ -194,9 +194,10 @@ function sot_show_product_meta_custom() {
       if ($produktkennzeichen) {
           $term = get_term_by('name', $produktkennzeichen, 'pa_produktkennzeichen');
           if ($term) {
+                error_log('Term: ' . print_r($term, true));
               $thumbnail_id = get_term_meta($term->term_id, 'product_search_image_id', true);
               $thumbnail_url = wp_get_attachment_url($thumbnail_id);
-              
+
               if ($thumbnail_url) {
                   echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center;"><img src="' . esc_url($thumbnail_url) . '" alt="Produktkennzeichen Thumbnail" title="' . esc_attr($produktkennzeichen) . '"></td></tr>';
               } else {
