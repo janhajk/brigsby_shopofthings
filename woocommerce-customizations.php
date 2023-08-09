@@ -159,11 +159,12 @@ function sot_show_product_meta_custom() {
     if ($herstellernummer) {
         echo '<tr><th scope="row">P/N:</th><td>' . $herstellernummer . '</td></tr>';
     }
-    
+
     // Marke Anzeige
-    $marke = $product->get_attribute('pa_brand');  // Angenommen, das Attribut-Slug für Marke ist 'pa_brand'. Dies sollte angepasst werden, falls es anders ist.
+    $marke = $product->get_attribute('pa_brand');
     if ($marke) {
-        echo '<tr><th scope="row">Marke:</th><td>' . $marke . '</td></tr>';
+        $marke_link = get_term_link($marke, 'pa_brand');  // Erstellt einen Link zur Marke
+        echo '<tr><th scope="row">Marke:</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a></td></tr>';
     }
 
     // Kategorien Anzeige
