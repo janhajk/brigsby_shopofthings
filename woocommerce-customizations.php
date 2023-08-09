@@ -191,21 +191,27 @@ function sot_show_product_meta_custom() {
       }
 
       // Produktkennzeichen Anzeige (mit icon)
+      $produktkennzeichen = $product->get_attribute('pa_produktkennzeichen');
       if ($produktkennzeichen) {
-          $term = get_term_by('name', $produktkennzeichen, 'pa_produktkennzeichen');
-          if ($term) {
-                error_log('Term: ' . print_r($term, true));
-              $thumbnail_id = get_term_meta($term->term_id, 'product_search_image_id', true);
-              $thumbnail_url = wp_get_attachment_url($thumbnail_id);
-
-              if ($thumbnail_url) {
-                  echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center;"><img src="' . esc_url($thumbnail_url) . '" alt="Produktkennzeichen Thumbnail" title="' . esc_attr($produktkennzeichen) . '"></td></tr>';
-              } else {
-                  // Falls es kein Thumbnail gibt, können Sie den Text wie zuvor anzeigen oder diesen Block weglassen, um nichts anzuzeigen
-                  echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center;">' . $produktkennzeichen . '</td></tr>';
+          $kennzeichen_terms = explode(', ', $produktkennzeichen);  // Trennt den String in ein Array, vorausgesetzt, die Werte sind durch ', ' getrennt.
+      
+          foreach ($kennzeichen_terms as $kennzeichen_term_name) {
+              $term = get_term_by('name', $kennzeichen_term_name, 'pa_produktkennzeichen');
+      
+              if ($term) {
+                  $thumbnail_id = get_term_meta($term->term_id, 'product_search_image_id', true);
+                  $thumbnail_url = wp_get_attachment_url($thumbnail_id);
+      
+                  if ($thumbnail_url) {
+                      echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center;"><img src="' . esc_url($thumbnail_url) . '" alt="Produktkennzeichen Thumbnail" title="' . esc_attr($kennzeichen_term_name) . '"></td></tr>';
+                  } else {
+                      // Falls es kein Thumbnail gibt, können Sie den Text wie zuvor anzeigen
+                      echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center;">' . $kennzeichen_term_name . '</td></tr>';
+                  }
               }
           }
       }
+
 
 
 
