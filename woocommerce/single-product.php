@@ -19,11 +19,20 @@ if ( hoot_page_header_attop() ) {
 do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 ?>
 
-<div class="hgrid main-content-grid">
+<div class="hgrid main-content-grid product-hgrid">
 
 	<?php
 	// Template modification Hook
 	do_action( 'hoot_template_before_main', 'single-product.php' );
+	?>
+
+	<?php
+	/**
+	 * woocommerce_sidebar hook
+	 *
+	 * @hooked woocommerce_get_sidebar - 10
+	 */
+	do_action( 'woocommerce_sidebar' );
 	?>
 
 	<main <?php hybridextend_attr( 'content' ); ?>>
@@ -104,14 +113,6 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 	do_action( 'hoot_template_after_main', 'single-product.php' );
 	?>
 
-	<?php
-	/**
-	 * woocommerce_sidebar hook
-	 *
-	 * @hooked woocommerce_get_sidebar - 10
-	 */
-	do_action( 'woocommerce_sidebar' );
-	?>
 
 </div><!-- .hgrid -->
 
