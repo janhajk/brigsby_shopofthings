@@ -295,7 +295,7 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
 
 
 
-      $onorder_txt = ((int) $onorder > 0) ? '<br/>'.$onorder.' Stück unterwegs von unserem Lieferanten': '';
+      $onorder_txt = ((int) $onorder > 0) ? '<br/>'.$onorder.' Stück auf Lieferweg': '';
 
 
       // if not on stock or backordered
@@ -303,17 +303,17 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
 
             // no stock but can backorder
             if ($canBackorder) {
-                  $availability = 'Ab externem Lager. Lieferzeit ca. '.$lieferzeit. ' Tage';
+                  $availability = 'Ab externem Lager. <br />Lieferzeit ca. '.$lieferzeit. ' Tage';
                   $circle = $_HTML_BACKORDER;
             }
             // TODO: simple is not correctly displaying data for variable products
             else if ($_product->get_type() != 'simple') {
-                  $availability = 'Teilweise an eigenem Lager. Bitte Option wählen.';
+                  $availability = 'Bitte Option wählen.';
                   $circle = $_HTML_AVAILABLE_PARTLY;
 
                   // show bundles as available if on thing is available
                   if ($_product->get_type() == 'bundle') {
-                      $availability = 'Sofort versandbereit ab unserem Lager';
+                      $availability = 'Ab Lager &#x1F1E8;&#x1F1ED;';
                       $circle = $_HTML_AVAILABLE;
                   }
             }
@@ -351,7 +351,7 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
       // Products that are available
 
       if ($product_stock > 0){
-            $availability = 'Sofort versandbereit ab unserem Lager';
+            $availability = 'Ab Lager &#x1F1E8;&#x1F1ED;';
             $circle = $_HTML_AVAILABLE;
       }
 
@@ -363,7 +363,7 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
 
 
       if($product_stock >= $big_stock_available){
-            $availability = $big_stock_available.'+ Stück sofort versandbereit ab unserem Lager';
+            $availability = $big_stock_available.'+ Stück Lager &#x1F1E8;&#x1F1ED;';
       }
       else if($product_stock <= $low_stock_available){
             $availability = $product_stock.' Stück Lager &#x1F1E8;&#x1F1ED;';
