@@ -73,11 +73,13 @@ function display_sorted_categories($product_id) {
     $terms = wp_get_post_terms($product_id, 'product_cat', array("fields" => "all"));
     $sorted_terms = array();
 
+    $brands_term_id = get_term_by('slug', 'brands', 'product_cat')->term_id;
+
     foreach($terms as $term) {
-        // Kategorie mit dem Slug 'brands' überspringen
-        if ($term->slug == 'brands') {
-            continue;
-        }
+          // Kategorie mit dem Slug 'brands' und ihre untergeordneten Kategorien überspringen
+          if ($term->term_id == $brands_term_id || $term->parent == $brands_term_id) {
+              continue;
+          }
         if($term->parent == 0) { // Überprüfen, ob es sich um eine Top-Kategorie handelt
             $sorted_terms[$term->term_id] = array($term);
         } else {
