@@ -193,7 +193,7 @@ function sot_show_product_meta_custom() {
       // Produktkennzeichen Anzeige (mit icon)
       $produktkennzeichen = $product->get_attribute('pa_produktkennzeichen');
       if ($produktkennzeichen) {
-          $thumbnail_id = get_term_meta($product->get_attribute('pa_produktkennzeichen'), 'thumbnail_id', true);
+          $thumbnail_id = get_term_meta($product->get_attribute('pa_produktkennzeichen'), 'thumbnail_url', true);
           $thumbnail_url = wp_get_attachment_url($thumbnail_id);
 
           if ($thumbnail_url) {
