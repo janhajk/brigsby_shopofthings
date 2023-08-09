@@ -221,7 +221,7 @@ function sot_show_product_meta_custom() {
 
           // Wenn unser Array Einträge hat, zeigen wir alle gesammelten Thumbnails und/oder Texte in einer Zeile an
           if (!empty($all_elements)) {
-              echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center; vertical-align: middle;"><div style="display: flex; align-items: center; justify-content: center; height: 100%;">' . implode(' ', $all_elements) . '</div></td></tr>';
+              echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center; vertical-align: middle;"><div style="display: flex; align-items: center; justify-content: center; height: 100%;padding:10px 0px">' . implode(' ', $all_elements) . '</div></td></tr>';
 
           }
       }
