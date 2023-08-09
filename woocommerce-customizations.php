@@ -76,18 +76,19 @@ function sot_show_product_meta_custom() {
         }
     }
 
-    // Kategorien Anzeige
-    echo '<div class="product-categories">Produktkategorien: ' . wc_get_product_category_list($product->get_id()) . '</div>';
-
     // Herstellernummer Anzeige
     $herstellernummer = $product->get_attribute('pa_herstellernummer');
     if ($herstellernummer) {
         echo '<div class="herstellernummer_wrapper">Herstellernummer: <span>' . $herstellernummer . '</span></div>';
     }
 
+    // Kategorien Anzeige
+    echo '<div class="product-categories">Produktkategorien: ' . wc_get_product_category_list($product->get_id()) . '</div>';
+
     // Tags, falls benötigt
     echo wc_get_product_tag_list($product->get_id(), ', ', '<span class="tagged_as">' . _n('Tag:', 'Tags:', count($product->get_tag_ids()), 'woocommerce') . ' ', '</span>');
 }
+
 
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 add_action('woocommerce_single_product_summary', 'sot_show_product_meta_custom', 5);
