@@ -184,16 +184,17 @@ function sot_show_product_meta_custom() {
       if ($tags) {
             echo '<tr><th scope="row">' . $tags_label . '</th><td>' . $tags . '</td></tr>';
       }
-      
+
       // Lagerverfügbarkeit
       $stock_info = get_stock_info($product);
       $stock_display = join(array_slice($stock_info,0,3), '&nbsp;');
       if ($stock_info['canBackorder'] && $stock_info['stock'] > 0) {
         $stock_display .= '<br />Weitere Mengen verfügbar ab externem Lager mit einer Lieferzeit von ca. ' . $stock_info['lieferzeit'] . ' Tagen.';
-      } elseif (!$stock_info['canBackorder'] && $stock_info['stock'] > 0) {
+      }
+      elseif (!$stock_info['canBackorder'] && $stock_info['stock'] > 0) {
         $stock_display .= '<br />Weitere Mengen auf Anfrage.';
       }
-      echo '<tr><th scope="row">' . __('Lagerbestand:', 'shopofthings') . '</th><td>' . $stock_display . '</td></tr>';
+      echo '<tr><th scope="row">' . __('Lager:', 'shopofthings') . '</th><td>' . $stock_display . '</td></tr>';
 
 
 

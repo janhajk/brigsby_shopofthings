@@ -366,7 +366,7 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
             $availability = $big_stock_available.'+ Stück sofort versandbereit ab unserem Lager';
       }
       else if($product_stock <= $low_stock_available){
-            $availability = $product_stock.' Stück ab unserem Lager';
+            $availability = $product_stock.' Stück Lager &#x1F1E8;&#x1F1ED;';
       }
       return array(
             'circle'      => $circle,
