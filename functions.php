@@ -887,6 +887,103 @@ function sot_after_add_to_cart_form_batteries(){
 
 
 
+/**
+ *
+ *
+ * format content on single product page before price (sku, herstellernummer, categories)
+ *
+ *
+ *
+ *
+ */
+ function skuToSpelling($sku) {
+    if (!isSKU($sku)) {
+        return 'Ungültige SKU';
+    }
+
+    $mapping = array(
+        '3' => 'three',
+        '4' => 'four',
+        '7' => 'seven',
+        'A' => 'alpha',
+        'E' => 'echo',
+        'H' => 'hotel',
+        'J' => 'juliet',
+        'L' => 'lima',
+        'N' => 'november',
+        'Q' => 'quebec',
+        'R' => 'romeo',
+        'T' => 'tango',
+        'U' => 'uniform',
+        'Y' => 'yankee'
+    );
+
+    $characters = str_split($sku);
+    $spelledOutSKU = array();
+
+    foreach($characters as $character) {
+        if(isset($mapping[$character])) {
+            $spelledOutSKU[] = $mapping[$character];
+        }
+    }
+
+    return implode(' / ', $spelledOutSKU);
+}
+
+function isSKU($sku) {
+    // Regulärer Ausdruck, der überprüft:
+    // ^ - Start des Strings
+    // [347AEHJLNQRTUY] - nur die genannten Zeichen sind erlaubt
+    // {4} - genau vier Zeichen lang
+    // $ - Ende des Strings
+    $pattern = '/^[347AEHJLNQRTUY]{4}$/';
+
+    return preg_match($pattern, $sku);
+}
+
+
+ function sot_display_sku() {
+    global $product;
+    $sku = $product->get_sku();
+
+    if ($sku) {
+      if (isSKU($sku)) {
+                  echo '<div class="sku_wrapper">SKU: <span class="sku" title="' . skuToSpelling($sku) . '">' . $sku . '</span></div>';
+      }
+      else {
+            echo '<div class="sku_wrapper">SKU: <span class="sku">' . $sku . '</span></div>';
+      }
+
+    }
+}
+
+// Ersetzen der Standard-SKU-Anzeige durch die benutzerdefinierte
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+add_action('woocommerce_single_product_summary', 'sot_display_sku', 40);
+
+function sot_product_categories() {
+    global $product;
+    echo '<div class="product-categories">Produktkategorien: ' . wc_get_product_category_list($product->get_id()) . '</div>';
+}
+
+add_action('woocommerce_single_product_summary', 'sot_product_categories', 41);
+
+function display_herstellernummer() {
+    global $product;
+    $herstellernummer = $product->get_attribute('pa_herstellernummer');
+    if ($herstellernummer) {
+        echo '<div class="herstellernummer_wrapper">Herstellernummer: <span>' . $herstellernummer . '</span></div>';
+    }
+}
+
+add_action('woocommerce_single_product_summary', 'display_herstellernummer', 42);
+
+
+
+
+
+
+
 
 
 
