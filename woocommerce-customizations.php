@@ -209,21 +209,20 @@ function sot_show_product_meta_custom() {
           $thumbnail_elements = [];
           $no_thumbnail_elements = []; // Ein separates Array für Werte ohne Thumbnails
 
-            foreach ($kennzeichen_terms as $kennzeichen_term_name) {
-                $term = get_term_by('name', $kennzeichen_term_name, 'pa_produktkennzeichen');
-            
-                if ($term) {
-                    $thumbnail_id = get_term_meta($term->term_id, 'product_search_image_id', true);
-                    $thumbnail_url = wp_get_attachment_url($thumbnail_id);
-                    $term_link = get_term_link($term);  // Link zum Term holen
-            
-                    if ($thumbnail_url) {
-                        $thumbnail_elements[$kennzeichen_term_name] = '<a href="' . esc_url($term_link) . '"><img src="' . esc_url($thumbnail_url) . '" alt="Produktkennzeichen Thumbnail" style="max-height: 30px;" title="' . esc_attr($kennzeichen_term_name) . '"></a>';  // Den Link um das Bild herum hinzufügen
-                    } else {
-                        $no_thumbnail_elements[] = '<a href="' . esc_url($term_link) . '">' . $kennzeichen_term_name . '</a>';  // Den Link um den Namen des Terms herum hinzufügen
-                    }
-                }
-            }
+          foreach ($kennzeichen_terms as $kennzeichen_term_name) {
+              $term = get_term_by('name', $kennzeichen_term_name, 'pa_produktkennzeichen');
+
+              if ($term) {
+                  $thumbnail_id = get_term_meta($term->term_id, 'product_search_image_id', true);
+                  $thumbnail_url = wp_get_attachment_url($thumbnail_id);
+
+                  if ($thumbnail_url) {
+                      $thumbnail_elements[$kennzeichen_term_name] = '<img src="' . esc_url($thumbnail_url) . '" alt="Produktkennzeichen Thumbnail" style="max-height: 30px;" title="' . esc_attr($kennzeichen_term_name) . '">';
+                  } else {
+                      $no_thumbnail_elements[] = $kennzeichen_term_name;
+                  }
+              }
+          }
 
           // Sortieren Sie die Arrays
           ksort($thumbnail_elements);
