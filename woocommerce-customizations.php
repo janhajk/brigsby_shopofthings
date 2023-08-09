@@ -189,7 +189,7 @@ function sot_show_product_meta_custom() {
       if ($tags) {
             echo '<tr><th scope="row">' . $tags_label . '</th><td>' . $tags . '</td></tr>';
       }
-      
+
       // Lagerverfügbarkeit
       $stock_info = get_stock_info($product);
       $stock_display = join(array_slice($stock_info,0,3), '&nbsp;');
@@ -233,7 +233,7 @@ function sot_show_product_meta_custom() {
 
           // Wenn unser Array Einträge hat, zeigen wir alle gesammelten Thumbnails und/oder Texte in einer Zeile an
           if (!empty($all_elements)) {
-              echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center; vertical-align: middle;"><div style="display: flex; align-items: center; justify-content: center; height: 100%;padding:10px 0px">' . implode(' ', $all_elements) . '</div></td></tr>';
+              echo '<tr style="line-height: 4em; border-bottom:1px solid gray;border-top:1px solid gray"><td colspan="2" style="text-align: center; vertical-align: middle;"><div style="display: flex; align-items: center; justify-content: center; height: 100%;padding:10px 0px">' . implode(' ', $all_elements) . '</div></td></tr>';
 
           }
       }
