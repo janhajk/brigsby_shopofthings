@@ -248,9 +248,13 @@ function sot_show_product_meta_custom() {
 // Dieser Filter wird nun geändert, um nichts zurückzugeben, da wir den Lagerbestand bereits oben angezeigt haben.
 add_filter( 'woocommerce_get_availability', 'remove_default_stock_display', 1, 2);
 function remove_default_stock_display( $availability, $_product ) {
-    $availability['availability'] = '<span style="display:none;">' . $availability['availability'] . '</span>';
+    // Wenn es sich nicht um eine Produktvariation handelt, verstecken Sie die Verfügbarkeitsnachricht
+    if ( ! $_product->is_type( 'variable' ) ) {
+        $availability['availability'] = '<span style="display:none;">' . $availability['availability'] . '</span>';
+    }
     return $availability;
 }
+
 
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 add_action('woocommerce_single_product_summary', 'sot_show_product_meta_custom', 5);
