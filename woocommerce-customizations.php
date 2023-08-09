@@ -218,9 +218,9 @@ function sot_show_product_meta_custom() {
                     $term_link = get_term_link($term);  // Link zum Term holen
 
                     if ($thumbnail_url) {
-                        $thumbnail_elements[$kennzeichen_term_name] = '<a href="' . esc_url($term_link) . '"><img src="' . esc_url($thumbnail_url) . '" alt="Produktkennzeichen Thumbnail" style="max-height: 30px;" title="' . esc_attr($kennzeichen_term_name) . '"></a>';  // Den Link um das Bild herum hinzufügen
+                        $thumbnail_elements[$kennzeichen_term_name] = '<a style="display:flex" href="' . esc_url($term_link) . '"><img src="' . esc_url($thumbnail_url) . '" alt="Produktkennzeichen Thumbnail" style="max-height: 30px;" title="' . esc_attr($kennzeichen_term_name) . '"></a>';  // Den Link um das Bild herum hinzufügen
                     } else {
-                        $no_thumbnail_elements[] = '<a href="' . esc_url($term_link) . '">' . $kennzeichen_term_name . '</a>';  // Den Link um den Namen des Terms herum hinzufügen
+                        $no_thumbnail_elements[] = '<a style="display:flex" href="' . esc_url($term_link) . '">' . $kennzeichen_term_name . '</a>';  // Den Link um den Namen des Terms herum hinzufügen
                     }
                 }
             }
