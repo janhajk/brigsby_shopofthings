@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.168
+ Version:       1.0.169
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -581,7 +581,7 @@ body .wc-tabs-wrapper {
     .product-hgrid #sidebar-primary {
         display: none;
     }
-    .elementor-element-24440c3 {
+    section[element[data-id="24440c3"]] {
           display: none;
     }
 }
