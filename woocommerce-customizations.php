@@ -251,7 +251,7 @@ function remove_default_stock_display( $availability, $_product ) {
           error_log( 'Produkt ID: ' . $_product->get_id() . ' - Typ: ' . $_product->get_type() );
 
     // Wenn es sich nicht um eine Produktvariation handelt, verstecken Sie die Verfügbarkeitsnachricht
-    if ( ! $_product->is_type( 'variable' ) ) {
+    if ( ! $_product->is_type( 'variation' ) ) {
         $availability['availability'] = '<span style="display:none;">' . $availability['availability'] . '</span>';
     }
     return $availability;
