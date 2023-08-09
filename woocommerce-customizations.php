@@ -72,6 +72,7 @@ function isSKU($sku) {
 function display_sorted_categories($product_id) {
     $terms = wp_get_post_terms($product_id, 'product_cat', array("fields" => "all"));
     $brands_term_id = get_term_by('slug', 'brands', 'product_cat')->term_id;
+    $solution_package_id = get_term_by('slug', 'solution-package', 'product_cat')->term_id;
 
     $all_lines = array();
 
@@ -80,7 +81,12 @@ function display_sorted_categories($product_id) {
         if ($term->term_id == $brands_term_id || $term->parent == $brands_term_id) {
             continue;
         }
-        
+
+        // Top-Kategorien ohne Unterkategorien ausschließen (außer 'solution-package')
+        if ($term->parent == 0 && !get_term_children($term->term_id, 'product_cat') && $term->term_id != $solution_package_id) {
+            continue;
+        }
+
         $line = array();
         $current_term = $term;
 
@@ -98,8 +104,12 @@ function display_sorted_categories($product_id) {
         $all_lines[] = $formatted_line;
     }
 
+    // Kategorien alphabetisch sortieren
+    sort($all_lines);
+
     return '<th scope="row">Kategorien:</th><td>' . join('<br>', $all_lines) . '</td>';
 }
+
 
 
 
@@ -185,7 +195,7 @@ function enqueue_custom_styles() {
     // Überprüft, ob wir uns auf einer Einzelproduktseite befinden
     if (is_product()) {
         // Verlinken Sie zur CSS-Datei
-        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.9' );
+        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.10' );
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_styles');
