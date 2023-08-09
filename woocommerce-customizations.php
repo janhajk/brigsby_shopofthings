@@ -196,14 +196,14 @@ function sot_show_product_meta_custom() {
           $kennzeichen_terms = explode(', ', $produktkennzeichen);
           $thumbnail_elements = [];
           $no_thumbnail_elements = []; // Ein separates Array für Werte ohne Thumbnails
-      
+
           foreach ($kennzeichen_terms as $kennzeichen_term_name) {
               $term = get_term_by('name', $kennzeichen_term_name, 'pa_produktkennzeichen');
-      
+
               if ($term) {
                   $thumbnail_id = get_term_meta($term->term_id, 'product_search_image_id', true);
                   $thumbnail_url = wp_get_attachment_url($thumbnail_id);
-      
+
                   if ($thumbnail_url) {
                       $thumbnail_elements[$kennzeichen_term_name] = '<img src="' . esc_url($thumbnail_url) . '" alt="Produktkennzeichen Thumbnail" style="max-height: 30px;" title="' . esc_attr($kennzeichen_term_name) . '">';
                   } else {
@@ -211,17 +211,18 @@ function sot_show_product_meta_custom() {
                   }
               }
           }
-      
+
           // Sortieren Sie die Arrays
           ksort($thumbnail_elements);
           sort($no_thumbnail_elements);
-      
+
           // Die sortierten Elemente zu einem Gesamtarray zusammenführen
           $all_elements = array_merge(array_values($thumbnail_elements), $no_thumbnail_elements);
-      
+
           // Wenn unser Array Einträge hat, zeigen wir alle gesammelten Thumbnails und/oder Texte in einer Zeile an
           if (!empty($all_elements)) {
-              echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center; vertical-align: middle;">' . implode(' ', $all_elements) . '</td></tr>';
+              echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center; vertical-align: middle;"><div style="display: flex; align-items: center; justify-content: center; height: 100%;">' . implode(' ', $all_elements) . '</div></td></tr>';
+
           }
       }
 
