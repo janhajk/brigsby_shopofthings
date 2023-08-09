@@ -193,7 +193,7 @@ function sot_show_product_meta_custom() {
       // Produktkennzeichen Anzeige
       $produktkennzeichen = $product->get_attribute('pa_produktkennzeichen');
       if ($produktkennzeichen) {
-          echo '<tr><td colspan="2">' . $produktkennzeichen . '</td></tr>';
+          echo '<tr><td colspan="2" style="text-align: center;">' . $produktkennzeichen . '</td></tr>';
       }
 
 
