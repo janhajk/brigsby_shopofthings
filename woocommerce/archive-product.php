@@ -20,20 +20,12 @@ if ( hoot_page_header_attop() ) {
 do_action( 'hoot_template_before_content_grid', 'archive-product.php' );
 ?>
 
-<div class="hgrid main-content-grid product-hgrid">
+<div class="hgrid main-content-grid">
 
 	<?php
 	// Template modification Hook
 	do_action( 'hoot_template_before_main', 'archive-product.php' );
 	?>
-
-	/**
-	 * woocommerce_sidebar hook
-	 *
-	 * @hooked woocommerce_get_sidebar - 10
-	 */
-	do_action( 'woocommerce_sidebar' );
-
 
 	<main <?php hybridextend_attr( 'content' ); ?>>
 
@@ -117,6 +109,12 @@ do_action( 'hoot_template_before_content_grid', 'archive-product.php' );
 	// Template modification Hook
 	do_action( 'hoot_template_after_main', 'archive-product.php' );
 
+	/**
+	 * woocommerce_sidebar hook
+	 *
+	 * @hooked woocommerce_get_sidebar - 10
+	 */
+	do_action( 'woocommerce_sidebar' );
 	?>
 
 </div><!-- .hgrid -->
