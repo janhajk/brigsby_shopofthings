@@ -70,24 +70,30 @@ function display_sorted_categories($product_id) {
         }
     }
 
-    $output = '';
+    $output = '<th scope="row" rowspan="' . count($sorted_terms) . '">Kategorie:</th>';
+    $firstRow = true;
+
     foreach($sorted_terms as $parent_term_id => $children_terms) {
         $line = array();
 
-        // Das Hauptelement zuerst hinzufügen
-        $parent_term = get_term($parent_term_id, 'product_cat');
-        $line[] = $parent_term->name;
-
-        // Füge untergeordnete Begriffe hinzu
         foreach($children_terms as $child_term) {
-            if($child_term->term_id != $parent_term_id) {
-                $line[] = $child_term->name;
+            $term_link = get_term_link($child_term, 'product_cat');
+            if (is_wp_error($term_link)) {
+                continue;
             }
+
+            // Hinzufügen von Begriffen und deren Links
+            $line[] = '<a href="' . esc_url($term_link) . '">' . $child_term->name . '</a>';
         }
 
         // Zeile formatieren
         $formatted_line = join(' > ', $line);
-        $output .= '<tr><th scope="row">Kategorie:</th><td>' . $formatted_line . '</td></tr>';
+        if($firstRow) {
+            $output .= '<td>' . $formatted_line . '</td></tr>'; // Schließt das erste <tr> Tag
+            $firstRow = false;
+        } else {
+            $output .= '<tr><td>' . $formatted_line . '</td></tr>';
+        }
     }
 
     return $output;
