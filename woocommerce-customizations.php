@@ -102,7 +102,7 @@ function enqueue_custom_styles() {
     // Überprüft, ob wir uns auf einer Einzelproduktseite befinden
     if (is_product()) {
         // Verlinken Sie zur CSS-Datei
-        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.2' );
+        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.3' );
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_styles');
