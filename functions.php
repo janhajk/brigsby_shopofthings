@@ -765,40 +765,6 @@ remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_r
 
 
 
- /**
-  *
-  * Move  Meta data (categorie, sku) to top of single-product page
-  *
-  *
-  *
-  *
-  */
-remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
-add_action( 'woocommerce_single_product_summary', 'sot_show_categories_again_single_product', 1 );
-
-function sot_show_categories_again_single_product() {
-   global $product;
-   ?>
-<div class="product_meta">
-
-	<?php do_action( 'woocommerce_product_meta_start' ); ?>
-
-	<?php if ( wc_product_sku_enabled() && ( $product->get_sku() || $product->is_type( 'variable' ) ) ) : ?>
-
-		<span class="sku_wrapper"><?php esc_html_e( 'SKU:', 'woocommerce' ); ?> <span class="sku"><?php echo ( $sku = $product->get_sku() ) ? $sku : esc_html__( 'N/A', 'woocommerce' ); ?></span></span>
-
-	<?php endif; ?>
-
-	<?php echo wc_get_product_category_list( $product->get_id(), ', ', '<span class="posted_in">' . _n( 'Category:', 'Categories:', count( $product->get_category_ids() ), 'woocommerce' ) . ' ', '</span>' ); ?>
-
-	<?php echo wc_get_product_tag_list( $product->get_id(), ', ', '<span class="tagged_as">' . _n( 'Tag:', 'Tags:', count( $product->get_tag_ids() ), 'woocommerce' ) . ' ', '</span>' ); ?>
-
-	<?php do_action( 'woocommerce_product_meta_end' ); ?>
-
-</div>
-   <?php
-}
-
 
 
 /**
@@ -881,103 +847,6 @@ function sot_after_add_to_cart_form_batteries(){
       	<?php
       }
 }
-
-
-
-
-
-
-/**
- *
- *
- * format content on single product page before price (sku, herstellernummer, categories)
- *
- *
- *
- *
- */
- function skuToSpelling($sku) {
-    if (!isSKU($sku)) {
-        return 'Ungültige SKU';
-    }
-
-    $mapping = array(
-        '3' => 'three',
-        '4' => 'four',
-        '7' => 'seven',
-        'A' => 'alpha',
-        'E' => 'echo',
-        'H' => 'hotel',
-        'J' => 'juliet',
-        'L' => 'lima',
-        'N' => 'november',
-        'Q' => 'quebec',
-        'R' => 'romeo',
-        'T' => 'tango',
-        'U' => 'uniform',
-        'Y' => 'yankee'
-    );
-
-    $characters = str_split($sku);
-    $spelledOutSKU = array();
-
-    foreach($characters as $character) {
-        if(isset($mapping[$character])) {
-            $spelledOutSKU[] = $mapping[$character];
-        }
-    }
-
-    return implode(' / ', $spelledOutSKU);
-}
-
-function isSKU($sku) {
-    // Regulärer Ausdruck, der überprüft:
-    // ^ - Start des Strings
-    // [347AEHJLNQRTUY] - nur die genannten Zeichen sind erlaubt
-    // {4} - genau vier Zeichen lang
-    // $ - Ende des Strings
-    $pattern = '/^[347AEHJLNQRTUY]{4}$/';
-
-    return preg_match($pattern, $sku);
-}
-
-
- function sot_display_sku() {
-    global $product;
-    $sku = $product->get_sku();
-
-    if ($sku) {
-      if (isSKU($sku)) {
-                  echo '<div class="sku_wrapper">SKU: <span class="sku" title="' . skuToSpelling($sku) . '">' . $sku . '</span></div>';
-      }
-      else {
-            echo '<div class="sku_wrapper">SKU: <span class="sku">' . $sku . '</span></div>';
-      }
-
-    }
-}
-
-function sot_product_categories() {
-    global $product;
-    echo '<div class="product-categories">Produktkategorien: ' . wc_get_product_category_list($product->get_id()) . '</div>';
-}
-
-
-function display_herstellernummer() {
-    global $product;
-    $herstellernummer = $product->get_attribute('pa_herstellernummer');
-    if ($herstellernummer) {
-        echo '<div class="herstellernummer_wrapper">Herstellernummer: <span>' . $herstellernummer . '</span></div>';
-    }
-}
-
-// Entfernen der Standard-SKU-Anzeige
-remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
-add_action('woocommerce_single_product_summary', 'sot_display_sku', 9);
-add_action('woocommerce_single_product_summary', 'sot_product_categories', 10);
-add_action('woocommerce_single_product_summary', 'display_herstellernummer', 11);
-
-
 
 
 
@@ -1113,6 +982,9 @@ if ( ! function_exists( 'yith_infs_customization_wc_product_filters' ) ) {
 //     return $query;
 // }, PHP_INT_MAX );
 
+
+
+require get_stylesheet_directory() . '/woocommerce-customizations.php';
 
 
 ?>
