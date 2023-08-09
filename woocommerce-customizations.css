@@ -1,6 +1,6 @@
 /*SKU Rahmen auf single product page*/
 #sot-single-product-top .sku_wrapper .sku {
-    padding: 5px 10px;
+    padding: 0px 10px;
     border: 1px solid #ccc;  /* Graue Rahmenfarbe */
     display: inline-block;
     cursor: pointer;
