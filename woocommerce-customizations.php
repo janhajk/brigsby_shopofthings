@@ -248,6 +248,8 @@ function sot_show_product_meta_custom() {
 // Dieser Filter wird nun geändert, um nichts zurückzugeben, da wir den Lagerbestand bereits oben angezeigt haben.
 add_filter( 'woocommerce_get_availability', 'remove_default_stock_display', 1, 2);
 function remove_default_stock_display( $availability, $_product ) {
+          error_log( 'Produkt ID: ' . $_product->get_id() . ' - Typ: ' . $_product->get_type() );
+
     // Wenn es sich nicht um eine Produktvariation handelt, verstecken Sie die Verfügbarkeitsnachricht
     if ( ! $_product->is_type( 'variable' ) ) {
         $availability['availability'] = '<span style="display:none;">' . $availability['availability'] . '</span>';
