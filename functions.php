@@ -307,7 +307,7 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
                   $circle = $_HTML_BACKORDER;
             }
             // TODO: simple is not correctly displaying data for variable products
-            else if ($_product->get_type() != 'simple') {
+            else if ($_product->get_type() != 'simple' && $_product->is_type('variable')) {
                   $availability = 'Bitte Option wählen.';
                   $circle = $_HTML_AVAILABLE_PARTLY;
 
