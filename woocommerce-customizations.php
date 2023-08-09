@@ -1,24 +1,5 @@
 <?php
 
-
-const COPY_TO_CLIPBOARD_JS = "
-            <script>
-            function copyToClipboard(element) {
-                var text = element.innerText;
-                var textarea = document.createElement('textarea');
-                textarea.value = text;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                alert('" . __('SKU kopiert:', 'your-text-domain') . "' + text);
-            }
-            </script>
-            ";
-            
-            
-            
-
 /**
  *
  *
@@ -94,15 +75,11 @@ function display_sorted_categories($product_id) {
     $solution_package_id = get_term_by('slug', 'solution-package', 'product_cat')->term_id;
 
     $all_lines = array();
+    $path_mapper = array();
 
     foreach($terms as $term) {
         // Kategorie mit dem Slug 'brands' und ihre untergeordneten Kategorien überspringen
         if ($term->term_id == $brands_term_id || $term->parent == $brands_term_id) {
-            continue;
-        }
-
-        // Top-Kategorien ohne Unterkategorien ausschließen (außer 'solution-package')
-        if ($term->parent == 0 && !get_term_children($term->term_id, 'product_cat') && $term->term_id != $solution_package_id) {
             continue;
         }
 
@@ -118,12 +95,15 @@ function display_sorted_categories($product_id) {
             $current_term = get_term($current_term->parent, 'product_cat');
         }
 
-        // Nur Kategorienpfade hinzufügen, die bis zur tiefsten Ebene gehen
-        if (!get_term_children($term->term_id, 'product_cat')) {
-            // Zeile formatieren
-            $formatted_line = join(' > ', $line);
-            $all_lines[] = $formatted_line;
+        // Check, ob der Pfad bereits existiert und überschreibt, wenn der aktuelle Pfad spezifischer ist
+        $root_category = explode(' > ', $line[0])[0];
+        if (!isset($path_mapper[$root_category]) || count($line) > count($path_mapper[$root_category])) {
+            $path_mapper[$root_category] = $line;
         }
+    }
+
+    foreach ($path_mapper as $line) {
+        $all_lines[] = join(' > ', $line);
     }
 
     // Kategorien alphabetisch sortieren
@@ -131,7 +111,6 @@ function display_sorted_categories($product_id) {
 
     return '<th scope="row">Kategorien:</th><td>' . join('<br>', $all_lines) . '</td>';
 }
-
 
 
 
@@ -159,7 +138,7 @@ function sot_show_product_meta_custom() {
                 textarea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
-                alert('" . __('SKU kopiert:', 'shopofthings') . "' + text);
+                alert('SKU kopiert: ' + text);
             }
             </script>
                 ";
@@ -173,23 +152,23 @@ function sot_show_product_meta_custom() {
     $sku = $product->get_sku();
     if ($sku) {
         if (isSKU($sku)) {
-            echo '<tr><th scope="row">' . __('SKU:', 'shopofthings') . '</th><td><span class="sku" title="' . skuToSpelling($sku) . '" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
+            echo '<tr><th scope="row">SKU:</th><td><span class="sku" title="' . skuToSpelling($sku) . '" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
         } else {
-            echo '<tr><th scope="row">' . __('SKU:', 'shopofthings') . '</th><td><span class="sku" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
+            echo '<tr><th scope="row">SKU:</th><td><span class="sku" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
         }
     }
 
     // Herstellernummer Anzeige
     $herstellernummer = $product->get_attribute('pa_herstellernummer');
     if ($herstellernummer) {
-        echo '<tr><th scope="row">' . __('P/N:', 'shopofthings') . '</th><td>' . $herstellernummer . '</td></tr>';
+        echo '<tr><th scope="row">P/N:</th><td>' . $herstellernummer . '</td></tr>';
     }
 
     // Marke Anzeige
     $marke = $product->get_attribute('pa_brand');
     if ($marke) {
         $marke_link = get_term_link($marke, 'pa_brand');  // Erstellt einen Link zur Marke
-        echo '<tr><th scope="row">' . __('Marke:', 'shopofthings') . '</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a></td></tr>';
+        echo '<tr><th scope="row">Marke:</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a></td></tr>';
     }
 
     // Kategorien Anzeige
@@ -198,13 +177,12 @@ function sot_show_product_meta_custom() {
     // Tags, falls benötigt
     $tags = wc_get_product_tag_list($product->get_id(), ', ', '<span class="tagged_as">' . _n('Tag:', 'Tags:', count($product->get_tag_ids()), 'woocommerce') . ' ', '</span>');
     if ($tags) {
-        echo '<tr><th scope="row">' . __('Tags:', 'shopofthings') . '</th><td>' . $tags . '</td></tr>';
+        echo '<tr><th scope="row">Tags:</th><td>' . $tags . '</td></tr>';
     }
 
     // Ende der Tabelle
     echo '</tbody></table>';
 }
-
 
 
 
