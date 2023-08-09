@@ -55,11 +55,29 @@ function isSKU($sku) {
 }
 
 
+/**
+ * Gibt eine formatierte Zeile zurück, die alle Produktkategorien des angegebenen Produkts
+ * in einer sortierten und hierarchisch strukturierten Weise darstellt.
+ *
+ * Die Kategorien werden basierend auf ihrer Hierarchie sortiert und anschließend
+ * in einer Zeile dargestellt, wobei die übergeordnete Kategorie zuerst und
+ * die untergeordneten Kategorien danach (getrennt durch ein ">") aufgeführt werden.
+ *
+ * Die Funktion überspringt zudem die Kategorie mit dem Slug 'brands', da diese
+ * in diesem Kontext nicht benötigt wird.
+ *
+ * @param int $product_id Die ID des Produkts, für das die Kategorien abgerufen werden sollen.
+ * @return string Eine formatierte Zeile, die alle relevanten Produktkategorien des angegebenen Produkts darstellt.
+ */
 function display_sorted_categories($product_id) {
     $terms = wp_get_post_terms($product_id, 'product_cat', array("fields" => "all"));
     $sorted_terms = array();
 
     foreach($terms as $term) {
+        // Kategorie mit dem Slug 'brands' überspringen
+        if ($term->slug == 'brands') {
+            continue;
+        }
         if($term->parent == 0) { // Überprüfen, ob es sich um eine Top-Kategorie handelt
             $sorted_terms[$term->term_id] = array($term);
         } else {
@@ -90,7 +108,7 @@ function display_sorted_categories($product_id) {
         $all_lines[] = $formatted_line;
     }
 
-    return '<th scope="row">Kategorie:</th><td>' . join('<br>', $all_lines) . '</td>';
+    return '<th scope="row">Kategorien:</th><td>' . join('<br>', $all_lines) . '</td>';
 }
 
 
@@ -141,6 +159,12 @@ function sot_show_product_meta_custom() {
     if ($herstellernummer) {
         echo '<tr><th scope="row">P/N:</th><td>' . $herstellernummer . '</td></tr>';
     }
+    
+    // Marke Anzeige
+    $marke = $product->get_attribute('pa_brand');  // Angenommen, das Attribut-Slug für Marke ist 'pa_brand'. Dies sollte angepasst werden, falls es anders ist.
+    if ($marke) {
+        echo '<tr><th scope="row">Marke:</th><td>' . $marke . '</td></tr>';
+    }
 
     // Kategorien Anzeige
     echo '<tr>' . display_sorted_categories($product->get_id()) . '</tr>';
@@ -169,7 +193,7 @@ function enqueue_custom_styles() {
     // Überprüft, ob wir uns auf einer Einzelproduktseite befinden
     if (is_product()) {
         // Verlinken Sie zur CSS-Datei
-        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.7' );
+        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.8' );
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_styles');

@@ -28,4 +28,5 @@
     text-align: left;
     text-transform: none; /* Entfernt Kapitälchen */
     font-weight: normal;  /* Setzt den Text auf normal statt fett */
+    vertical-align: top;
 }
