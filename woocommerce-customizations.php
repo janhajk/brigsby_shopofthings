@@ -193,8 +193,9 @@ function sot_show_product_meta_custom() {
       // Produktkennzeichen Anzeige (mit icon)
       $produktkennzeichen = $product->get_attribute('pa_produktkennzeichen');
       if ($produktkennzeichen) {
-          $kennzeichen_terms = explode(', ', $produktkennzeichen);  // Trennt den String in ein Array, vorausgesetzt, die Werte sind durch ', ' getrennt.
+          $kennzeichen_terms = explode(', ', $produktkennzeichen);
           $thumbnail_elements = [];
+          $no_thumbnail_elements = []; // Ein separates Array für Werte ohne Thumbnails
       
           foreach ($kennzeichen_terms as $kennzeichen_term_name) {
               $term = get_term_by('name', $kennzeichen_term_name, 'pa_produktkennzeichen');
@@ -204,18 +205,23 @@ function sot_show_product_meta_custom() {
                   $thumbnail_url = wp_get_attachment_url($thumbnail_id);
       
                   if ($thumbnail_url) {
-                      // Wir fügen die Thumbnails zu unserem Array hinzu, anstatt sie sofort auszugeben
-                      $thumbnail_elements[] = '<img src="' . esc_url($thumbnail_url) . '" alt="Produktkennzeichen Thumbnail" style="max-height: 30px;" title="' . esc_attr($kennzeichen_term_name) . '">';
+                      $thumbnail_elements[$kennzeichen_term_name] = '<img src="' . esc_url($thumbnail_url) . '" alt="Produktkennzeichen Thumbnail" style="max-height: 30px;" title="' . esc_attr($kennzeichen_term_name) . '">';
                   } else {
-                      // Für Werte ohne Thumbnails können wir den Text auch zu unserem Array hinzufügen
-                      $thumbnail_elements[] = $kennzeichen_term_name;
+                      $no_thumbnail_elements[] = $kennzeichen_term_name;
                   }
               }
           }
       
+          // Sortieren Sie die Arrays
+          ksort($thumbnail_elements);
+          sort($no_thumbnail_elements);
+      
+          // Die sortierten Elemente zu einem Gesamtarray zusammenführen
+          $all_elements = array_merge(array_values($thumbnail_elements), $no_thumbnail_elements);
+      
           // Wenn unser Array Einträge hat, zeigen wir alle gesammelten Thumbnails und/oder Texte in einer Zeile an
-          if (!empty($thumbnail_elements)) {
-              echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center;">' . implode(' ', $thumbnail_elements) . '</td></tr>';
+          if (!empty($all_elements)) {
+              echo '<tr style="line-height: 4em;"><td colspan="2" style="text-align: center; vertical-align: middle;">' . implode(' ', $all_elements) . '</td></tr>';
           }
       }
 
