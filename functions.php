@@ -400,38 +400,6 @@ add_action( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20
 
 /**
  *
- * get stock onsingle product page
- *
- */
-/**
- *
- * Woocommerce Availability
- *
- *
- * $_product obejct documentation: https://www.businessbloomer.com/woocommerce-easily-get-product-info-title-sku-desc-product-object
- *
- */
-add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
-function wcs_custom_get_availability( $availability, $_product ) {
-      $info = get_stock_info($_product);
-      // $availability['availability'] = join($info, '&nbsp;');
-      $availability['availability'] = join(array_slice($info,0,3), '&nbsp;');
-      if ($info['canBackorder'] && $info['stock'] > 0) {
-            $availability['availability'] .= '<br /><span style="">Weitere Mengen verfügbar ab externem Lager mit einer Lieferzeit von ca. '.$info['lieferzeit']. ' Tagen.</span>';
-      }
-      if (!$info['canBackorder'] && $info['stock'] > 0) {
-            $availability['availability'] .= '<br /><span style="">Weitere Mengen auf Anfrage.</span>';
-      }
-      return $availability;
-}
-
-
-
-
-
-
-/**
- *
  * Auto shorten long titles in product loop
  *
  *

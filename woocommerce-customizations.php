@@ -129,7 +129,7 @@ function display_sorted_categories($product_id) {
   */
 function sot_show_product_meta_custom() {
       global $product;
-      
+
       // JavaScript zum Kopieren von Text in die Zwischenablage
       $copyToClipboardJS = "
             <script>
@@ -145,12 +145,12 @@ function sot_show_product_meta_custom() {
             }
             </script>
                 ";
-      
+
       echo $copyToClipboardJS; // Das JS-Script einfügen
-      
+
       // Start der Tabelle
       echo '<table class="product-meta-table"><tbody>';
-      
+
       // SKU Anzeige
       $sku = $product->get_sku();
       if ($sku) {
@@ -160,38 +160,55 @@ function sot_show_product_meta_custom() {
             echo '<tr><th scope="row">' . __('SKU:', 'shopofthings') . '</th><td><span class="sku" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
         }
       }
-      
+
       // Herstellernummer Anzeige
       $herstellernummer = $product->get_attribute('pa_herstellernummer');
       if ($herstellernummer) {
         echo '<tr><th scope="row">' . __('P/N:', 'shopofthings') . '</th><td>' . $herstellernummer . '</td></tr>';
       }
-      
+
       // Marke Anzeige
       $marke = $product->get_attribute('pa_brand');
       if ($marke) {
         $marke_link = get_term_link($marke, 'pa_brand');  // Erstellt einen Link zur Marke
         echo '<tr><th scope="row">' . __('Marke:', 'shopofthings') . '</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a></td></tr>';
       }
-      
+
       // Kategorien Anzeige
       echo '<tr>' . display_sorted_categories($product->get_id()) . '</tr>';
-      
+
       // Tags, falls benötigt
       $tag_count = count($product->get_tag_ids());
       $tags_label = _n('Tag:', 'Tags:', $tag_count, 'shopofthings');
       $tags = wc_get_product_tag_list($product->get_id(), ', ');
       if ($tags) {
-      echo '<tr><th scope="row">' . $tags_label . '</th><td>' . $tags . '</td></tr>';
+            echo '<tr><th scope="row">' . $tags_label . '</th><td>' . $tags . '</td></tr>';
       }
       
-      
+      // Lagerverfügbarkeit
+      $stock_info = get_stock_info($product);
+      $stock_display = join(array_slice($stock_info,0,3), '&nbsp;');
+      if ($stock_info['canBackorder'] && $stock_info['stock'] > 0) {
+        $stock_display .= '<br />Weitere Mengen verfügbar ab externem Lager mit einer Lieferzeit von ca. ' . $stock_info['lieferzeit'] . ' Tagen.';
+      } elseif (!$stock_info['canBackorder'] && $stock_info['stock'] > 0) {
+        $stock_display .= '<br />Weitere Mengen auf Anfrage.';
+      }
+      echo '<tr><th scope="row">' . __('Lagerbestand:', 'shopofthings') . '</th><td>' . $stock_display . '</td></tr>';
+
+
+
       // Ende der Tabelle
       echo '</tbody></table>';
 }
 
 
 
+// Dieser Filter wird nun geändert, um nichts zurückzugeben, da wir den Lagerbestand bereits oben angezeigt haben.
+add_filter( 'woocommerce_get_availability', 'remove_default_stock_display', 1, 2);
+function remove_default_stock_display( $availability, $_product ) {
+    $availability['availability'] = '';
+    return $availability;
+}
 
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 add_action('woocommerce_single_product_summary', 'sot_show_product_meta_custom', 5);
