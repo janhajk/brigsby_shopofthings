@@ -72,7 +72,7 @@ function sot_show_product_meta_custom() {
         if (isSKU($sku)) {
             echo '<div class="sku_wrapper">SKU: <span class="sku" title="' . skuToSpelling($sku) . '">' . $sku . '</span></div>';
         } else {
-            echo '<div class="sku_wrapper">SKU: <span class="sku">' . $sku . '</span></div>';
+            echo '<div class="sku_wrapper">SKU: <span class="">' . $sku . '</span></div>';
         }
     }
 
@@ -92,3 +92,17 @@ function sot_show_product_meta_custom() {
 
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 add_action('woocommerce_single_product_summary', 'sot_show_product_meta_custom', 5);
+
+
+
+
+
+
+function enqueue_custom_styles() {
+    // Überprüft, ob wir uns auf einer Einzelproduktseite befinden
+    if (is_product()) {
+        // Verlinken Sie zur CSS-Datei
+        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory() . '/woocommerce-customizations.css');
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_custom_styles');

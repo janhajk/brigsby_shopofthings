@@ -1,0 +1,18 @@
+/*SKU Rahmen auf single product page*/
+.single-product .sku_wrapper .sku {
+    padding: 5px 10px;
+    border: 1px solid #ccc;  /* Graue Rahmenfarbe */
+    display: inline-block;
+    cursor: pointer;
+    transition: border-color 0.3s;  /* Übergangseffekt auf die Rahmenfarbe anwenden */
+    border-radius: 5px;  /* Leicht gerundete Ecken */
+}
+
+.single-product .sku_wrapper .sku:hover {
+    border-color: #333;  /* Rahmenfarbe wird beim Hovern schwarz */
+}
+
+
+.single-product .sku_wrapper .sku:hover {
+    background-color: #f5f5f5; /* Hintergrundfarbe beim Hovern */
+}
