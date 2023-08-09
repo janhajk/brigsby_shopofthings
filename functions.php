@@ -957,16 +957,11 @@ function isSKU($sku) {
     }
 }
 
-// Ersetzen der Standard-SKU-Anzeige durch die benutzerdefinierte
-remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
-add_action('woocommerce_single_product_summary', 'sot_display_sku', 40);
-
 function sot_product_categories() {
     global $product;
     echo '<div class="product-categories">Produktkategorien: ' . wc_get_product_category_list($product->get_id()) . '</div>';
 }
 
-add_action('woocommerce_single_product_summary', 'sot_product_categories', 41);
 
 function display_herstellernummer() {
     global $product;
@@ -976,7 +971,11 @@ function display_herstellernummer() {
     }
 }
 
-add_action('woocommerce_single_product_summary', 'display_herstellernummer', 42);
+// Entfernen der Standard-SKU-Anzeige
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+add_action('woocommerce_single_product_summary', 'sot_display_sku', 9);
+add_action('woocommerce_single_product_summary', 'sot_product_categories', 10);
+add_action('woocommerce_single_product_summary', 'display_herstellernummer', 11);
 
 
 
