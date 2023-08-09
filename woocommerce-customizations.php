@@ -250,7 +250,18 @@ add_filter( 'woocommerce_get_availability', 'remove_default_stock_display', 1, 2
 function remove_default_stock_display( $availability, $_product ) {
     // Wenn es sich nicht um eine Produktvariation handelt, verstecken Sie die Verfügbarkeitsnachricht
     if ( ! $_product->is_type( 'variation' ) ) {
-        $availability['availability'] = '<span style="display:none;">' . $availability['availability'] . '</span>';
+            $availability['availability'] = '<span style="display:none;">' . $availability['availability'] . '</span>';
+    }
+    else {
+            $stock_info = get_stock_info($_product);
+            $stock_display = join(array_slice($stock_info,0,3), '&nbsp;');
+            if ($stock_info['canBackorder'] && $stock_info['stock'] > 0) {
+                  $stock_display .= '<br />Externes Lager: +' . $stock_info['lieferzeit'] . ' Tage.';
+            }
+            elseif (!$stock_info['canBackorder'] && $stock_info['stock'] > 0) {
+                  $stock_display .= '<br />Weitere Mengen auf Anfrage.';
+            }
+            $availability['availability'] = '<span style="">' . $stock_display . '</span>';
     }
     return $availability;
 }
