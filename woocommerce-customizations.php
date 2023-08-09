@@ -71,38 +71,26 @@ function isSKU($sku) {
  */
 function display_sorted_categories($product_id) {
     $terms = wp_get_post_terms($product_id, 'product_cat', array("fields" => "all"));
-    $sorted_terms = array();
-
     $brands_term_id = get_term_by('slug', 'brands', 'product_cat')->term_id;
-
-    foreach($terms as $term) {
-          // Kategorie mit dem Slug 'brands' und ihre untergeordneten Kategorien überspringen
-          if ($term->term_id == $brands_term_id || $term->parent == $brands_term_id) {
-              continue;
-          }
-        if($term->parent == 0) { // Überprüfen, ob es sich um eine Top-Kategorie handelt
-            $sorted_terms[$term->term_id] = array($term);
-        } else {
-            if(!isset($sorted_terms[$term->parent])){
-                $sorted_terms[$term->parent] = array(get_term($term->parent, 'product_cat'));
-            }
-            $sorted_terms[$term->parent][] = $term;
-        }
-    }
 
     $all_lines = array();
 
-    foreach($sorted_terms as $parent_term_id => $children_terms) {
+    foreach($terms as $term) {
+        // Kategorie mit dem Slug 'brands' und ihre untergeordneten Kategorien überspringen
+        if ($term->term_id == $brands_term_id || $term->parent == $brands_term_id) {
+            continue;
+        }
+        
         $line = array();
+        $current_term = $term;
 
-        foreach($children_terms as $child_term) {
-            $term_link = get_term_link($child_term, 'product_cat');
+        while ($current_term && $current_term->term_id != 0) {
+            $term_link = get_term_link($current_term, 'product_cat');
             if (is_wp_error($term_link)) {
-                continue;
+                continue 2;  // überspringt zur nächsten Iteration der äußeren foreach-Schleife
             }
-
-            // Hinzufügen von Begriffen und deren Links
-            $line[] = '<a href="' . esc_url($term_link) . '">' . $child_term->name . '</a>';
+            array_unshift($line, '<a href="' . esc_url($term_link) . '">' . $current_term->name . '</a>');
+            $current_term = get_term($current_term->parent, 'product_cat');
         }
 
         // Zeile formatieren
@@ -112,6 +100,7 @@ function display_sorted_categories($product_id) {
 
     return '<th scope="row">Kategorien:</th><td>' . join('<br>', $all_lines) . '</td>';
 }
+
 
 
  /**
@@ -196,7 +185,7 @@ function enqueue_custom_styles() {
     // Überprüft, ob wir uns auf einer Einzelproduktseite befinden
     if (is_product()) {
         // Verlinken Sie zur CSS-Datei
-        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.8' );
+        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.9' );
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_styles');

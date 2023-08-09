@@ -24,9 +24,10 @@
 .product-meta-table th,
 .product-meta-table td {
     border: none;
-    padding: 8px;
     text-align: left;
-    text-transform: none; /* Entfernt Kapitälchen */
-    font-weight: normal;  /* Setzt den Text auf normal statt fett */
+    text-transform: none;
+    font-weight: normal;
     vertical-align: top;
+    margin: 0;
+    padding: 0 20px 0 0;
 }
