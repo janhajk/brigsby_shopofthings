@@ -151,7 +151,7 @@ function display_sorted_categories($product_id) {
 function sot_show_product_meta_custom() {
       global $product;
 
-      echo ""; // COPY_TO_CLIPBOARD_JS; // Das JS-Script einfügen
+      echo COPY_TO_CLIPBOARD_JS; // Das JS-Script einfügen
 
       // Start der Tabelle
       echo '<table class="product-meta-table"><tbody>';
