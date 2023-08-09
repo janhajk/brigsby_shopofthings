@@ -68,43 +68,54 @@ function sot_show_product_meta_custom() {
 
     // JavaScript zum Kopieren von Text in die Zwischenablage
     $copyToClipboardJS = "
-                  <script>
-                  function copyToClipboard(element) {
-                      var text = element.innerText;
-                      var textarea = document.createElement('textarea');
-                      textarea.value = text;
-                      document.body.appendChild(textarea);
-                      textarea.select();
-                      document.execCommand('copy');
-                      document.body.removeChild(textarea);
-                      alert('SKU kopiert: ' + text);
-                  }
-                  </script>
-                      ";
+            <script>
+            function copyToClipboard(element) {
+                var text = element.innerText;
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('SKU kopiert: ' + text);
+            }
+            </script>
+                ";
+
     echo $copyToClipboardJS; // Das JS-Script einfügen
+
+    // Start der Tabelle
+    echo '<table class="product-meta-table"><tbody>';
 
     // SKU Anzeige
     $sku = $product->get_sku();
     if ($sku) {
         if (isSKU($sku)) {
-            echo '<div class="sku_wrapper">SKU: <span class="sku" title="' . skuToSpelling($sku) . '" onclick="copyToClipboard(this)">' . $sku . '</span></div>';
+            echo '<tr><th scope="row">SKU:</th><td><span class="sku" title="' . skuToSpelling($sku) . '" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
         } else {
-            echo '<div class="sku_wrapper">SKU: <span class="sku" onclick="copyToClipboard(this)">' . $sku . '</span></div>';
+            echo '<tr><th scope="row">SKU:</th><td><span class="sku" onclick="copyToClipboard(this)">' . $sku . '</span></td></tr>';
         }
     }
 
     // Herstellernummer Anzeige
     $herstellernummer = $product->get_attribute('pa_herstellernummer');
     if ($herstellernummer) {
-        echo '<div class="herstellernummer_wrapper">Herstellernummer: <span>' . $herstellernummer . '</span></div>';
+        echo '<tr><th scope="row">Herstellernummer:</th><td>' . $herstellernummer . '</td></tr>';
     }
 
     // Kategorien Anzeige
-    echo '<div class="product-categories">Produktkategorien: ' . wc_get_product_category_list($product->get_id()) . '</div>';
+    echo '<tr><th scope="row">Produktkategorien:</th><td>' . wc_get_product_category_list($product->get_id()) . '</td></tr>';
 
     // Tags, falls benötigt
-    echo wc_get_product_tag_list($product->get_id(), ', ', '<span class="tagged_as">' . _n('Tag:', 'Tags:', count($product->get_tag_ids()), 'woocommerce') . ' ', '</span>');
+    $tags = wc_get_product_tag_list($product->get_id(), ', ', '<span class="tagged_as">' . _n('Tag:', 'Tags:', count($product->get_tag_ids()), 'woocommerce') . ' ', '</span>');
+    if ($tags) {
+        echo '<tr><th scope="row">Tags:</th><td>' . $tags . '</td></tr>';
+    }
+
+    // Ende der Tabelle
+    echo '</tbody></table>';
 }
+
 
 
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
@@ -119,7 +130,7 @@ function enqueue_custom_styles() {
     // Überprüft, ob wir uns auf einer Einzelproduktseite befinden
     if (is_product()) {
         // Verlinken Sie zur CSS-Datei
-        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.4' );
+        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.5' );
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_styles');
