@@ -2,21 +2,21 @@
 
 
 // JavaScript zum Kopieren von Text in die Zwischenablage
-define('COPY_TO_CLIPBOARD_JS', <<<JS
-<script>
-function copyToClipboard(element) {
-    var text = element.innerText;
-    var textarea = document.createElement('textarea');
-    textarea.value = text;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-    alert('{$__(`SKU kopiert`, `shopofthings`)}');
-}
-</script>
-JS
-);
+// define('COPY_TO_CLIPBOARD_JS', <<<JS
+// <script>
+// function copyToClipboard(element) {
+//     var text = element.innerText;
+//     var textarea = document.createElement('textarea');
+//     textarea.value = text;
+//     document.body.appendChild(textarea);
+//     textarea.select();
+//     document.execCommand('copy');
+//     document.body.removeChild(textarea);
+//     alert('{$__(`SKU kopiert`, `shopofthings`)}');
+// }
+// </script>
+// JS
+// );
 
 
 
@@ -149,7 +149,7 @@ function display_sorted_categories($product_id) {
 function sot_show_product_meta_custom() {
       global $product;
 
-      echo COPY_TO_CLIPBOARD_JS; // Das JS-Script einfügen
+      echo ""; // COPY_TO_CLIPBOARD_JS; // Das JS-Script einfügen
 
       // Start der Tabelle
       echo '<table class="product-meta-table"><tbody>';
