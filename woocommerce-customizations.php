@@ -70,8 +70,7 @@ function display_sorted_categories($product_id) {
         }
     }
 
-    $output = '<th scope="row" rowspan="' . count($sorted_terms) . '">Kategorie:</th>';
-    $firstRow = true;
+    $all_lines = array();
 
     foreach($sorted_terms as $parent_term_id => $children_terms) {
         $line = array();
@@ -88,15 +87,10 @@ function display_sorted_categories($product_id) {
 
         // Zeile formatieren
         $formatted_line = join(' > ', $line);
-        if($firstRow) {
-            $output .= '<td>' . $formatted_line . '</td></tr>'; // Schließt das erste <tr> Tag
-            $firstRow = false;
-        } else {
-            $output .= '<tr><td>' . $formatted_line . '</td></tr>';
-        }
+        $all_lines[] = $formatted_line;
     }
 
-    return $output;
+    return '<th scope="row">Kategorie:</th><td>' . join('<br>', $all_lines) . '</td>';
 }
 
 
@@ -149,7 +143,7 @@ function sot_show_product_meta_custom() {
     }
 
     // Kategorien Anzeige
-    echo display_sorted_categories($product->get_id());
+    echo '<tr>' . display_sorted_categories($product->get_id()) . '</tr>';
 
     // Tags, falls benötigt
     $tags = wc_get_product_tag_list($product->get_id(), ', ', '<span class="tagged_as">' . _n('Tag:', 'Tags:', count($product->get_tag_ids()), 'woocommerce') . ' ', '</span>');
