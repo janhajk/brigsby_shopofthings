@@ -63,18 +63,18 @@
 }
 
 .entry.product.type-product .woocommerce-product-gallery {
-    flex-basis: 60%;
+    flex-basis: 70%;
     margin-right: 2%;
 }
 
 .entry.product.type-product .entry-summary {
-    flex-basis: 40%;
+    flex-basis: 30%;
     order: 1;  /* Die Reihenfolge verschieben, damit es rechts angezeigt wird */
     min-height: 1000px;
 }
 
 .entry.product.type-product .wc-tabs-wrapper {
-    width: 58%; /* Die gewünschte Breite */
+    width: 68%; /* Die gewünschte Breite */
     margin-top: calc(-250px); /* Nutzen Sie calc(), um es abhängig von der Breite der .woocommerce-product-gallery zu machen */
 }
 
@@ -132,5 +132,37 @@
         flex-basis: 100% !important; /* Nimmt die volle Breite des Containers ein */
     }
 }
+
+
+
+
+/* Allgemeiner Stil für spezielle Zeilen */
+.special-row {
+    line-height: 4em;
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.special-row > *:not(:last-child) {
+    margin-right: 10px; /* Abstand zwischen den Icons, anpassen nach Bedarf */
+}
+
+/* Stil für das Icon-Container div */
+.icon-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end; /* ändern Sie dies zu 'flex-end' um die Icons von rechts nach links auszurichten */
+    padding: 10px 0px;
+}
+
+/* Ein optionaler Stil, um den Abstand zwischen den Icons (a-Elementen innerhalb des icon-containers) zu setzen */
+.icon-container a {
+    margin-left: 10px; /* Setzen Sie den Abstand nach Ihrem Geschmack */
+}
+
 
 
