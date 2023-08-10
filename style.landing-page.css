@@ -1,0 +1,14 @@
+
+/* bigger title font on landing pages */
+.landing-page .loop-meta .entry-title {
+    font-size: 3em !important;
+}
+
+.landing-page .loop-description {
+      display: none;
+}
+
+.landing-page main {
+      width: 100%;
+      font-size: 1.2em;
+}

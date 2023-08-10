@@ -1,0 +1,64 @@
+/*
+  Single product page formating
+*/
+
+
+
+/*Wechsel von wide auf mobile bildschirme v.a. für main content*/
+
+#sot-single-product-top {
+      display: flex;
+      flex-wrap: nowrap;
+}
+
+
+#sot-single-product-top .woocommerce-product-gallery {
+      flex-basis: 60%;
+      /* 66% Breite */
+}
+
+#sot-single-product-top .entry-summary {
+      flex-basis: 40%;
+      padding: 15px;
+      /* 33% Breite */
+}
+
+.wc-tabs-wrapper {
+      width: 60%;
+}
+
+
+
+/* Mobil-Ansicht bei max-width: 800px */
+
+@media only screen and (max-width: 800px) {
+      #sot-single-product-top {
+            flex-wrap: wrap;
+            /* erlaube das Umbrechen */
+      }
+
+     #sot-single-product-top .woocommerce-product-gallery,
+     #sot-single-product-top .entry-summary {
+            flex-basis: 100%;
+            /* beide nehmen die volle Breite ein */
+      }
+
+      .product-hgrid #sidebar-primary {
+            display: none;
+      }
+
+      .wc-tabs-wrapper, #wpshopofthingstools-specifications-wrapper, .show-more {
+            width: 100%;
+      }
+}
+
+
+
+/* Media Query für Bildschirmbreiten von 700px und darunter */
+@media only screen and (max-width: 769px) {
+    .product-hgrid #content {
+        flex-basis: 100% !important; /* Nimmt die volle Breite des Containers ein */
+    }
+}
+
+

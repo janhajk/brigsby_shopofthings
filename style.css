@@ -5,85 +5,11 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.196
+ Version:       1.0.202
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
 */
-
-
-:root {
-    --max-screen-size: 800px;
-}
-
-
-/*
-  Single product page formating sidebar
-*/
-
-
-
-/*Wechsel von wide auf mobile bildschirme v.a. für main content*/
-
-#sot-single-product-top {
-      display: flex;
-      flex-wrap: nowrap;
-}
-
-
-#sot-single-product-top .woocommerce-product-gallery {
-      flex-basis: 60%;
-      /* 66% Breite */
-}
-
-#sot-single-product-top .entry-summary {
-      flex-basis: 40%;
-      padding: 15px;
-      /* 33% Breite */
-}
-
-.wc-tabs-wrapper {
-      width: 60%;
-}
-
-/* Mobil-Ansicht bei max-width: var(--max-screen-size) */
-
-@media only screen and (max-width: var(--max-screen-size)) {
-      #sot-single-product-top {
-            flex-wrap: wrap;
-            /* erlaube das Umbrechen */
-      }
-
-     #sot-single-product-top .woocommerce-product-gallery,
-     #sot-single-product-top .entry-summary {
-            flex-basis: 100%;
-            /* beide nehmen die volle Breite ein */
-      }
-
-      .product-hgrid #sidebar-primary {
-            display: none;
-      }
-
-      .wc-tabs-wrapper, #wpshopofthingstools-specifications-wrapper, .show-more {
-            width: 100%;
-      }
-}
-
-
-
-/* Media Query für Bildschirmbreiten von 700px und darunter */
-@media only screen and (max-width: 769px) {
-    .product-hgrid #content {
-        flex-basis: 100% !important; /* Nimmt die volle Breite des Containers ein */
-    }
-}
-
-
-
-
-
-
-
 
 
 a {
@@ -557,22 +483,6 @@ input.product-search-field {
       margin-top: 0px;
       font-weight: bold;
       margin-left: 5px;
-}
-
-
-
-/* bigger title font on landing pages */
-.landing-page .loop-meta .entry-title {
-    font-size: 3em !important;
-}
-
-.landing-page .loop-description {
-      display: none;
-}
-
-.landing-page main {
-      width: 100%;
-      font-size: 1.2em;
 }
 
 
