@@ -70,6 +70,7 @@
 .entry.product.type-product .entry-summary {
     flex-basis: 40%;
     order: 1;  /* Die Reihenfolge verschieben, damit es rechts angezeigt wird */
+    min-height: 1000px;
 }
 
 .entry.product.type-product .wc-tabs-wrapper {
@@ -99,6 +100,7 @@
     .entry.product.type-product .entry-summary {
         order: 2; /* Das letzte Element */
         flex-basis: 100%;
+        min-height: auto;
     }
 }
 
