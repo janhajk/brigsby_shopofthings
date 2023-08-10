@@ -168,6 +168,10 @@
 
 .product-meta-table .special-row .text-link {
     margin-right: 5px;
+    border: 1px solid #999;  /* Randfarbe - du kannst dies nach Bedarf ändern */
+    border-radius: 5px;  /* Runde Ecken */
+    padding: 5px;  /* Abstand zwischen Text und Rand */
+    display: inline-block;  /* Damit padding und border korrekt angewendet werden */
 }
 
 /* Ein optionaler Stil, um den Abstand zwischen den Icons (a-Elementen innerhalb des icon-containers) zu setzen */
