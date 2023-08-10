@@ -63,17 +63,17 @@
 }
 
 .entry.product.type-product .woocommerce-product-gallery {
-    flex-basis: 60%; 
+    flex-basis: 60%;
     margin-right: 2%;
 }
 
 .entry.product.type-product .entry-summary {
-    flex-basis: 40%; 
+    flex-basis: 40%;
     order: 1;  /* Die Reihenfolge verschieben, damit es rechts angezeigt wird */
 }
 
 .entry.product.type-product .wc-tabs-wrapper {
-    width: 60%; /* Die gewünschte Breite */
+    width: 58%; /* Die gewünschte Breite */
     margin-top: calc(-250px); /* Nutzen Sie calc(), um es abhängig von der Breite der .woocommerce-product-gallery zu machen */
 }
 
