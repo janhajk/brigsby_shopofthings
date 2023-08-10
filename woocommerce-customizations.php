@@ -96,11 +96,21 @@ function display_sorted_categories($product_id) {
     $brands_term_id = get_term_by('slug', 'brands', 'product_cat')->term_id;
     $solution_package_id = get_term_by('slug', 'solution-package', 'product_cat')->term_id;
 
+    // Holen Sie die term_id von 'sensorik' und alle seine Unterordnungen
+    $sensorik_term_id = get_term_by('slug', 'sensorik', 'product_cat')->term_id;
+    $sensorik_children = get_term_children($sensorik_term_id, 'product_cat');
+    $sensorik_all_terms = array_merge([$sensorik_term_id], $sensorik_children);
+
     $all_lines = array();
 
     foreach($terms as $term) {
         // Kategorie mit dem Slug 'brands' und ihre untergeordneten Kategorien überspringen
         if ($term->term_id == $brands_term_id || $term->parent == $brands_term_id) {
+            continue;
+        }
+
+        // Überspringen von "sensorik" und allen seinen Unterordnungen
+        if (in_array($term->term_id, $sensorik_all_terms)) {
             continue;
         }
 
@@ -134,6 +144,7 @@ function display_sorted_categories($product_id) {
 
     return '<th scope="row">' . __( 'Kategorien:', 'textdomain' ) . '</th><td>' . join('<br>', $all_lines) . '</td>';
 }
+
 
 
 
@@ -183,25 +194,13 @@ function sot_show_product_meta_custom() {
       echo '<tr>' . display_sorted_categories($product->get_id()) . '</tr>';
 
       // Tags, falls benötigt
-      $tag_count = count($product->get_tag_ids());
-      $tags_label = _n('Tag:', 'Tags:', $tag_count, 'shopofthings');
-      $tags = wc_get_product_tag_list($product->get_id(), ', ');
-      if ($tags) {
-            echo '<tr><th scope="row">' . $tags_label . '</th><td>' . $tags . '</td></tr>';
-      }
-
-      // Lagerverfügbarkeit
-      $stock_info = get_stock_info($product);
-      $stock_display = join(array_slice($stock_info,0,3), '&nbsp;');
-      if ($stock_info['canBackorder'] && $stock_info['stock'] > 0) {
-        $stock_display .= '<br />Externes Lager: +' . $stock_info['lieferzeit'] . ' Tage.';
-      }
-      elseif (!$stock_info['canBackorder'] && $stock_info['stock'] > 0) {
-        $stock_display .= '<br />Weitere Mengen auf Anfrage.';
-      }
-      echo '<tr><th scope="row">' . __('Lager:', 'shopofthings') . '</th><td>' . $stock_display . '</td></tr>';
-
-
+      // $tag_count = count($product->get_tag_ids());
+      // $tags_label = _n('Tag:', 'Tags:', $tag_count, 'shopofthings');
+      // $tags = wc_get_product_tag_list($product->get_id(), ', ');
+      // if ($tags) {
+      //       echo '<tr><th scope="row">' . $tags_label . '</th><td>' . $tags . '</td></tr>';
+      // }
+      
       // Sensoren Anzeige (mit icon)
       $sensoren = $product->get_attribute('pa_sensoren');
       if ($sensoren) {
@@ -237,6 +236,17 @@ function sot_show_product_meta_custom() {
               echo '<tr style="line-height: 4em; border-bottom:1px solid gray;border-top:1px solid gray"><td colspan="2" style="align-items: center; justify-content: center; height: 100%;"><div style="display: flex; width: 100%; align-items: center; justify-content: space-between; padding:10px 0px">' . implode(' ', $all_elements) . '</div></td></tr>';
           }
       }
+
+      // Lagerverfügbarkeit
+      $stock_info = get_stock_info($product);
+      $stock_display = join(array_slice($stock_info,0,3), '&nbsp;');
+      if ($stock_info['canBackorder'] && $stock_info['stock'] > 0) {
+        $stock_display .= '<br />Externes Lager: +' . $stock_info['lieferzeit'] . ' Tage.';
+      }
+      elseif (!$stock_info['canBackorder'] && $stock_info['stock'] > 0) {
+        $stock_display .= '<br />Weitere Mengen auf Anfrage.';
+      }
+      echo '<tr><th scope="row">' . __('Lager:', 'shopofthings') . '</th><td>' . $stock_display . '</td></tr>';
 
 
       // Produktkennzeichen Anzeige (mit icon)
