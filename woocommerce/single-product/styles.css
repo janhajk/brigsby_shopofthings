@@ -151,6 +151,11 @@
     border-top: 1px solid gray;
 }
 
+/* grössere zeilen */
+.product-meta-table .special-row td, .product-meta-table .special-row th {
+      padding-top: 0.7em;
+      padding-bottom: 0.7em;
+}
 
 .product-meta-table .special-row .icon-link img {
     max-height: 30px;
