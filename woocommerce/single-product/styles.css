@@ -136,22 +136,27 @@
 
 
 
+
 /* Allgemeiner Stil für spezielle Zeilen */
-.special-row {
-    line-height: 4em;
+.product-meta-table .special-row div {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+
+/* is a tr */
+.product-meta-table .special-row {
     border-bottom: 1px solid gray;
     border-top: 1px solid gray;
-    align-items: center;
-    justify-content: flex-end;
-    height: 100%;
 }
 
-.special-row > *:not(:last-child) {
-    margin-right: 10px; /* Abstand zwischen den Icons, anpassen nach Bedarf */
-}
+/*product-meta-table .special-row > *:not(:last-child) {*/
+/*    margin-right: 10px; /* Abstand zwischen den Icons, anpassen nach Bedarf */
+/*}*/
 
 /* Stil für das Icon-Container div */
-.icon-container {
+.product-meta-table .icon-container {
     display: flex;
     width: 100%;
     align-items: center;
@@ -160,7 +165,7 @@
 }
 
 /* Ein optionaler Stil, um den Abstand zwischen den Icons (a-Elementen innerhalb des icon-containers) zu setzen */
-.icon-container a {
+.product-meta-table .icon-container a {
     margin-left: 10px; /* Setzen Sie den Abstand nach Ihrem Geschmack */
 }
 

@@ -147,7 +147,7 @@ function display_sorted_categories($product_id) {
 
 
 
-function display_icon_row($taxonomy, $attribute, $alt_text) {
+function display_icon_row($title, $taxonomy, $attribute, $alt_text) {
     $terms = explode(', ', $attribute);
     $thumbnail_elements = [];
     $no_thumbnail_elements = [];
@@ -160,9 +160,9 @@ function display_icon_row($taxonomy, $attribute, $alt_text) {
             $term_link = get_term_link($term);
 
             if ($thumbnail_url) {
-                $thumbnail_elements[$term_name] = '<a href="' . esc_url($term_link) . '"><img src="' . esc_url($thumbnail_url) . '" alt="' . $alt_text . '" style="max-height: 30px;" title="' . esc_attr($term_name) . '"></a>';
+                $thumbnail_elements[$term_name] = '<a href="' . esc_url($term_link) . '" class="icon-link"><img src="' . esc_url($thumbnail_url) . '" alt="' . $alt_text . '" class="icon-image" title="' . esc_attr($term_name) . '"></a>';
             } else {
-                $no_thumbnail_elements[] = '<a href="' . esc_url($term_link) . '">' . $term_name . '</a>';
+                $no_thumbnail_elements[] = '<a href="' . esc_url($term_link) . '" class="text-link">' . $term_name . '</a>';
             }
         }
     }
@@ -172,7 +172,7 @@ function display_icon_row($taxonomy, $attribute, $alt_text) {
     $all_elements = array_merge(array_values($thumbnail_elements), $no_thumbnail_elements);
 
     if (!empty($all_elements)) {
-        echo '<tr><td></td><td><div style="display: flex; align-items: center; justify-content: start;">' . implode(' ', $all_elements) . '</div></td></tr>';
+        echo '<tr class="special-row"><th scope="row">'.$title.'</th><td class="special-row-icons"><div>' . implode(' ', $all_elements) . '</div></td></tr>';
     }
 }
 
@@ -235,13 +235,13 @@ function sot_show_product_meta_custom() {
       // Sensoren Anzeige (mit icon)
       $sensoren = $product->get_attribute('pa_sensoren');
       if ($sensoren) {
-        display_icon_row('pa_sensoren', $sensoren, "Sensoren Thumbnail");
+        display_icon_row('Sensoren: ', 'pa_sensoren', $sensoren, "Sensoren Thumbnail");
       }
-      
+
       // Produktkennzeichen Anzeige (mit icon)
       $produktkennzeichen = $product->get_attribute('pa_produktkennzeichen');
       if ($produktkennzeichen) {
-        display_icon_row('pa_produktkennzeichen', $produktkennzeichen, "Produktkennzeichen Thumbnail");
+        display_icon_row('Zertifizierungen: ', 'pa_produktkennzeichen', $produktkennzeichen, "Produktkennzeichen Thumbnail");
       }
 
       // Lagerverfügbarkeit
