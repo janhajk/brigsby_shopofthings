@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.171
+ Version:       1.0.172
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -571,7 +571,7 @@ body .wc-tabs-wrapper {
 
 /* Media Query für Bildschirmbreiten von 700px und darunter */
 @media (max-width: var(--max-screen-size)) {
-    .product-hgrid#content, .product-hgrid #sidebar-primary {
+    .product-hgrid #content, .product-hgrid #sidebar-primary {
         flex-basis: 100%; /* Nimmt die volle Breite des Containers ein */
     }
 
