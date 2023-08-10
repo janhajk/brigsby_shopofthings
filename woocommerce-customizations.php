@@ -160,7 +160,7 @@ function display_icon_row($title, $taxonomy, $attribute, $alt_text) {
             $term_link = get_term_link($term);
 
             if ($thumbnail_url) {
-                $thumbnail_elements[$term_name] = '<a href="' . esc_url($term_link) . '" class="icon-link"><img src="' . esc_url($thumbnail_url) . '" alt="' . $alt_text . '" class="icon-image" title="' . esc_attr($term_name) . '"></a>';
+                $thumbnail_elements[$term_name] = '<a href="' . esc_url($term_link) . '" class="icon-link text-link"><img src="' . esc_url($thumbnail_url) . '" alt="' . $alt_text . '" class="icon-image" title="' . esc_attr($term_name) . '"></a>';
             } else {
                 $no_thumbnail_elements[] = '<a href="' . esc_url($term_link) . '" class="text-link">' . $term_name . '</a>';
             }
