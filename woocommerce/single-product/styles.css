@@ -53,6 +53,61 @@
 }
 
 
+/*******************************************/
+/*------ TEST ------*/
+/*******************************************/
+/* Desktop-Standard */
+.entry.product.type-product #sot-single-product-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.entry.product.type-product .woocommerce-product-gallery {
+    flex-basis: 60%; 
+    margin-right: 2%;
+}
+
+.entry.product.type-product .entry-summary {
+    flex-basis: 40%; 
+    order: 1;  /* Die Reihenfolge verschieben, damit es rechts angezeigt wird */
+}
+
+.entry.product.type-product .wc-tabs-wrapper {
+    width: 60%; /* Die gewünschte Breite */
+    margin-top: calc(-250px); /* Nutzen Sie calc(), um es abhängig von der Breite der .woocommerce-product-gallery zu machen */
+}
+
+/* Mobile-Ansicht für Geräte mit einer Breite von 800px oder weniger */
+@media screen and (max-width: 800px) {
+    .entry.product.type-product #sot-single-product-top {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .entry.product.type-product .wc-tabs-wrapper {
+        order: 1; /* Zwischen den beiden divs */
+        margin-top: 0;
+        width: 100%;
+    }
+
+    .entry.product.type-product .woocommerce-product-gallery {
+        order: 0; /* Das erste Element */
+        flex-basis: 100%;
+        margin-right: 0; /* Entfernt den Rand für die mobile Ansicht */
+    }
+
+    .entry.product.type-product .entry-summary {
+        order: 2; /* Das letzte Element */
+        flex-basis: 100%;
+    }
+}
+
+
+/*******************************************/
+/*----- END TEST -------*/
+/*******************************************/
+
+
 
 /* Media Query für Bildschirmbreiten von 700px und darunter */
 @media only screen and (max-width: 769px) {
