@@ -151,17 +151,14 @@
     border-top: 1px solid gray;
 }
 
-/*product-meta-table .special-row > *:not(:last-child) {*/
-/*    margin-right: 10px; /* Abstand zwischen den Icons, anpassen nach Bedarf */
-/*}*/
 
-/* Stil für das Icon-Container div */
-.product-meta-table .icon-container {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: flex-end; /* ändern Sie dies zu 'flex-end' um die Icons von rechts nach links auszurichten */
-    padding: 10px 0px;
+.product-meta-table .special-row .icon-link img {
+    max-height: 30px;
+    margin-right: 5px;
+}
+
+.product-meta-table .special-row .text-link {
+    margin-right: 5px;
 }
 
 /* Ein optionaler Stil, um den Abstand zwischen den Icons (a-Elementen innerhalb des icon-containers) zu setzen */
