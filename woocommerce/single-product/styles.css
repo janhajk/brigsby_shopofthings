@@ -156,6 +156,10 @@
       padding-top: 0.7em;
       padding-bottom: 0.7em;
 }
+.product-meta-table #special-row-stock td, .product-meta-table #special-row-stock th {
+      padding-top: 1em;
+      padding-bottom: 1em;
+}
 
 .product-meta-table .special-row .icon-link img {
     max-height: 30px;

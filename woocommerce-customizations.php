@@ -253,7 +253,7 @@ function sot_show_product_meta_custom() {
       elseif (!$stock_info['canBackorder'] && $stock_info['stock'] > 0) {
         $stock_display .= '<br />Weitere Mengen auf Anfrage.';
       }
-      echo '<tr><th scope="row">' . __('Lager:', 'shopofthings') . '</th><td>' . $stock_display . '</td></tr>';
+      echo '<tr id="special-row-stock"><th scope="row">' . __('Lager:', 'shopofthings') . '</th><td>' . $stock_display . '</td></tr>';
 
 
 
