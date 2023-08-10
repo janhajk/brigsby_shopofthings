@@ -23,6 +23,16 @@ do_action( 'hoot_template_before_content_grid', 'archive-product.php' );
 <div class="hgrid main-content-grid">
 
 	<?php
+	/**
+	 * woocommerce_sidebar hook
+	 *
+	 * @hooked woocommerce_get_sidebar - 10
+	 */
+	do_action( 'woocommerce_sidebar' );
+
+	?>
+
+	<?php
 	// Template modification Hook
 	do_action( 'hoot_template_before_main', 'archive-product.php' );
 	?>
@@ -109,12 +119,6 @@ do_action( 'hoot_template_before_content_grid', 'archive-product.php' );
 	// Template modification Hook
 	do_action( 'hoot_template_after_main', 'archive-product.php' );
 
-	/**
-	 * woocommerce_sidebar hook
-	 *
-	 * @hooked woocommerce_get_sidebar - 10
-	 */
-	do_action( 'woocommerce_sidebar' );
 	?>
 
 </div><!-- .hgrid -->

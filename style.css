@@ -23,9 +23,19 @@ body {
 }
 
 
+
+/*Archive Seite*/
+
+/* hide Kategorien in mobile, because we have the menu on top */
+@media screen and (max-width: 800px) {
+      div[id^="woocommerce_product_categories-"] {
+            display:none;
+      }
+}
+
+
 .woocommerce.archive ul.products li.product, .woocommerce-page.archive ul.products li.product {
-    margin: 0;
-    margin-bottom: 30px;
+      margin: 0 0 30px;
 }
 
 .loop-meta {
