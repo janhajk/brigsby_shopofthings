@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       1.0.202
+ Version:       1.0.203
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -483,6 +483,14 @@ input.product-search-field {
       margin-top: 0px;
       font-weight: bold;
       margin-left: 5px;
+}
+
+
+/*Auf Startseite Partner Icons verstecken wenn mit Handy */
+@media (max-width: 800px) {
+    section[element[data-id="24440c3"]] {
+          display: none;
+    }
 }
 
 
