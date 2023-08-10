@@ -147,6 +147,37 @@ function display_sorted_categories($product_id) {
 
 
 
+function display_icon_row($taxonomy, $attribute, $alt_text) {
+    $terms = explode(', ', $attribute);
+    $thumbnail_elements = [];
+    $no_thumbnail_elements = [];
+
+    foreach ($terms as $term_name) {
+        $term = get_term_by('name', $term_name, $taxonomy);
+        if ($term) {
+            $thumbnail_id = get_term_meta($term->term_id, 'product_search_image_id', true);
+            $thumbnail_url = wp_get_attachment_url($thumbnail_id);
+            $term_link = get_term_link($term);
+
+            if ($thumbnail_url) {
+                $thumbnail_elements[$term_name] = '<a href="' . esc_url($term_link) . '"><img src="' . esc_url($thumbnail_url) . '" alt="' . $alt_text . '" style="max-height: 30px;" title="' . esc_attr($term_name) . '"></a>';
+            } else {
+                $no_thumbnail_elements[] = '<a href="' . esc_url($term_link) . '">' . $term_name . '</a>';
+            }
+        }
+    }
+
+    ksort($thumbnail_elements);
+    sort($no_thumbnail_elements);
+    $all_elements = array_merge(array_values($thumbnail_elements), $no_thumbnail_elements);
+
+    if (!empty($all_elements)) {
+        echo '<tr><td></td><td><div style="display: flex; align-items: center; justify-content: start;">' . implode(' ', $all_elements) . '</div></td></tr>';
+    }
+}
+
+
+
 
 
 
@@ -204,73 +235,13 @@ function sot_show_product_meta_custom() {
       // Sensoren Anzeige (mit icon)
       $sensoren = $product->get_attribute('pa_sensoren');
       if ($sensoren) {
-          $sensoren_terms = explode(', ', $sensoren);
-          $thumbnail_elements = [];
-          $no_thumbnail_elements = []; // Ein separates Array für Werte ohne Thumbnails
-
-            foreach ($sensoren_terms as $sensoren_terms_name) {
-                $term = get_term_by('name', $sensoren_terms_name, 'pa_sensoren');
-
-                if ($term) {
-                    $thumbnail_id = get_term_meta($term->term_id, 'product_search_image_id', true);
-                    $thumbnail_url = wp_get_attachment_url($thumbnail_id);
-                    $term_link = get_term_link($term);  // Link zum Term holen
-
-                    if ($thumbnail_url) {
-                        $thumbnail_elements[$sensoren_terms_name] = '<a style="display:flex" href="' . esc_url($term_link) . '"><img src="' . esc_url($thumbnail_url) . '" alt="Sensoren Thumbnail" style="max-height: 30px;" title="' . esc_attr($sensoren_terms_name) . '"></a>';  // Den Link um das Bild herum hinzufügen
-                    } else {
-                        $no_thumbnail_elements[] = '<a style="display:flex" href="' . esc_url($term_link) . '">' . $sensoren_terms_name . '</a>';  // Den Link um den Namen des Terms herum hinzufügen
-                    }
-                }
-            }
-
-          // Sortieren Sie die Arrays
-          ksort($thumbnail_elements);
-          sort($no_thumbnail_elements);
-
-          // Die sortierten Elemente zu einem Gesamtarray zusammenführen
-          $all_elements = array_merge(array_values($thumbnail_elements), $no_thumbnail_elements);
-
-          // Wenn unser Array Einträge hat, zeigen wir alle gesammelten Thumbnails und/oder Texte in einer Zeile an
-          if (!empty($all_elements)) {
-                echo '<tr class="special-row"><td colspan="2"><div class="icon-container">' . implode(' ', $all_elements) . '</div></td></tr>';
-          }
+        display_icon_row('pa_sensoren', $sensoren, "Sensoren Thumbnail");
       }
-
+      
       // Produktkennzeichen Anzeige (mit icon)
       $produktkennzeichen = $product->get_attribute('pa_produktkennzeichen');
       if ($produktkennzeichen) {
-          $kennzeichen_terms = explode(', ', $produktkennzeichen);
-          $thumbnail_elements = [];
-          $no_thumbnail_elements = []; // Ein separates Array für Werte ohne Thumbnails
-
-            foreach ($kennzeichen_terms as $kennzeichen_term_name) {
-                $term = get_term_by('name', $kennzeichen_term_name, 'pa_produktkennzeichen');
-
-                if ($term) {
-                    $thumbnail_id = get_term_meta($term->term_id, 'product_search_image_id', true);
-                    $thumbnail_url = wp_get_attachment_url($thumbnail_id);
-                    $term_link = get_term_link($term);  // Link zum Term holen
-
-                    if ($thumbnail_url) {
-                        $thumbnail_elements[$kennzeichen_term_name] = '<a style="display:flex" href="' . esc_url($term_link) . '"><img src="' . esc_url($thumbnail_url) . '" alt="Produktkennzeichen Thumbnail" style="max-height: 30px;" title="' . esc_attr($kennzeichen_term_name) . '"></a>';  // Den Link um das Bild herum hinzufügen
-                    } else {
-                        $no_thumbnail_elements[] = '<a style="display:flex" href="' . esc_url($term_link) . '">' . $kennzeichen_term_name . '</a>';  // Den Link um den Namen des Terms herum hinzufügen
-                    }
-                }
-            }
-
-          // Sortieren Sie die Arrays
-          ksort($thumbnail_elements);
-          sort($no_thumbnail_elements);
-
-          // Die sortierten Elemente zu einem Gesamtarray zusammenführen
-          $all_elements = array_merge(array_values($thumbnail_elements), $no_thumbnail_elements);
-
-          // Wenn unser Array Einträge hat, zeigen wir alle gesammelten Thumbnails und/oder Texte in einer Zeile an
-          if (!empty($all_elements)) {
-                echo '<tr class="special-row"><td colspan="2"><div class="icon-container">' . implode(' ', $all_elements) . '</div></td></tr>';
-          }
+        display_icon_row('pa_produktkennzeichen', $produktkennzeichen, "Produktkennzeichen Thumbnail");
       }
 
       // Lagerverfügbarkeit
