@@ -104,6 +104,14 @@
     }
 }
 
+.woocommerce div.product div.images .flex-control-thumbs li {
+    width: 15%;
+}
+
+.woocommerce div.product div.images .flex-viewport {
+      max-height: 500px;
+}
+
 
 /*******************************************/
 /*----- END TEST -------*/
