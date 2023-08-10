@@ -50,6 +50,17 @@ function sot_enqueue_styles() {
 add_action('wp_enqueue_scripts', 'sot_enqueue_styles');
 
 
+function sot_custom_scripts() {
+    // Überprüfen Sie, ob Sie auf einer Produktseite sind
+    if (is_product()) {
+        // Registrieren und Einreihen des Scripts
+        wp_enqueue_script('single-product-script', get_stylesheet_directory_uri() . '/woocommerce/single-product/single-product.js', array('jquery'), '1.0.0', true);
+    }
+}
+add_action('wp_enqueue_scripts', 'sot_custom_scripts');
+
+
+
 // require_once '/var/www/vhosts/jan/shopofthings/wordpress/wp-content/geoip/vendor/autoload.php';
 // use GeoIp2\Database\Reader;
 function createAdsenseBlogResponsive() {
