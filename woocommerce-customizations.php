@@ -202,6 +202,43 @@ function sot_show_product_meta_custom() {
       echo '<tr><th scope="row">' . __('Lager:', 'shopofthings') . '</th><td>' . $stock_display . '</td></tr>';
 
 
+      // Sensoren Anzeige (mit icon)
+      $sensoren = $product->get_attribute('pa_sensoren');
+      if ($sensoren) {
+          $sensoren_terms = explode(', ', $sensoren);
+          $thumbnail_elements = [];
+          $no_thumbnail_elements = []; // Ein separates Array für Werte ohne Thumbnails
+
+            foreach ($sensoren_terms as $sensoren_terms_name) {
+                $term = get_term_by('name', $sensoren_terms_name, 'pa_sensoren');
+
+                if ($term) {
+                    $thumbnail_id = get_term_meta($term->term_id, 'product_search_image_id', true);
+                    $thumbnail_url = wp_get_attachment_url($thumbnail_id);
+                    $term_link = get_term_link($term);  // Link zum Term holen
+
+                    if ($thumbnail_url) {
+                        $thumbnail_elements[$sensoren_terms_name] = '<a style="display:flex" href="' . esc_url($term_link) . '"><img src="' . esc_url($thumbnail_url) . '" alt="Sensoren Thumbnail" style="max-height: 30px;" title="' . esc_attr($sensoren_terms_name) . '"></a>';  // Den Link um das Bild herum hinzufügen
+                    } else {
+                        $no_thumbnail_elements[] = '<a style="display:flex" href="' . esc_url($term_link) . '">' . $sensoren_terms_name . '</a>';  // Den Link um den Namen des Terms herum hinzufügen
+                    }
+                }
+            }
+
+          // Sortieren Sie die Arrays
+          ksort($thumbnail_elements);
+          sort($no_thumbnail_elements);
+
+          // Die sortierten Elemente zu einem Gesamtarray zusammenführen
+          $all_elements = array_merge(array_values($thumbnail_elements), $no_thumbnail_elements);
+
+          // Wenn unser Array Einträge hat, zeigen wir alle gesammelten Thumbnails und/oder Texte in einer Zeile an
+          if (!empty($all_elements)) {
+              echo '<tr style="line-height: 4em; border-bottom:1px solid gray;border-top:1px solid gray"><td colspan="2" style="align-items: center; justify-content: center; height: 100%;"><div style="display: flex; width: 100%; align-items: center; justify-content: space-between; padding:10px 0px">' . implode(' ', $all_elements) . '</div></td></tr>';
+          }
+      }
+
+
       // Produktkennzeichen Anzeige (mit icon)
       $produktkennzeichen = $product->get_attribute('pa_produktkennzeichen');
       if ($produktkennzeichen) {
