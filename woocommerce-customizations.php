@@ -237,18 +237,6 @@ function sot_show_product_meta_custom() {
           }
       }
 
-      // Lagerverfügbarkeit
-      $stock_info = get_stock_info($product);
-      $stock_display = join(array_slice($stock_info,0,3), '&nbsp;');
-      if ($stock_info['canBackorder'] && $stock_info['stock'] > 0) {
-        $stock_display .= '<br />Externes Lager: +' . $stock_info['lieferzeit'] . ' Tage.';
-      }
-      elseif (!$stock_info['canBackorder'] && $stock_info['stock'] > 0) {
-        $stock_display .= '<br />Weitere Mengen auf Anfrage.';
-      }
-      echo '<tr><th scope="row">' . __('Lager:', 'shopofthings') . '</th><td>' . $stock_display . '</td></tr>';
-
-
       // Produktkennzeichen Anzeige (mit icon)
       $produktkennzeichen = $product->get_attribute('pa_produktkennzeichen');
       if ($produktkennzeichen) {
@@ -284,6 +272,18 @@ function sot_show_product_meta_custom() {
               echo '<tr style="line-height: 4em; border-bottom:1px solid gray;border-top:1px solid gray"><td colspan="2" style="align-items: center; justify-content: center; height: 100%;"><div style="display: flex; width: 100%; align-items: center; justify-content: space-between; padding:10px 0px">' . implode(' ', $all_elements) . '</div></td></tr>';
           }
       }
+      
+      // Lagerverfügbarkeit
+      $stock_info = get_stock_info($product);
+      $stock_display = join(array_slice($stock_info,0,3), '&nbsp;');
+      if ($stock_info['canBackorder'] && $stock_info['stock'] > 0) {
+        $stock_display .= '<br />Externes Lager: +' . $stock_info['lieferzeit'] . ' Tage.';
+      }
+      elseif (!$stock_info['canBackorder'] && $stock_info['stock'] > 0) {
+        $stock_display .= '<br />Weitere Mengen auf Anfrage.';
+      }
+      echo '<tr><th scope="row">' . __('Lager:', 'shopofthings') . '</th><td>' . $stock_display . '</td></tr>';
+
 
 
       // Ende der Tabelle
