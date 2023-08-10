@@ -13,12 +13,12 @@
 
 
 #sot-single-product-top .woocommerce-product-gallery {
-      flex-basis: 60%;
+      flex-basis: 70%;
       /* 66% Breite */
 }
 
 #sot-single-product-top .entry-summary {
-      flex-basis: 40%;
+      flex-basis: 30%;
       padding: 15px;
       /* 33% Breite */
 }
