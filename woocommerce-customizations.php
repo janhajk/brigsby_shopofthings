@@ -233,9 +233,9 @@ function sot_show_product_meta_custom() {
       // }
 
       // Sensoren Anzeige (mit icon)
-      $sensoren = $product->get_attribute('pa_sensoren');
+      $sensoren = $product->get_attribute('pa_sensores');
       if ($sensoren) {
-        display_icon_row('Sensoren: ', 'pa_sensoren', $sensoren, "Sensoren Thumbnail");
+        display_icon_row('Sensoren: ', 'pa_sensores', $sensoren, "Sensoren Thumbnail");
       }
 
       // Produktkennzeichen Anzeige (mit icon)
