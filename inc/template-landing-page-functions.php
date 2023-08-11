@@ -7,6 +7,7 @@ function add_landing_page_metabox() {
     global $post;
     if ($post) {
         $current_template = get_post_meta($post->ID, '_wp_page_template', true);
+        error_log('******************** current template ' . $current_template);
         if ($current_template == 'template-landing-page.php') {
             add_meta_box(
                 'landing_page_settings', // Metabox ID
