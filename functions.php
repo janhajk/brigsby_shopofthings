@@ -982,4 +982,7 @@ if ( ! function_exists( 'yith_infs_customization_wc_product_filters' ) ) {
 require get_stylesheet_directory() . '/woocommerce-customizations.php';
 
 
+include_once get_stylesheet_directory() . '/templates/landing-page/landing-page.php';
+
+
 ?>
