@@ -1,6 +1,7 @@
 <?php
 /*
 Template Name: Landing Pages
+Template Post Type: page
 */
 ?>
 
