@@ -60,6 +60,10 @@ function sot_custom_scripts() {
 add_action('wp_enqueue_scripts', 'sot_custom_scripts');
 
 
+// invoke landing page functions
+require get_stylesheet_directory() . '/page-templates/template-landing-page-functions.php';
+
+
 
 // require_once '/var/www/vhosts/jan/shopofthings/wordpress/wp-content/geoip/vendor/autoload.php';
 // use GeoIp2\Database\Reader;
@@ -982,7 +986,3 @@ if ( ! function_exists( 'yith_infs_customization_wc_product_filters' ) ) {
 require get_stylesheet_directory() . '/woocommerce-customizations.php';
 
 
-require get_stylesheet_directory() . '/page-templates/template-landing-page-functions.php';
-
-
-?>
