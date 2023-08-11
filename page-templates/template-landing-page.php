@@ -9,7 +9,7 @@ Template Post Type: page
 <?php
 
 // variables from metabox in page editor
-if (is_page_template('template-landing-page.php')) {
+if (is_page_template('page-templates/template-landing-page.php')) {
     $padding = get_post_meta(get_the_ID(), '_landing_page_padding', true);
     $width = get_post_meta(get_the_ID(), '_landing_page_width', true);
     $custom_css = "<style>
