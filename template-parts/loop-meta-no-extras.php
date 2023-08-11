@@ -11,7 +11,7 @@ if ( !$display_loop_meta )
 /**
  * If viewing a single post/page (including frontpage not using Widgetized Template :redundant)
  */
-elseif ( is_singular() ) :
+if ( is_singular() ) :
 
 	if ( have_posts() ) :
 
