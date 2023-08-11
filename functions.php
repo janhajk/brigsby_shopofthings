@@ -44,7 +44,7 @@ add_action( 'after_setup_theme', 'sot_add_woocommerce_support' );
 function sot_enqueue_styles() {
     // Registrieren und einbinden der zusätzlichen CSS-Datei
     wp_enqueue_style('sot-single-product', get_stylesheet_directory_uri() . '/woocommerce/single-product/styles.css', array(), '1.0.16', 'all');
-    wp_enqueue_style('sot-landing-page', get_stylesheet_directory_uri() . '/style.landing-page.css', array(), '1.0.0', 'all');
+    wp_enqueue_style('sot-landing-page', get_stylesheet_directory_uri() . '/page-templates/template.landing-page.css', array(), '1.0.1', 'all');
 }
 
 add_action('wp_enqueue_scripts', 'sot_enqueue_styles');
@@ -982,7 +982,7 @@ if ( ! function_exists( 'yith_infs_customization_wc_product_filters' ) ) {
 require get_stylesheet_directory() . '/woocommerce-customizations.php';
 
 
-require get_stylesheet_directory() . '/templates/landing-page/landing-page.php';
+require get_stylesheet_directory() . '/page-templates/template-landing-page-functions.php';
 
 
 ?>
