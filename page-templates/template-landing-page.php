@@ -8,21 +8,6 @@ Template Post Type: page
 
 <?php
 
-// variables from metabox in page editor
-if (is_page_template('page-templates/template-landing-page.php')) {
-    $padding = get_post_meta(get_the_ID(), '_landing_page_padding', true);
-    $width = get_post_meta(get_the_ID(), '_landing_page_width', true);
-    $custom_css = "<style>
-        #page-wrapper {
-            max-width: {$width}px;
-        }
-        #main {
-        	padding: {$padding}em;
-        }
-        </style>";
-    echo $custom_css;
-}
-
 
 // Loads the header.php template.
 get_header();

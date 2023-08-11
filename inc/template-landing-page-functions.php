@@ -41,3 +41,26 @@ function save_landing_page_settings($post_id) {
         update_post_meta($post_id, '_landing_page_width', sanitize_text_field($_POST['landing_page_width']));
 }
 add_action('save_post', 'save_landing_page_settings');
+
+
+
+// Include the custom css
+function sot_output_custom_css() {
+    if (is_page_template('page-templates/template-landing-page.php')) {
+        $padding = get_post_meta(get_the_ID(), '_landing_page_padding', true);
+        $width = get_post_meta(get_the_ID(), '_landing_page_width', true);
+
+        $custom_css = "
+        <style>
+            #page-wrapper {
+                max-width: {$width}px;
+            }
+            #main {
+                padding: {$padding}em;
+            }
+        </style>";
+
+        echo $custom_css;
+    }
+}
+add_action('wp_head', 'sot_output_custom_css');
