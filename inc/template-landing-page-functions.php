@@ -13,7 +13,9 @@ function add_landing_page_metabox() {
                 'landing_page_settings', // Metabox ID
                 'Landing Page Settings', // Titel der Metabox
                 'landing_page_metabox_callback', // Callback-Funktion
-                'page' // Post-Typ
+                'page', // Post-Typ
+                'side', // settings on the right side
+                'high' // priority
             );
         }
     }
