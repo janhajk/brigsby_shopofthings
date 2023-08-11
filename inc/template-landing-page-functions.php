@@ -3,8 +3,8 @@
 
 
 /**
- * Adds a metabox named "Landing Page Settings" on the editing screen of pages 
- * that use the "Landing Pages" template. The metabox will appear on the right side 
+ * Adds a metabox named "Landing Page Settings" on the editing screen of pages
+ * that use the "Landing Pages" template. The metabox will appear on the right side
  * of the editor with high priority.
  */
 function add_landing_page_metabox() {
@@ -28,13 +28,17 @@ add_action('add_meta_boxes_page', 'add_landing_page_metabox'); // Beachten Sie, 
 
 
 /**
- * Callback function for displaying the contents of the "Landing Page Settings" metabox. 
- * This function fetches the saved values (if any) for padding and max-width and 
+ * Callback function for displaying the contents of the "Landing Page Settings" metabox.
+ * This function fetches the saved values (if any) for padding and max-width and
  * displays input fields for them.
  */
 function landing_page_metabox_callback($post) {
-    $padding = get_post_meta($post->ID, '_landing_page_padding', true);
-    $width = get_post_meta($post->ID, '_landing_page_width', true);
+    $default_padding = '4'; // Default value for padding
+    $default_width = '1200'; // Default value for max-width
+
+    $padding = get_post_meta($post->ID, '_landing_page_padding', true) ?: $default_padding;
+    $width = get_post_meta($post->ID, '_landing_page_width', true) ?: $default_width;
+
     echo '<label for="landing_page_padding">Padding (em): </label>';
     echo '<input type="text" id="landing_page_padding" name="landing_page_padding" value="' . esc_attr($padding) . '" />';
     echo '<br/><label for="landing_page_width">max-width (px): </label>';
@@ -44,8 +48,8 @@ function landing_page_metabox_callback($post) {
 
 
 /**
- * This function is triggered when a post/page is saved. It checks if the page being saved 
- * uses the "Landing Pages" template and, if so, it saves the values entered in the 
+ * This function is triggered when a post/page is saved. It checks if the page being saved
+ * uses the "Landing Pages" template and, if so, it saves the values entered in the
  * "Landing Page Settings" metabox into the post's meta data.
  */
 function save_landing_page_settings($post_id) {
@@ -63,9 +67,9 @@ add_action('save_post', 'save_landing_page_settings');
 
 
 /**
- * Outputs custom CSS to the site's head section based on the values entered in 
- * the "Landing Page Settings" metabox. The custom styles are applied to the #page-wrapper 
- * and #main elements, with the padding value specifically being applied only for 
+ * Outputs custom CSS to the site's head section based on the values entered in
+ * the "Landing Page Settings" metabox. The custom styles are applied to the #page-wrapper
+ * and #main elements, with the padding value specifically being applied only for
  * screen widths greater than 800px.
  */
  function sot_output_custom_css() {
