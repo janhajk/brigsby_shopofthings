@@ -651,56 +651,6 @@ function shopofthings_add_b2b_script() {
 
 
 
-/**
- *
- * Add tracking number to order on order-view
- *
- *
- *
- *
- */
-
-add_action( 'woocommerce_view_order', 'sot_order_view_add_tracking', 20 );
-add_action( 'woocommerce_admin_order_data_after_order_details', 'sot_display_tracking' );
-
-function sot_order_view_add_tracking( $order_id ){
-    $POST_LINK = "https://service.post.ch/ekp-web/ui/entry/search/";
-    $metafield = get_post_meta( $order_id, 'thingware_sendungsnummer', true );
-    if (empty($metafield)) return;
-    $metafield = json_decode($metafield, true);
-    // old values from the olden days have to be turned into array
-    if (!is_array($metafield)) {
-          $metafield = array($metafield);
-    } ?>
-    <h4>Tracking Nummer</h4>
-    <table class="woocommerce-table shop_table">
-        <tbody>
-            <?php for ($i = 0; $i < count($metafield); $i++) { ?>
-            <tr>
-                <td>Paket <?php echo ($i+1); ?>:</td>
-                <td><a href="<?php echo $POST_LINK; echo $metafield[$i]; ?>" target="_blank"><?php echo $metafield[$i]; ?></a></td>
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-    <?php
-}
-
-// display the extra data in the order admin panel
-function sot_display_tracking( $order ){  ?>
-    <?php $tn = get_post_meta( $order->id, 'thingware_sendungsnummer', true );
-    $tn = json_decode($tn, true);
-    if ($tn) { ?>
-          <div class="order_data_column">
-              <h4><?php __( 'Versand' ); ?></h4>
-
-              <?php echo '<p><strong>' . __( 'Sendungsnummer' ) . ':</strong>' . '<a href="https://service.post.ch/ekp-web/ui/entry/search/' . $tn  .'" target="_blank">' . $tn  . '</a></p>'; ?>
-          </div>
-    <?php } ?>
-<?php }
-
-
-
 
 
 /**
