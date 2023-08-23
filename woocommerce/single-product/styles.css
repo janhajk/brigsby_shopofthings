@@ -108,9 +108,9 @@
     width: 14%;
 }
 
-.woocommerce div.product div.images .flex-viewport {
-      max-height: 720px;
-}
+/*.woocommerce div.product div.images .flex-viewport {*/
+/*      max-height: 720px;*/
+/*}*/
 
 .woocommerce div.product .woocommerce-product-gallery--columns-4 .flex-control-thumbs li:nth-child(4n+1) {
     clear: none;
