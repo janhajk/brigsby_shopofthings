@@ -75,7 +75,6 @@
 
 .entry.product.type-product .wc-tabs-wrapper {
     width: 68%; /* Die gewünschte Breite */
-    margin-top: calc(-250px); /* Nutzen Sie calc(), um es abhängig von der Breite der .woocommerce-product-gallery zu machen */
 }
 
 /* Mobile-Ansicht für Geräte mit einer Breite von 800px oder weniger */
