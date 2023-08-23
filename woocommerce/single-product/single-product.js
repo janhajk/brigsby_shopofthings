@@ -1,22 +1,32 @@
 /* globals jQuery */
 jQuery(document).ready(function() {
+      var originalMarginTop = parseInt(jQuery('.wc-tabs-wrapper').css('margin-top'), 10);
+
       function adjustTabsPosition() {
             // Überprüfen Sie die Fensterbreite
             if (jQuery(window).width() > 800) {
-                  // Basiswert für die negative Verschiebung
-                  var baseOffset = -250;
+                  var referenceElement;
 
-                  // Höhe von .entry-summary ermitteln
-                  var summaryHeight = jQuery('.entry-summary').height();
-
-                  if (summaryHeight > 1000) {
-                        // Berechnen Sie den zusätzlichen negativen Abstand, basierend auf wie viel größer die Höhe ist als 1000px
-                        var extraOffset = summaryHeight - 1000;
-                        jQuery('.wc-tabs-wrapper').css('margin-top', (baseOffset - extraOffset) + 'px');
+                  // Überprüfen, ob .flex-control-nav.flex-control-thumbs existiert
+                  if (jQuery('.flex-control-nav.flex-control-thumbs').length) {
+                        referenceElement = jQuery('.flex-control-nav.flex-control-thumbs');
                   }
                   else {
-                        jQuery('.wc-tabs-wrapper').css('margin-top', baseOffset + 'px');
+                        // Wenn nicht, verwenden Sie .woocommerce-product-gallery__wrapper als Referenz
+                        referenceElement = jQuery('.woocommerce-product-gallery__wrapper');
                   }
+
+                  // Position und Höhe des Referenzelements ermitteln
+                  var referencePosition = referenceElement.offset().top;
+                  var referenceHeight = referenceElement.height();
+
+                  // Die gewünschte Position berechnen
+                  var desiredPosition = referencePosition + referenceHeight + 20;
+
+                  // Den benötigten Abstand berechnen
+                  var offset = desiredPosition - originalMarginTop;
+
+                  jQuery('.wc-tabs-wrapper').css('margin-top', offset + 'px');
             }
             else {
                   // Setzen Sie den margin-top für mobile Ansichten zurück
