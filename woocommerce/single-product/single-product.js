@@ -28,9 +28,12 @@ jQuery(document).ready(function() {
             jQuery('.wc-tabs-wrapper').css('margin-top', offset + 'px');
       }
 
-      // Aufruf der Funktion, wenn alle Bilder geladen sind
-      jQuery(window).on('load', adjustTabsPosition);
+      var resizeTimeout;
+      jQuery(window).on('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(adjustTabsPosition, 200); // Verzögerung von 200ms
+      });
 
-      // Aufruf der Funktion, wenn die Fenstergröße geändert wird
-      jQuery(window).resize(adjustTabsPosition);
+      // Aufruf der Funktion beim Laden der Seite
+      adjustTabsPosition();
 });
