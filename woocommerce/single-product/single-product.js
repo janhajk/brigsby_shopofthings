@@ -1,6 +1,6 @@
 /* globals jQuery */
 jQuery(document).ready(function() {
-      var originalMarginTop = parseInt(jQuery('.wc-tabs-wrapper').css('margin-top'), 10);
+      var originalTabsPosition = jQuery('.wc-tabs-wrapper').offset().top;
 
       function adjustTabsPosition() {
             // Überprüfen Sie die Fensterbreite
@@ -24,7 +24,7 @@ jQuery(document).ready(function() {
                   var desiredPosition = referencePosition + referenceHeight + 20;
 
                   // Den benötigten Abstand berechnen
-                  var offset = desiredPosition - originalMarginTop;
+                  var offset = desiredPosition - originalTabsPosition;
 
                   jQuery('.wc-tabs-wrapper').css('margin-top', offset + 'px');
             }
