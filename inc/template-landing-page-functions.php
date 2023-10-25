@@ -43,6 +43,15 @@ function landing_page_metabox_callback($post) {
     echo '<input type="text" id="landing_page_padding" name="landing_page_padding" value="' . esc_attr($padding) . '" />';
     echo '<br/><label for="landing_page_width">max-width (px): </label>';
     echo '<input type="text" id="landing_page_width" name="landing_page_width" value="' . esc_attr($width) . '" />';
+    
+    
+    // checkbox to hide title of site
+    $hide_title = get_post_meta($post->ID, '_landing_page_hide_title', true);
+    
+    echo '<br/>';
+    echo '<input type="checkbox" id="landing_page_hide_title" name="landing_page_hide_title" value="yes"' . checked($hide_title, 'yes', false) . ' />';
+    echo '<label for="landing_page_hide_title">Seitentitel ausblenden</label>';
+
 }
 
 
@@ -60,6 +69,12 @@ function save_landing_page_settings($post_id) {
         update_post_meta($post_id, '_landing_page_padding', sanitize_text_field($_POST['landing_page_padding']));
     if (isset($_POST['landing_page_width']))
         update_post_meta($post_id, '_landing_page_width', sanitize_text_field($_POST['landing_page_width']));
+        
+    if (isset($_POST['landing_page_hide_title']))
+        update_post_meta($post_id, '_landing_page_hide_title', sanitize_text_field($_POST['landing_page_hide_title']));
+    else
+        delete_post_meta($post_id, '_landing_page_hide_title');
+
 }
 add_action('save_post', 'save_landing_page_settings');
 
@@ -88,6 +103,18 @@ add_action('save_post', 'save_landing_page_settings');
                 }
             }
         </style>";
+        
+        $hide_title = get_post_meta(get_the_ID(), '_landing_page_hide_title', true);
+        
+        if ($hide_title == 'yes') {
+            $custom_css .= "
+            <style>
+                .pageheader-bg-default {
+                    display: none;
+                }
+            </style>";
+        }
+
 
         echo $custom_css;
     }
