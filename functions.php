@@ -65,47 +65,6 @@ require get_stylesheet_directory() . '/inc/template-landing-page-functions.php';
 
 
 
-// require_once '/var/www/vhosts/jan/shopofthings/wordpress/wp-content/geoip/vendor/autoload.php';
-// use GeoIp2\Database\Reader;
-function createAdsenseBlogResponsive() {
-    $ad = '';
-
-    // // This creates the Reader object, which should be reused across
-    // // lookups.
-    // $reader = new Reader('/var/www/vhosts/jan/shopofthings/wordpress/wp-content/geoip/GeoLite2-Country_20190205/GeoLite2-Country.mmdb');
-
-
-    // if (!isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-    //     $IP = $_SERVER['REMOTE_ADDR'];
-    // }
-    // else {
-    //     $IP = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    // }
-    // $record = $reader->country($IP);
-    // $ISO = $record->country->isoCode;
-
-    // if (!in_array($ISO, array('CH', 'LI'))) {
-        $ad = '<div align="center">
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Blog_Ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-9031640881990657"
-     data-ad-slot="1335518191"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script></div>
-             ';
-    // }
-    $ad = '';
-    return $ad;
-}
-add_shortcode('adsenseBlogResponsive', 'createAdsenseBlogResponsive');
-
-
-
 /*
  * Remove jetpack ads
  *
@@ -157,24 +116,24 @@ function oiw_add_fbpixel() {
 
 
 
-/***** Adding mouseflow. see: https://eu.mouseflow.com/  *****/
-add_action('wp_head', 'oiw_add_mouseflow');
+// /***** Adding mouseflow. see: https://eu.mouseflow.com/  *****/
+// add_action('wp_head', 'oiw_add_mouseflow');
 
-function oiw_add_mouseflow() {
-?>
-<!-- Mouseflow Code -->
-      <script type="text/javascript">
-        window._mfq = window._mfq || [];
-        (function() {
-          var mf = document.createElement("script");
-          mf.type = "text/javascript"; mf.defer = true;
-          mf.src = "//cdn.mouseflow.com/projects/cdd365bf-3a34-4574-8d19-93407a72cace.js";
-          document.getElementsByTagName("head")[0].appendChild(mf);
-        })();
-      </script>
-<!-- End Mouseflow Code -->
-<?php
-}
+// function oiw_add_mouseflow() {
+// ?>
+// <!-- Mouseflow Code -->
+//       <script type="text/javascript">
+//         window._mfq = window._mfq || [];
+//         (function() {
+//           var mf = document.createElement("script");
+//           mf.type = "text/javascript"; mf.defer = true;
+//           mf.src = "//cdn.mouseflow.com/projects/cdd365bf-3a34-4574-8d19-93407a72cace.js";
+//           document.getElementsByTagName("head")[0].appendChild(mf);
+//         })();
+//       </script>
+// <!-- End Mouseflow Code -->
+// <?php
+// }
 
 
 
@@ -240,191 +199,6 @@ s0.parentNode.insertBefore(s1,s0);
 add_filter( 'woocommerce_product_description_heading', '__return_null' );
 
 
-
-
-
-
-/**
- *
- * Stock status in Product Loop
- *
- * $_product obejct documentation: https://www.businessbloomer.com/woocommerce-easily-get-product-info-title-sku-desc-product-object
- *
- *
- * returns array(
- *    circle: <dom> for circle,
- *    availability: <dom> for availability,
- *    onorder: <dom>
- * )
- *
- */
- function get_stock_info ($_product) {
-
-      $_UNICODE_CIRCLE = '';
-      $_UNICODE_CIRCLE_BULLET = '&#10687;';
-      $_UNICODE_CIRCLE_HALF = '&#9681;';
-      $_UNICODE_CIRCLE_FILLED ='&#9679;';
-      $_UNICODE_CIRCLE_CROSS = '&#11199;';
-      $_UNICODE_UNKNOWN = '&#65533;';
-
-      $_HTML_AVAILABLE = '<span style="color:#73c44d;font-size:2em"> '.$_UNICODE_CIRCLE_FILLED.'</span>';
-      $_HTML_AVAILABLE_PARTLY = '<span style="color:#73c44d;font-size:1.5em"> '.$_UNICODE_CIRCLE_BULLET.'</span>';
-      $_HTML_BACKORDER = '<span style="color:#73c44d;font-size:1.5em">'.$_UNICODE_CIRCLE_HALF.'</span>';
-      $_HTML_UNAVAILABLE = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_CIRCLE_CROSS.'</span>';
-      $_HTML_UNKNOWN = '<span style="color:rgb(0, 85, 157);font-size:1.5em">'.$_UNICODE_UNKNOWN.'</span';
-
-
-      // Default Values
-      $DEFAULT_BIG_STOCK_THRESHOLD = 10;
-      $DEFAULT_LOW_STOCK_THRESHOLD = 10;
-
-      // Product ID
-      $id = $_product->get_id();
-
-      // return values
-      $availability = '';
-      $availabilityX = ''; // ab externem Lager
-      $circle = '';
-
-      // status
-      $canBackorder = $_product->backorders_allowed() ?: false;
-      $lieferzeit = get_post_meta($id, 'shopofthings_lieferzeit', true) ?: '20'; // returns '' (empty string) if not set, in this case set default value
-      $lieferzeitType = preg_match('/^\d+(-\d+)?$/', $lieferzeit) ? 'days' : 'custom';
-      // Stock Quantity of current product
-      $product_stock = (int) $_product->get_stock_quantity() ?: 0;
-      // Backordered / on the way
-      $onorder = get_post_meta($id, 'shopofthings_onorder', true) ?: 0;
-      // reduce backordered from ordered quantity
-      if ($product_stock < 0) $onorder = $onorder + $product_stock;
-
-
-      // virtual products are always available
-      if ($_product->get_virtual()) {
-            return array(
-                  'circle'      => $_HTML_AVAILABLE,
-                  'availability'=> 'sofort verfügbar',
-                  'onorder'     => '',
-                  'canBackorder' => $canBackorder,
-                  'lieferzeit' => $lieferzeit,
-                  'lieferzeitType' => $lieferzeitType,
-                  'stock' => $product_stock,
-            );
-      }
-
-      // unmanaged stock is always on stock
-      if (!$_product->get_manage_stock()) {
-            return array(
-                  'circle'      => $_HTML_AVAILABLE,
-                  'availability'=> 'sofort verfügbar',
-                  'onorder'     => '',
-                  'canBackorder' => $canBackorder,
-                  'lieferzeit' => $lieferzeit,
-                  'lieferzeitType' => $lieferzeitType,
-                  'stock' => $product_stock
-            );
-      }
-
-
-
-      $onorder_txt = ((int) $onorder > 0) ? '<br/>'.$onorder.' Stück auf Lieferweg': '';
-
-
-      // if not on stock or backordered
-      if($product_stock <= 0) {
-
-            // no stock but can backorder
-            if ($canBackorder) {
-                  $availability = 'Externes Lager: ca. '.$lieferzeit. ' Tage';
-                  $circle = $_HTML_BACKORDER;
-            }
-            // TODO: simple is not correctly displaying data for variable products
-            else if ($_product->get_type() != 'simple' && $_product->is_type('variable')) {
-                  $availability = 'Bitte Option wählen.';
-                  $circle = $_HTML_AVAILABLE_PARTLY;
-
-                  // show bundles as available if on thing is available
-                  if ($_product->get_type() == 'bundle') {
-                      $availability = 'Ab Lager &#x1F1E8;&#x1F1ED;';
-                      $circle = $_HTML_AVAILABLE;
-                  }
-            }
-            // no backorder and no stock
-            else {
-                  $availability = 'Momentan nicht an Lager';;
-                  $circle = $_HTML_UNAVAILABLE;
-            }
-            return array(
-                  'circle'      => $circle,
-                  'availability'=> $availability,
-                  'onorder'     => $onorder_txt,
-                  'canBackorder' => $canBackorder,
-                  'lieferzeit' => $lieferzeit,
-                  'lieferzeitType' => $lieferzeitType,
-                  'stock' => $product_stock
-            );
-      }
-
-      // no availability or = zero return regular
-      if(!$product_stock) {
-            return array(
-                  'circle'      => $_HTML_UNKNOWN,
-                  'availability'=> 'unbekannt',
-                  'onorder'     => $onorder_txt,
-                  'canBackorder' => $canBackorder,
-                  'lieferzeit' => $lieferzeit,
-                  'lieferzeitType' => $lieferzeitType,
-                  'stock' => $product_stock
-            );
-      }
-
-
-
-      // Products that are available
-
-      if ($product_stock > 0){
-            $availability = 'Ab Lager &#x1F1E8;&#x1F1ED;';
-            $circle = $_HTML_AVAILABLE;
-      }
-
-      // retrieve thresolds
-      $big_stock_available = get_post_meta($id,'product_bigstock_threshold',true);
-      $low_stock_available = get_post_meta($id,'product_lowstock_threshold',true);
-      if ($big_stock_available== '') $big_stock_available = $DEFAULT_BIG_STOCK_THRESHOLD;
-      if ($low_stock_available== '') $low_stock_available = $DEFAULT_LOW_STOCK_THRESHOLD;
-
-
-      if($product_stock >= $big_stock_available){
-            $availability = $big_stock_available.'+ Stück Lager &#x1F1E8;&#x1F1ED;';
-      }
-      else if($product_stock <= $low_stock_available){
-            $availability = $product_stock.' Stück Lager &#x1F1E8;&#x1F1ED;';
-      }
-      return array(
-            'circle'      => $circle,
-            'availability'=> $availability,
-            'onorder'     => $onorder_txt,
-            'canBackorder' => $canBackorder,
-            'lieferzeit' => $lieferzeit,
-            'lieferzeitType' => $lieferzeitType,
-            'stock' => $product_stock
-      );
-}
-
-
-/**
- *
- * get stock on product loop
- *
- */
-function sot_loop_item_stock() {
-      global $product;
-      // uncomment for testing it only on one product
-      // if ($product->get_id() == 4986 || $product->get_id() == 16448) {
-            $info = get_stock_info($product);
-            echo '<div style="float:right;position:absolute;top:7px;right:12px" title="'.$info['availability'].'">'.$info['circle'].'</div>';
-      // }
-}
-add_action( 'woocommerce_before_shop_loop_item_title', 'sot_loop_item_stock', 20, 2);
 
 
 
@@ -653,33 +427,6 @@ function shopofthings_add_b2b_script() {
 
 
 
-/**
- *
- * Add Credential link to order
- *
- *
- *
- *
- */
-add_action( 'woocommerce_view_order', 'sot_order_view_add_credentials', 20 );
-
-function sot_order_view_add_credentials( $order_id ){
-    $metafield = get_post_meta( $order_id, 'shopofthings_credentials_url', true );
-    if ($metafield) { ?>
-    <h4>Device Credentials</h4>
-    <table class="woocommerce-table shop_table">
-        <tbody>
-            <tr>
-                <td>URL</td>
-                <td><a href="<?php echo $metafield; ?>" target="_blank"><?php echo $metafield; ?></a></td>
-            </tr>
-        </tbody>
-    </table>
-    <?php }
-}
-
-
-
 
 /**
  *
@@ -746,56 +493,7 @@ add_action( 'sot_woocommerce_before_shop_loop_item_item', 'woocommerce_template_
 
 
 
-/**
- *
- * add Lorawan connectivity warning on categories for lorawan
- *
- *
- *
- *
- */
-add_action( 'woocommerce_after_add_to_cart_form', 'sot_after_add_to_cart_form_connectivity' );
 
-function sot_after_add_to_cart_form_connectivity(){
-      global $product;
-      $ids = $product->get_category_ids();
-      if (in_array(653, $ids) && $product->get_id() !== 14069 && $product->get_id() !== 14192 && $product->get_id() !== 18505) { // lorawan, swsscom connectivity abo
-            if (!in_array(1182, $ids) && !in_array(1248, $ids) && !in_array(1179, $ids) ) { // exclude antenna, gateway, zubehör
-                  if ($product->get_type() != 'subscription') { // exclude
-                  	?>
-                  	<div class="sot_info_box">
-                                    <span class="sot_kapital">!</span>
-                                    Um diese Gerät zu betreiben, brauchst Du ein LoRaWAN. Dies kannst Du mittels eines <a href="https://shopofthings.ch/produkt-kategorie/typ/gateway/">LoRaWAN Gateways</a> selber erstellen, Du kannst das <a href="https://shopofthings.ch/shop/connectivity-2/connectivity-lorawan/loriot-lpn-lorawan-connectivity-abo-jaehrlicher-renewal/">LORIOT</a> oder TTN Netzwerk benutzen respektive das Schweizweit flächendeckende <a href="https://shopofthings.ch/shop/connectivity-2/connectivity-lorawan/1-jahr-swisscom-lpn-lorawan-connectivity-abo-yearly-payment">Swisscom LoRaWAN</a> verwenden. Alle Netze sind bei uns käuflich.
-                        </div>
-                  	<?php
-                  }
-            }
-      }
-}
-
-
-
-/**
- *
- * add battery warning on elsys devices
- *
- *
- *
- *
- */
-add_action( 'woocommerce_after_add_to_cart_form', 'sot_after_add_to_cart_form_batteries' );
-
-function sot_after_add_to_cart_form_batteries(){
-      global $product;
-      $ids = $product->get_category_ids();
-      if (in_array(653, $ids) && in_array(1060, $ids)) { // lorawan and elsys
-      	?>
-      	<div class="sot_info_box">
-                  Dieser Sensor kommt <span style="text-decoration:underline">ohne</span> Batterien. Diese können <a href="/shop/prototyping/power/eve-er14505v-lisocl2-lithium-3-6v-batterie-aa-2600mah">hier</a> erworben werden.
-            </div>
-      	<?php
-      }
-}
 
 
 
