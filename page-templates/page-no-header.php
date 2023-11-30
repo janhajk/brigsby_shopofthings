@@ -30,7 +30,7 @@ do_action( 'hoot_template_before_content_grid', 'page.php' );
 	do_action( 'hoot_template_before_main', 'page.php' );
 	?>
 
-	<main <?php hybridextend_attr( 'content' ); ?>>
+	<main <?php hybridextend_attr( 'content' ); ?> style="margin-top:0">
 
 		<?php
 		// Template modification Hook
