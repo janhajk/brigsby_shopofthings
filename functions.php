@@ -33,11 +33,11 @@ add_action( 'after_setup_theme', 'sot_add_woocommerce_support' );
 // add_action('wp_enqueue_scripts', 'brigsby_shopofthings_enqueue_styles', 20);
 
 
-function child_theme_styles() {
-    wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/style.css', array(), wp_get_theme()->get('Version'));
+function child_theme_override_styles() {
+    wp_dequeue_style('plugin-style-handle'); // 'plugin-style-handle' durch den tatsächlichen Handle des Plugin-Styles ersetzen
+    wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/style.css', array('plugin-style-handle'), wp_get_theme()->get('Version'));
 }
-add_action('wp_enqueue_scripts', 'child_theme_styles', PHP_INT_MAX); // PHP_INT_MAX setzt die höchstmögliche Priorität
-
+add_action('wp_print_styles', 'child_theme_override_styles', PHP_INT_MAX);
 
 
 /**
