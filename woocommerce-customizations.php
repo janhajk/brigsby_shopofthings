@@ -93,15 +93,37 @@ function isSKU($sku) {
  */
 function display_sorted_categories($product_id) {
     $terms = wp_get_post_terms($product_id, 'product_cat', array("fields" => "all"));
-    $brands_term_id = get_term_by('slug', 'brands', 'product_cat')->term_id;
-    $solution_package_id = get_term_by('slug', 'solution-package', 'product_cat')->term_id;
+    
+    // Überprüfe, ob die Terms erfolgreich abgerufen wurden
+    if (is_wp_error($terms)) {
+        // Behandeln Sie den Fehler entsprechend, z.B. eine Fehlermeldung ausgeben oder zurückkehren
+        return 'Fehler beim Abrufen der Kategorien';
+    }
 
-    // Holen Sie die term_id von 'sensorik' und alle seine Unterordnungen
-    $sensorik_term_id = get_term_by('slug', 'sensorik', 'product_cat')->term_id;
+    $brands_term = get_term_by('slug', 'brands', 'product_cat');
+    $solution_package_term = get_term_by('slug', 'solution-package', 'product_cat');
+    $sensorik_term = get_term_by('slug', 'sensorik', 'product_cat');
+
+    // Überprüfe, ob die Terms erfolgreich abgerufen wurden
+    if (is_wp_error($brands_term) || is_wp_error($solution_package_term) || is_wp_error($sensorik_term)) {
+        // Behandeln Sie den Fehler entsprechend
+        return 'Fehler beim Abrufen der Kategorien';
+    }
+
+    $brands_term_id = $brands_term->term_id;
+    $solution_package_id = $solution_package_term->term_id;
+    $sensorik_term_id = $sensorik_term->term_id;
     $sensorik_children = get_term_children($sensorik_term_id, 'product_cat');
-    $sensorik_all_terms = array_merge([$sensorik_term_id], $sensorik_children);
 
+    // Überprüfe, ob die Children erfolgreich abgerufen wurden
+    if (is_wp_error($sensorik_children)) {
+        // Behandeln Sie den Fehler entsprechend
+        return 'Fehler beim Abrufen der Kategorien';
+    }
+
+    $sensorik_all_terms = array_merge([$sensorik_term_id], $sensorik_children);
     $all_lines = array();
+
 
     foreach($terms as $term) {
         
