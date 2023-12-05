@@ -104,6 +104,11 @@ function display_sorted_categories($product_id) {
     $all_lines = array();
 
     foreach($terms as $term) {
+        
+        if (is_wp_error($term)) {
+            // Behandle den Fehler oder überspringe die aktuelle Iteration
+            continue;
+        }
         // Kategorie mit dem Slug 'brands' und ihre untergeordneten Kategorien überspringen
         if ($term->term_id == $brands_term_id || $term->parent == $brands_term_id) {
             continue;
@@ -268,21 +273,22 @@ add_filter( 'woocommerce_get_availability', 'remove_default_stock_display', 1, 2
 function remove_default_stock_display( $availability, $_product ) {
     // Wenn es sich nicht um eine Produktvariation handelt, verstecken Sie die Verfügbarkeitsnachricht
     if ( ! $_product->is_type( 'variation' ) ) {
-            $availability['availability'] = '<span style="display:none;">' . $availability['availability'] . '</span>';
+        $availability['availability'] = '<span style="display:none;">' . $availability['availability'] . '</span>';
     }
     else {
-            $stock_info = get_stock_info($_product);
-            $stock_display = join(array_slice($stock_info,0,3), '&nbsp;');
-            if ($stock_info['canBackorder'] && $stock_info['stock'] > 0) {
-                  $stock_display .= '<br />Externes Lager: +' . $stock_info['lieferzeit'] . ' Tage.';
-            }
-            elseif (!$stock_info['canBackorder'] && $stock_info['stock'] > 0) {
-                  $stock_display .= '<br />Weitere Mengen auf Anfrage.';
-            }
-            $availability['availability'] = '<span style="">' . $stock_display . '</span>';
+        $stock_info = get_stock_info($_product);
+        $stock_display = join('&nbsp;', array_slice($stock_info,0,3));
+        if ($stock_info['canBackorder'] && $stock_info['stock'] > 0) {
+              $stock_display .= '<br />Externes Lager: +' . $stock_info['lieferzeit'] . ' Tage.';
+        }
+        elseif (!$stock_info['canBackorder'] && $stock_info['stock'] > 0) {
+              $stock_display .= '<br />Weitere Mengen auf Anfrage.';
+        }
+        $availability['availability'] = '<span style="">' . $stock_display . '</span>';
     }
     return $availability;
 }
+
 
 
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
