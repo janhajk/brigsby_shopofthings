@@ -149,7 +149,7 @@ function display_sorted_categories($product_id) {
         $line = array();
         $current_term = $term;
 
-        while ($current_term && $current_term->term_id != 0) {
+        while (!is_wp_error($current_term) && $current_term && $current_term->term_id != 0) {
             $term_link = get_term_link($current_term, 'product_cat');
             if (is_wp_error($term_link)) {
                 continue 2;  // überspringt zur nächsten Iteration der äußeren foreach-Schleife
