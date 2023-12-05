@@ -251,7 +251,7 @@ function sot_show_product_meta_custom() {
 
       // Lagerverfügbarkeit
       $stock_info = get_stock_info($product);
-      $stock_display = join(array_slice($stock_info,0,3), '&nbsp;');
+      $stock_display = join('&nbsp;', array_slice($stock_info, 0, 3));
       if ($stock_info['canBackorder'] && $stock_info['stock'] > 0) {
         $stock_display .= '<br />Externes Lager: +' . $stock_info['lieferzeit'] . ' Tage.';
       }
