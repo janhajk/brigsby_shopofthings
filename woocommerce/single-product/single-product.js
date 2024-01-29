@@ -44,7 +44,11 @@ jQuery(document).ready(function() {
             };
       }
 
-      var adjustTabsPositionDebounced = debounce(adjustTabsPosition, 200);
+      function adjustTabsPositionAfterDelay() {
+            setTimeout(adjustTabsPosition, 100); // Verzögerung von 100ms
+      }
+
+      var adjustTabsPositionDebounced = debounce(adjustTabsPositionAfterDelay, 200);
 
       jQuery(window).on('resize', adjustTabsPositionDebounced);
       jQuery(window).on('load', adjustTabsPosition);
