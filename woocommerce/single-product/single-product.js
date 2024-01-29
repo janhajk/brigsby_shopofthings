@@ -25,6 +25,10 @@ jQuery(document).ready(function() {
             // Den benötigten Abstand berechnen
             var offset = desiredPosition - tabsPosition;
 
+            if (offset < 0) {
+                  offset = 0; // Verhindert negative Offsets
+            }
+
             jQuery('.wc-tabs-wrapper').css('margin-top', offset + 'px');
       }
 
