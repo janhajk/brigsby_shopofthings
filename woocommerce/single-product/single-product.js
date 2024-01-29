@@ -1,15 +1,15 @@
 /* globals jQuery */
 jQuery(document).ready(function() {
       function adjustTabsPosition() {
-            var referenceElement;
 
-            // Überprüfen, ob .flex-control-nav.flex-control-thumbs existiert
-            if (jQuery('.flex-control-nav.flex-control-thumbs').length) {
-                  referenceElement = jQuery('.flex-control-nav.flex-control-thumbs');
-            }
-            else {
-                  // Wenn nicht, verwenden Sie .woocommerce-product-gallery__wrapper als Referenz
+            var referenceElement = jQuery('.flex-control-nav.flex-control-thumbs');
+            if (referenceElement.length === 0) {
                   referenceElement = jQuery('.woocommerce-product-gallery__wrapper');
+            }
+
+            if (referenceElement.length === 0) {
+                  // Wenn das Referenzelement nicht existiert, brechen Sie die Funktion ab.
+                  return;
             }
 
             // Position und Höhe des Referenzelements ermitteln
@@ -28,12 +28,24 @@ jQuery(document).ready(function() {
             jQuery('.wc-tabs-wrapper').css('margin-top', offset + 'px');
       }
 
-      var resizeTimeout;
-      jQuery(window).on('resize', function() {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(adjustTabsPosition, 200); // Verzögerung von 200ms
-      });
+      function debounce(func, wait, immediate) {
+            var timeout;
+            return function() {
+                  var context = this,
+                        args = arguments;
+                  var later = function() {
+                        timeout = null;
+                        if (!immediate) func.apply(context, args);
+                  };
+                  var callNow = immediate && !timeout;
+                  clearTimeout(timeout);
+                  timeout = setTimeout(later, wait);
+                  if (callNow) func.apply(context, args);
+            };
+      }
 
-      // Aufruf der Funktion beim Laden der Seite
-      adjustTabsPosition();
+      var adjustTabsPositionDebounced = debounce(adjustTabsPosition, 200);
+
+      jQuery(window).on('resize', adjustTabsPositionDebounced);
+      jQuery(window).on('load', adjustTabsPosition);
 });
