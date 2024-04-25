@@ -506,3 +506,7 @@ if ( ! function_exists( 'yith_infs_customization_wc_product_filters' ) ) {
 require get_stylesheet_directory() . '/woocommerce-customizations.php';
 
 
+
+
+// disable lazy loading
+add_filter('wp_lazy_loading_enabled', '__return_false');
