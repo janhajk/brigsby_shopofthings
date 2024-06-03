@@ -302,7 +302,7 @@ function remove_default_stock_display( $availability, $_product ) {
     }
     else {
         $stock_info = get_stock_info($_product);
-        echo $stock_info;
+        echo $stock_info->$lieferinfo_html;
         // $stock_display = join('&nbsp;', array_slice($stock_info,0,3));
         // if ($stock_info['canBackorder'] && $stock_info['stock'] > 0) {
         //       $stock_display .= '<br />Externes Lager: +' . $stock_info['lieferzeit'] . ' Tage.';
