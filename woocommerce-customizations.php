@@ -281,7 +281,7 @@ function sot_show_product_meta_custom() {
     //   elseif (!$stock_info['canBackorder'] && $stock_info['stock'] > 0) {
     //     $stock_display .= '<br />Weitere Mengen auf Anfrage.';
     //   }
-     if (!$_product->is_type('variable')) {
+     if (!$product->is_type('variable')) {
         echo '<tr id="special-row-stock"><th scope="row">' . __('Lager:', 'shopofthings') . '</th><td>' . $stock_info['lieferinfo_html'] . '</td></tr>';
      }
 
