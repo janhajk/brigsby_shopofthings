@@ -282,7 +282,7 @@ function sot_show_product_meta_custom() {
     //     $stock_display .= '<br />Weitere Mengen auf Anfrage.';
     //   }
      if (!$product->is_type('variable')) {
-        echo '<tr id="special-row-stock"><th scope="row">' . __('Lager:', 'shopofthings') . '</th><td>' . $stock_info['lieferinfo_html'] . '</td></tr>';
+        echo '<tr id="special-row-stock"><th scope="row">' . __('Verfügbarkeit:', 'shopofthings') . '</th><td>' . $stock_info['lieferinfo_html'] . '</td></tr>';
      }
 
 
@@ -297,10 +297,7 @@ function sot_show_product_meta_custom() {
 add_filter( 'woocommerce_get_availability', 'remove_default_stock_display', 1, 2);
 function remove_default_stock_display( $availability, $_product ) {
     // Wenn es sich nicht um eine Produktvariation handelt, verstecken Sie die Verfügbarkeitsnachricht
-    if ( ! $_product->is_type( 'variation' ) ) {
-        // $availability['availability'] = '<span style="display:none;">' . $availability['availability'] . '</span>';
-    }
-    else {
+    if ($_product->is_type( 'variation' ) ) {
         $stock_info = get_stock_info($_product);
         $availability['availability'] = $stock_info['lieferinfo_html'];
         // $stock_display = join('&nbsp;', array_slice($stock_info,0,3));
