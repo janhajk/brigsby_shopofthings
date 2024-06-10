@@ -257,7 +257,7 @@ function sot_show_product_meta_custom() {
             
             // Überprüfen, ob die Marke in der Partner-Liste ist
             if (in_array(strtolower($marke), $partner_brands)) {
-                echo ' <img src="' . esc_url(get_template_directory_uri() . '/images/handshake.svg') . '" alt="Partner" style="height:1em; vertical-align:middle;">';
+                echo ' <img src="' . esc_url(get_stylesheet_directory_uri() . '/images/handshake.svg') . '" alt="Partner" style="height:1em; vertical-align:middle;">';
             }
             
             echo '</td></tr>';
