@@ -262,7 +262,7 @@ function sot_show_product_meta_custom() {
         // Überprüfen, ob die Marke in der Partner-Liste ist
         if (in_array(strtolower($marke), $partner_brands)) {
             $tooltip_text = __('Partner dieser Marke: Mengenrabatte und direkter Support verfügbar.', 'shopofthings');
-            echo ' <img src="' . esc_url(get_stylesheet_directory_uri() . '/images/handshake.svg') . '" alt="Partner" title="' . esc_attr($tooltip_text) . '" style="height:1em; vertical-align:middle;">';
+            echo ' <img src="' . esc_url(get_stylesheet_directory_uri() . '/images/handshake.svg') . '" alt="Partner" title="' . esc_attr($tooltip_text) . '" style="height:1.8em; vertical-align:middle;">';
         }
         
         echo '</td></tr>';
