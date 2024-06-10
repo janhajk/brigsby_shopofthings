@@ -247,21 +247,23 @@ function sot_show_product_meta_custom() {
     //     $marke_link = get_term_link($marke, 'pa_brand');  // Erstellt einen Link zur Marke
     //     echo '<tr><th scope="row">' . __('Marke:', 'shopofthings') . '</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a></td></tr>';
     //   }
-        // Marke Anzeige
-        $marke = $product->get_attribute('pa_brand');
-        $partner_brands = array('elsys', 'rakwireless');  // Array der Partner-Marken
+    // Marke Anzeige
+    $marke = $product->get_attribute('pa_brand');
+    $partner_brands = array('elsys', 'rakwireless');  // Array der Partner-Marken
+    
+    if ($marke) {
+        $marke_link = get_term_link($marke, 'pa_brand');  // Erstellt einen Link zur Marke
+        echo '<tr><th scope="row">' . __('Marke:', 'shopofthings') . '</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a>';
         
-        if ($marke) {
-            $marke_link = get_term_link($marke, 'pa_brand');  // Erstellt einen Link zur Marke
-            echo '<tr><th scope="row">' . __('Marke:', 'shopofthings') . '</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a>';
-            
-            // Überprüfen, ob die Marke in der Partner-Liste ist
-            if (in_array(strtolower($marke), $partner_brands)) {
-                echo ' <img src="' . esc_url(get_stylesheet_directory_uri() . '/images/handshake.svg') . '" alt="Partner" style="height:1em; vertical-align:middle;">';
-            }
-            
-            echo '</td></tr>';
+        // Überprüfen, ob die Marke in der Partner-Liste ist
+        if (in_array(strtolower($marke), $partner_brands)) {
+            $tooltip_text = __('Partner dieser Marke: Mengenrabatte und direkter Support verfügbar.', 'shopofthings');
+            echo ' <img src="' . esc_url(get_stylesheet_directory_uri() . '/images/handshake.svg') . '" alt="Partner" title="' . esc_attr($tooltip_text) . '" style="height:1em; vertical-align:middle;">';
         }
+        
+        echo '</td></tr>';
+    }
+
 
 
       // Kategorien Anzeige
