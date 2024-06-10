@@ -242,11 +242,27 @@ function sot_show_product_meta_custom() {
       }
 
       // Marke Anzeige
-      $marke = $product->get_attribute('pa_brand');
-      if ($marke) {
-        $marke_link = get_term_link($marke, 'pa_brand');  // Erstellt einen Link zur Marke
-        echo '<tr><th scope="row">' . __('Marke:', 'shopofthings') . '</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a></td></tr>';
-      }
+    //   $marke = $product->get_attribute('pa_brand');
+    //   if ($marke) {
+    //     $marke_link = get_term_link($marke, 'pa_brand');  // Erstellt einen Link zur Marke
+    //     echo '<tr><th scope="row">' . __('Marke:', 'shopofthings') . '</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a></td></tr>';
+    //   }
+        // Marke Anzeige
+        $marke = $product->get_attribute('pa_brand');
+        $partner_brands = array('elsys', 'rakwireless');  // Array der Partner-Marken
+        
+        if ($marke) {
+            $marke_link = get_term_link($marke, 'pa_brand');  // Erstellt einen Link zur Marke
+            echo '<tr><th scope="row">' . __('Marke:', 'shopofthings') . '</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a>';
+            
+            // Überprüfen, ob die Marke in der Partner-Liste ist
+            if (in_array(strtolower($marke), $partner_brands)) {
+                echo ' <img src="' . esc_url(get_template_directory_uri() . '/images/handshake.svg') . '" alt="Partner" style="height:1em; vertical-align:middle;">';
+            }
+            
+            echo '</td></tr>';
+        }
+
 
       // Kategorien Anzeige
       echo '<tr>' . display_sorted_categories($product->get_id()) . '</tr>';
