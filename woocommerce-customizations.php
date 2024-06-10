@@ -250,9 +250,10 @@ function sot_show_product_meta_custom() {
     // Marke Anzeige
     $marke = $product->get_attribute('pa_brand');
     $partner_brands = array('elsys', 'rakwireless', 'abeeway', 'adnexo', 'atim',
-    'circuitmess', 'decentlab', 'reolink', 'seeedstudio', 'small-data-garden',
-    'aal', 'strega', 'swisscom', 'tektelic', 'ttgo', 'adeunis', 'digital-matter', 'enginko', 
-    'mclimate', 'milesight', 'miromico', 'nanosensorics', 'netvox', 'panorama', 'teltonika');  // Array der Partner-Marken
+    'circuitmess', 'decentlab', 'reolink', 'seeedstudio', 'small data garden',
+    'smart aal', 'strega', 'swisscom', 'tektelic', 'ttgo', 'adeunis', 'digital matter', 'enginko', 
+    'mclimate', 'milesight iot', 'miromico', 'nano sensorics', 'netvox', 'panorama', 'teltonika',
+    'nexelec');  // Array der Partner-Marken
     
     if ($marke) {
         $marke_link = get_term_link($marke, 'pa_brand');  // Erstellt einen Link zur Marke
