@@ -574,7 +574,13 @@ input.product-search-field {
 
 
 
-/** Produktseite AI Prompt **/
+/* 
+  Modernes CSS für die Produktseite eines B2B-Onlineshops (Deutsch-Schweiz).
+  Ziel: Professionelles, responsives Design mit klarer Typografie, subtilen Animationen 
+  und einer benutzerfreundlichen Darstellung. Entwickelt für eine maximale Breite von 900px, 
+  optimiert für Desktop und Mobile. Bulletpoints in Listen werden durch Häkchen ersetzt.
+  Erstellt am 22. April 2025.
+*/
 
 .produktseite-container {
   max-width: 900px;
@@ -585,6 +591,11 @@ input.product-search-field {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* 
+    Der Container zentriert die Produktseite, sorgt für einen sauberen weißen Hintergrund
+    und fügt einen subtilen Schatten für Tiefe hinzu. Die Schriftart 'Inter' ist modern
+    und klar, mit Fallbacks für maximale Kompatibilität.
+  */
 }
 
 .management-summary {
@@ -592,6 +603,11 @@ input.product-search-field {
   line-height: 1.75;
   color: #4a4a4a;
   margin-bottom: 2rem;
+  /* 
+    Der Management Summary ist ein einleitender Text, der leicht größer und mit 
+    einem angenehmen Zeilenabstand gestaltet ist, um die Lesbarkeit zu fördern.
+    Die gedämpfte Farbe sorgt für einen professionellen Look.
+  */
 }
 
 .section-title {
@@ -602,6 +618,10 @@ input.product-search-field {
   margin-bottom: 1.5rem;
   position: relative;
   transition: color 0.2s ease;
+  /* 
+    Abschnittsüberschriften sind groß, fett und blau, um Aufmerksamkeit zu erregen.
+    Eine sanfte Farbtransition bei Hover (definiert weiter unten) sorgt für Interaktivität.
+  */
 }
 
 .section-title::after {
@@ -613,15 +633,24 @@ input.product-search-field {
   height: 3px;
   background-color: #0052cc;
   border-radius: 2px;
+  /* 
+    Ein dekorativer Unterstrich hebt die Überschrift hervor und gibt der Seite Struktur.
+    Die Breite und Farbe sind auf die Hauptfarbe #0052cc abgestimmt.
+  */
 }
 
 .feature-list,
 .use-case-list {
-  list-style-type: none;
+  list-style-type: none !important; /* Entfernt standardmäßige Bulletpoints */
   padding: 0;
   font-size: 1rem;
   line-height: 1.75;
   color: #333333;
+  /* 
+    Listen für Features und Anwendungsszenarien verwenden keine standardmäßigen 
+    Bulletpoints, sondern ein benutzerdefiniertes Häkchen (siehe ::before). 
+    Der Zeilenabstand sorgt für gute Lesbarkeit.
+  */
 }
 
 .feature-list li,
@@ -630,6 +659,10 @@ input.product-search-field {
   padding-left: 1.5rem;
   margin-bottom: 1rem;
   transition: transform 0.2s ease;
+  /* 
+    Listenelemente haben einen linken Abstand, um Platz für das Häkchen zu schaffen.
+    Ein Hover-Effekt (translateX) sorgt für eine subtile Animation.
+  */
 }
 
 .feature-list li::before,
@@ -639,11 +672,19 @@ input.product-search-field {
   left: 0;
   color: #0052cc;
   font-size: 1.1rem;
+  /* 
+    Das Häkchen ersetzt die standardmäßigen Bulletpoints und ist farblich auf die 
+    Hauptfarbe abgestimmt. Es wird absolut positioniert, um präzise Platzierung zu gewährleisten.
+  */
 }
 
 .feature-list li:hover,
 .use-case-list li:hover {
   transform: translateX(8px);
+  /* 
+    Beim Hovern verschieben sich Listenelemente leicht nach rechts, um Interaktivität 
+    zu fördern und die Seite dynamisch wirken zu lassen.
+  */
 }
 
 .spec-table {
@@ -652,6 +693,10 @@ input.product-search-field {
   font-size: 1rem;
   line-height: 1.75;
   margin-top: 1rem;
+  /* 
+    Die Tabelle für technische Spezifikationen ist vollbreit und klar strukturiert.
+    Der Zeilenabstand sorgt für Lesbarkeit, auch bei dichten Informationen.
+  */
 }
 
 .spec-table th,
@@ -659,16 +704,28 @@ input.product-search-field {
   padding: 12px 16px;
   text-align: left;
   border-bottom: 1px solid #e6e6e6;
+  /* 
+    Zellen haben ausreichend Padding für eine aufgeräumte Darstellung. 
+    Ein dünner unterer Rand trennt die Zeilen optisch.
+  */
 }
 
 .spec-table th {
   background-color: #f7f9fc;
   font-weight: 600;
   color: #1a1a1a;
+  /* 
+    Tabellenüberschriften haben einen hellen Hintergrund und eine kräftige Schrift,
+    um sie von den Daten zu unterscheiden.
+  */
 }
 
 .spec-table tr:hover {
   background-color: #f1f5f9;
+  /* 
+    Ein sanfter Hover-Effekt hebt die aktuelle Tabellenzeile hervor, 
+    was die Interaktion und Lesbarkeit verbessert.
+  */
 }
 
 .support-text {
@@ -676,6 +733,10 @@ input.product-search-field {
   line-height: 1.75;
   color: #4a4a4a;
   margin-top: 1rem;
+  /* 
+    Der Support-Text ist klar und einfach formatiert, mit einer gedämpften Farbe, 
+    um ihn vom Hauptinhalt abzugrenzen.
+  */
 }
 
 /* Responsive Design */
@@ -701,6 +762,8 @@ input.product-search-field {
   .spec-table td {
     padding: 10px;
   }
+  /* 
+    Auf kleineren Bildschirmen werden Abstände und Schriftgrößen reduziert, 
+    um die Lesbarkeit zu bewahren und Platz zu sparen. Die Struktur bleibt erhalten.
+  */
 }
-
-
