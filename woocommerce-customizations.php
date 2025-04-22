@@ -96,72 +96,6 @@ function isSKU($sku) {
     return preg_match($pattern, $sku);
 }
 
-/**
- * Gibt eine formatierte Zeile zurück, die alle Produktkategorien des angegebenen Produkts
- * in einer sortierten und hierarchisch strukturierten Weise darstellt.
- */
-// function display_sorted_categories($product_id) {
-//     $terms = wp_get_post_terms($product_id, 'product_cat', array("fields" => "all"));
-    
-//     if (is_wp_error($terms)) {
-//         return 'Fehler beim Abrufen der Kategorien';
-//     }
-
-//     $brands_term = get_term_by('slug', 'brands', 'product_cat');
-//     $solution_package_term = get_term_by('slug', 'solution-package', 'product_cat');
-//     $sensorik_term = get_term_by('slug', 'sensorik', 'product_cat');
-
-//     if (is_wp_error($brands_term) || is_wp_error($solution_package_term) || is_wp_error($sensorik_term)) {
-//         return 'Fehler beim Abrufen der Kategorien';
-//     }
-
-//     $brands_term_id = $brands_term->term_id;
-//     $solution_package_id = $solution_package_term->term_id;
-//     $sensorik_term_id = $sensorik_term->term_id;
-//     $sensorik_children = get_term_children($sensorik_term_id, 'product_cat');
-
-//     if (is_wp_error($sensorik_children)) {
-//         return 'Fehler beim Abrufen der Kategorien';
-//     }
-
-//     $sensorik_all_terms = array_merge([$sensorik_term_id], $sensorik_children);
-//     $all_lines = array();
-
-//     foreach ($terms as $term) {
-//         if (is_wp_error($term)) {
-//             continue;
-//         }
-//         if ($term->term_id == $brands_term_id || $term->parent == $brands_term_id) {
-//             continue;
-//         }
-//         if (in_array($term->term_id, $sensorik_all_terms)) {
-//             continue;
-//         }
-//         if ($term->parent == 0 && !get_term_children($term->term_id, 'product_cat') && $term->term_id != $solution_package_id) {
-//             continue;
-//         }
-
-//         $line = array();
-//         $current_term = $term;
-
-//         while (!is_wp_error($current_term) && $current_term && $current_term->term_id != 0) {
-//             $term_link = get_term_link($current_term, 'product_cat');
-//             if (is_wp_error($term_link)) {
-//                 continue 2;
-//             }
-//             array_unshift($line, '<a href="' . esc_url($term_link) . '">' . $current_term->name . '</a>');
-//             $current_term = get_term($current_term->parent, 'product_cat');
-//         }
-
-//         if (!get_term_children($term->term_id, 'product_cat')) {
-//             $formatted_line = join(' > ', $line);
-//             $all_lines[] = $formatted_line;
-//         }
-//     }
-
-//     sort($all_lines);
-//     return '<th scope="row">' . __('Kategorien:', 'textdomain') . '</th><td>' . join('<br>', $all_lines) . '</td>';
-// }
 
 /**
  * Gibt eine formatierte Zeile zurück, die alle Produktkategorien des angegebenen Produkts
@@ -230,7 +164,7 @@ function display_sorted_categories($product_id) {
         .category-tag {
             display: inline-block;
             color: #333;
-            padding: 5px 10px;
+            padding: 2px 10px;
             margin: 2px;
             border: 1px solid #ccc;
             border-radius: 15px;
