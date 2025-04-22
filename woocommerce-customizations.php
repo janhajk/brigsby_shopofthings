@@ -154,31 +154,7 @@ function display_sorted_categories($product_id) {
 
     sort($all_tags);
     
-    // Füge das CSS für die farblosen Tags ein
-    $output = '<style>
-        .category-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-        .category-tag {
-            display: inline-block;
-            color: #333;
-            padding: 2px 10px;
-            margin: 2px;
-            border: 1px solid #ccc;
-            border-radius: 15px;
-            font-size: 0.9em;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .category-tag:hover {
-            color: #006064;
-            text-decoration: underline;
-        }
-    </style>';
-
-    $output .= '<th scope="row">' . __('Kategorien:', 'textdomain') . '</th><td><div class="category-tags">' . join('', $all_tags) . '</div></td>';
+    $output = '<th scope="row">' . __('Kategorien:', 'textdomain') . '</th><td><div class="category-tags">' . join('', $all_tags) . '</div></td>';
     return $output;
 }
 
@@ -307,43 +283,7 @@ add_action('woocommerce_single_product_summary', 'sot_show_product_meta_custom',
 
 function enqueue_custom_styles() {
     if (is_product()) {
-        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.10');
-        // Inline-CSS für Tooltips hinzufügen
-        wp_add_inline_style('woocommerce-customizations', '
-            .tooltip {
-                position: relative;
-                cursor: pointer;
-                display: inline-block;
-            }
-            .tooltip-box {
-                position: absolute;
-                background: #69b3e7; /* Mittel-hellblau */
-                color: var(--wc-primary-text, #fff);
-                padding: 10px 14px;
-                border-radius: 4px;
-                font-size: 13px;
-                z-index: 1000;
-                display: none;
-                max-width: 250px;
-                text-align: left;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-                line-height: 1.4;
-            }
-            .tooltip-box strong {
-                font-size: 14px;
-                display: block;
-                margin-bottom: 5px;
-            }
-            .tooltip-box::after {
-                content: "";
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                margin-left: -5px;
-                border: 5px solid transparent;
-                border-top-color: #69b3e7; /* Mittel-hellblau für den Pfeil */
-            }
-        ');
+        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.11');
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_styles');

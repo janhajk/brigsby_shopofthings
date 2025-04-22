@@ -1,16 +1,21 @@
 /*SKU Rahmen auf single product page*/
 #sot-single-product-top .sku {
     padding: 0px 10px;
-    border: 1px solid #ccc;  /* Graue Rahmenfarbe */
+    border: 1px solid #ccc;
+    /* Graue Rahmenfarbe */
     display: inline-block;
     cursor: pointer;
-    transition: border-color 0.3s;  /* Übergangseffekt auf die Rahmenfarbe anwenden */
-    border-radius: 5px;  /* Leicht gerundete Ecken */
+    transition: border-color 0.3s;
+    /* Übergangseffekt auf die Rahmenfarbe anwenden */
+    border-radius: 5px;
+    /* Leicht gerundete Ecken */
 }
 
 #sot-single-product-top .sku:hover {
-    border-color: #333;  /* Rahmenfarbe wird beim Hovern schwarz */
-    background-color: #f5f5f5; /* Hintergrundfarbe beim Hovern */
+    border-color: #333;
+    /* Rahmenfarbe wird beim Hovern schwarz */
+    background-color: #f5f5f5;
+    /* Hintergrundfarbe beim Hovern */
 }
 
 
@@ -33,6 +38,71 @@
 }
 
 
+.category-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.category-tag {
+    display: inline-block;
+    color: #333;
+    padding: 2px 10px;
+    margin: 2px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 0.9em;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.category-tag:hover {
+    color: #006064;
+    text-decoration: underline;
+}
+
+
+
+.tooltip {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.tooltip-box {
+    position: absolute;
+    background: #69b3e7;
+    /* Mittel-hellblau */
+    color: var(--wc-primary-text, #fff);
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    z-index: 1000;
+    display: none;
+    max-width: 250px;
+    text-align: left;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    line-height: 1.4;
+}
+
+.tooltip-box strong {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.tooltip-box::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border: 5px solid transparent;
+    border-top-color: #69b3e7;
+    /* Mittel-hellblau für den Pfeil */
+}
+
+
 
 
 /* Neue Stile für Spaltenbreite */
@@ -46,6 +116,7 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
     .product-meta-table th,
     .product-meta-table td {
         width: 100%;
