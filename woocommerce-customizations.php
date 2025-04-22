@@ -174,11 +174,17 @@ function display_icon_row($title, $taxonomy, $attribute, $alt_text) {
             $thumbnail_id = get_term_meta($term->term_id, 'product_search_image_id', true);
             $thumbnail_url = wp_get_attachment_url($thumbnail_id);
             $term_link = get_term_link($term);
+            // Hole die Beschreibung des Terms
+            $term_description = term_description($term->term_id, $taxonomy);
+            // Entferne HTML-Tags aus der Beschreibung für den Tooltip
+            $clean_description = wp_strip_all_tags($term_description);
+            // Erstelle den Tooltip-Inhalt: Term-Name als Titel (fett) und Beschreibung
+            $tooltip_content = '<strong>' . esc_html($term_name) . '</strong><br>' . esc_html($clean_description);
 
             if ($thumbnail_url) {
-                $thumbnail_elements[$term_name] = '<a href="' . esc_url($term_link) . '" class="icon-link text-link tooltip" data-tooltip="' . esc_attr($term_name) . '"><img src="' . esc_url($thumbnail_url) . '" alt="' . $alt_text . '" class="icon-image"></a>';
+                $thumbnail_elements[$term_name] = '<a href="' . esc_url($term_link) . '" class="icon-link text-link tooltip" data-tooltip="' . esc_attr($tooltip_content) . '"><img src="' . esc_url($thumbnail_url) . '" alt="' . esc_attr($alt_text) . '" class="icon-image"></a>';
             } else {
-                $no_thumbnail_elements[] = '<a href="' . esc_url($term_link) . '" class="text-link tooltip" data-tooltip="' . esc_attr($term_name) . '">' . $term_name . '</a>';
+                $no_thumbnail_elements[] = '<a href="' . esc_url($term_link) . '" class="text-link tooltip" data-tooltip="' . esc_attr($tooltip_content) . '">' . esc_html($term_name) . '</a>';
             }
         }
     }
@@ -188,7 +194,7 @@ function display_icon_row($title, $taxonomy, $attribute, $alt_text) {
     $all_elements = array_merge(array_values($thumbnail_elements), $no_thumbnail_elements);
 
     if (!empty($all_elements)) {
-        echo '<tr class="special-row"><th scope="row">' . $title . '</th><td class="special-row-icons"><div>' . implode(' ', $all_elements) . '</div></td></tr>';
+        echo '<tr class="special-row"><th scope="row">' . esc_html($title) . '</th><td class="special-row-icons"><div>' . implode(' ', $all_elements) . '</div></td></tr>';
     }
 }
 
@@ -294,14 +300,20 @@ function enqueue_custom_styles() {
                 position: absolute;
                 background: #69b3e7; /* Mittel-hellblau */
                 color: var(--wc-primary-text, #fff);
-                padding: 8px 12px;
+                padding: 10px 14px;
                 border-radius: 4px;
-                font-size: 14px;
+                font-size: 13px;
                 z-index: 1000;
                 display: none;
-                max-width: 200px;
-                text-align: center;
+                max-width: 250px;
+                text-align: left;
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                line-height: 1.4;
+            }
+            .tooltip-box strong {
+                font-size: 14px;
+                display: block;
+                margin-bottom: 5px;
             }
             .tooltip-box::after {
                 content: "";
