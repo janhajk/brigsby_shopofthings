@@ -292,7 +292,7 @@ function enqueue_custom_styles() {
             }
             .tooltip-box {
                 position: absolute;
-                background: var(--wc-primary, #a46497);
+                background: #69b3e7; /* Mittel-hellblau */
                 color: var(--wc-primary-text, #fff);
                 padding: 8px 12px;
                 border-radius: 4px;
@@ -310,7 +310,7 @@ function enqueue_custom_styles() {
                 left: 50%;
                 margin-left: -5px;
                 border: 5px solid transparent;
-                border-top-color: var(--wc-primary, #a46497);
+                border-top-color: #69b3e7; /* Mittel-hellblau für den Pfeil */
             }
         ');
     }
