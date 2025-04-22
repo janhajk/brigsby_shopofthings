@@ -192,7 +192,7 @@ function display_sorted_categories($product_id) {
     }
 
     $sensorik_all_terms = array_merge([$sensorik_term_id], $sensorik_children);
-    $all_lines = array();
+    $all_tags = array();
 
     foreach ($terms as $term) {
         if (is_wp_error($term)) {
@@ -208,52 +208,43 @@ function display_sorted_categories($product_id) {
             continue;
         }
 
-        $line = array();
-        $current_term = $term;
-
-        while (!is_wp_error($current_term) && $current_term && $current_term->term_id != 0) {
-            $term_link = get_term_link($current_term, 'product_cat');
-            if (is_wp_error($term_link)) {
-                continue 2;
-            }
-            // Jede Kategorie wird als Tag dargestellt
-            array_unshift($line, '<a href="' . esc_url($term_link) . '" class="category-tag">' . esc_html($current_term->name) . '</a>');
-            $current_term = get_term($current_term->parent, 'product_cat');
-        }
-
+        // Nur Blattkategorien (ohne Kinder) anzeigen
         if (!get_term_children($term->term_id, 'product_cat')) {
-            $formatted_line = '<span class="category-path">' . implode('', $line) . '</span>';
-            $all_lines[] = $formatted_line;
+            $term_link = get_term_link($term, 'product_cat');
+            if (is_wp_error($term_link)) {
+                continue;
+            }
+            $all_tags[] = '<a href="' . esc_url($term_link) . '" class="category-tag">' . esc_html($term->name) . '</a>';
         }
     }
 
-    sort($all_lines);
+    sort($all_tags);
     
-    // Füge das CSS für die Tags direkt ein (alternativ kannst du es in eine separate CSS-Datei auslagern)
+    // Füge das CSS für die farblosen Tags ein
     $output = '<style>
-        .category-path {
+        .category-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
-            margin-bottom: 5px;
         }
         .category-tag {
             display: inline-block;
-            background-color: #e0f7fa;
-            color: #006064;
+            color: #333;
             padding: 5px 10px;
             margin: 2px;
+            border: 1px solid #ccc;
             border-radius: 15px;
             font-size: 0.9em;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: color 0.3s;
         }
         .category-tag:hover {
-            background-color: #b2ebf2;
+            color: #006064;
+            text-decoration: underline;
         }
     </style>';
 
-    $output .= '<th scope="row">' . __('Kategorien:', 'textdomain') . '</th><td>' . join('', $all_lines) . '</td>';
+    $output .= '<th scope="row">' . __('Kategorien:', 'textdomain') . '</th><td><div class="category-tags">' . join('', $all_tags) . '</div></td>';
     return $output;
 }
 
