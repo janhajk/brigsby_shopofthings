@@ -100,6 +100,73 @@ function isSKU($sku) {
  * Gibt eine formatierte Zeile zurück, die alle Produktkategorien des angegebenen Produkts
  * in einer sortierten und hierarchisch strukturierten Weise darstellt.
  */
+// function display_sorted_categories($product_id) {
+//     $terms = wp_get_post_terms($product_id, 'product_cat', array("fields" => "all"));
+    
+//     if (is_wp_error($terms)) {
+//         return 'Fehler beim Abrufen der Kategorien';
+//     }
+
+//     $brands_term = get_term_by('slug', 'brands', 'product_cat');
+//     $solution_package_term = get_term_by('slug', 'solution-package', 'product_cat');
+//     $sensorik_term = get_term_by('slug', 'sensorik', 'product_cat');
+
+//     if (is_wp_error($brands_term) || is_wp_error($solution_package_term) || is_wp_error($sensorik_term)) {
+//         return 'Fehler beim Abrufen der Kategorien';
+//     }
+
+//     $brands_term_id = $brands_term->term_id;
+//     $solution_package_id = $solution_package_term->term_id;
+//     $sensorik_term_id = $sensorik_term->term_id;
+//     $sensorik_children = get_term_children($sensorik_term_id, 'product_cat');
+
+//     if (is_wp_error($sensorik_children)) {
+//         return 'Fehler beim Abrufen der Kategorien';
+//     }
+
+//     $sensorik_all_terms = array_merge([$sensorik_term_id], $sensorik_children);
+//     $all_lines = array();
+
+//     foreach ($terms as $term) {
+//         if (is_wp_error($term)) {
+//             continue;
+//         }
+//         if ($term->term_id == $brands_term_id || $term->parent == $brands_term_id) {
+//             continue;
+//         }
+//         if (in_array($term->term_id, $sensorik_all_terms)) {
+//             continue;
+//         }
+//         if ($term->parent == 0 && !get_term_children($term->term_id, 'product_cat') && $term->term_id != $solution_package_id) {
+//             continue;
+//         }
+
+//         $line = array();
+//         $current_term = $term;
+
+//         while (!is_wp_error($current_term) && $current_term && $current_term->term_id != 0) {
+//             $term_link = get_term_link($current_term, 'product_cat');
+//             if (is_wp_error($term_link)) {
+//                 continue 2;
+//             }
+//             array_unshift($line, '<a href="' . esc_url($term_link) . '">' . $current_term->name . '</a>');
+//             $current_term = get_term($current_term->parent, 'product_cat');
+//         }
+
+//         if (!get_term_children($term->term_id, 'product_cat')) {
+//             $formatted_line = join(' > ', $line);
+//             $all_lines[] = $formatted_line;
+//         }
+//     }
+
+//     sort($all_lines);
+//     return '<th scope="row">' . __('Kategorien:', 'textdomain') . '</th><td>' . join('<br>', $all_lines) . '</td>';
+// }
+
+/**
+ * Gibt eine formatierte Zeile zurück, die alle Produktkategorien des angegebenen Produkts
+ * in einer sortierten und hierarchisch strukturierten Weise als Tags darstellt.
+ */
 function display_sorted_categories($product_id) {
     $terms = wp_get_post_terms($product_id, 'product_cat', array("fields" => "all"));
     
@@ -149,18 +216,45 @@ function display_sorted_categories($product_id) {
             if (is_wp_error($term_link)) {
                 continue 2;
             }
-            array_unshift($line, '<a href="' . esc_url($term_link) . '">' . $current_term->name . '</a>');
+            // Jede Kategorie wird als Tag dargestellt
+            array_unshift($line, '<a href="' . esc_url($term_link) . '" class="category-tag">' . esc_html($current_term->name) . '</a>');
             $current_term = get_term($current_term->parent, 'product_cat');
         }
 
         if (!get_term_children($term->term_id, 'product_cat')) {
-            $formatted_line = join(' > ', $line);
+            $formatted_line = '<span class="category-path">' . implode('', $line) . '</span>';
             $all_lines[] = $formatted_line;
         }
     }
 
     sort($all_lines);
-    return '<th scope="row">' . __('Kategorien:', 'textdomain') . '</th><td>' . join('<br>', $all_lines) . '</td>';
+    
+    // Füge das CSS für die Tags direkt ein (alternativ kannst du es in eine separate CSS-Datei auslagern)
+    $output = '<style>
+        .category-path {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+        .category-tag {
+            display: inline-block;
+            background-color: #e0f7fa;
+            color: #006064;
+            padding: 5px 10px;
+            margin: 2px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .category-tag:hover {
+            background-color: #b2ebf2;
+        }
+    </style>';
+
+    $output .= '<th scope="row">' . __('Kategorien:', 'textdomain') . '</th><td>' . join('', $all_lines) . '</td>';
+    return $output;
 }
 
 function display_icon_row($title, $taxonomy, $attribute, $alt_text) {
