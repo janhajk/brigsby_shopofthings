@@ -19,20 +19,6 @@ function sot_add_woocommerce_support() {
 add_action( 'after_setup_theme', 'sot_add_woocommerce_support' );
 
 
-// if ( ! defined( 'ABSPATH' ) ) {
-// 	exit;
-// }
-// if ( ! function_exists( 'brigsby_shopofthings_enqueue_styles' ) ):
-// 	/**
-// 	 * Load CSS file.
-// 	 */
-//       function brigsby_shopofthings_enqueue_styles() {
-//       //     wp_enqueue_style( 'brigsby-shopofthings', trailingslashit( get_stylesheet_directory_uri() ) . 'style.css', array( 'brigsby-style' ), false );
-//       }
-// endif;
-// add_action('wp_enqueue_scripts', 'brigsby_shopofthings_enqueue_styles', 20);
-
-
 /**
  *
  *
@@ -84,57 +70,6 @@ add_filter( 'jetpack_just_in_time_msgs', '__return_false' );
 add_filter( 'woocommerce_min_password_strength', 'wpglorify_woocommerce_password_filter', 10 );
 function wpglorify_woocommerce_password_filter() {
       return 1;
-}
-
-
-
-/***** Adding Facebook Pixel *****/
-add_action('wp_head', 'oiw_add_fbpixel');
-
-function oiw_add_fbpixel() {
-?>
-<!-- Facebook Pixel Code -->
-      <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '2735434730048399');
-      fbq('track', 'PageView');
-      </script>
-      <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=2735434730048399&ev=PageView&noscript=1"
-      /></noscript>
-<!-- End Facebook Pixel Code -->
-<?php
-}
-
-
-
-/***** Adding LinkedIn Script *****/
-// add_action('wp_head', 'oiw_add_linkedin');
-
-function oiw_add_linkedin() {
-?>
-<script type="text/javascript">
-_linkedin_partner_id = "2806769";
-window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
-window._linkedin_data_partner_ids.push(_linkedin_partner_id);
-</script><script type="text/javascript">
-(function(){var s = document.getElementsByTagName("script")[0];
-var b = document.createElement("script");
-b.type = "text/javascript";b.async = true;
-b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
-s.parentNode.insertBefore(b, s);})();
-</script>
-<noscript>
-<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=2806769&fmt=gif" />
-</noscript>
-<?php
 }
 
 
@@ -470,36 +405,6 @@ if ( ! function_exists( 'yith_infs_customization_wc_product_filters' ) ) {
 }
 
 
-
-/**
- * Log database queries to the /wp-content/sql.log file.
- *
- * @link https://wordpress.stackexchange.com/a/144353/90061
- */
-// add_filter( 'query', function( $query ){
-
-// 	// Filter out everything that shouldn't be logged.
-// // 	if (
-// // 		stripos( $query, 'SELECT' ) !== FALSE ||
-// // 		stripos( $query, 'SHOW' ) !== FALSE ||
-// // 		stripos( $query, '_transient_' ) !== FALSE ||
-// // 		stripos( $query, 'iap517_yoast_notifications' ) !== FALSE ||
-// // 		stripos( $query, "WHERE `option_name` = 'cron'" ) !== FALSE ||
-// // 		stripos( $query, 'iap517_actionscheduler' ) !== FALSE ||
-// // 		stripos( $query, 'action_scheduler' ) !== FALSE
-// // 	) {
-// // 		return $query;
-// // 	}
-
-// 	$file =  WP_CONTENT_DIR . '/sql.log'; // Edit this filepath.
-// 	@file_put_contents(
-// 		$file,
-// 		date( 'c' ) . ' - ' . $query . PHP_EOL,
-// 		FILE_APPEND | LOCK_EX
-// 	);
-
-//     return $query;
-// }, PHP_INT_MAX );
 
 
 
