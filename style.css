@@ -767,3 +767,18 @@ input.product-search-field {
     um die Lesbarkeit zu bewahren und Platz zu sparen. Die Struktur bleibt erhalten.
   */
 }
+
+
+
+
+
+/*
+    search bar customization
+*/
+.product-search-field{
+    width: 100%;
+}
+
+.product-search-form form {
+    margin-bottom: 0 !important;
+} 
