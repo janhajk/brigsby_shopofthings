@@ -1,177 +1,120 @@
 <?php
+
+
+// https://storecustomizer.com/woocommerce-shop-page-hooks-visual-guide/
+// https://www.businessbloomer.com/woocommerce-add-new-tab-account-page/
+
+
 /**
- * Brigsby - ShopOfThings Child Theme
- * Kompatibel mit WordPress 6.9 + WooCommerce 10.4+ (Dezember 2025)
+ * Brigsby - ShopOfThings
+ *
+ * @package brigsby-shopofthings
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
+
+ // checks for woocommerce templates in woocommerce folder
+function sot_add_woocommerce_support() {
+    add_theme_support( 'woocommerce' ); // <<<< here
+}
+add_action( 'after_setup_theme', 'sot_add_woocommerce_support' );
+
+
+/**
+ *
+ *
+ *
+ *
+ *
+ */
+function sot_enqueue_styles() {
+    // Registrieren und einbinden der zusätzlichen CSS-Datei
+    wp_enqueue_style('sot-single-product', get_stylesheet_directory_uri() . '/woocommerce/single-product/styles.css', array(), '1.0.20', 'all');
+    wp_enqueue_style('sot-landing-page-style', get_stylesheet_directory_uri() . '/css/template-landing-page.css', array(), '1.0.4', 'all');
+
 }
 
-/* ==========================================================================
-   1. WooCommerce Support + Grundlagen
-   ========================================================================== */
-add_action( 'after_setup_theme', function() {
-    add_theme_support( 'woocommerce' );
-} );
+add_action('wp_enqueue_scripts', 'sot_enqueue_styles');
 
-/* ==========================================================================
-   2. CSS & JS einbinden
-   ========================================================================== */
-add_action( 'wp_enqueue_scripts', function() {
-    // Allgemeine Styles (immer laden)
-    wp_enqueue_style(
-        'sot-single-product',
-        get_stylesheet_directory_uri() . '/woocommerce/single-product/styles.css',
-        [],
-        '1.0.21'
-    );
 
-    wp_enqueue_style(
-        'sot-landing-page-style',
-        get_stylesheet_directory_uri() . '/css/template-landing-page.css',
-        [],
-        '1.0.5'
-    );
-
-    // Nur auf Produktseiten: Custom JS
-    if ( function_exists( 'is_product' ) && is_product() ) {
-        wp_enqueue_script(
-            'single-product-script',
-            get_stylesheet_directory_uri() . '/woocommerce/single-product/single-product.js',
-            [ 'jquery' ],
-            '1.0.15',
-            true
-        );
+function sot_custom_scripts() {
+    // Überprüfen Sie, ob Sie auf einer Produktseite sind
+    if (is_product()) {
+        // Registrieren und Einreihen des Scripts
+        wp_enqueue_script('single-product-script', get_stylesheet_directory_uri() . '/woocommerce/single-product/single-product.js', array('jquery'), '1.0.14', true);
     }
-
-    // B2B Script (falls du es wieder aktivieren willst)
-    // wp_enqueue_script( 'shopofthings-b2b', get_stylesheet_directory_uri() . '/b2b.js', [], '1.10', true );
-
-}, 20 );
-
-/* ==========================================================================
-   3. Landing Page Functions einbinden
-   ========================================================================== */
-if ( file_exists( get_stylesheet_directory() . '/inc/template-landing-page-functions.php' ) ) {
-    require_once get_stylesheet_directory() . '/inc/template-landing-page-functions.php';
 }
+add_action('wp_enqueue_scripts', 'sot_custom_scripts');
 
-/* ==========================================================================
-   4. Diverse WooCommerce Anpassungen
-   ========================================================================== */
 
-// Jetpack Werbung deaktivieren
+// invoke landing page functions
+require get_stylesheet_directory() . '/inc/template-landing-page-functions.php';
+
+
+
+/*
+ * Remove jetpack ads
+ *
+ */
 add_filter( 'jetpack_just_in_time_msgs', '__return_false' );
 
-// Schwächere Passwortstärke bei Registrierung
-add_filter( 'woocommerce_min_password_strength', function() { return 1; } );
 
-// Beschreibung-Titel auf Produktseite entfernen
+/*
+* Reduce the strength requirement for woocommerce registration password.
+* Strength Settings:
+* 0 = Nothing = Anything
+* 1 = Weak
+* 2 = Medium
+* 3 = Strong (default)
+*/
+
+add_filter( 'woocommerce_min_password_strength', 'wpglorify_woocommerce_password_filter', 10 );
+function wpglorify_woocommerce_password_filter() {
+      return 1;
+}
+
+
+
+
+
+/**
+ *
+ * @snippet       Remove "Description" Title @ WooCommerce Single Product Tabs
+ *
+ * see https://njengah.com/woocommerce-hide-description-heading/
+ */
+
 add_filter( 'woocommerce_product_description_heading', '__return_null' );
 
-// Titel in Shop-Loop kürzen
-remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
-add_action( 'woocommerce_shop_loop_item_title', 'sot_custom_loop_title', 10 );
+
+
+
+
+
+/**
+ *
+ * Auto shorten long titles in product loop
+ *
+ *
+ *
+ *
+ *
+ */
+remove_action('woocommerce_shop_loop_item_title','woocommerce_template_loop_product_title',10);
+add_action('woocommerce_shop_loop_item_title','sot_custom_loop_title',10);
 function sot_custom_loop_title() {
-    global $product;
-    $title = get_the_title();
-    $max   = 60;
-
-    if ( strlen( $title ) > $max ) {
-        $title = substr( $title, 0, $max ) . '...';
-    }
-
-    $link = apply_filters( 'woocommerce_loop_product_link', get_permalink(), $product );
-
-    echo '<h3 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '" style="height:55px;overflow-y:hidden">'
-       . '<a href="' . esc_url( $link ) . '" class="woocommerce-LoopProduct-link-title woocommerce-loop-product__title_ink">'
-       . esc_html( $title )
-       . '</a></h3>';
+   $MAX_LEN = 60;
+   global $product;
+   $title = get_the_title();
+   $len = strlen($title);
+   $link = apply_filters( 'woocommerce_loop_product_link', get_the_permalink(), $product );
+   $title = substr($title, 0, $MAX_LEN);
+      if ($len >= $MAX_LEN) {
+         $title .= '...';
+   }
+   echo '<h3 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '" style="height:55px;overflow-y:hidden"><a href="' . esc_url( $link ) . '" class="woocommerce-LoopProduct-link-title woocommerce-loop-product__title_ink">' . $title . '</a></h3>';
 }
 
-// 4 Spalten im Shop
-add_filter( 'loop_shop_columns', function() { return 4; } );
 
-// Warenkorb-Icon im Menü (Shortcode + AJAX)
-add_shortcode( 'woo_cart_but', 'woo_cart_but' );
-function woo_cart_but() {
-    $count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
-    $url   = wc_get_cart_url();
-
-    ob_start(); ?>
-    <li><a class="menu-item cart-contents" href="<?php echo esc_url( $url ); ?>" title="Warenkorb">
-        <?php if ( $count > 0 ) : ?>
-            <span class="cart-contents-count"><?php echo (int) $count; ?></span>
-        <?php endif; ?>
-    </a></li>
-    <?php
-    return ob_get_clean();
-}
-
-add_filter( 'woocommerce_add_to_cart_fragments', 'woo_cart_but_count' );
-function woo_cart_but_count( $fragments ) {
-    ob_start(); ?>
-    <a class="cart-contents menu-item" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="Warenkorb">
-        <?php if ( WC()->cart && WC()->cart->get_cart_contents_count() > 0 ) : ?>
-            <span class="cart-contents-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
-        <?php endif; ?>
-    </a>
-    <?php
-    $fragments['a.cart-contents'] = ob_get_clean();
-    return $fragments;
-}
-
-add_filter( 'wp_nav_menu_primary_items', function( $items ) {
-    return $items . '[woo_cart_but]';
-}, 10, 2 );
-
-// Add-to-Cart-Button Text → Warenkorb-Symbol
-add_filter( 'woocommerce_product_add_to_cart_text', function() {
-    return '🛒';
-});
-add_filter( 'woocommerce_product_single_add_to_cart_text', function() {
-    return '🛒 In den Warenkorb';
-});
-
-// Related Products ausblenden
-remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
-
-/* ==========================================================================
-   5. YITH Infinite Scroll + Product Filters Fix (wichtig!)
-   ========================================================================== */
-add_action( 'wp_enqueue_scripts', 'yith_infs_customization_wc_product_filters', 99 );
-function yith_infs_customization_wc_product_filters() {
-    if ( ! class_exists( 'YITH_WCAN' ) || ! function_exists( 'yith_infs_init' ) ) {
-        return;
-    }
-
-    $js = "(function($){
-        $(window).off('wcpf_before_ajax_filtering yith_infs_start');
-        $(window).on('wcpf_before_ajax_filtering', function(){
-            $(window).off('yith_infs_start');
-        });
-        $(window).on('wcpf_after_ajax_filtering', function(){
-            if (typeof yith_infs !== 'undefined') {
-                $(yith_infs.contentSelector).yit_infinitescroll(yith_infs);
-            }
-        });
-    })(jQuery);";
-
-    wp_add_inline_script( 'yith-infs', $js );
-}
-
-/* ==========================================================================
-   6. Lazy Loading komplett deaktivieren (wie gewünscht)
-   ========================================================================== */
-add_filter( 'wp_lazy_loading_enabled', '__return_false' );
-
-/* ==========================================================================
-   7. WooCommerce Customizations einbinden (deine große Datei von vorhin)
-   ========================================================================== */
-if ( file_exists( get_stylesheet_directory() . '/woocommerce-customizations.php' ) ) {
-    require_once get_stylesheet_directory() . '/woocommerce-customizations.php';
-}
 
 
 /**
@@ -246,3 +189,229 @@ function hoot_set_current_layout( $sidebar ) {
 	}
 
 }
+
+
+
+// Change the Number of Columns Displayed Per Page
+add_filter( 'loop_shop_columns', 'lw_loop_shop_columns' );
+
+function lw_loop_shop_columns( $columns ) {
+ $columns = 4;
+ return $columns;
+}
+
+
+
+//add_filter('woocommerce_get_price_html', 'sot_custom_price_exkl_mwst', $price, 10, 2);
+// function sot_custom_price_exkl_mwst($price, $instance) {
+//     return $price . '<br/><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">CHF</span>'.round(wc_get_price_excluding_tax($instance),2).' </bdi></span><small class="woocommerce-price-suffix">exkl. MWST</small>';
+// }
+
+
+
+
+/**
+ *
+ *
+ * Show number of items in cart
+ *
+ *
+ *
+ *
+ *
+ */
+
+
+
+
+
+add_shortcode ('woo_cart_but', 'woo_cart_but' );
+/**
+ * Create Shortcode for WooCommerce Cart Menu Item
+ */
+function woo_cart_but() {
+        ob_start();
+
+        $cart_count = WC()->cart->cart_contents_count; // Set variable for cart item count
+        $cart_url = wc_get_cart_url();  // Set Cart URL
+
+        ?>
+        <li><a class="menu-item cart-contents" href="<?php echo $cart_url; ?>" title="Warenkorb">
+            <?php
+        if ( $cart_count > 0 ) {
+       ?>
+            <span class="cart-contents-count"><?php echo $cart_count; ?></span>
+        <?php
+        }
+        ?>
+        </a></li>
+        <?php
+
+    return ob_get_clean();
+
+}
+
+add_filter( 'woocommerce_add_to_cart_fragments', 'woo_cart_but_count' );
+/**
+ * Add AJAX Shortcode when cart contents update
+ */
+function woo_cart_but_count( $fragments ) {
+
+    ob_start();
+
+    $cart_count = WC()->cart->cart_contents_count;
+    $cart_url = wc_get_cart_url();
+
+    ?>
+    <a class="cart-contents menu-item" href="<?php echo $cart_url; ?>" title="<?php _e( 'Warenkorb' ); ?>">
+        <?php
+    if ( $cart_count > 0 ) {
+        ?>
+        <span class="cart-contents-count"><?php echo $cart_count; ?></span>
+        <?php
+    }
+
+    $fragments['a.cart-contents'] = ob_get_clean();
+
+    return $fragments;
+}
+add_filter( 'wp_nav_menu_primary_items', 'woo_cart_but_icon', 10, 2 ); // Change menu to suit - example uses 'top-menu'
+
+
+
+
+/**
+ * Add WooCommerce Cart Menu Item Shortcode to particular menu
+ */
+function woo_cart_but_icon ( $items, $args ) {
+       $items .=  '[woo_cart_but]'; // Adding the created Icon via the shortcode already created
+
+       return $items;
+}
+
+
+
+/**
+ *
+ * Add B2B Javascript
+ *
+ * inkl. MWST / exkl. MWST Buttons
+ *
+ *
+ */
+function shopofthings_add_b2b_script() {
+      // Register js file
+      wp_register_script( 'shopofthings-b2b', get_stylesheet_directory_uri().'/b2b.js', false, '1.10', true );
+
+      // Enqueue the registered script file
+      wp_enqueue_script('shopofthings-b2b');
+}
+
+// add script
+// add_action('wp_enqueue_scripts', 'shopofthings_add_b2b_script');
+
+
+
+
+
+
+/**
+ *
+ * Titel vor Bundled Items
+ *
+ *
+ *
+ */
+
+//  add_action('woocommerce_before_bundled_items', 'sot_bundled_options_title', 20);
+//  function sot_bundled_options_title() {
+//        echo '<h3 style="border-bottom:1px solid rgba(0,0,0,0.1);padding-bottom:10px;">Zusätzliche Optionen</h3>';
+//  }
+
+
+/**
+ * hide similar products
+ *
+ */
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
+
+
+
+// define the woocommerce_product_upsells_products_heading callback
+// function sot_woocommerce_product_upsells_products_heading( $__ ){
+//     return $__; //'Wird of zusammen gekauft';
+// }
+
+//add the action
+// add_filter('woocommerce_product_upsells_products_heading', 'sot_woocommerce_product_upsells_products_heading', 10, 1)
+
+
+
+
+
+/**
+ *
+ * Change add to cart icon
+ *
+ *
+ *
+ *
+ */
+
+add_filter('woocommerce_product_add_to_cart_text','sot_customize_add_to_cart_button_woocommerce');
+function sot_customize_add_to_cart_button_woocommerce(){
+      return '&#128722;';
+      // return __('Add to cart', 'woocommer');
+}
+
+
+
+
+/**
+ *
+ * ??
+ *
+ *
+ *
+ */
+add_action( 'sot_woocommerce_before_shop_loop_item_item', 'woocommerce_template_loop_product_link_open', 10 );
+
+
+
+
+
+
+
+
+
+
+// YITH Scrolling Bug Fix
+// See: https://wordpress.org/support/topic/problem-with-product-filters-for-woocommerce/
+if ( ! function_exists( 'yith_infs_customization_wc_product_filters' ) ) {
+	add_action( 'wp_enqueue_scripts', 'yith_infs_customization_wc_product_filters', 99 );
+	function yith_infs_customization_wc_product_filters() {
+		$js = "( function( $ ){
+				$( window ).on( 'wcpf_before_ajax_filtering', function(){
+					$( window ).unbind( 'yith_infs_start' );
+				});
+
+				$( window ).on( 'wcpf_after_ajax_filtering', function(){
+					$( yith_infs.contentSelector ).yit_infinitescroll( infinite_scroll );
+				});
+                   } )( jQuery );";
+		wp_add_inline_script( 'yith-infs', $js );
+	}
+}
+
+
+
+
+
+require get_stylesheet_directory() . '/woocommerce-customizations.php';
+
+
+
+
+// disable lazy loading
+add_filter('wp_lazy_loading_enabled', '__return_false');
