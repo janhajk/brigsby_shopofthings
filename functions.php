@@ -172,3 +172,77 @@ add_filter( 'wp_lazy_loading_enabled', '__return_false' );
 if ( file_exists( get_stylesheet_directory() . '/woocommerce-customizations.php' ) ) {
     require_once get_stylesheet_directory() . '/woocommerce-customizations.php';
 }
+
+
+/**
+ * Overwrite the 'narrow-left-right' from 6/3/3 to 8/2/2
+ * defined in theme brigsby
+ *
+ *
+ *
+ *
+ */
+function hoot_set_current_layout( $sidebar ) {
+	$spans = apply_filters( 'hoot_main_layout_spans', array(
+		'none' => array(
+			'content' => 9,
+			'sidebar' => 0,
+		),
+		'full' => array(
+			'content' => 12,
+			'sidebar' => 0,
+		),
+		'full-width' => array(
+			'content' => 12,
+			'sidebar' => 0,
+		),
+		'narrow-right' => array(
+			'content' => 9,
+			'sidebar' => 3,
+		),
+		'wide-right' => array(
+			'content' => 8,
+			'sidebar' => 4,
+		),
+		'narrow-left' => array(
+			'content' => 9,
+			'sidebar' => 3,
+		),
+		'wide-left' => array(
+			'content' => 8,
+			'sidebar' => 4,
+		),
+		'narrow-left-left' => array(
+			'content' => 6,
+			'sidebar' => 3,
+		),
+		'narrow-left-right' => array(
+			'content' => 8,
+			'sidebar' => 2,
+		),
+		'narrow-right-left' => array(
+			'content' => 6,
+			'sidebar' => 3,
+		),
+		'narrow-right-right' => array(
+			'content' => 6,
+			'sidebar' => 3,
+		),
+		'default' => array(
+			'content' => 8,
+			'sidebar' => 4,
+		),
+	) );
+
+	/* Set the layout for current view */
+	global $hoot_theme;
+	$hoot_theme->currentlayout['layout'] = $sidebar;
+	if ( isset( $spans[ $sidebar ] ) ) {
+		$hoot_theme->currentlayout['content'] = $spans[ $sidebar ]['content'];
+		$hoot_theme->currentlayout['sidebar'] = $spans[ $sidebar ]['sidebar'];
+	} else {
+		$hoot_theme->currentlayout['content'] = $spans['default']['content'];
+		$hoot_theme->currentlayout['sidebar'] = $spans['default']['sidebar'];
+	}
+
+}
