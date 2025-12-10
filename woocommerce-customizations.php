@@ -283,7 +283,7 @@ add_action('woocommerce_single_product_summary', 'sot_show_product_meta_custom',
 
 function enqueue_custom_styles() {
     if (is_product()) {
-        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.11');
+        wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.12');
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_styles');
