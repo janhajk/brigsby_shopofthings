@@ -282,7 +282,7 @@ remove_action('woocommerce_single_product_summary', 'woocommerce_template_single
 add_action('woocommerce_single_product_summary', 'sot_show_product_meta_custom', 5);
 
 function enqueue_custom_styles() {
-    if (is_product()) {
+    if ( function_exists( 'is_product' ) && is_product() ) {
         wp_enqueue_style('woocommerce-customizations', get_stylesheet_directory_uri() . '/woocommerce-customizations.css', array(), '1.0.11');
     }
 }
