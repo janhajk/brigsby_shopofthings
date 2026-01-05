@@ -38,9 +38,9 @@
                 <div class="footer-column">
                     <h4>Unternehmen</h4>
                     <ul>
-                        <li><a href="/ueber-uns">Über uns</a></li>
+                        <li><a href="/ueber-uns/">Über uns</a></li>
                         <li><a href="/agb">AGB</a></li>
-                        <li><a href="/datenschutz">Datenschutz</a></li>
+                        <li><a href="/privacy">Datenschutz</a></li>
                         <li><a href="/impressum">Impressum</a></li>
                         <li><a href="/nachhaltigkeit">Nachhaltigkeit</a></li>
                     </ul>
