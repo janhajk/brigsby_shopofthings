@@ -38,8 +38,8 @@
                 <div class="sot-topbar-right">
                     <!-- Lupe: Toggle für dein Search-Widget -->
                     <a href="#" class="sot-icon sot-search-toggle" aria-label="Suche">
-                        <i class="fas fa-search"></i>
-                        <i class="fas fa-times sot-search-close" style="display:none;"></i>
+                        <i class="far fa-search"></i>
+                        <i class="far fa-times sot-search-close" style="display:none;"></i>
                     </a>
 
                     <!-- DROPDOWN SUCHE: Nur aus unserem neuen dedizierten Bereich -->
@@ -56,12 +56,12 @@
 
                     <!-- WooCommerce Mini-Cart (dynamisch mit Count) -->
                     <a href="<?php echo wc_get_cart_url(); ?>" class="sot-icon sot-cart">
-                        <i class="fas-regular fa-shopping-cart"></i>
+                        <i class="far fa-shopping-cart"></i>
                         <?php if (WC()->cart->get_cart_contents_count() > 0): ?>
                             <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                         <?php endif; ?>
                     </a>
-                    <a href="/my-account" class="sot-icon"><i class="fas-regular fa-user"></i></a>
+                    <a href="/my-account" class="sot-icon"><i class="far fa-user"></i></a>
 
                     <!-- Sprache -->
                     <span class="sot-language">DE</span>
