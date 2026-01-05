@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.0.15
+ Version:       3.0.16
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -16,6 +16,7 @@
     --SOT---blue-deep: #1D2E7C;  /* Dein tiefes Blau für ShopOfThings */
     --sot-topbar-height: 45px;  /* Passe Höhe an */
     --sot-topbar-mobile-height: 90px;  /* Mehr Platz auf Mobile */
+    --SOT---light-gray: #F4F9FC;
 }
 
 
@@ -27,6 +28,7 @@ a {
 
 body {
       font-size: 13px;
+      
 }
 
 
@@ -910,27 +912,14 @@ input.product-search-field {
 
 
 
-Hier ist der komplette, finale und konsolidierte CSS-Block für deinen fixed Top-Bar. Er enthält:
-
-Alle bisherigen Optimierungen
-Deine letzte Anpassung mit padding: 2px auf Desktop
-Die neue Mobile-Optimierung (flexible Höhe, gestackte Zeilen, Buttons versteckt)
-Große Touch-Ziele auf Mobile
-Dynamische body-Padding
-
-Kopiere das einfach komplett in deine Child-Theme style.css (am besten den alten Top-Bar-Abschnitt ersetzen).
-CSS:root {
-    --sot-topbar-height: 50px;         /* Desktop-Höhe */
-    --sot-topbar-mobile-height: 100px; /* Mobile-Höhe (mehr Platz für 2 Zeilen) */
-}
-
 /* FIXED TOP-BAR – Basis */
 .sot-topbar-fixed {
     position: fixed;
+    color: var(--SOT---blue-deep);
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(240, 248, 255, 0.98);
+    background: var(--SOT---light-gray);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid #e0e7ff;
     z-index: 99999;
