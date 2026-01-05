@@ -63,7 +63,7 @@
                     <ul>
                         <li><a href="/partner-werden">Partner werden</a></li>
                         <li><a href="/blog">Blog</a></li>
-                        <li><a href="/katalog">Katalog</a></li>
+                        <li><a href="/shop">Katalog</a></li>
                         <li><a href="/newsletter">Newsletter</a></li>
                     </ul>
                 </div>
@@ -87,7 +87,7 @@
     <!-- Copyright-Zeile -->
     <div class="footer-bottom">
         <div class="col-full">
-            <p>&copy; <?php echo date('Y'); ?> Thingware GmbH | Wir versenden grün 🌿 mit Biobiene®</p>
+            <p>&copy; <?php echo date('Y'); ?> Thingware GmbH | Wir versenden grün 🌿</p>
         </div>
     </div>
 
