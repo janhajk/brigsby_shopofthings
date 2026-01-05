@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.0.2
+ Version:       3.0.3
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -902,5 +902,127 @@ input.product-search-field {
     }
     .newsletter-form input[type="email"] {
         max-width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* Fixed Top-Bar – immer zuoberst */
+.sot-topbar-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(240, 248, 255, 0.95); /* Hellblau-Transparent wie im Screenshot */
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #ddd;
+    z-index: 9999;
+    padding: 8px 0;
+    font-size: 0.9rem;
+}
+
+.sot-topbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.sot-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #333;
+}
+
+.sot-flag {
+    font-size: 1.2rem;
+}
+
+.sot-phone a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sot-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.sot-icon {
+    color: #333;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.sot-cart {
+    position: relative;
+}
+
+.sot-cart .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #a46497;
+    color: #fff;
+    font-size: 0.7rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sot-language {
+    font-weight: bold;
+    color: #333;
+}
+
+.sot-btn {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sot-btn-compare {
+    background: transparent;
+    color: #333;
+    border: 1px solid #333;
+}
+
+.sot-btn-request {
+    background: #1D2E7C;
+    color: #fff;
+}
+
+/* Abstand für den Rest der Seite, damit nichts unter dem fixed Bar verschwindet */
+body {
+    padding-top: 50px; /* Anpassen je nach Höhe deines Top-Bars */
+}
+
+/* Mobile Optimierung */
+@media (max-width: 768px) {
+    .sot-topbar-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    .sot-topbar-left, .sot-topbar-right {
+        justify-content: center;
+    }
+    body {
+        padding-top: 80px;
     }
 }
