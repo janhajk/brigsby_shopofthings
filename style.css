@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.0.12
+ Version:       3.0.13
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -911,19 +911,17 @@ input.product-search-field {
 
 
 
-
-
-/* FIXED TOP-BAR: Full-width mit Brigsby .hgrid Padding (15px L/R) */
+/* FIXED TOP-BAR – immer zuoberst */
 .sot-topbar-fixed {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    height: var(--sot-topbar-height);
     background: rgba(240, 248, 255, 0.98);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid #e0e7ff;
-    z-index: 99999; 
-    height: var(--sot-topbar-height);
+    z-index: 99999;
     box-sizing: border-box;
 }
 
@@ -934,34 +932,10 @@ input.product-search-field {
     height: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 30px;  /* Links/Rechts-Abstand – passt zu Brigsby */
 }
 
-
-/*.sot-topbar-fixed {*/
-/*    position: fixed;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-    /*background: rgba(240, 248, 255, 0.95); */
-/*    backdrop-filter: blur(8px);*/
-/*    border-bottom: 1px solid #ddd;*/
-/*    z-index: 9999;*/
-/*    padding: 8px 0;*/
-/*    font-size: 0.9rem;*/
-/*}*/
-
-/*.sot-topbar-content {*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    align-items: center;*/
-/*    flex-wrap: wrap;*/
-/*    padding: 0 30px;*/
-/*}*/
-
-
-
-
+/* Linke Seite: Flagge + Text + Telefon */
 .sot-topbar-left {
     display: flex;
     align-items: center;
@@ -972,6 +946,8 @@ input.product-search-field {
 
 .sot-flag-svg {
     flex-shrink: 0;
+    width: 24px;
+    height: 24px;
 }
 
 .sot-phone {
@@ -980,6 +956,7 @@ input.product-search-field {
     text-decoration: none;
 }
 
+/* Rechte Seite: Icons + Buttons */
 .sot-topbar-right {
     display: flex;
     align-items: center;
@@ -992,6 +969,11 @@ input.product-search-field {
     text-decoration: none;
     position: relative;
     padding: 4px;
+    transition: color 0.2s;
+}
+
+.sot-icon:hover {
+    color: var(--SOT---blue-deep, #1D2E7C);
 }
 
 .sot-cart .cart-count {
@@ -1029,12 +1011,21 @@ input.product-search-field {
     color: #374151;
 }
 
+.sot-btn-compare:hover {
+    background: #374151;
+    color: white;
+}
+
 .sot-btn-request {
     background: var(--SOT---blue-deep, #1D2E7C);
     color: white;
 }
 
-/* SUCHE TOGGLE: Versteckt → Slide-Down */
+.sot-btn-request:hover {
+    background: #152060;
+}
+
+/* SUCHE DROPDOWN – Toggle mit Scroll */
 .sot-search-dropdown {
     position: absolute;
     top: 100%;
@@ -1046,26 +1037,31 @@ input.product-search-field {
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.4s ease, padding 0.3s ease;
     z-index: 10000;
     width: 100%;
 }
 
 .sot-search-dropdown.active {
-    max-height: 120px;  /* Höhe deines Widgets */
-    padding: 15px;
+    max-height: 500px;     /* Genug für viele Results */
+    overflow-y: auto;      /* Scrollbar bei Bedarf */
+    padding: 20px 30px;    /* Innenabstand + ausgerichtet mit Top-Bar */
 }
 
+/* Close-Icon beim offenen Zustand */
 .sot-search-toggle .sot-search-close {
     display: none !important;
 }
+.sot-search-toggle.active .fas.fa-search {
+    display: none;
+}
+.sot-search-toggle.active .sot-search-close {
+    display: inline !important;
+}
 
-.sot-search-toggle.active .fas.fa-search { display: none; }
-.sot-search-toggle.active .sot-search-close { display: inline !important; }
-
+/* Suchformular Styling */
 .sot-search-dropdown .widget {
     margin: 0;
-    padding: 0 20px;
 }
 
 .sot-search-dropdown .search-form,
@@ -1073,39 +1069,54 @@ input.product-search-field {
     display: flex;
     align-items: center;
     gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .sot-search-dropdown input[type="search"] {
-    width: 300px;
-    max-width: 100%;
-    padding: 10px 15px;
+    flex: 1;
+    padding: 12px 20px;
     border: 1px solid #ccc;
     border-radius: 30px;
+    font-size: 1rem;
 }
 
 .sot-search-dropdown input[type="submit"],
 .sot-search-dropdown button[type="submit"] {
-    padding: 10px 20px;
+    padding: 12px 24px;
     background: var(--SOT---blue-deep, #1D2E7C);
     color: white;
     border: none;
     border-radius: 30px;
     cursor: pointer;
+    font-weight: 600;
 }
 
-/* Mobile: Vollbreit */
+/* Body-Abstand unter dem fixed Bar */
+body {
+    padding-top: var(--sot-topbar-height);
+}
+
+/* Mobile Optimierungen */
 @media (max-width: 768px) {
+    .sot-topbar-content {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 15px;
+    }
+    .sot-topbar-left,
+    .sot-topbar-right {
+        width: 100%;
+        justify-content: center;
+    }
+    .sot-search-dropdown.active {
+        padding: 15px;
+    }
+    .sot-search-dropdown .search-form,
+    .sot-search-dropdown .woocommerce-product-search {
+        flex-direction: column;
+    }
     .sot-search-dropdown input[type="search"] {
         width: 100%;
     }
-}
-
-/* Body-Padding: Inhalt unter Top-Bar */
-body { padding-top: var(--sot-topbar-height); }
-
-/* Mobile: Stacken */
-@media (max-width: 768px) {
-    .sot-topbar-content { flex-wrap: wrap; gap: 10px; }
-    .sot-topbar-left { order: 1; width: 100%; justify-content: center; }
-    .sot-topbar-right { order: 2; width: 100%; justify-content: center; }
 }

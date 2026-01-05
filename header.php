@@ -57,7 +57,7 @@
                     <!-- WooCommerce Mini-Cart (dynamisch mit Count) -->
                     <a href="<?php echo wc_get_cart_url(); ?>" class="sot-icon sot-cart">
                         <i class="fas fa-shopping-cart"></i>
-                        <?php if (WC()->cart->get_cart_contents_count() > 0): ?>
+                        <?php if (WC()     ->cart->get_cart_contents_count() > 0): ?>
                             <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                         <?php endif; ?>
                     </a>
