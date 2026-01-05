@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.0.9
+ Version:       3.0.10
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -914,50 +914,50 @@ input.product-search-field {
 
 
 /* FIXED TOP-BAR: Full-width mit Brigsby .hgrid Padding (15px L/R) */
-/*.sot-topbar-fixed {*/
-/*    position: fixed;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    background: rgba(240, 248, 255, 0.98);*/
-/*    backdrop-filter: blur(10px);*/
-/*    border-bottom: 1px solid #e0e7ff;*/
-/*    z-index: 99999; */
-/*    height: var(--sot-topbar-height);*/
-/*    box-sizing: border-box;*/
-/*}*/
-
-/*.sot-topbar-content {*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    align-items: center;*/
-/*    height: 100%;*/
-/*    max-width: 1200px;*/
-/*    margin: 0 auto;*/
-/*    padding: 0 30px;*/
-/*}*/
-
-
 .sot-topbar-fixed {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(240, 248, 255, 0.95); /* Hellblau-Transparent wie im Screenshot */
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid #ddd;
-    z-index: 9999;
-    padding: 8px 0;
-    font-size: 0.9rem;
+    background: rgba(240, 248, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e0e7ff;
+    z-index: 99999; 
+    height: var(--sot-topbar-height);
+    box-sizing: border-box;
 }
 
 .sot-topbar-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 0 30px;
 }
+
+
+/*.sot-topbar-fixed {*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+    /*background: rgba(240, 248, 255, 0.95); */
+/*    backdrop-filter: blur(8px);*/
+/*    border-bottom: 1px solid #ddd;*/
+/*    z-index: 9999;*/
+/*    padding: 8px 0;*/
+/*    font-size: 0.9rem;*/
+/*}*/
+
+/*.sot-topbar-content {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    flex-wrap: wrap;*/
+/*    padding: 0 30px;*/
+/*}*/
 
 
 
