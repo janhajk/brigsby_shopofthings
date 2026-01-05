@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.0.5
+ Version:       3.0.6
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -14,6 +14,7 @@
 
 :root {
     --SOT---blue-deep: #1D2E7C;  /* Dein tiefes Blau für ShopOfThings */
+    --sot-topbar-height: 45px;  /* Passe Höhe an */
 }
 
 
@@ -912,72 +913,71 @@ input.product-search-field {
 
 
 
-
-
-/* Fixed Top-Bar – immer zuoberst */
+/* FIXED TOP-BAR: Full-width mit Brigsby .hgrid Padding (15px L/R) */
 .sot-topbar-fixed {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(240, 248, 255, 0.95); /* Hellblau-Transparent wie im Screenshot */
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid #ddd;
-    z-index: 9999;
-    padding: 8px 0;
-    font-size: 0.9rem;
+    background: rgba(240, 248, 255, 0.98); /* Screenshot-Farbe */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e0e7ff;
+    z-index: 99999;  /* Höher als Header */
+    height: var(--sot-topbar-height);
+    box-sizing: border-box;
 }
 
 .sot-topbar-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    padding: 0 30px;
+    height: 100%;
+    max-width: 1200px;  /* Brigsby-typisch */
+    margin: 0 auto;
+    padding: 0 30px;  /* Links/Rechts-Rand fixen! */
 }
 
 .sot-topbar-left {
     display: flex;
     align-items: center;
-    gap: 15px;
-    color: #333;
+    gap: 12px;
+    font-weight: 500;
+    color: #1e40af;
 }
 
-.sot-flag {
-    font-size: 1.2rem;
+.sot-flag-svg {
+    flex-shrink: 0;
 }
 
-.sot-phone a {
-    color: #333;
+.sot-phone {
+    color: #1e40af;
+    font-weight: 600;
     text-decoration: none;
-    font-weight: bold;
 }
 
 .sot-topbar-right {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .sot-icon {
-    color: #333;
+    color: #374151;
     font-size: 1.1rem;
     text-decoration: none;
-}
-
-.sot-cart {
     position: relative;
+    padding: 4px;
 }
 
 .sot-cart .cart-count {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    background: #a46497;
-    color: #fff;
+    top: -4px;
+    right: -4px;
+    background: var(--SOT---accent, #a46497);
+    color: white;
     font-size: 0.7rem;
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -985,45 +985,65 @@ input.product-search-field {
 }
 
 .sot-language {
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.9rem;
 }
 
 .sot-btn {
-    padding: 6px 14px;
-    border-radius: 30px;
+    padding: 6px 16px;
+    border-radius: 20px;
     font-size: 0.85rem;
+    font-weight: 600;
     text-decoration: none;
-    font-weight: bold;
+    transition: all 0.2s;
 }
 
 .sot-btn-compare {
-    background: transparent;
-    color: #333;
-    border: 1px solid #333;
+    border: 1px solid #374151;
+    color: #374151;
 }
 
 .sot-btn-request {
-    background: #1D2E7C;
-    color: #fff;
+    background: var(--SOT---blue-deep, #1D2E7C);
+    color: white;
 }
 
-/* Abstand für den Rest der Seite, damit nichts unter dem fixed Bar verschwindet */
-body {
-    padding-top: 50px; /* Anpassen je nach Höhe deines Top-Bars */
+/* SUCHE TOGGLE: Versteckt → Slide-Down */
+.sot-search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e0e7ff;
+    border-top: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    z-index: 10000;
+    width: 100%;
 }
 
-/* Mobile Optimierung */
+.sot-search-dropdown.active {
+    max-height: 120px;  /* Höhe deines Widgets */
+    padding: 15px;
+}
+
+.sot-search-toggle .sot-search-close {
+    display: none !important;
+}
+
+.sot-search-toggle.active .fas.fa-search { display: none; }
+.sot-search-toggle.active .sot-search-close { display: inline !important; }
+
+/* Body-Padding: Inhalt unter Top-Bar */
+body { padding-top: var(--sot-topbar-height); }
+
+/* Mobile: Stacken */
 @media (max-width: 768px) {
-    .sot-topbar-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    .sot-topbar-left, .sot-topbar-right {
-        justify-content: center;
-    }
-    body {
-        padding-top: 80px;
-    }
+    .sot-topbar-content { flex-wrap: wrap; gap: 10px; }
+    .sot-topbar-left { order: 1; width: 100%; justify-content: center; }
+    .sot-topbar-right { order: 2; width: 100%; justify-content: center; }
 }

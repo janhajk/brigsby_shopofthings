@@ -415,3 +415,41 @@ require get_stylesheet_directory() . '/woocommerce-customizations.php';
 
 // disable lazy loading
 add_filter('wp_lazy_loading_enabled', '__return_false');
+
+
+
+
+
+
+function sot_topbar_scripts() {
+    wp_enqueue_script('jquery');
+    ?>
+    <script type="text/javascript">
+    jQuery(document).ready(function($) {
+        // Lupe Toggle
+        $('.sot-search-toggle').on('click', function(e) {
+            e.preventDefault();
+            $('.sot-search-dropdown, .sot-search-toggle').toggleClass('active');
+            if ($('.sot-search-dropdown').hasClass('active')) {
+                $('.sot-search-dropdown input[type="search"]').focus();  // Fokus ins Feld
+            }
+        });
+
+        // ESC schließt Suche
+        $(document).keyup(function(e) {
+            if (e.keyCode === 27) {  // ESC
+                $('.sot-search-dropdown, .sot-search-toggle').removeClass('active');
+            }
+        });
+
+        // Klick außerhalb schließt
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.sot-search-toggle, .sot-search-dropdown').length) {
+                $('.sot-search-dropdown, .sot-search-toggle').removeClass('active');
+            }
+        });
+    });
+    </script>
+    <?php
+}
+add_action('wp_footer', 'sot_topbar_scripts');
