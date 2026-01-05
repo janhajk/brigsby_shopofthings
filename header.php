@@ -50,9 +50,10 @@
                     </div>
 
                     <!-- Wunschliste -->
-                    <a href="<?php echo wc_get_cart_url(); ?>?wishlist" class="sot-icon">
+                    <!--<a href="<?php echo wc_get_cart_url(); ?>?wishlist" class="sot-icon">
                         <i class="far fa-heart"></i>
-                    </a>
+                    </a>-->
+                    <a href="/my-account" class="sot-icon"><i class="fas fa-user"></i></a>
 
                     <!-- WooCommerce Mini-Cart (dynamisch mit Count) -->
                     <a href="<?php echo wc_get_cart_url(); ?>" class="sot-icon sot-cart">
