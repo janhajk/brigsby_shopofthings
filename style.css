@@ -5,11 +5,16 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       2.0.1
+ Version:       3.0.0
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
 */
+
+
+:root {
+    --SOT---blue-deep: #1D2E7C;  /* Dein tiefes Blau für ShopOfThings */
+}
 
 
 a {
@@ -790,7 +795,7 @@ input.product-search-field {
 /* new footer */
 
 .site-footer {
-    background: linear-gradient(to bottom, #0a1f3d, #0d2b5a);
+    background: var(--SOT---blue-deep, #1D2E7C);
     color: #ccc;
     font-size: 0.95rem;
 }
@@ -799,6 +804,8 @@ input.product-search-field {
     padding: 60px 20px;
     text-align: center;
     border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(151.57deg, #3B7FC2 10.25%, #3369AF 17.68%, #214393 35.75%, var(--SOT---blue-deep) 52.54%);
+
 }
 
 .footer-newsletter h3 {

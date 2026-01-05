@@ -50,10 +50,10 @@
                 <div class="footer-column">
                     <h4>Support</h4>
                     <ul>
-                        <li><a href="/versand-rueckgabe">Versand & Rückgabe</a></li>
-                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/lieferung-und-versandkosten/">Versand & Rückgabe</a></li>
+                        <!--<li><a href="/faq">FAQ</a></li>-->
                         <li><a href="/kontakt">Kontakt</a></li>
-                        <li><a href="/supportportal">Supportportal</a></li>
+                        <!--<li><a href="/supportportal">Supportportal</a></li>-->
                     </ul>
                 </div>
 
