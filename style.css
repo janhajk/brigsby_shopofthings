@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.0.19
+ Version:       3.0.20
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -17,6 +17,7 @@
     --SOT---light-gray: #F4F9FC;
     --sot-topbar-height: 50px;
     --sot-topbar-mobile-height: 100px;
+    --sot-max-width: 1750px;
 }
 
 
@@ -101,7 +102,7 @@ body {
  * ========================================================
  */
 .hgrid {
-      max-width: 1750px;
+      max-width: var(--sot-max-width);
 }
 
 
@@ -944,7 +945,7 @@ input.product-search-field {
     
     /* WICHTIG: Gleiches Grid wie Content-Bereich */
     .sot-topbar-fixed .hgrid {
-        max-width: 1200px;  /* Oder was auch immer Brigsby nutzt */
+        max-width: var(--sot-max-width);  /* Oder was auch immer Brigsby nutzt */
         margin: 0 auto;
         padding: 0 30px;    /* Brigsby-Standard Padding L/R */
     }
