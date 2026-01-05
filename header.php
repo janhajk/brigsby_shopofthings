@@ -31,7 +31,7 @@
 
                 <!-- Rechte Seite: Icons + Buttons -->
                 <div class="sot-topbar-right">
-                    <a href="/suche" class="sot-icon"><i class="fas fa-search"></i></a>
+                    <a href="/suche" class="sot-icon"><i class=fas fa-user"></i></a>
                     <!--<a href="/wunschliste" class="sot-icon"><i class="far fa-heart"></i></a>-->
                     <a href="/cart" class="sot-icon sot-cart">
                         <i class="fas fa-shopping-cart"></i>
@@ -39,6 +39,7 @@
                             <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                         <?php endif; ?>
                     </a>
+                    <a href="/my-account" class="sot-icon"><i class="fas fa-search"></i></a>
                     <span class="sot-language">DE</span>
                     <a href="/compare" class="sot-btn sot-btn-compare">Produktvergleich</a>
                     <a href="/angebot-anfordern" class="sot-btn sot-btn-request">Angebot anfordern</a>
