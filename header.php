@@ -18,7 +18,7 @@
     <!-- DEIN NEUER FIXED TOP-BAR -->
     <div class="sot-topbar-fixed">
         <div class="hgrid">
-            <div class="sot-topbar-content">
+            <div class="sot-topbar-content hgrid-span-12">
 
                 <!-- Linke Seite: Infos -->
                 <div class="sot-topbar-left">
