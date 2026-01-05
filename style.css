@@ -1000,7 +1000,7 @@ input.product-search-field {
 .sot-phone {
     color: #1e40af;
     font-weight: 600;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 /* Rechte Seite */
