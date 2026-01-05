@@ -12,12 +12,12 @@
 <footer class="site-footer">
 
     <!-- Newsletter-Bereich -->
+    <!--
     <div class="footer-newsletter">
         <div class="col-full">
             <h3>Newsletter abonnieren</h3>
             <p>Bleiben Sie informiert über neue Produkte und IoT-Trends</p>
             
-            <!-- Hier kannst du später ein echtes Formular einbauen (z. B. mit Mailchimp, Brevo oder WP-Plugin) -->
             <form class="newsletter-form">
                 <input type="email" placeholder="Ihre E-Mail-Adresse" required>
                 <label class="checkbox-label">
@@ -28,6 +28,7 @@
             </form>
         </div>
     </div>
+    -->
 
     <!-- Haupt-Footer mit 4 Spalten -->
     <div class="footer-main">
