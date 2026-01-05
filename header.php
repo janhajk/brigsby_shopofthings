@@ -42,10 +42,10 @@
                         <i class="fas fa-times sot-search-close" style="display:none;"></i>
                     </a>
 
-                    <!-- DROPDOWN SUCHE: Dynamisch aus Header-Sidebar-Widget (du legst es dort rein) -->
+                    <!-- DROPDOWN SUCHE: Nur aus unserem neuen dedizierten Bereich -->
                     <div class="sot-search-dropdown">
-                        <?php if (function_exists('dynamic_sidebar') && is_active_sidebar('header-side')): ?>
-                            <?php dynamic_sidebar('header-side'); // Dein Search-Widget hier! ?>
+                        <?php if (function_exists('dynamic_sidebar') && is_active_sidebar('sot-topbar-search')): ?>
+                            <?php dynamic_sidebar('sot-topbar-search'); ?>
                         <?php endif; ?>
                     </div>
 
@@ -53,15 +53,15 @@
                     <!--<a href="<?php echo wc_get_cart_url(); ?>?wishlist" class="sot-icon">
                         <i class="far fa-heart"></i>
                     </a>-->
-                    <a href="/my-account" class="sot-icon"><i class="fas fa-user"></i></a>
 
                     <!-- WooCommerce Mini-Cart (dynamisch mit Count) -->
                     <a href="<?php echo wc_get_cart_url(); ?>" class="sot-icon sot-cart">
-                        <i class="fas fa-shopping-cart"></i>
+                        <i class="fas-regular fa-shopping-cart"></i>
                         <?php if (WC()->cart->get_cart_contents_count() > 0): ?>
                             <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                         <?php endif; ?>
                     </a>
+                    <a href="/my-account" class="sot-icon"><i class="fas-regular fa-user"></i></a>
 
                     <!-- Sprache -->
                     <span class="sot-language">DE</span>

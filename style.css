@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.0.7
+ Version:       3.0.9
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -914,28 +914,53 @@ input.product-search-field {
 
 
 /* FIXED TOP-BAR: Full-width mit Brigsby .hgrid Padding (15px L/R) */
+/*.sot-topbar-fixed {*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    background: rgba(240, 248, 255, 0.98);*/
+/*    backdrop-filter: blur(10px);*/
+/*    border-bottom: 1px solid #e0e7ff;*/
+/*    z-index: 99999; */
+/*    height: var(--sot-topbar-height);*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+/*.sot-topbar-content {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    height: 100%;*/
+/*    max-width: 1200px;*/
+/*    margin: 0 auto;*/
+/*    padding: 0 30px;*/
+/*}*/
+
+
 .sot-topbar-fixed {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(240, 248, 255, 0.98); /* Screenshot-Farbe */
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #e0e7ff;
-    z-index: 99999;  /* Höher als Header */
-    height: var(--sot-topbar-height);
-    box-sizing: border-box;
+    background: rgba(240, 248, 255, 0.95); /* Hellblau-Transparent wie im Screenshot */
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #ddd;
+    z-index: 9999;
+    padding: 8px 0;
+    font-size: 0.9rem;
 }
 
 .sot-topbar-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
-    max-width: 1200px;  /* Brigsby-typisch */
-    margin: 0 auto;
-    padding: 0 30px;  /* Links/Rechts-Rand fixen! */
+    flex-wrap: wrap;
+    padding: 0 30px;
 }
+
+
+
 
 .sot-topbar-left {
     display: flex;
@@ -1037,6 +1062,43 @@ input.product-search-field {
 
 .sot-search-toggle.active .fas.fa-search { display: none; }
 .sot-search-toggle.active .sot-search-close { display: inline !important; }
+
+.sot-search-dropdown .widget {
+    margin: 0;
+    padding: 0 20px;
+}
+
+.sot-search-dropdown .search-form,
+.sot-search-dropdown .woocommerce-product-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sot-search-dropdown input[type="search"] {
+    width: 300px;
+    max-width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+}
+
+.sot-search-dropdown input[type="submit"],
+.sot-search-dropdown button[type="submit"] {
+    padding: 10px 20px;
+    background: var(--SOT---blue-deep, #1D2E7C);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+/* Mobile: Vollbreit */
+@media (max-width: 768px) {
+    .sot-search-dropdown input[type="search"] {
+        width: 100%;
+    }
+}
 
 /* Body-Padding: Inhalt unter Top-Bar */
 body { padding-top: var(--sot-topbar-height); }

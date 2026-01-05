@@ -421,6 +421,22 @@ add_filter('wp_lazy_loading_enabled', '__return_false');
 
 
 
+
+function sot_register_topbar_search_widget_area() {
+    register_sidebar( array(
+        'name'          => __( 'Top-Bar Suche', 'brigsby_shopofthings' ),
+        'id'            => 'sot-topbar-search',
+        'description'   => __( 'Widget-Bereich für die Suche im fixed Top-Bar (erscheint nur bei Klick auf Lupe)', 'brigsby_shopofthings' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+}
+add_action( 'widgets_init', 'sot_register_topbar_search_widget_area' );
+
+
+
 function sot_topbar_scripts() {
     wp_enqueue_script('jquery');
     ?>
