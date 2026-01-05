@@ -64,7 +64,7 @@
                     <a href="/my-account" class="sot-icon"><i class="far fa-user"></i></a>
 
                     <!-- Sprache -->
-                    <span class="sot-language">DE</span>
+                    <span class="sot-language" title="please use browser translation to translate to your own language. We're working on a better solution, thank you!">DE</span>
 
                     <!-- Buttons -->
                     <a href="/produktvergleich" class="sot-btn sot-btn-compare">Produktvergleich</a>
