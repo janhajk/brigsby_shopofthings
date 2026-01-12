@@ -78,8 +78,8 @@ get_header();
 	                src="<?php echo get_stylesheet_directory_uri(); ?>/images/hero01.png" 
 	                alt="Surreal Schweizer IoT-Landschaft" 
 	                loading="eager"
-	                width="1440" 
-	                height="852"
+	                width="560" 
+	                height="612"
 	            >
 	        </div>
 	    </div>

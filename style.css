@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.5
+ Version:       3.1.6
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -18,6 +18,7 @@
     --sot-topbar-height: 50px;
     --sot-topbar-mobile-height: 100px;
     --sot-max-width: 1750px;
+    --sot-black: #000;
 }
 
 
@@ -1167,12 +1168,12 @@ input.product-search-field {
 
 
 /* front page */
-/* ── Hero – Rechtslastig (Text links, Bild rechts dominant) ─────────────── */
+/* ── Hero  ───────────────────────────────────────────────────────────────────────────────────── */
 .sot-hero {
     position: relative;
     height: 852px;
     min-height: 80vh;
-    background: #ffffff;              /* Weißer Hintergrund wie gewünscht */
+    background: #ffffff;             
     overflow: hidden;
 }
 
@@ -1181,22 +1182,22 @@ input.product-search-field {
     display: flex;
     align-items: center;
     position: relative;
-    padding: 0 160px;                 /* Figma-Padding beibehalten */
+    padding: 0 160px;               
 }
 
 .hero-text {
     z-index: 10;
-    color: #0a1f3d;                   /* Dunkler Text auf hell */
+    color: #0a1f3d;                  
     padding-right: 80px;
     max-width: 720px;
-    text-shadow: none;                /* Kein Schatten nötig */
+    text-shadow: none;               
 }
 
 .hero-subtitle {
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 1.5rem;
-    color: #374151;
+    color: var(--sot-black);
     opacity: 0.9;
 }
 
@@ -1218,9 +1219,9 @@ input.product-search-field {
     bottom: 8px;
     left: 0;
     width: 100%;
-    height: 12px;
+    height: 3px;
     background: var(--SOT---blue-deep);
-    opacity: 0.65;
+    opacity: 0.95;
     z-index: -1;
 }
 
