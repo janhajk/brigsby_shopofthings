@@ -1,8 +1,8 @@
 <?php
-/**
- * front-page.php – Custom Startseite für ShopOfThings
- */
-get_header(); // Dein Header mit Top-Bar
+/*
+Template Name: Test Startseite
+*/
+get_header();
 ?>
 
 <main id="main-content" class="sot-frontpage">
