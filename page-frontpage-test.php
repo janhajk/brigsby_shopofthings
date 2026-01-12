@@ -19,7 +19,7 @@ get_header();
 	
 	            <h1 class="hero-title">
 	                Ihr Schweizer <span class="highlight">Shop</span><br>
-	                für IoT-Hardware<br>
+	                für <span class="highlight">IoT</span>-Hardware<br>
 	                und Integration.
 	            </h1>
 	
