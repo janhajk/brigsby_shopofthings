@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.16
+ Version:       3.1.17
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -1346,21 +1346,43 @@ input.product-search-field {
     top: 300px;
     
     /* Animation: 8px runter + hoch, sanft, Endlosschleife */
-    animation: heroFloat 3s ease-in-out infinite;
+    animation: heroFloatRandom 12s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+    
 }
 
-@keyframes heroFloat {
-    0%, 100% {
+@keyframes heroFloatRandom {
+    0% {
         transform: translate(0px, 0px);
     }
-    25% {
-        transform: translate(6px, 4px);   /* leicht nach rechts + runter */
+    10% {
+        transform: translate(4px, 2px);     /* leicht rechts + minimal runter */
+    }
+    20% {
+        transform: translate(-6px, 4px);    /* stärker links */
+    }
+    30% {
+        transform: translate(8px, 6px);     /* wieder rechts, etwas tiefer */
+    }
+    40% {
+        transform: translate(-3px, 8px);    /* leicht links, Mitte der Vertikalbewegung */
     }
     50% {
-        transform: translate(0px, 8px);   /* Mitte: runter */
+        transform: translate(0px, 12px);    /* Mitte: maximal runter */
     }
-    75% {
-        transform: translate(-6px, 4px);  /* leicht nach links + etwas runter */
+    60% {
+        transform: translate(5px, 10px);    /* leicht rechts beim Hochkommen */
+    }
+    70% {
+        transform: translate(-7px, 6px);    /* stärker links */
+    }
+    80% {
+        transform: translate(6px, 4px);     /* wieder rechts */
+    }
+    90% {
+        transform: translate(-4px, 2px);    /* leicht links, fast oben */
+    }
+    100% {
+        transform: translate(0px, 0px);     /* zurück zum Start */
     }
 }
 
