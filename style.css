@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.3
+ Version:       3.1.4
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -1168,13 +1168,12 @@ input.product-search-field {
 
 /* front page */
 /* ── Hero – Rechtslastig (Text links, Bild rechts dominant) ─────────────── */
-
 .sot-hero {
     position: relative;
     height: 852px;
     min-height: 80vh;
+    background: #ffffff;              /* Weißer Hintergrund wie gewünscht */
     overflow: hidden;
-    background: #0a1f3d;  /* Dein dunkles Blau – nicht zu schwarz */
 }
 
 .hero-grid {
@@ -1182,23 +1181,23 @@ input.product-search-field {
     display: flex;
     align-items: center;
     position: relative;
-    padding: 0 160px;  /* Figma-Padding */
+    padding: 0 160px;                 /* Figma-Padding beibehalten */
 }
 
 .hero-text {
     z-index: 10;
-    color: #f0f4ff;            /* Sehr helles Grau-Weiß – clean */
-    padding-right: 80px;       /* Mehr Abstand zum Bild */
+    color: #0a1f3d;                   /* Dunkler Text auf hell */
+    padding-right: 80px;
     max-width: 720px;
-    text-shadow: none;         /* Kein harter Schatten mehr */
+    text-shadow: none;                /* Kein Schatten nötig */
 }
 
 .hero-subtitle {
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 1.5rem;
+    color: #374151;
     opacity: 0.9;
-    letter-spacing: 1px;
 }
 
 .hero-title {
@@ -1206,6 +1205,7 @@ input.product-search-field {
     font-weight: 900;
     line-height: 1.08;
     margin: 0 0 3rem;
+    color: #0a1f3d;
 }
 
 .hero-title .highlight {
@@ -1230,32 +1230,66 @@ input.product-search-field {
     margin-bottom: 3.5rem;
 }
 
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 2.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #1D2E7C;
+    color: white;
+    border: 2px solid #1D2E7C;
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: #1D2E7C;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #1D2E7C;
+    border: 2px solid #1D2E7C;
+}
+
+.btn-secondary:hover {
+    background: #1D2E7C;
+    color: white;
+}
+
 .hero-badges {
     display: flex;
     flex-wrap: wrap;
     gap: 2.2rem;
     font-size: 1.15rem;
     font-weight: 500;
-    opacity: 0.9;
+    color: #374151;
 }
 
-/* Bild rechts – weicher Übergang nach links */
+/* Bild rechts – sehr weicher Fade nach links */
 .hero-image {
     position: absolute;
     top: 0;
-    right: -12%;               /* Leicht überstehend */
-    width: 68%;                /* Bild nimmt mehr Platz ein */
+    right: -10%;
+    width: 70%;
     height: 100%;
     z-index: 5;
     mask-image: linear-gradient(
         to left,
         transparent 0%,
-        black 30%                  /* Hier der weiche Fade nach links */
+        black 40%                     /* Weicherer, längerer Fade */
     );
     -webkit-mask-image: linear-gradient(
         to left,
         transparent 0%,
-        black 30%
+        black 40%
     );
 }
 
@@ -1268,16 +1302,9 @@ input.product-search-field {
 
 /* Responsive */
 @media (max-width: 1200px) {
-    .hero-grid {
-        padding: 0 100px;
-    }
-    .hero-title {
-        font-size: 4rem;
-    }
-    .hero-image {
-        right: -10%;
-        width: 65%;
-    }
+    .hero-grid { padding: 0 100px; }
+    .hero-title { font-size: 4rem; }
+    .hero-image { right: -8%; width: 68%; }
 }
 
 @media (max-width: 992px) {
@@ -1288,7 +1315,7 @@ input.product-search-field {
     }
     
     .hero-grid {
-        flex-direction: column-reverse;  /* Bild oben, Text unten */
+        flex-direction: column-reverse;
         padding: 80px 40px 60px;
         text-align: center;
     }
@@ -1315,6 +1342,15 @@ input.product-search-field {
         gap: 1.2rem;
     }
 }
+
+
+
+
+
+
+
+
+
 
 .sot-target-groups .target-cards,
 .sot-process .process-steps,

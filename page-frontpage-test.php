@@ -10,7 +10,8 @@ get_header();
 	<!-- Hero-Bereich – rechtslastig, weicher Übergang -->
 	<section class="sot-hero">
 	    <div class="hgrid hero-grid">
-	        <!-- Linker Text-Bereich -->
+	        
+	        <!-- Linker Text-Bereich (dunkler Text auf hell) -->
 	        <div class="hero-text hgrid-span-7 hgrid-span-tablet-12">
 	            <p class="hero-subtitle">
 	                IoT einfach gemacht – von Sensor bis Cloud.
@@ -34,10 +35,10 @@ get_header();
 	            </div>
 	        </div>
 	
-	        <!-- Rechter Bild-Bereich (weich auslaufend) -->
+	        <!-- Rechter Bild-Bereich – weicher Fade nach links -->
 	        <div class="hero-image hgrid-span-5 hgrid-span-tablet-12">
 	            <img 
-	                src="<?php echo get_stylesheet_directory_uri(); ?>/images/hero01.png" 
+	                src="<?php echo get_stylesheet_directory_uri(); ?>/images/hero-surreal-1440x852.jpg" 
 	                alt="Surreal Schweizer IoT-Landschaft" 
 	                loading="eager"
 	                width="1440" 
