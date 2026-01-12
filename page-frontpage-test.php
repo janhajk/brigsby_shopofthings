@@ -38,7 +38,7 @@ get_header();
 	        <!-- Rechter Bild-Bereich (ca. 40–50%, überstehend) -->
 	        <div class="hero-image hgrid-span-6 hgrid-span-tablet-12">
 	            <img 
-	                src="<?php echo get_stylesheet_directory_uri(); ?>/images/hero-surreal-1440x852.jpg" 
+	                src="<?php echo get_stylesheet_directory_uri(); ?>/images/hero01.png" 
 	                alt="Surreal Schweizer IoT-Landschaft" 
 	                loading="eager"
 	                width="1440" 
