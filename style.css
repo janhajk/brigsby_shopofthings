@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.20
+ Version:       3.1.21
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -1171,7 +1171,7 @@ input.product-search-field {
 /* ── Hero  ───────────────────────────────────────────────────────────────────────────────────── */
 .sot-hero {
     position: relative;
-    height: 852px;
+    height: 800px;
     min-height: 80vh;
     background: #ffffff;             
     overflow: hidden;
@@ -1332,8 +1332,8 @@ input.product-search-field {
         black 40%
     );
     background: url('images/hero01_bg.png');
-    background-position-x: 15%;
     background-position-y: 200px;
+    background-position-x: 15%;
     background-size: 560px 350px;
     background-repeat: no-repeat;
     overflow: hidden;  /* ← WICHTIG: verhindert Clipping der Animation */
