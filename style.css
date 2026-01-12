@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.7
+ Version:       3.1.8
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -1188,7 +1188,6 @@ input.product-search-field {
 .hero-text {
     z-index: 10;
     color: #0a1f3d;                  
-    padding-right: 80px;
     max-width: 720px;
     text-shadow: none;               
 }
@@ -1202,7 +1201,7 @@ input.product-search-field {
 }
 
 .hero-title {
-    font-size: 3rem;
+    font-size: 3.8rem;
     font-weight: 500;
     line-height: 1.1;
     margin: 0 0 3rem;
@@ -1274,6 +1273,10 @@ input.product-search-field {
     color: #374151;
 }
 
+.hero-badges .badge {
+    word-wrap: normal;
+}
+
 /* Bild rechts – sehr weicher Fade nach links */
 .hero-image {
     position: absolute;
@@ -1295,8 +1298,6 @@ input.product-search-field {
 }
 
 .hero-image img {
-    width: 55%;
-    height: 55%;
     object-fit: cover;
     object-position: center right;
 }
