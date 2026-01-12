@@ -1343,7 +1343,7 @@ input.product-search-field {
     object-fit: cover;
     object-position: center right;
     position: relative;
-    top: 100px;
+    top: 300px;
     
     /* Animation: 8px runter + hoch, sanft, Endlosschleife */
     animation: heroFloat 3s ease-in-out infinite;
@@ -1351,10 +1351,16 @@ input.product-search-field {
 
 @keyframes heroFloat {
     0%, 100% {
-        transform: translateY(0px);   /* Start-Position */
+        transform: translate(0px, 0px);
+    }
+    25% {
+        transform: translate(6px, 4px);   /* leicht nach rechts + runter */
     }
     50% {
-        transform: translateY(8px);   /* Max. 8px runter */
+        transform: translate(0px, 8px);   /* Mitte: runter */
+    }
+    75% {
+        transform: translate(-6px, 4px);  /* leicht nach links + etwas runter */
     }
 }
 
