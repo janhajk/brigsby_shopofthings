@@ -7,12 +7,11 @@ get_header();
 
 <main id="main-content" class="sot-frontpage">
 
-	<!-- 1. Hero-Bereich – rechtslastiges Layout mit Bild rechts, Text links -->
+	<!-- Hero-Bereich – rechtslastig, weicher Übergang -->
 	<section class="sot-hero">
 	    <div class="hgrid hero-grid">
-	        
-	        <!-- Linker Text-Bereich (ca. 50–60%) -->
-	        <div class="hero-text hgrid-span-6 hgrid-span-tablet-12">
+	        <!-- Linker Text-Bereich -->
+	        <div class="hero-text hgrid-span-7 hgrid-span-tablet-12">
 	            <p class="hero-subtitle">
 	                IoT einfach gemacht – von Sensor bis Cloud.
 	            </p>
@@ -35,8 +34,8 @@ get_header();
 	            </div>
 	        </div>
 	
-	        <!-- Rechter Bild-Bereich (ca. 40–50%, überstehend) -->
-	        <div class="hero-image hgrid-span-6 hgrid-span-tablet-12">
+	        <!-- Rechter Bild-Bereich (weich auslaufend) -->
+	        <div class="hero-image hgrid-span-5 hgrid-span-tablet-12">
 	            <img 
 	                src="<?php echo get_stylesheet_directory_uri(); ?>/images/hero01.png" 
 	                alt="Surreal Schweizer IoT-Landschaft" 

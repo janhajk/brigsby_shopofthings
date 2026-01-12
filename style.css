@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.2
+ Version:       3.1.3
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -1171,10 +1171,10 @@ input.product-search-field {
 
 .sot-hero {
     position: relative;
-    height: 852px;                    /* Original Figma-Höhe */
+    height: 852px;
     min-height: 80vh;
     overflow: hidden;
-    background: #0a1f3d;              /* Dunkelblau als Fallback */
+    background: #0a1f3d;  /* Dein dunkles Blau – nicht zu schwarz */
 }
 
 .hero-grid {
@@ -1182,84 +1182,97 @@ input.product-search-field {
     display: flex;
     align-items: center;
     position: relative;
-    padding: 0 160px;                 /* Wie in Figma */
+    padding: 0 160px;  /* Figma-Padding */
 }
 
 .hero-text {
     z-index: 10;
-    color: white;
-    padding-right: 60px;              /* Abstand zum Bild */
-    max-width: 650px;
+    color: #f0f4ff;            /* Sehr helles Grau-Weiß – clean */
+    padding-right: 80px;       /* Mehr Abstand zum Bild */
+    max-width: 720px;
+    text-shadow: none;         /* Kein harter Schatten mehr */
 }
 
 .hero-subtitle {
     font-size: 1.5rem;
     font-weight: 400;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
     opacity: 0.9;
+    letter-spacing: 1px;
 }
 
 .hero-title {
-    font-size: 4.5rem;
+    font-size: 4.8rem;
     font-weight: 900;
-    line-height: 1.1;
-    margin: 0 0 2.5rem;
+    line-height: 1.08;
+    margin: 0 0 3rem;
 }
 
 .hero-title .highlight {
     position: relative;
-    display: inline-block;
 }
 
 .hero-title .highlight::after {
     content: '';
     position: absolute;
-    bottom: 6px;
+    bottom: 8px;
     left: 0;
     width: 100%;
-    height: 10px;
-    background: #1D2E7C;              /* Dein Blau */
-    opacity: 0.75;
+    height: 12px;
+    background: #1D2E7C;
+    opacity: 0.65;
     z-index: -1;
 }
 
 .hero-buttons {
     display: flex;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    gap: 1.8rem;
+    margin-bottom: 3.5rem;
 }
 
 .hero-badges {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
-    font-size: 1.1rem;
+    gap: 2.2rem;
+    font-size: 1.15rem;
     font-weight: 500;
+    opacity: 0.9;
 }
 
+/* Bild rechts – weicher Übergang nach links */
 .hero-image {
     position: absolute;
     top: 0;
-    right: -15%;                      /* Überstehend rechts – wichtig! */
-    width: 70%;                       /* Bild nimmt mehr als 50% ein */
+    right: -12%;               /* Leicht überstehend */
+    width: 68%;                /* Bild nimmt mehr Platz ein */
     height: 100%;
     z-index: 5;
+    mask-image: linear-gradient(
+        to left,
+        transparent 0%,
+        black 30%                  /* Hier der weiche Fade nach links */
+    );
+    -webkit-mask-image: linear-gradient(
+        to left,
+        transparent 0%,
+        black 30%
+    );
 }
 
 .hero-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center right;    /* Bild rechts betonen */
+    object-position: center right;
 }
 
-/* Responsive Anpassungen */
+/* Responsive */
 @media (max-width: 1200px) {
     .hero-grid {
-        padding: 0 80px;
+        padding: 0 100px;
     }
     .hero-title {
-        font-size: 3.8rem;
+        font-size: 4rem;
     }
     .hero-image {
         right: -10%;
@@ -1271,12 +1284,12 @@ input.product-search-field {
     .sot-hero {
         height: auto;
         min-height: 100vh;
-        padding-bottom: 80px;
+        padding-bottom: 100px;
     }
     
     .hero-grid {
-        flex-direction: column;
-        padding: 100px 40px 60px;
+        flex-direction: column-reverse;  /* Bild oben, Text unten */
+        padding: 80px 40px 60px;
         text-align: center;
     }
     
@@ -1289,15 +1302,17 @@ input.product-search-field {
     .hero-image {
         position: relative;
         right: auto;
-        width: 140%;                  /* Bild etwas überstehend */
+        width: 160%;
         height: 60vh;
-        margin: 0 -20%;
+        margin: 0 -30%;
+        mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
         order: 1;
     }
     
     .hero-buttons {
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.2rem;
     }
 }
 
