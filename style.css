@@ -1316,9 +1316,9 @@ input.product-search-field {
 
 /* Bild rechts – sehr weicher Fade nach links */
 .hero-image {
-    position: absolute;
+    position: relative;
     /*top: 0;*/
-    right: -0%;
+    right: 0%;
     width: 50%;
     /*height: 100%;*/
     z-index: 5;
@@ -1332,12 +1332,17 @@ input.product-search-field {
         transparent 0%,
         black 40%
     );
-    background-attachment: url('/images/hero01_bg.png');
+    background: url('images/hero01_bg.png');
+    background-position-x: 15%;
+    background-size: 560px 350px;
+    background-repeat: no-repeat;
 }
 
 .hero-image img {
     object-fit: cover;
     object-position: center right;
+    position: relative;
+    top: 100px;
 }
 
 /* Responsive */
