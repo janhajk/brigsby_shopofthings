@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.8
+ Version:       3.1.9
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -1266,15 +1266,52 @@ input.product-search-field {
 
 .hero-badges {
     display: flex;
-    flex-wrap: wrap;
-    gap: 2.2rem;
-    font-size: 1.15rem;
+    flex-wrap: nowrap;                /* Immer eine Zeile – kein Umbruch auf Desktop */
+    justify-content: space-between;   /* Gleichmäßige Verteilung */
+    align-items: center;
+    gap: 4rem;                        /* Großer, gleichmäßiger Abstand */
+    width: 100%;
+    max-width: 900px;                 /* Verhindert, dass es zu breit wird */
+    margin: 2rem auto 0;              /* Zentriert + Abstand nach oben */
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;                        /* Icon ↔ Text Abstand */
+    white-space: nowrap;              /* Text bricht nicht um */
+    font-size: 1.1rem;
     font-weight: 500;
     color: #374151;
 }
 
-.hero-badges .badge {
-    word-wrap: normal;
+.badge-icon {
+    flex-shrink: 0;                   /* Icon bleibt immer voll sichtbar */
+    width: 28px;                      /* Etwas größer für bessere Optik */
+    height: 28px;
+}
+
+.badge-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.badge-text {
+    white-space: normal;              /* Text darf umbrechen, aber erst NACH Icon */
+}
+
+/* Mobile: Stacken auf eine Spalte */
+@media (max-width: 992px) {
+    .hero-badges {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: flex-start;
+        max-width: 100%;
+    }
+
+    .badge {
+        justify-content: flex-start;
+    }
 }
 
 /* Bild rechts – sehr weicher Fade nach links */
