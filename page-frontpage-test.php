@@ -7,28 +7,45 @@ get_header();
 
 <main id="main-content" class="sot-frontpage">
 
-    <!-- 1. Hero-Bereich (großes Bild + Text + Buttons) -->
-    <section class="sot-hero">
-        <div class="hgrid">
-            <div class="hgrid-span-12">
-                <div class="hero-content">
-                    <h1>IoT einfach gemacht – von Sensor bis Cloud.</h1>
-                    <h2>Ihr Schweizer <strong>Shop</strong> für IoT-Hardware und Integration.</h2>
-                    
-                    <div class="hero-buttons">
-                        <a href="/shop/" class="btn-primary">Produkte entdecken</a>
-                        <a href="/projekt-starten/" class="btn-secondary">Projekt starten</a>
-                    </div>
-
-                    <div class="hero-badges">
-                        <span>🇨🇭 Schweizer Lager</span>
-                        <span>Offizieller Distributor</span>
-                        <span>⚡ Schnelle Lieferung & Support</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+	<!-- 1. Hero-Bereich – großer Surreal-Berg-Loop mit Text-Overlay -->
+	<section class="sot-hero">
+	    <!-- Hintergrund-Bild (full-bleed) -->
+	    <div class="hero-background">
+	        <img 
+	            src="<?php echo get_stylesheet_directory_uri(); ?>/images/hero01.png" 
+	            alt="Surreal Schweizer IoT-Landschaft" 
+	            loading="eager"
+	            width="1440" 
+	            height="852"
+	        >
+	    </div>
+	
+	    <!-- Overlay-Content (zentriert, mit Padding wie in Figma) -->
+	    <div class="hero-overlay hgrid">
+	        <div class="hero-content hgrid-span-12">
+	            <p class="hero-subtitle">
+	                IoT einfach gemacht – von Sensor bis Cloud.
+	            </p>
+	
+	            <h1 class="hero-title">
+	                Ihr Schweizer <span class="highlight">Shop</span><br>
+	                für IoT-Hardware<br>
+	                und Integration.
+	            </h1>
+	
+	            <div class="hero-buttons">
+	                <a href="/shop/" class="btn btn-primary">Produkte entdecken</a>
+	                <a href="/projekt-starten/" class="btn btn-secondary">Projekt starten</a>
+	            </div>
+	
+	            <div class="hero-badges">
+	                <span class="badge">🇨🇭 Schweizer Lager</span>
+	                <span class="badge">Offizieller Distributor</span>
+	                <span class="badge">Schnelle Lieferung & Support</span>
+	            </div>
+	        </div>
+	    </div>
+	</section>
 
     <!-- 2. Für wen? – 3 Karten -->
     <section class="sot-target-groups">
