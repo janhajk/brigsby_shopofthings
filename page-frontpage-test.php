@@ -7,22 +7,12 @@ get_header();
 
 <main id="main-content" class="sot-frontpage">
 
-	<!-- 1. Hero-Bereich – großer Surreal-Berg-Loop mit Text-Overlay -->
+	<!-- 1. Hero-Bereich – rechtslastiges Layout mit Bild rechts, Text links -->
 	<section class="sot-hero">
-	    <!-- Hintergrund-Bild (full-bleed) -->
-	    <div class="hero-background">
-	        <img 
-	            src="<?php echo get_stylesheet_directory_uri(); ?>/images/hero01.png" 
-	            alt="Surreal Schweizer IoT-Landschaft" 
-	            loading="eager"
-	            width="1440" 
-	            height="852"
-	        >
-	    </div>
-	
-	    <!-- Overlay-Content (zentriert, mit Padding wie in Figma) -->
-	    <div class="hero-overlay hgrid">
-	        <div class="hero-content hgrid-span-12">
+	    <div class="hgrid hero-grid">
+	        
+	        <!-- Linker Text-Bereich (ca. 50–60%) -->
+	        <div class="hero-text hgrid-span-6 hgrid-span-tablet-12">
 	            <p class="hero-subtitle">
 	                IoT einfach gemacht – von Sensor bis Cloud.
 	            </p>
@@ -43,6 +33,17 @@ get_header();
 	                <span class="badge">Offizieller Distributor</span>
 	                <span class="badge">Schnelle Lieferung & Support</span>
 	            </div>
+	        </div>
+	
+	        <!-- Rechter Bild-Bereich (ca. 40–50%, überstehend) -->
+	        <div class="hero-image hgrid-span-6 hgrid-span-tablet-12">
+	            <img 
+	                src="<?php echo get_stylesheet_directory_uri(); ?>/images/hero-surreal-1440x852.jpg" 
+	                alt="Surreal Schweizer IoT-Landschaft" 
+	                loading="eager"
+	                width="1440" 
+	                height="852"
+	            >
 	        </div>
 	    </div>
 	</section>
