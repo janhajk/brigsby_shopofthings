@@ -1161,3 +1161,32 @@ input.product-search-field {
     width: 90%;
     max-width: 500px;
 }
+
+
+
+
+
+/* front page */
+.sot-hero {
+    background: url('images/hero01.png') center/cover no-repeat;
+    color: white;
+    padding: 120px 0 80px;
+    text-align: center;
+}
+
+.hero-buttons .btn-primary,
+.hero-buttons .btn-secondary {
+    /* Deine Button-Styles */
+}
+
+.sot-target-groups .target-cards,
+.sot-process .process-steps,
+.sot-why-us .why-grid,
+.sot-stats .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* etc. – passe Farben, Abstände an dein Design an */
