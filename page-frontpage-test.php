@@ -29,7 +29,17 @@ get_header();
 	            </div>
 	
 	            <div class="hero-badges">
-	                <span class="badge">🇨🇭 Schweizer Lager</span>
+	                <span class="badge"><span><svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.5 6.62062V22.5706H22.5V6.62062L11.5 0.570618L0.5 6.62062Z" fill="white"/>
+<path d="M4.90015 15.9706V22.5706H11.5001V15.9706H4.90015Z" fill="white"/>
+<path d="M11.5002 15.9706V22.5706H18.1002V15.9706H11.5002Z" fill="white"/>
+<path d="M8.2002 9.37061V15.9706H14.8002V9.37061H8.2002Z" fill="white"/>
+<path d="M0.5 6.62062V22.5706H22.5V6.62062L11.5 0.570618L0.5 6.62062Z" stroke="#1D2E7C"/>
+<path d="M4.90015 15.9706V22.5706H11.5001V15.9706H4.90015Z" stroke="#1D2E7C"/>
+<path d="M11.5002 15.9706V22.5706H18.1002V15.9706H11.5002Z" stroke="#1D2E7C"/>
+<path d="M8.2002 9.37061V15.9706H14.8002V9.37061H8.2002Z" stroke="#1D2E7C"/>
+</svg>
+</span>Schweizer Lager</span>
 	                <span class="badge">Offizieller Distributor</span>
 	                <span class="badge">Schnelle Lieferung & Support</span>
 	            </div>
