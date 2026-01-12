@@ -24,7 +24,7 @@ get_header();
 	            </h1>
 	
 	            <div class="hero-buttons">
-	                <a href="/shop/" class="btn btn-primary">Produkte entdecken</a>
+	                <a href="/produkt-kategorie/typ/nodes/" class="btn btn-primary">Produkte entdecken</a>
 	                <a href="/projekt-starten/" class="btn btn-secondary">Projekt starten</a>
 	            </div>
 	
