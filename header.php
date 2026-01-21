@@ -30,7 +30,7 @@
                     </svg>
                     Schweizer Lager – Versand innert 48 h
                     <span class="sot-phone">
-                        <a href="tel:+41625304800">+41 61 55 14 107</a>
+                        <a href="tel:+41615514107">+41 61 55 14 107</a>
                     </span>
                 </div>
 
