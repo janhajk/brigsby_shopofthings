@@ -28,16 +28,18 @@
                         <path fill="rgb(100%, 100%, 100%)" d="M 13.171875 9.835938 L 16.34375 9.835938 L 16.34375 19.226562 L 13.171875 19.226562 Z M 13.171875 9.835938 " fill-opacity="1" fill-rule="evenodd"/>
                         <path fill="rgb(100%, 100%, 100%)" d="M 10 12.964844 L 19.519531 12.964844 L 19.519531 16.09375 L 10 16.09375 Z M 10 12.964844 " fill-opacity="1" fill-rule="evenodd"/>
                     </svg>
-                    Schweizer Lager – Versand innert 48 h
+                    <?php echo esc_html( sot_topbar( 'info_text' ) ); ?>
+                    <?php if ( sot_topbar( 'phone' ) ) : ?>
                     <span class="sot-phone">
-                        <a href="tel:+41615514107">+41 61 55 14 107</a>
+                        <a href="tel:<?php echo esc_attr( sot_topbar_tel( sot_topbar( 'phone' ) ) ); ?>"><?php echo esc_html( sot_topbar( 'phone' ) ); ?></a>
                     </span>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Rechts: Icons + Buttons + Toggle-Suche -->
                 <div class="sot-topbar-right">
                     <!-- Lupe: Toggle für dein Search-Widget -->
-                    <a href="#" class="sot-icon sot-search-toggle" aria-label="Suche" data-tooltip="Produkte suchen">
+                    <a href="#" class="sot-icon sot-search-toggle" aria-label="Suche" data-tooltip="<?php echo esc_attr( sot_topbar( 'tt_search' ) ); ?>">
                         <i class="fas fa-search"></i>
                         <i class="fas fa-times sot-search-close" style="display:none;"></i>
                     </a>
@@ -55,20 +57,20 @@
                     </a>-->
 
                     <!-- WooCommerce Mini-Cart (dynamisch mit Count) -->
-                    <a href="<?php echo wc_get_cart_url(); ?>" class="sot-icon sot-cart" aria-label="Warenkorb" data-tooltip="Warenkorb">
+                    <a href="<?php echo wc_get_cart_url(); ?>" class="sot-icon sot-cart" aria-label="<?php echo esc_attr( sot_topbar( 'tt_cart' ) ); ?>" data-tooltip="<?php echo esc_attr( sot_topbar( 'tt_cart' ) ); ?>">
                         <i class="fas fa-shopping-cart"></i>
                         <?php if (WC()     ->cart->get_cart_contents_count() > 0): ?>
                             <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                         <?php endif; ?>
                     </a>
-                    <a href="/my-account" class="sot-icon" aria-label="Mein Konto" data-tooltip="Mein Konto"><i class="far fa-user"></i></a>
+                    <a href="/my-account" class="sot-icon" aria-label="<?php echo esc_attr( sot_topbar( 'tt_account' ) ); ?>" data-tooltip="<?php echo esc_attr( sot_topbar( 'tt_account' ) ); ?>"><i class="far fa-user"></i></a>
 
                     <!-- Sprache -->
-                    <span class="sot-language" data-tooltip="Bitte nutze die Browser-Übersetzung für andere Sprachen. Wir arbeiten an einer besseren Lösung – danke!">DE</span>
+                    <span class="sot-language" data-tooltip="<?php echo esc_attr( sot_topbar( 'tt_language' ) ); ?>">DE</span>
 
                     <!-- Buttons -->
-                    <a href="/produktvergleich" class="sot-btn sot-btn-compare" data-tooltip="Produkte miteinander vergleichen">Produktvergleich</a>
-                    <a href="/kontakt/?angebot=1" class="sot-btn sot-btn-request" data-tooltip="Unverbindliches Angebot anfordern">Angebot anfordern</a>
+                    <a href="<?php echo esc_url( sot_topbar( 'compare_url' ) ); ?>" class="sot-btn sot-btn-compare" data-tooltip="<?php echo esc_attr( sot_topbar( 'compare_tooltip' ) ); ?>"><?php echo esc_html( sot_topbar( 'compare_text' ) ); ?></a>
+                    <a href="<?php echo esc_url( sot_topbar( 'request_url' ) ); ?>" class="sot-btn sot-btn-request" data-tooltip="<?php echo esc_attr( sot_topbar( 'request_tooltip' ) ); ?>"><?php echo esc_html( sot_topbar( 'request_text' ) ); ?></a>
                 </div>
 
             </div>

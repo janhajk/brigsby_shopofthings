@@ -121,6 +121,26 @@ function sot_menu_defaults() {
 }
 
 /* ==========================================================================
+   Top-Bar-Defaults (entsprechen den bisher hartcodierten Werten)
+   ========================================================================== */
+function sot_menu_topbar_defaults() {
+    return array(
+        'info_text'       => 'Schweizer Lager – Versand innert 48 h',
+        'phone'           => '+41 61 55 14 107',
+        'tt_search'       => 'Produkte suchen',
+        'tt_cart'         => 'Warenkorb',
+        'tt_account'      => 'Mein Konto',
+        'tt_language'     => 'Bitte nutze die Browser-Übersetzung für andere Sprachen. Wir arbeiten an einer besseren Lösung – danke!',
+        'compare_text'    => 'Produktvergleich',
+        'compare_tooltip' => 'Produkte miteinander vergleichen',
+        'compare_url'     => '/produktvergleich',
+        'request_text'    => 'Angebot anfordern',
+        'request_tooltip' => 'Unverbindliches Angebot anfordern',
+        'request_url'     => '/kontakt/?angebot=1',
+    );
+}
+
+/* ==========================================================================
    Accessor
    ========================================================================== */
 function sot_menu() {
@@ -128,8 +148,23 @@ function sot_menu() {
     if ( null === $o ) {
         $saved = get_option( 'sot_menu', null );
         $o     = ( is_array( $saved ) && ! empty( $saved['items'] ) ) ? $saved : sot_menu_defaults();
+        // Top-Bar-Defaults immer mergen (auch wenn Menüpunkte schon gespeichert sind)
+        $tb          = ( isset( $o['topbar'] ) && is_array( $o['topbar'] ) ) ? $o['topbar'] : array();
+        $o['topbar'] = array_merge( sot_menu_topbar_defaults(), $tb );
     }
     return $o;
+}
+
+/** Einzelnen Top-Bar-Wert holen */
+function sot_topbar( $key, $fallback = '' ) {
+    $o  = sot_menu();
+    $tb = isset( $o['topbar'] ) ? $o['topbar'] : array();
+    return ( isset( $tb[ $key ] ) && '' !== $tb[ $key ] ) ? $tb[ $key ] : $fallback;
+}
+
+/** Telefonnummer für tel:-Link (nur Ziffern und führendes +) */
+function sot_topbar_tel( $display ) {
+    return preg_replace( '/[^0-9+]/', '', (string) $display );
 }
 
 /** Standard-Icon (blaues Abzeichen) für Gruppen ohne eigenes Bild */
@@ -240,6 +275,23 @@ function sot_menu_sanitize( $input ) {
             'links'    => sanitize_textarea_field( $item['links'] ?? '' ),
         );
     }
+
+    // Top-Bar
+    $tb            = ( isset( $input['topbar'] ) && is_array( $input['topbar'] ) ) ? $input['topbar'] : array();
+    $out['topbar'] = array(
+        'info_text'       => sanitize_text_field( $tb['info_text'] ?? '' ),
+        'phone'           => sanitize_text_field( $tb['phone'] ?? '' ),
+        'tt_search'       => sanitize_text_field( $tb['tt_search'] ?? '' ),
+        'tt_cart'         => sanitize_text_field( $tb['tt_cart'] ?? '' ),
+        'tt_account'      => sanitize_text_field( $tb['tt_account'] ?? '' ),
+        'tt_language'     => sanitize_text_field( $tb['tt_language'] ?? '' ),
+        'compare_text'    => sanitize_text_field( $tb['compare_text'] ?? '' ),
+        'compare_tooltip' => sanitize_text_field( $tb['compare_tooltip'] ?? '' ),
+        'compare_url'     => esc_url_raw( $tb['compare_url'] ?? '' ),
+        'request_text'    => sanitize_text_field( $tb['request_text'] ?? '' ),
+        'request_tooltip' => sanitize_text_field( $tb['request_tooltip'] ?? '' ),
+        'request_url'     => esc_url_raw( $tb['request_url'] ?? '' ),
+    );
 
     return $out;
 }
@@ -358,6 +410,31 @@ function sot_menu_render_page() {
                     </li>
                 <?php endfor; ?>
             </ul>
+
+            <hr>
+            <h2 class="title">Top-Bar</h2>
+            <p class="description">Texte, Telefonnummer, Tooltips und Buttons der oberen Leiste.</p>
+            <?php
+            $tb = $o['topbar'];
+            sot_menu_text( 'topbar][info_text', 'Info-Text (links, neben der Flagge)', $tb['info_text'] );
+            sot_menu_text( 'topbar][phone', 'Telefonnummer', $tb['phone'], '+41 …' );
+
+            echo '<h3>Tooltips der Icons</h3>';
+            sot_menu_text( 'topbar][tt_search', 'Tooltip Suche', $tb['tt_search'] );
+            sot_menu_text( 'topbar][tt_cart', 'Tooltip Warenkorb', $tb['tt_cart'] );
+            sot_menu_text( 'topbar][tt_account', 'Tooltip Mein Konto', $tb['tt_account'] );
+            sot_menu_text( 'topbar][tt_language', 'Tooltip Sprache (DE)', $tb['tt_language'] );
+
+            echo '<h3>Button „Produktvergleich"</h3>';
+            sot_menu_text( 'topbar][compare_text', 'Text', $tb['compare_text'] );
+            sot_menu_text( 'topbar][compare_tooltip', 'Tooltip', $tb['compare_tooltip'] );
+            sot_menu_text( 'topbar][compare_url', 'Link', $tb['compare_url'] );
+
+            echo '<h3>Button „Angebot anfordern"</h3>';
+            sot_menu_text( 'topbar][request_text', 'Text', $tb['request_text'] );
+            sot_menu_text( 'topbar][request_tooltip', 'Tooltip', $tb['request_tooltip'] );
+            sot_menu_text( 'topbar][request_url', 'Link', $tb['request_url'] );
+            ?>
 
             <?php submit_button( 'Menü speichern' ); ?>
         </form>

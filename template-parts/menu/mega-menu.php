@@ -94,10 +94,10 @@ if ( empty( $items ) ) { return; }
         <?php endforeach; ?>
 
         <?php /* Nur Mobile: Top-Bar-Inhalte als Links im Hamburger-Menü (oben, vor den Menüpunkten) */ ?>
-        <li class="sot-nav-extra"><a href="<?php echo esc_url( function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '/cart/' ); ?>">Warenkorb</a></li>
-        <li class="sot-nav-extra"><a href="/my-account">Mein Konto</a></li>
-        <li class="sot-nav-extra"><a href="/produktvergleich">Produktvergleich</a></li>
-        <li class="sot-nav-extra"><a href="/kontakt/?angebot=1">Angebot anfordern</a></li>
+        <li class="sot-nav-extra"><a href="<?php echo esc_url( function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '/cart/' ); ?>"><?php echo esc_html( sot_topbar( 'tt_cart', 'Warenkorb' ) ); ?></a></li>
+        <li class="sot-nav-extra"><a href="/my-account"><?php echo esc_html( sot_topbar( 'tt_account', 'Mein Konto' ) ); ?></a></li>
+        <li class="sot-nav-extra"><a href="<?php echo esc_url( sot_topbar( 'compare_url' ) ); ?>"><?php echo esc_html( sot_topbar( 'compare_text' ) ); ?></a></li>
+        <li class="sot-nav-extra"><a href="<?php echo esc_url( sot_topbar( 'request_url' ) ); ?>"><?php echo esc_html( sot_topbar( 'request_text' ) ); ?></a></li>
         <li class="sot-nav-extra sot-nav-extra-lang"><span>Sprache: DE</span></li>
     </ul>
 </nav>
