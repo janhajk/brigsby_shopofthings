@@ -368,8 +368,17 @@
         overflow-x: hidden;
     }
 
+    /* schmaleres Header-Padding, damit der Hamburger im Viewport bleibt */
+    #header .hgrid {
+        max-width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
     .sot-header-row {
         gap: 14px;
+        width: 100%;
+        box-sizing: border-box;
     }
     .sot-nav-toggle {
         display: inline-flex;
@@ -429,9 +438,20 @@
         box-shadow: none;
     }
 
+    /* Kein Hover-Öffnen auf Touch (Sticky-Hover würde das Schliessen
+       per erneutem Tippen verhindern) – nur per Klick (.open) öffnen */
+    .sot-nav-item.has-panel:hover > .sot-nav-dropdown,
+    .sot-nav-item.has-panel:hover > .sot-nav-mega {
+        display: none;
+    }
     .sot-nav-item.open > .sot-nav-dropdown,
     .sot-nav-item.open > .sot-nav-mega {
         display: block;
+    }
+
+    /* Hover-Brücke des Mega-Punkts auf Mobile deaktivieren (würde Taps abfangen) */
+    .sot-nav-item.type-mega > .sot-nav-link::after {
+        display: none;
     }
 
     .sot-nav-dropdown ul {
