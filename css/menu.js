@@ -91,13 +91,17 @@
             link.addEventListener( 'click', function ( e ) {
                 if ( ! isMobile() ) { return; }
                 e.preventDefault();
-                var li       = link.parentNode;
-                var willOpen = ! li.classList.contains( 'open' );
-                // Akkordeon: andere offene Punkte schliessen, nur einer offen
+                e.stopPropagation();
+                var li     = link.closest( '.sot-nav-item' );
+                var isOpen = li.classList.contains( 'open' );
+                // Akkordeon: erst alle schliessen …
                 nav.querySelectorAll( '.sot-nav-item.open' ).forEach( function ( o ) {
-                    if ( o !== li ) { o.classList.remove( 'open' ); }
+                    o.classList.remove( 'open' );
                 } );
-                li.classList.toggle( 'open', willOpen );
+                // … und nur öffnen, wenn der Punkt vorher zu war
+                if ( ! isOpen ) {
+                    li.classList.add( 'open' );
+                }
             } );
         } );
     } );

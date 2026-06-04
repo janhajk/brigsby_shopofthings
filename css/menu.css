@@ -24,13 +24,16 @@
     flex: 0 0 auto;
 }
 
-/* Header kompakter: Logo-Abstände raus */
+/* Header kompakter: Logo-Abstände raus, Tagline ausblenden (wie Figma) */
 .sot-header-row #site-logo,
 .sot-header-row .site-logo-image,
-.sot-header-row #site-title,
-.sot-header-row #site-description {
+.sot-header-row #site-title {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
+}
+
+.sot-header-row #site-description {
+    display: none;
 }
 
 /* Top-Bar & Header gleiche Breite + gleicher Seitenrand wie der Content */
@@ -78,6 +81,22 @@
    damit es bei schmaleren Fenstern nicht über den Rand läuft */
 .sot-nav-item.type-mega {
     position: static;
+}
+
+/* Schmale Hover-Brücke nur unter dem Mega-Punkt: das Panel sitzt an der
+   Shell (weiter unten), darum reicht die normale Panel-Brücke nicht bis
+   zum Link. Diese Brücke ist nur so breit wie der Punkt -> kein Stören
+   der Nachbarpunkte. */
+.sot-nav-item.type-mega > .sot-nav-link {
+    position: relative;
+}
+.sot-nav-item.type-mega > .sot-nav-link::after {
+    content: "";
+    position: absolute;
+    left: -16px;
+    right: -16px;
+    top: 100%;
+    height: 48px;
 }
 
 .sot-nav-link {

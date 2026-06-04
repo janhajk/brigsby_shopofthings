@@ -63,13 +63,13 @@ function sot_enqueue_menu_assets() {
         'sot-menu',
         get_stylesheet_directory_uri() . '/css/menu.css',
         array( 'hybridextend-child-style' ),
-        '1.2.0'
+        '1.3.0'
     );
     wp_enqueue_script(
         'sot-menu',
         get_stylesheet_directory_uri() . '/css/menu.js',
         array(),
-        '1.2.0',
+        '1.3.0',
         true
     );
 }
@@ -85,7 +85,7 @@ function sot_enqueue_frontpage_styles() {
             'sot-frontpage',
             get_stylesheet_directory_uri() . '/css/frontpage.css',
             array( 'hybridextend-child-style' ), // nach der globalen style.css laden
-            '1.4.1',
+            '1.5.0',
             'all'
         );
     }

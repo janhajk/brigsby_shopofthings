@@ -50,11 +50,39 @@ body.sot-frontpage-page {
     box-sizing: border-box;
 }
 
+/* Hero an die Content-Shell ausrichten (Text bündig zum Logo, Bild
+   bündig zum rechten Content-Rand) und Höhe an den Inhalt anpassen */
 .sot-frontpage .hero-grid {
-    max-width: 1440px;
+    max-width: 1320px;
     margin-left: auto;
     margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    align-items: center;
     box-sizing: border-box;
+}
+
+.sot-frontpage .hero-text {
+    max-width: none;
+    padding-left: 0;
+}
+
+.sot-frontpage .hero-image {
+    width: 48%;
+    height: auto;
+    right: 0;
+    align-self: center;
+    background-position: right top;
+    background-size: 82% auto;
+}
+
+.sot-frontpage .hero-image img {
+    position: relative;
+    top: 0;
+    width: 96%;
+    height: auto;
+    margin: 70px 0 0 auto; /* Stadtbild tiefer -> Wolke (bg) ragt oben darüber */
+    display: block;
 }
 
 .sot-frontpage section {
@@ -71,9 +99,12 @@ html {
     scroll-margin-top: 70px; /* Versatz wegen der fixierten Top-Bar */
 }
 
-/* Hero behält sein eigenes Layout aus der globalen style.css */
+/* Hero: Höhe an den Inhalt (endet kurz unter den Badges), nicht 800px fix */
 .sot-frontpage .sot-hero {
-    padding: 0;
+    height: auto;
+    min-height: 0;
+    padding: 8px 0 40px;
+    overflow: visible;
 }
 
 /* Hero bei schmalem Viewport: Bild verblasst hinter den Titel */
@@ -113,6 +144,7 @@ html {
         top: 0;
         width: 100%;
         height: 100%;
+        margin: 0;
         object-fit: contain;
         animation: none;
     }
