@@ -3,7 +3,7 @@
  * Startseiten-Einstellungen (Theme-Optionen, ohne Plugin)
  *
  * Stellt eine eigene Admin-Seite „Startseite" bereit (WordPress Settings API)
- * und liefert über sot_fp() die Werte für front-page.php und die Partials.
+ * und liefert über sot_fp() die Werte für das Startseiten-Template und die Partials.
  * Alle Werte liegen in EINER Option `sot_frontpage` (Array).
  */
 
@@ -369,7 +369,7 @@ function sot_fp_render_page() {
     ?>
     <div class="wrap sot-fp-admin">
         <h1>Startseite</h1>
-        <p class="description">Inhalte der Startseite anpassen. Diese Seite wird über <em>Einstellungen → Lesen → „Eine statische Seite"</em> als Startseite verwendet (Theme nutzt <code>front-page.php</code>).</p>
+        <p class="description"><strong>Hinweis:</strong> Diese Einstellungen wirken auf die Seite mit dem Template „Startseite (ShopOfThings)" – aktuell die Vorschau unter <code>/test-startseite</code>. Die bestehende Startseite wird <em>nicht</em> automatisch ersetzt. Erst wenn du unter <em>Einstellungen → Lesen → „Eine statische Seite"</em> diese Seite auswählst, wird sie zur echten Startseite.</p>
 
         <form method="post" action="options.php">
             <?php settings_fields( 'sot_frontpage_group' ); ?>
