@@ -61,8 +61,8 @@ function sot_enqueue_frontpage_styles() {
         wp_enqueue_style(
             'sot-frontpage',
             get_stylesheet_directory_uri() . '/css/frontpage.css',
-            array(),
-            '1.0.0',
+            array( 'hybridextend-child-style' ), // nach der globalen style.css laden
+            '1.1.0',
             'all'
         );
     }

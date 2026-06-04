@@ -1,72 +1,84 @@
 /*
- * Startseite – Sektions-Styles
- * Wird nur auf der Startseite / im Startseiten-Template geladen.
- * Der Hero ist bereits in der globalen style.css gestylt; hier werden
- * die übrigen Sektionen vervollständigt. Alles unter .sot-frontpage.
+ * Startseite – Sektions-Styles (nur auf der Startseite geladen)
+ * Hero ist in der globalen style.css gestylt; hier die übrigen Sektionen.
+ * Design nach Figma: helle Sektionen mit farbigen Boxen/Karten.
  */
 
+:root {
+    --fp-navy: #1d2e7c;
+    --fp-navy-2: #16236b;
+    --fp-ink: #0a1f3d;
+    --fp-gray: #5b6577;
+    --fp-card: #eef4fb;
+    --fp-line: #e3e9f4;
+}
+
 .sot-frontpage section {
-    padding: 70px 0;
+    padding: 80px 0;
 }
 
-.sot-frontpage section:nth-of-type(even) {
-    background: var(--SOT---light-gray, #F4F9FC);
-}
-
-/* Hero hat eigenen Hintergrund – Zebra nicht auf ihn anwenden */
+/* Hero behält sein eigenes Layout aus der globalen style.css */
 .sot-frontpage .sot-hero {
     padding: 0;
-    background: #ffffff;
 }
 
-.sot-frontpage section h2 {
+/* gemeinsame Überschriften */
+.sot-frontpage .section-eyebrow {
     text-align: center;
-    font-size: 2.2rem;
-    line-height: 1.2;
-    color: var(--SOT---blue-deep, #1D2E7C);
-    margin: 0 0 0.6rem;
+    color: var(--fp-ink);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0 0 0.8rem;
 }
 
-.sot-frontpage .section-intro {
+.sot-frontpage .section-statement {
     text-align: center;
-    max-width: 720px;
-    margin: 0 auto 1.5rem;
-    color: #4b5563;
-    font-size: 1.05rem;
+    color: var(--fp-ink);
+    font-size: 2.3rem;
+    line-height: 1.25;
+    font-weight: 800;
+    max-width: 900px;
+    margin: 0 auto 2.5rem;
 }
 
-/* ── Zielgruppen / Karten ─────────────────────────────────────────────── */
+.sot-frontpage section > .hgrid > h2:not(.section-statement) {
+    text-align: center;
+    color: var(--fp-ink);
+    font-size: 2.1rem;
+    font-weight: 800;
+    margin: 0 0 2.2rem;
+}
+
+/* ── Zielgruppen ──────────────────────────────────────────────────────── */
+.sot-target-groups .target-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+}
+
 .sot-target-groups .card {
-    background: #fff;
-    border: 1px solid #e6ecf5;
-    border-radius: 14px;
-    padding: 28px;
-    box-shadow: 0 6px 20px rgba(29, 46, 124, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: var(--fp-card);
+    border-radius: 18px;
+    padding: 34px 30px;
     display: flex;
     flex-direction: column;
 }
 
-.sot-target-groups .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 34px rgba(29, 46, 124, 0.12);
-}
-
 .sot-target-groups .card h3 {
-    color: var(--SOT---blue-deep, #1D2E7C);
-    margin: 0 0 0.6rem;
-    font-size: 1.3rem;
+    color: var(--fp-ink);
+    margin: 0 0 0.8rem;
+    font-size: 1.35rem;
 }
 
 .sot-target-groups .card p {
-    color: #4b5563;
-    margin: 0 0 1.2rem;
+    color: var(--fp-gray);
+    margin: 0 0 1.6rem;
     flex: 1;
 }
 
 .sot-target-groups .card-link {
     font-weight: 600;
-    color: var(--SOT---blue-deep, #1D2E7C);
+    color: var(--fp-navy);
     text-decoration: none;
 }
 
@@ -74,124 +86,365 @@
     text-decoration: underline;
 }
 
-/* ── Prozess / Schritte ───────────────────────────────────────────────── */
+/* ── Prozess (dunkelblaue Gradient-Karten) ────────────────────────────── */
+.sot-process .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
 .sot-process .step {
-    background: #fff;
-    border: 1px solid #e6ecf5;
-    border-radius: 14px;
-    padding: 28px 24px;
-    text-align: center;
-    position: relative;
+    background: linear-gradient(160deg, #2a3da8 0%, var(--fp-navy-2) 100%);
+    border-radius: 20px;
+    padding: 26px 24px 28px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.sot-process .step-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .sot-process .step-number {
-    width: 46px;
-    height: 46px;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
     border-radius: 50%;
-    background: var(--SOT---blue-deep, #1D2E7C);
-    color: #fff;
+    background: #fff;
+    color: var(--fp-navy);
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 14px;
 }
 
-.sot-process .step h3 {
-    color: var(--SOT---blue-deep, #1D2E7C);
-    font-size: 1.2rem;
-    margin: 0 0 0.4rem;
-}
-
-.sot-process .step .step-lead {
+.sot-process .step-tag {
     font-weight: 600;
-    color: #111827;
-    margin: 0 0 0.3rem;
-}
-
-.sot-process .step p {
-    color: #4b5563;
-    margin: 0 0 0.8rem;
     font-size: 0.95rem;
 }
 
-.sot-process .step a {
+.sot-process .step h3 {
+    color: #fff;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.sot-process .step p {
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0;
+    font-size: 0.92rem;
+    flex: 1;
+}
+
+.sot-process .step-link {
+    color: #fff;
     font-weight: 600;
-    color: var(--SOT---blue-deep, #1D2E7C);
     text-decoration: none;
     font-size: 0.9rem;
 }
 
-/* ── Kategorien (WooCommerce-Produkte) ────────────────────────────────── */
-.sot-categories .products {
-    margin-top: 30px;
+/* ── Kacheln (Tabs) ───────────────────────────────────────────────────── */
+.sot-tiles .tiles-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    background: var(--fp-card);
+    border-radius: 40px;
+    padding: 5px;
+    width: max-content;
+    margin: 0 auto 36px;
 }
 
-/* ── Warum ShopOfThings ───────────────────────────────────────────────── */
-.sot-why-us .why-item {
-    background: #fff;
-    border: 1px solid #e6ecf5;
-    border-radius: 14px;
-    padding: 26px;
-    text-align: center;
+.sot-tiles .tiles-tab {
+    border: none;
+    background: transparent;
+    color: var(--fp-ink);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 9px 26px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
-.sot-why-us .why-item .icon {
-    font-size: 2.2rem;
-    line-height: 1;
+.sot-tiles .tiles-tab.active {
+    background: var(--fp-navy);
+    color: #fff;
+}
+
+.sot-tiles .tiles-panel {
+    display: none;
+}
+
+.sot-tiles .tiles-panel.active {
     display: block;
-    margin-bottom: 12px;
 }
 
-.sot-why-us .why-item h3 {
-    color: var(--SOT---blue-deep, #1D2E7C);
-    font-size: 1.15rem;
-    margin: 0 0 0.4rem;
+.sot-tiles .tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
 }
 
-.sot-why-us .why-item p {
-    color: #4b5563;
+.sot-tiles .tile {
+    background: var(--fp-card);
+    border-radius: 18px;
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+}
+
+.sot-tiles .tile h3 {
+    color: var(--fp-navy);
+    font-size: 1.3rem;
+    margin: 0 0 0.5rem;
+}
+
+.sot-tiles .tile p {
+    color: var(--fp-gray);
     margin: 0;
     font-size: 0.95rem;
 }
 
-/* ── Partner- / Kunden-Logos ──────────────────────────────────────────── */
-.sot-partners .partner-logos,
-.sot-customers .customer-logos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+.sot-tiles .tile-media {
+    flex: 1;
+    display: flex;
     align-items: center;
-    gap: 24px;
-    margin-top: 36px;
+    justify-content: center;
+    padding: 14px 0;
+    min-height: 120px;
 }
 
-.sot-partners .partner-logos img,
-.sot-customers .customer-logos img {
+.sot-tiles .tile-media img {
+    max-width: 100%;
+    max-height: 150px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.sot-tiles .tile-btn {
+    align-self: flex-start;
+    border: 1px solid var(--fp-navy);
+    color: var(--fp-navy);
+    background: #fff;
+    border-radius: 40px;
+    padding: 9px 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sot-tiles .tile-btn:hover {
+    background: var(--fp-navy);
+    color: #fff;
+}
+
+/* ── CTA-Banner ───────────────────────────────────────────────────────── */
+.sot-cta .cta-box {
+    background: linear-gradient(120deg, #2f6fd0 0%, #2453b5 100%);
+    border-radius: 24px;
+    padding: 44px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 44px;
+    align-items: center;
+}
+
+.sot-cta .cta-media {
+    position: relative;
+    background: #fff;
+    border-radius: 18px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.sot-cta .cta-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sot-cta .cta-badge {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    background: #fff;
+    color: var(--fp-navy);
+    border-radius: 40px;
+    padding: 8px 18px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.sot-cta .cta-content h2 {
+    color: #fff;
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 1rem;
+    text-align: left;
+}
+
+.sot-cta .cta-text {
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 1.6rem;
+}
+
+.sot-cta .cta-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
+}
+
+.btn-cta-primary {
+    background: var(--fp-navy-2);
+    color: #fff;
+    border: 2px solid var(--fp-navy-2);
+    padding: 0.8rem 1.8rem;
+    border-radius: 40px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-cta-ghost {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    padding: 0.8rem 1.8rem;
+    border-radius: 40px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-cta-ghost:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.sot-cta .cta-footnote {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* ── Warum ShopOfThings ───────────────────────────────────────────────── */
+.sot-why-us .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+}
+
+.sot-why-us .why-item {
+    background: var(--fp-card);
+    border-radius: 18px;
+    padding: 30px;
+}
+
+.sot-why-us .why-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: var(--fp-navy);
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 22px;
+}
+
+.sot-why-us .why-item h3 {
+    color: var(--fp-ink);
+    font-size: 1.15rem;
+    margin: 0 0 0.5rem;
+}
+
+.sot-why-us .why-item p {
+    color: var(--fp-gray);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* ── Partner-Logos ────────────────────────────────────────────────────── */
+.sot-partners .partner-logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.sot-partners .partner-logos img {
     max-width: 100%;
     height: auto;
-    max-height: 70px;
+    max-height: 48px;
     margin: 0 auto;
     object-fit: contain;
     filter: grayscale(100%);
-    opacity: 0.7;
+    opacity: 0.75;
     transition: filter 0.2s ease, opacity 0.2s ease;
 }
 
-.sot-partners .partner-logos img:hover,
-.sot-customers .customer-logos img:hover {
+.sot-partners .partner-logos img:hover {
     filter: grayscale(0);
     opacity: 1;
 }
 
-/* ── Stats / Zahlen ───────────────────────────────────────────────────── */
-.sot-frontpage section.sot-stats {
-    background: var(--SOT---blue-deep, #1D2E7C);
-    color: #fff;
+/* ── Kunden-Logos (weisse Karten auf hellem Grund) ────────────────────── */
+.sot-customers {
+    background: var(--fp-card);
 }
 
-.sot-stats h2 {
+.sot-customers .customer-logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    margin-top: 20px;
+}
+
+.sot-customers .customer-logos img {
+    background: #fff;
+    border-radius: 16px;
+    padding: 26px;
+    width: 100%;
+    height: 130px;
+    object-fit: contain;
+    box-shadow: 0 4px 16px rgba(29, 46, 124, 0.05);
+}
+
+/* ── Stats (blaue Box) ────────────────────────────────────────────────── */
+.sot-stats .stats-box {
+    background: linear-gradient(120deg, #2a3da8 0%, var(--fp-navy-2) 100%);
+    border-radius: 24px;
+    padding: 50px 40px;
+}
+
+.sot-stats .stats-box h2 {
+    text-align: center;
     color: #fff;
+    font-size: 1.8rem;
+    margin: 0 0 2rem;
+}
+
+.sot-stats .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 24px;
 }
 
 .sot-stats .stat {
@@ -207,74 +460,184 @@
 }
 
 .sot-stats .stat p {
-    margin: 8px 0 0;
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 1rem;
+    margin: 10px 0 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.95rem;
 }
 
 /* ── News ─────────────────────────────────────────────────────────────── */
+.sot-news .news-eyebrow {
+    margin-bottom: 2rem;
+}
+
 .sot-news .news-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 36px;
+    gap: 26px;
+}
+
+.sot-news .news-grid.has-rest {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
 }
 
 .sot-news .news-item {
-    background: #fff;
-    border: 1px solid #e6ecf5;
-    border-radius: 14px;
+    background: var(--fp-card);
+    border-radius: 18px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
-.sot-news .news-thumb {
-    display: block;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: #f4f9fc;
+.sot-news .news-rest {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
 }
 
-.sot-news .news-thumb img {
+.sot-news .news-featured .news-thumb {
+    display: block;
+    aspect-ratio: 16 / 10;
+    background: #e7edf6;
+    overflow: hidden;
+}
+
+.sot-news .news-featured .news-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+.sot-news .news-body {
+    padding: 20px 24px 24px;
+}
+
 .sot-news .news-item time {
     display: block;
-    color: #6b7280;
+    color: var(--fp-gray);
     font-size: 0.82rem;
-    padding: 16px 20px 0;
+    margin-bottom: 6px;
 }
 
 .sot-news .news-item h3 {
     font-size: 1.1rem;
     line-height: 1.3;
-    margin: 6px 0 12px;
-    padding: 0 20px;
+    margin: 0 0 8px;
 }
 
 .sot-news .news-item h3 a {
-    color: var(--SOT---blue-deep, #1D2E7C);
+    color: var(--fp-ink);
     text-decoration: none;
 }
 
+.sot-news .news-item p {
+    color: var(--fp-gray);
+    font-size: 0.92rem;
+    margin: 0 0 12px;
+}
+
 .sot-news .news-more {
-    margin: auto 20px 18px;
     font-weight: 600;
-    color: var(--SOT---blue-deep, #1D2E7C);
+    color: var(--fp-navy);
     text-decoration: none;
     font-size: 0.9rem;
 }
 
+/* ── Berater-CTA ──────────────────────────────────────────────────────── */
+.sot-berater .berater-box {
+    background: linear-gradient(120deg, #2f6fd0 0%, #2453b5 100%);
+    border-radius: 24px;
+    padding: 56px 48px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 44px;
+    align-items: center;
+}
+
+.sot-berater .berater-eyebrow {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    margin: 0 0 0.8rem;
+}
+
+.sot-berater .berater-content h2 {
+    color: #fff;
+    font-size: 1.9rem;
+    line-height: 1.25;
+    margin: 0 0 1.6rem;
+    text-align: left;
+}
+
+.sot-berater .berater-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 30px;
+    text-align: center;
+}
+
+.sot-berater .berater-photo {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 16px;
+    border-radius: 16px;
+    background: #eef2f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.sot-berater .berater-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sot-berater .berater-name {
+    font-weight: 700;
+    color: var(--fp-ink);
+    font-size: 1.1rem;
+}
+
+.sot-berater .berater-role {
+    color: var(--fp-gray);
+    font-size: 0.95rem;
+    margin-top: 2px;
+}
+
+.sot-berater .berater-phone {
+    margin-top: 4px;
+    font-size: 0.95rem;
+}
+
+.sot-berater .berater-phone a {
+    color: var(--fp-gray);
+    text-decoration: none;
+}
+
 /* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .sot-cta .cta-box,
+    .sot-berater .berater-box {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+    .sot-cta .cta-content h2,
+    .sot-berater .berater-content h2 {
+        text-align: center;
+    }
+    .sot-cta .cta-buttons {
+        justify-content: center;
+    }
+    .sot-news .news-grid.has-rest {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
     .sot-frontpage section {
-        padding: 48px 0;
+        padding: 52px 0;
     }
-    .sot-frontpage section h2 {
+    .sot-frontpage .section-statement {
         font-size: 1.7rem;
     }
     .sot-stats .stat .number {
