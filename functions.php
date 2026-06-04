@@ -447,7 +447,11 @@ function sot_topbar_scripts() {
             e.preventDefault();
             $('.sot-search-dropdown, .sot-search-toggle').toggleClass('active');
             if ($('.sot-search-dropdown').hasClass('active')) {
-                $('.sot-search-dropdown input[type="search"]').focus();  // Fokus ins Feld
+                // Fokus ins echte Suchfeld – WooCommerce Product Search nutzt type="text"
+                $('.sot-search-dropdown')
+                    .find('input.product-search-field, input[type="search"], input[type="text"]')
+                    .first()
+                    .trigger('focus');
             }
         });
 

@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.21
+ Version:       3.1.22
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -1067,32 +1067,25 @@ input.product-search-field {
     background: #152060;
 }
 
-/* SUCHE DROPDOWN – Full-width unter Top-Bar */
+/* SUCHE INLINE – Feld klappt horizontal links neben der Lupe auf */
 .sot-search-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid #e0e7ff;
-    border-top: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    max-height: 0;
+    order: -1;                 /* direkt links von der Lupe positionieren */
+    position: relative;        /* Anker für die floating Suchresultate */
+    width: 0;
+    opacity: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.3s ease;
-    z-index: 10000;
-    width: 100%;
+    transition: width 0.35s ease, opacity 0.25s ease;
 }
 
 .sot-search-dropdown.active {
-    max-height: 500px;
-    overflow-y: auto;
-    padding: 20px 30px;
+    width: 300px;
+    opacity: 1;
+    overflow: visible;         /* Resultate dürfen herausragen */
 }
 
 @media (max-width: 768px) {
     .sot-search-dropdown.active {
-        padding: 15px;
+        width: 200px;
     }
 }
 
@@ -1102,26 +1095,36 @@ input.product-search-field {
 .sot-search-toggle.active .fas.fa-search { display: none; }
 .sot-search-toggle.active .sot-search-close { display: inline !important; }
 
+/* Widget im Top-Bar auf volle Breite des Aufklapp-Containers bringen */
+.sot-search-dropdown .widget_woocommerce_product_search_widget {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+
 .sot-search-dropdown .search-form,
-.sot-search-dropdown .woocommerce-product-search {
+.sot-search-dropdown .woocommerce-product-search,
+.sot-search-dropdown .product-search-form form {
     display: flex;
     align-items: center;
     gap: 10px;
-    max-width: 600px;
-    margin: 0 auto;
+    margin: 0;
 }
 
-.sot-search-dropdown input[type="search"] {
+.sot-search-dropdown input[type="search"],
+.sot-search-dropdown input[type="text"],
+.sot-search-dropdown input.product-search-field {
     flex: 1;
-    padding: 12px 20px;
+    width: 100%;
+    padding: 9px 18px;
     border: 1px solid #ccc;
     border-radius: 30px;
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
 .sot-search-dropdown input[type="submit"],
 .sot-search-dropdown button[type="submit"] {
-    padding: 12px 24px;
+    padding: 9px 20px;
     background: var(--SOT---blue-deep, #1D2E7C);
     color: white;
     border: none;
@@ -1148,11 +1151,6 @@ input.product-search-field {
     .sot-btn-compare,
     .sot-btn-request {
         display: none !important;
-    }
-
-    .sot-search-dropdown .search-form,
-    .sot-search-dropdown .woocommerce-product-search {
-        flex-direction: column;
     }
 }
 
