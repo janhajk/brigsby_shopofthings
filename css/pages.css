@@ -1,0 +1,91 @@
+/* =========================================================================
+   Generischer Seiten-Look (Blog, Checkout, Cart, Konto, Seiten, Archive …)
+   Vollbreiter weisser Hintergrund + zentrierter Content (1320er-Shell) wie
+   die Startseite. Lädt via body.sot-page (siehe sot_is_generic_page()).
+   ========================================================================= */
+
+body.sot-page {
+    background: #fff;
+}
+
+.sot-page #page-wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+}
+
+/* Content-Shell wie Startseite */
+.sot-page .hgrid.main-content-grid {
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .sot-page .hgrid.main-content-grid {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+/* ── Seitenkopf / Titel modern (kein Farbkasten, grosse dunkle Headline) ── */
+.sot-page #loop-meta {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 26px 0 6px;
+}
+.sot-page #loop-meta .hgrid {
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+.sot-page #loop-meta .loop-title,
+.sot-page .loop-meta .entry-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #0a1f3d;
+    line-height: 1.15;
+}
+
+@media (max-width: 768px) {
+    .sot-page #loop-meta .hgrid {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .sot-page #loop-meta .loop-title,
+    .sot-page .loop-meta .entry-title {
+        font-size: 1.6rem;
+    }
+}
+
+/* ── Primär-Buttons im Startseiten-Stil (tiefblauer Pill) ──────────────── */
+.sot-page .content .button.alt,
+.sot-page .content button.button.alt,
+.sot-page #place_order,
+.sot-page .content input[type="submit"],
+.sot-page .content #submit {
+    background: #1D2E7C !important;
+    color: #fff !important;
+    border-color: #1D2E7C !important;
+    border-radius: 40px !important;
+}
+.sot-page .content .button.alt:hover,
+.sot-page .content button.button.alt:hover,
+.sot-page #place_order:hover,
+.sot-page .content input[type="submit"]:hover,
+.sot-page .content #submit:hover {
+    background: #16236b !important;
+    color: #fff !important;
+}

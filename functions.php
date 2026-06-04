@@ -135,6 +135,42 @@ function sot_enqueue_shop_styles() {
 add_action( 'wp_enqueue_scripts', 'sot_enqueue_shop_styles' );
 
 /**
+ * Generische Seiten (Blog, Checkout, Cart, Konto, normale Seiten, Archive …):
+ * Startseiten-Look (vollbreiter weisser Hintergrund + 1320er-Shell + moderner
+ * Titel). NICHT auf der Startseite (eigene Behandlung) und NICHT im Shop
+ * (eigene Behandlung via sot-shop-page).
+ */
+function sot_is_generic_page() {
+    if ( is_front_page() ) {
+        return false;
+    }
+    if ( function_exists( 'sot_is_shop_view' ) && sot_is_shop_view() ) {
+        return false;
+    }
+    return true;
+}
+
+function sot_page_body_class( $classes ) {
+    if ( sot_is_generic_page() ) {
+        $classes[] = 'sot-page';
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'sot_page_body_class' );
+
+function sot_enqueue_page_styles() {
+    if ( sot_is_generic_page() ) {
+        wp_enqueue_style(
+            'sot-page',
+            get_stylesheet_directory_uri() . '/css/pages.css',
+            array( 'hybridextend-child-style' ),
+            '1.0.0'
+        );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'sot_enqueue_page_styles' );
+
+/**
  * Mobile: Produktfilter (WooCommerce Product Filters) hinter einen
  * „Filter"-Button einklappen (oberhalb der Produktliste).
  */
