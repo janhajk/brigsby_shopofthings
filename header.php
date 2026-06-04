@@ -37,7 +37,7 @@
                 <!-- Rechts: Icons + Buttons + Toggle-Suche -->
                 <div class="sot-topbar-right">
                     <!-- Lupe: Toggle für dein Search-Widget -->
-                    <a href="#" class="sot-icon sot-search-toggle" aria-label="Suche">
+                    <a href="#" class="sot-icon sot-search-toggle" aria-label="Suche" data-tooltip="Produkte suchen">
                         <i class="fas fa-search"></i>
                         <i class="fas fa-times sot-search-close" style="display:none;"></i>
                     </a>
@@ -55,20 +55,20 @@
                     </a>-->
 
                     <!-- WooCommerce Mini-Cart (dynamisch mit Count) -->
-                    <a href="<?php echo wc_get_cart_url(); ?>" class="sot-icon sot-cart">
+                    <a href="<?php echo wc_get_cart_url(); ?>" class="sot-icon sot-cart" aria-label="Warenkorb" data-tooltip="Warenkorb">
                         <i class="fas fa-shopping-cart"></i>
                         <?php if (WC()     ->cart->get_cart_contents_count() > 0): ?>
                             <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                         <?php endif; ?>
                     </a>
-                    <a href="/my-account" class="sot-icon"><i class="far fa-user"></i></a>
+                    <a href="/my-account" class="sot-icon" aria-label="Mein Konto" data-tooltip="Mein Konto"><i class="far fa-user"></i></a>
 
                     <!-- Sprache -->
-                    <span class="sot-language" title="please use browser translation to translate to your own language. We're working on a better solution, thank you!">DE</span>
+                    <span class="sot-language" data-tooltip="Bitte nutze die Browser-Übersetzung für andere Sprachen. Wir arbeiten an einer besseren Lösung – danke!">DE</span>
 
                     <!-- Buttons -->
-                    <a href="/produktvergleich" class="sot-btn sot-btn-compare">Produktvergleich</a>
-                    <a href="/kontakt/?angebot=1" class="sot-btn sot-btn-request">Angebot anfordern</a>
+                    <a href="/produktvergleich" class="sot-btn sot-btn-compare" data-tooltip="Produkte miteinander vergleichen">Produktvergleich</a>
+                    <a href="/kontakt/?angebot=1" class="sot-btn sot-btn-request" data-tooltip="Unverbindliches Angebot anfordern">Angebot anfordern</a>
                 </div>
 
             </div>
