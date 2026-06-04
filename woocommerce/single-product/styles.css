@@ -295,22 +295,25 @@
     border-color: #e6ecf5 !important;
 }
 
-/* Vergleich-Button auf der Produktseite: violetter Outline-Pill */
+/* Vergleich-Button auf der Produktseite: kompakt & dezent (näher am Preis) */
 .compare-btn-singleProductPage {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    margin-top: 12px;
-    padding: 9px 18px;
-    border: 1px solid #7b5dc7;
-    color: #7b5dc7;
+    gap: 7px;
+    margin: 4px 0 14px;
+    padding: 7px 15px;
+    border: 1px solid #d9d2ee;
+    background: #f6f3fd;
+    color: #6a4fb3;
     border-radius: 40px;
+    font-size: 0.85rem;
     font-weight: 600;
     text-decoration: none;
-    transition: background .2s, color .2s;
+    transition: background .2s, color .2s, border-color .2s;
 }
 .compare-btn-singleProductPage:hover {
     background: #7b5dc7;
+    border-color: #7b5dc7;
     color: #fff;
 }
 
@@ -338,6 +341,67 @@
 /* WooCommerce-Zoom-Lupe entfernen – Klick öffnet die Lightbox */
 .zoomImg {
     display: none !important;
+}
+
+/* ── Feinschliff: Preis, Lagerstatus, Verfügbarkeits-Tabelle ───────── */
+
+/* Preis tiefblau statt Theme-Gold */
+.sot-sp-summary p.price:not(.shipping-notice),
+.sot-sp-summary p.price:not(.shipping-notice) .woocommerce-Price-amount,
+.sot-sp-summary p.price:not(.shipping-notice) bdi,
+.sot-sp-summary p.price:not(.shipping-notice) .woocommerce-Price-currencySymbol,
+.sot-sp-summary p.price:not(.shipping-notice) .woocommerce-price-suffix {
+    color: #1D2E7C !important;
+}
+.sot-sp-summary p.price:not(.shipping-notice) {
+    margin: 12px 0 2px !important;
+    line-height: 1.2;
+}
+/* Versand-Hinweis: keine Überlappung mehr (Plugin setzt margin-top:-2em) */
+.sot-sp-summary .price.shipping-notice {
+    margin: 2px 0 0 !important;
+    font-size: 0.8rem !important;
+    font-weight: 400 !important;
+}
+.sot-sp-summary .price.shipping-notice a {
+    color: #8a93a6 !important;
+}
+
+/* Lagerstatus nicht im Theme-Gold */
+.sot-sp-summary .stock.in-stock { color: #2e7d32 !important; font-weight: 600; }
+.sot-sp-summary .stock.out-of-stock { color: #c0392b !important; font-weight: 600; }
+.sot-sp-summary .stock.available-on-backorder { color: #b8860b !important; font-weight: 600; }
+
+/* Verfügbarkeits-Tabelle: klare Karte statt kaum sichtbarer Linien */
+.sot-sp-summary .lieferinfo-table {
+    width: 100%;
+    border: 1px solid #e3e9f3 !important;
+    border-radius: 10px;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    overflow: hidden;
+    background: #fff;
+    font-size: 0.9rem;
+    margin-top: 6px;
+}
+.sot-sp-summary .lieferinfo-table td {
+    border: 0 !important;
+    border-top: 1px solid #eaeff7 !important;
+    padding: 9px 14px !important;
+    vertical-align: middle;
+}
+.sot-sp-summary .lieferinfo-table tr:first-child td {
+    border-top: 0 !important;
+    background: #f4f7fc;
+}
+.sot-sp-summary .lieferinfo-table td:first-child {
+    color: #5b6577;
+    font-weight: 600 !important;
+}
+.sot-sp-summary .lieferinfo-table td:last-child {
+    text-align: right;
+    font-weight: 700 !important;
+    color: #1D2E7C;
 }
 
 /* ── Mobile: nichts darf aus dem Viewport laufen ───────────── */
