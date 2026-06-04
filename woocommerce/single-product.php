@@ -22,6 +22,21 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 	</div>
 </header>
 
+<?php /* Kritisches Single-Product-Layout inline (gewinnt sicher gegen Parent-Theme + Cache) */ ?>
+<style id="sot-sp-inline">
+.product-hgrid{display:block !important;max-width:1600px !important;margin-left:auto !important;margin-right:auto !important;padding-left:40px !important;padding-right:40px !important;box-sizing:border-box;}
+.product-hgrid #content{width:100% !important;max-width:100% !important;float:none !important;margin:0 !important;padding-left:0 !important;padding-right:0 !important;}
+.product-hgrid #loop-meta{display:none !important;}
+.product-hgrid .sot-sp{display:grid !important;grid-template-columns:minmax(0,700px) minmax(0,1fr);grid-template-areas:"gallery summary" "below summary";gap:14px 48px;align-items:start;}
+.product-hgrid .sot-sp-gallery{grid-area:gallery;}
+.product-hgrid .sot-sp-summary{grid-area:summary;}
+.product-hgrid .sot-sp-below{grid-area:below;}
+.product-hgrid .sot-sp-gallery .woocommerce-product-gallery,
+.product-hgrid .sot-sp .woocommerce-product-gallery.images{width:100% !important;float:none !important;margin:0 !important;}
+.product-hgrid .summary.sot-sp-summary{width:100% !important;float:none !important;margin:0 !important;}
+@media(max-width:900px){.product-hgrid .sot-sp{grid-template-columns:1fr;grid-template-areas:"gallery" "summary" "below";gap:22px;}}
+</style>
+
 <div class="hgrid main-content-grid product-hgrid">
 
 	<?php // Sidebar bewusst entfernt – Einzelprodukt nutzt die volle Breite. ?>
