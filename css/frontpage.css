@@ -305,32 +305,35 @@ body.sot-frontpage-page {
     font-size: 0.95rem;
 }
 
-/* Produktbild (transparenter Hintergrund): gross, rechts, am Text vorbei */
+/* Produktbild (transparenter Hintergrund): gross & mittig, füllt die
+   Kachel im Hintergrund fast aus (abzüglich Rand), unten am Kachelrand */
 .sot-tiles .tile-media {
     position: absolute;
-    right: -6px;
-    bottom: 28px;
-    width: 74%;
-    max-width: 290px;
+    left: 20px;
+    right: 20px;
+    top: 62px;
+    bottom: 18px;
     display: flex;
     align-items: flex-end;
-    justify-content: flex-end;
+    justify-content: center;
     z-index: 1;
     pointer-events: none;
 }
 
 .sot-tiles .tile-media img {
     width: 100%;
-    max-height: 215px;
-    height: auto;
+    height: 100%;
+    max-height: 100%;
     object-fit: contain;
+    object-position: center bottom;
 }
 
-/* Button liegt über dem Bild, schlanker, violette Umrandung */
+/* Button liegt über dem Bild, schlanker, violette Umrandung;
+   höher (etwa Kachelmitte) und etwas weiter rechts */
 .sot-tiles .tile-btn {
     position: absolute;
-    left: 26px;
-    bottom: 22px;
+    left: 52px;
+    bottom: 56px;
     z-index: 3;
     border: 1.5px solid var(--fp-violet);
     color: var(--fp-violet);
