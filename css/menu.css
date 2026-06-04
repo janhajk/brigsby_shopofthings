@@ -138,9 +138,13 @@
     display: none;
 }
 
-.sot-nav-item.has-panel:hover > .sot-nav-dropdown,
-.sot-nav-item.has-panel:hover > .sot-nav-mega {
-    display: block;
+/* Hover-Öffnen NUR auf Desktop mit Maus – Touch/Mobile nutzt Klick (.open).
+   So gibt es kein Sticky-Hover-Problem und keinen Open/Close-Loop. */
+@media (min-width: 1025px) and (hover: hover) {
+    .sot-nav-item.has-panel:hover > .sot-nav-dropdown,
+    .sot-nav-item.has-panel:hover > .sot-nav-mega {
+        display: block;
+    }
 }
 
 /* Dropdown */
@@ -373,12 +377,30 @@
         max-width: 100%;
         padding-left: 16px;
         padding-right: 16px;
+        box-sizing: border-box;
     }
 
     .sot-header-row {
         gap: 14px;
         width: 100%;
         box-sizing: border-box;
+        flex-wrap: nowrap;
+    }
+
+    /* Logo darf schrumpfen, Hamburger behält seinen Platz rechts */
+    .sot-header-row #branding,
+    .sot-header-row .site-branding {
+        flex: 0 1 auto;
+        min-width: 0;
+    }
+    .sot-header-row .custom-logo,
+    .sot-header-row .custom-logo-link img,
+    .sot-header-row #site-logo img {
+        max-width: 150px;
+        height: auto;
+    }
+    .sot-nav {
+        flex: 0 0 auto;
     }
     .sot-nav-toggle {
         display: inline-flex;
@@ -438,12 +460,7 @@
         box-shadow: none;
     }
 
-    /* Kein Hover-Öffnen auf Touch (Sticky-Hover würde das Schliessen
-       per erneutem Tippen verhindern) – nur per Klick (.open) öffnen */
-    .sot-nav-item.has-panel:hover > .sot-nav-dropdown,
-    .sot-nav-item.has-panel:hover > .sot-nav-mega {
-        display: none;
-    }
+    /* Panels nur per Klick (.open) öffnen – Hover-Öffnen gilt nur Desktop */
     .sot-nav-item.open > .sot-nav-dropdown,
     .sot-nav-item.open > .sot-nav-mega {
         display: block;
