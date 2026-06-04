@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.24
+ Version:       3.1.25
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -1181,11 +1181,91 @@ input.product-search-field {
     padding: 6px 0;
 }
 
-/* etwas Innenabstand für die einzelnen Resultat-Zeilen (tolerant
-   gegenüber der konkreten Markup-Struktur des Plugins) */
-.sot-search-dropdown .product-search-results-content > * {
-    padding-left: 14px;
-    padding-right: 14px;
+/* ---- Modernes, kompaktes Layout der Suchresultate ----
+   Plugin liefert eine Tabelle .search-results mit Zeilen tr.entry,
+   jede Zeile ist ein <a> mit <img>, .title und .price.
+   Layout: Bild links (gross genug), Titel + Preis rechts gestapelt. */
+.sot-search-dropdown .product-search-results .search-results {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.sot-search-dropdown .product-search-results .search-results td {
+    padding: 0;
+    border: none;
+}
+
+.sot-search-dropdown .product-search-results tr.entry {
+    border-top: 1px solid #eef1f8 !important;
+}
+.sot-search-dropdown .product-search-results tr.entry:first-child {
+    border-top: none !important;
+}
+
+.sot-search-dropdown .product-search-results tr.entry a {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    align-items: center;
+    padding: 9px 14px;
+    text-decoration: none;
+    color: #1f2937;
+    transition: background 0.15s ease;
+}
+
+.sot-search-dropdown .product-search-results tr.entry a:hover {
+    background: #f4f9fc;
+}
+
+/* Bild ueberspannt beide Textzeilen, gross genug zum Erkennen */
+.sot-search-dropdown .product-search-results tr.entry img {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.sot-search-dropdown .product-search-results .title {
+    grid-column: 2;
+    grid-row: 1;
+    float: none !important;
+    margin: 0 !important;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #1f2937;
+    /* maximal 2 Zeilen, Rest mit … abschneiden */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sot-search-dropdown .product-search-results .price {
+    grid-column: 2;
+    grid-row: 2;
+    float: none !important;
+    margin: 2px 0 0 !important;
+    font-size: 0.8rem !important;
+    font-weight: 700;
+    color: var(--SOT---blue-deep, #1D2E7C) !important;
+}
+
+/* evtl. vorhandener „mehr Resultate"-Link unterhalb der Tabelle */
+.sot-search-dropdown .product-search-results .product-search-more,
+.sot-search-dropdown .product-search-results-content > a {
+    display: block;
+    padding: 10px 14px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--SOT---blue-deep, #1D2E7C);
+    border-top: 1px solid #eef1f8;
 }
 
 /* ==========================================================================
@@ -1237,14 +1317,23 @@ input.product-search-field {
     z-index: 100001;
 }
 
-.sot-topbar-right [data-tooltip]:hover::after,
+/* :hover und :focus-visible getrennt halten – falls ein Browser
+   :focus-visible nicht kennt, bleibt die :hover-Regel trotzdem gültig */
+.sot-topbar-right [data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
 .sot-topbar-right [data-tooltip]:focus-visible::after {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
 }
 
-.sot-topbar-right [data-tooltip]:hover::before,
+.sot-topbar-right [data-tooltip]:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
 .sot-topbar-right [data-tooltip]:focus-visible::before {
     opacity: 1;
     visibility: visible;
@@ -1257,7 +1346,9 @@ input.product-search-field {
     right: 0;
     transform: translateY(4px);
 }
-.sot-topbar-right .sot-btn-request[data-tooltip]:hover::after,
+.sot-topbar-right .sot-btn-request[data-tooltip]:hover::after {
+    transform: translateY(0);
+}
 .sot-topbar-right .sot-btn-request[data-tooltip]:focus-visible::after {
     transform: translateY(0);
 }
