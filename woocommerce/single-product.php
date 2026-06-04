@@ -24,19 +24,7 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 
 <div class="hgrid main-content-grid product-hgrid">
 
-	<?php
-	// Template modification Hook
-	do_action( 'hoot_template_before_main', 'single-product.php' );
-	?>
-
-	<?php
-	/**
-	 * woocommerce_sidebar hook
-	 *
-	 * @hooked woocommerce_get_sidebar - 10
-	 */
-	do_action( 'woocommerce_sidebar' );
-	?>
+	<?php // Sidebar bewusst entfernt – Einzelprodukt nutzt die volle Breite. ?>
 
 	<main <?php hybridextend_attr( 'content' ); ?>>
 

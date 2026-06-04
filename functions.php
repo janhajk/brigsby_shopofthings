@@ -128,7 +128,7 @@ function sot_enqueue_shop_styles() {
             'sot-shop',
             get_stylesheet_directory_uri() . '/css/shop.css',
             array( 'hybridextend-child-style' ),
-            '1.3.0'
+            '1.4.0'
         );
     }
 }

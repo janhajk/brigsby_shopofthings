@@ -19,8 +19,15 @@ body.sot-shop-page {
     background: #fff !important;
 }
 
+/* Shop nutzt eine breitere Shell als die Startseite (weniger Leerraum) */
+.sot-shop-page .hgrid.main-content-grid,
+.sot-shop-page .sot-shop-header .hgrid,
+.sot-shop-page #header .hgrid,
+.sot-shop-page .sot-topbar-fixed .hgrid {
+    max-width: 1600px;
+}
+
 .sot-shop-page .hgrid.main-content-grid {
-    max-width: 1320px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 40px;
@@ -389,13 +396,22 @@ body.sot-shop-page {
 
 /* Einzelprodukt: keine Sidebar -> volle Breite */
 .sot-shop-page.single-product #sidebar-primary,
-.sot-shop-page.single-product #sidebar-secondary {
+.sot-shop-page.single-product #sidebar-secondary,
+.sot-shop-page.single-product .sidebar {
     display: none !important;
 }
-.sot-shop-page.single-product #content {
+.sot-shop-page.single-product #content,
+.sot-shop-page.single-product main.content {
     flex-basis: 100% !important;
     max-width: 100% !important;
     width: 100% !important;
+    margin: 0 !important;
+}
+
+/* doppelten Produkttitel im Content ausblenden (Titel steht oben im Kopf) */
+.sot-shop-page.single-product #content .product_title,
+.sot-shop-page.single-product #content .entry-title {
+    display: none !important;
 }
 
 /* Lupe ausblenden – Klick aufs Bild öffnet die Lightbox */
