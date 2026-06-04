@@ -23,8 +23,18 @@
 .sot-sp-gallery .woocommerce-product-gallery,
 .sot-sp .woocommerce-product-gallery.images {
     width: 100% !important;
+    max-width: 500px !important;
     float: none !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
+}
+
+/* Bild maximal 500x500, zentriert */
+.sot-sp-gallery .woocommerce-product-gallery__image img {
+    max-width: 500px;
+    max-height: 500px;
+    height: auto;
+    margin: 0 auto;
+    cursor: zoom-in;
 }
 
 .sot-sp-summary {

@@ -32,7 +32,9 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 .product-hgrid .sot-sp-summary{grid-area:summary;}
 .product-hgrid .sot-sp-below{grid-area:below;}
 .product-hgrid .sot-sp-gallery .woocommerce-product-gallery,
-.product-hgrid .sot-sp .woocommerce-product-gallery.images{width:100% !important;float:none !important;margin:0 !important;}
+.product-hgrid .sot-sp .woocommerce-product-gallery.images{width:100% !important;max-width:500px !important;float:none !important;margin:0 auto !important;}
+.product-hgrid .sot-sp-gallery .woocommerce-product-gallery__image img{max-width:500px;max-height:500px;height:auto;margin:0 auto;cursor:zoom-in;}
+.product-hgrid .woocommerce-product-gallery__trigger{display:none !important;}
 .product-hgrid .summary.sot-sp-summary{width:100% !important;float:none !important;margin:0 !important;}
 @media(max-width:900px){.product-hgrid .sot-sp{grid-template-columns:1fr;grid-template-areas:"gallery" "summary" "below";gap:22px;}}
 </style>

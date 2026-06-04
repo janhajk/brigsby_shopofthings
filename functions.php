@@ -28,7 +28,7 @@ add_action( 'after_setup_theme', 'sot_add_woocommerce_support' );
  */
 function sot_enqueue_styles() {
     // Registrieren und einbinden der zusätzlichen CSS-Datei
-    wp_enqueue_style('sot-single-product', get_stylesheet_directory_uri() . '/woocommerce/single-product/styles.css', array(), '1.0.26', 'all');
+    wp_enqueue_style('sot-single-product', get_stylesheet_directory_uri() . '/woocommerce/single-product/styles.css', array(), '1.0.27', 'all');
     wp_enqueue_style('sot-landing-page-style', get_stylesheet_directory_uri() . '/css/template-landing-page.css', array(), '1.0.4', 'all');
 
 }
@@ -140,6 +140,14 @@ add_action( 'wp_enqueue_scripts', 'sot_enqueue_shop_styles' );
  */
 add_action( 'woocommerce_after_shop_loop_item', function () { echo '<div class="sot-card-actions">'; }, 6 );
 add_action( 'woocommerce_after_shop_loop_item', function () { echo '</div>'; }, 99 );
+
+/**
+ * WooCommerce-Galerie: Hover-Zoom (Lupe) deaktivieren – ein Klick aufs Bild
+ * öffnet stattdessen die Lightbox (Responsive Lightbox / swipebox).
+ */
+add_action( 'after_setup_theme', function () {
+    remove_theme_support( 'wc-product-gallery-zoom' );
+}, 99 );
 
 /**
  * Produktbild im Loop in einen Wrapper packen (für leichten Zoom + Clip).
