@@ -28,7 +28,7 @@ add_action( 'after_setup_theme', 'sot_add_woocommerce_support' );
  */
 function sot_enqueue_styles() {
     // Registrieren und einbinden der zusätzlichen CSS-Datei
-    wp_enqueue_style('sot-single-product', get_stylesheet_directory_uri() . '/woocommerce/single-product/styles.css', array(), '1.0.22', 'all');
+    wp_enqueue_style('sot-single-product', get_stylesheet_directory_uri() . '/woocommerce/single-product/styles.css', array(), '1.0.23', 'all');
     wp_enqueue_style('sot-landing-page-style', get_stylesheet_directory_uri() . '/css/template-landing-page.css', array(), '1.0.4', 'all');
 
 }
@@ -128,7 +128,7 @@ function sot_enqueue_shop_styles() {
             'sot-shop',
             get_stylesheet_directory_uri() . '/css/shop.css',
             array( 'hybridextend-child-style' ),
-            '1.4.0'
+            '1.5.0'
         );
     }
 }

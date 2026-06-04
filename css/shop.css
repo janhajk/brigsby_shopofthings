@@ -394,23 +394,26 @@ body.sot-shop-page {
     background: #fff;
 }
 
-/* Einzelprodukt: keine Sidebar -> volle Breite */
+/* Einzelprodukt: keine Sidebar + volle Breite (Sidebar-Layout aufheben) */
 .sot-shop-page.single-product #sidebar-primary,
 .sot-shop-page.single-product #sidebar-secondary,
 .sot-shop-page.single-product .sidebar {
     display: none !important;
 }
+.sot-shop-page.single-product .main-content-grid {
+    display: block !important;
+}
 .sot-shop-page.single-product #content,
 .sot-shop-page.single-product main.content {
-    flex-basis: 100% !important;
-    max-width: 100% !important;
     width: 100% !important;
+    max-width: 100% !important;
     margin: 0 !important;
+    float: none !important;
 }
 
-/* doppelten Produkttitel im Content ausblenden (Titel steht oben im Kopf) */
-.sot-shop-page.single-product #content .product_title,
-.sot-shop-page.single-product #content .entry-title {
+/* doppelter Produkttitel (Theme-loop-meta) auf der Produktseite ausblenden
+   – der Titel steht bereits oben im Kopf (.sot-shop-header) */
+.sot-shop-page.single-product #loop-meta {
     display: none !important;
 }
 

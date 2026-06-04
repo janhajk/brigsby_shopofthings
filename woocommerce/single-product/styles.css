@@ -6,11 +6,11 @@
 
 .sot-sp {
     display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 620px) minmax(0, 1fr);
     grid-template-areas:
         "gallery summary"
         "below   summary";
-    gap: 14px 40px;
+    gap: 14px 48px;
     align-items: start;
 }
 
