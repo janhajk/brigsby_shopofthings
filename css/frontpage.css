@@ -724,6 +724,15 @@ body.sot-frontpage-page {
     .sot-cta .cta-buttons {
         justify-content: center;
     }
+    .sot-cta .cta-media {
+        max-width: 320px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    .sot-berater .berater-card {
+        max-width: 340px;
+        margin: 0 auto;
+    }
     .sot-news .news-grid.has-rest {
         grid-template-columns: 1fr;
     }
@@ -733,10 +742,99 @@ body.sot-frontpage-page {
     .sot-frontpage section {
         padding: 52px 0;
     }
+    /* schmalerer Seitenrand auf dem Handy */
+    .sot-frontpage .hgrid:not(.hero-grid) {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
     .sot-frontpage .section-statement {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
+        margin-bottom: 1.8rem;
+    }
+    .sot-frontpage section > .hgrid > h2:not(.section-statement) {
+        font-size: 1.5rem;
+    }
+
+    .sot-hero .hero-title {
+        font-size: 2.4rem;
+    }
+    .sot-hero .hero-subtitle {
+        font-size: 1.15rem;
+    }
+
+    .sot-target-groups .card,
+    .sot-why-us .why-item,
+    .sot-tiles .tile {
+        padding: 24px;
+    }
+    .sot-tiles .tile {
+        min-height: 0;
+    }
+
+    .sot-cta .cta-box {
+        padding: 26px;
+    }
+    .sot-cta .cta-content h2 {
+        font-size: 1.55rem;
+    }
+
+    .sot-stats .stats-box {
+        padding: 34px 22px;
+    }
+    .sot-stats .stats-box h2 {
+        font-size: 1.5rem;
     }
     .sot-stats .stat .number {
         font-size: 2.2rem;
+    }
+
+    .sot-berater .berater-box {
+        padding: 32px 24px;
+    }
+    .sot-berater .berater-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .sot-partners .partner-logos {
+        gap: 28px;
+    }
+    .sot-customers .customer-logos {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sot-frontpage .hgrid:not(.hero-grid) {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+    .sot-hero .hero-title {
+        font-size: 2rem;
+    }
+    .sot-frontpage .section-statement {
+        font-size: 1.35rem;
+    }
+    .sot-tiles .tiles-tab {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+    }
+    /* je 2 nebeneinander statt 1, damit es kompakt bleibt */
+    .sot-stats .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sot-partners .partner-logos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sot-customers .customer-logos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sot-customers .customer-logos img {
+        height: 96px;
+        padding: 16px;
+    }
+    .sot-frontpage .hero-grid {
+        padding: 52px 18px;
     }
 }
