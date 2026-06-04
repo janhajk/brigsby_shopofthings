@@ -59,16 +59,25 @@ body.sot-frontpage-page {
     padding-left: 40px;
     padding-right: 40px;
     align-items: center;
+    flex-wrap: nowrap; /* Bildspalte soll nicht unter den Text rutschen */
+    box-sizing: border-box;
+}
+
+/* Spalten-Gutter raus: Text bündig zum Logo, Bild bündig zum rechten Rand
+   und dadurch grösser; vermeidet zugleich den Umbruch der Bildspalte */
+.sot-frontpage .hero-text,
+.sot-frontpage .hero-image {
+    padding-left: 0;
+    padding-right: 0;
     box-sizing: border-box;
 }
 
 .sot-frontpage .hero-text {
     max-width: none;
-    padding-left: 0;
 }
 
 .sot-frontpage .hero-image {
-    width: 48%;
+    width: 41%;
     height: auto;
     right: 0;
     align-self: center;
@@ -79,7 +88,7 @@ body.sot-frontpage-page {
 .sot-frontpage .hero-image img {
     position: relative;
     top: 0;
-    width: 96%;
+    width: 100%;
     height: auto;
     margin: 70px 0 0 auto; /* Stadtbild tiefer -> Wolke (bg) ragt oben darüber */
     display: block;
