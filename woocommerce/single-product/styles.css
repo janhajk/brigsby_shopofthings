@@ -176,9 +176,13 @@
    Tokens: tiefblau #1D2E7C · violett #7b5dc7 · helle Linie #e6ecf5
    ============================================================ */
 
-/* Info-Spalte: Meta-Tabelle aufgeräumt, keine grauen Linien */
+/* Info-Spalte: Meta-Tabelle aufgeräumt, keine grauen Linien.
+   table-layout:fixed -> Label-Spalte fix, Wert-Spalte nimmt den Rest ein
+   (sonst richtet sich die Wert-Spalte nach dem breitesten Inhalt und die
+   Verfügbarkeits-Tabelle bleibt schmal). */
 .sot-sp-summary .product-meta-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
 }
 .sot-sp-summary .product-meta-table th {
@@ -187,7 +191,8 @@
     font-size: 0.9rem;
     vertical-align: top;
     padding: 9px 12px 9px 0;
-    white-space: nowrap;
+    width: 150px;
+    white-space: normal;
 }
 .sot-sp-summary .product-meta-table td {
     color: #1f2937;
@@ -266,6 +271,13 @@
     border: 2px solid #1D2E7C !important;
     border-radius: 40px !important;
     font-weight: 600;
+    /* Quantity-Plugin erzwingt height:35px/line-height:1 -> hier zentrieren */
+    height: auto !important;
+    min-height: 48px !important;
+    line-height: 1.2 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     padding: 12px 26px !important;
     transition: background .2s, color .2s;
 }
@@ -395,16 +407,8 @@
     color: #1D2E7C;
 }
 
-/* Verfügbarkeit: breite Tabelle unter das Label „Verfügbarkeit:" setzen */
-.sot-sp-summary .product-meta-table #special-row-stock th,
-.sot-sp-summary .product-meta-table #special-row-stock td {
-    display: block;
-    width: 100%;
-    padding-left: 0 !important;
-}
-.sot-sp-summary .product-meta-table #special-row-stock th {
-    padding-bottom: 6px;
-}
+/* Verfügbarkeit bleibt auf Desktop neben dem Label; die Wert-Spalte ist
+   dank table-layout:fixed breit, die Tabelle darin füllt sie (100%). */
 
 /* Abstand zwischen Hauptbild und Thumbnail-Leiste */
 .sot-sp-gallery .flex-control-nav.flex-control-thumbs {

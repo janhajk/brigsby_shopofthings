@@ -28,7 +28,7 @@ add_action( 'after_setup_theme', 'sot_add_woocommerce_support' );
  */
 function sot_enqueue_styles() {
     // Registrieren und einbinden der zusätzlichen CSS-Datei
-    wp_enqueue_style('sot-single-product', get_stylesheet_directory_uri() . '/woocommerce/single-product/styles.css', array(), '1.0.31', 'all');
+    wp_enqueue_style('sot-single-product', get_stylesheet_directory_uri() . '/woocommerce/single-product/styles.css', array(), '1.0.32', 'all');
     wp_enqueue_style('sot-landing-page-style', get_stylesheet_directory_uri() . '/css/template-landing-page.css', array(), '1.0.4', 'all');
 
 }
@@ -151,14 +151,19 @@ add_action( 'wp_footer', function () {
             var btn = document.createElement('button');
             btn.type = 'button';
             btn.className = 'sot-filter-toggle';
-            btn.setAttribute('aria-expanded', 'false');
             btn.innerHTML = '<i class="fas fa-sliders-h" aria-hidden="true"></i> Filter';
-            filter.classList.add('sot-filter-collapsed');
             filter.parentNode.insertBefore(btn, filter);
-            btn.addEventListener('click', function () {
-                var collapsed = filter.classList.toggle('sot-filter-collapsed');
-                btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-                btn.classList.toggle('open', ! collapsed);
+            var open = false;
+            function setState(o) {
+                open = o;
+                filter.classList.toggle('sot-filter-collapsed', ! open);
+                btn.classList.toggle('open', open);
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            }
+            setState(false); // standardmäßig eingeklappt
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                setState(! open);
             });
         }
         if ( document.readyState !== 'loading' ) { initSotFilter(); }
