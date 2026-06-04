@@ -426,27 +426,19 @@ body.sot-shop-page {
     cursor: zoom-in;
 }
 
-/* Beschreibungs-„Mehr anzeigen" optisch wie das Details-„Mehr anzeigen" */
-.sot-shop-page .show-more-content {
-    display: block;
-    width: auto;
-    text-align: center;
-    margin: 12px auto 0;
+/* „Mehr anzeigen" (Beschreibung + Details) zentriert auf gleicher Position;
+   der +/–-Kreis kommt aus dem Markup/JS, nicht per ::before */
+.sot-shop-page .show-more-content,
+.sot-shop-page .sot-sp-below .show-more {
+    display: block !important;
+    width: auto !important;
+    margin: 12px auto 0 !important;
+    text-align: center !important;
     font-weight: 600;
     color: rgb(15, 88, 148);
     text-decoration: none;
-}
-.sot-shop-page .show-more-content::before {
-    content: "+";
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 6px;
-    border: 1px solid rgb(15, 88, 148);
-    border-radius: 50%;
-    line-height: 20px;
-    text-align: center;
-    vertical-align: middle;
+    background: none !important;
+    border: 0 !important;
 }
 
 /* Abstand nach den Details */

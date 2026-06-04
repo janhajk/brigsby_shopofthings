@@ -112,16 +112,22 @@
 }
 
 /* Beschreibungs-„Mehr anzeigen" optisch wie das Details-„Mehr anzeigen" */
-.sot-sp-below .show-more-content {
-    display: block;
-    width: auto;
-    text-align: center;
-    margin: 12px auto 0;
+/* Beschreibung + Details „Mehr anzeigen": beide zentriert auf gleicher x-Position.
+   Das Details-Button hat inline width:60% -> hier auf auto/zentriert überschreiben.
+   Der +/–-Kreis kommt aus dem Markup/JS, nicht per ::before. */
+.sot-sp-below .show-more-content,
+.sot-sp-below .show-more {
+    display: block !important;
+    width: auto !important;
+    margin: 12px auto 0 !important;
+    text-align: center !important;
     font-weight: 600;
     color: rgb(15, 88, 148);
     text-decoration: none;
+    background: none !important;
+    border: 0 !important;
+    cursor: pointer;
 }
-/* der +/–-Kreis kommt jetzt aus dem Markup/JS (description.php), nicht mehr per ::before */
 
 /* Abstand nach den Details */
 .sot-sp-below {
@@ -252,14 +258,14 @@
     background: #f4f7fc !important;
 }
 
-/* Preis */
-.sot-sp-summary .price:not(.shipping-notice) {
+/* Preis (nur Hauptpreis = direktes Kind, NICHT die Bundle-Preise) */
+.sot-sp-summary > .price:not(.shipping-notice) {
     color: #1D2E7C;
     font-weight: 800;
     font-size: 1.5rem;
     margin: 14px 0 2px;
 }
-.sot-sp-summary .price.shipping-notice {
+.sot-sp-summary > .price.shipping-notice {
     font-size: 0.8rem;
     font-weight: 400;
 }
@@ -346,25 +352,25 @@
 
 /* ── Feinschliff: Preis, Lagerstatus, Verfügbarkeits-Tabelle ───────── */
 
-/* Preis tiefblau statt Theme-Gold */
-.sot-sp-summary p.price:not(.shipping-notice),
-.sot-sp-summary p.price:not(.shipping-notice) .woocommerce-Price-amount,
-.sot-sp-summary p.price:not(.shipping-notice) bdi,
-.sot-sp-summary p.price:not(.shipping-notice) .woocommerce-Price-currencySymbol,
-.sot-sp-summary p.price:not(.shipping-notice) .woocommerce-price-suffix {
+/* Preis tiefblau statt Theme-Gold (nur Hauptpreis = direktes Kind) */
+.sot-sp-summary > p.price:not(.shipping-notice),
+.sot-sp-summary > p.price:not(.shipping-notice) .woocommerce-Price-amount,
+.sot-sp-summary > p.price:not(.shipping-notice) bdi,
+.sot-sp-summary > p.price:not(.shipping-notice) .woocommerce-Price-currencySymbol,
+.sot-sp-summary > p.price:not(.shipping-notice) .woocommerce-price-suffix {
     color: #1D2E7C !important;
 }
-.sot-sp-summary p.price:not(.shipping-notice) {
+.sot-sp-summary > p.price:not(.shipping-notice) {
     margin: 12px 0 2px !important;
     line-height: 1.2;
 }
 /* Versand-Hinweis: keine Überlappung mehr (Plugin setzt margin-top:-2em) */
-.sot-sp-summary .price.shipping-notice {
+.sot-sp-summary > .price.shipping-notice {
     margin: 2px 0 0 !important;
     font-size: 0.8rem !important;
     font-weight: 400 !important;
 }
-.sot-sp-summary .price.shipping-notice a {
+.sot-sp-summary > .price.shipping-notice a {
     color: #8a93a6 !important;
 }
 
@@ -405,6 +411,84 @@
     text-align: right;
     font-weight: 700 !important;
     color: #1D2E7C;
+}
+
+/* ── „passend dazu" (WooCommerce Product Bundles) sauber als Liste ──── */
+.sot-sp-summary .bundle_sells_title h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 18px 0 6px;
+}
+.sot-sp-summary .bundle_form,
+.sot-sp-summary .bundle_sells_form {
+    margin: 0 0 16px;
+    float: none !important;
+}
+.sot-sp-summary .bundled_product {
+    display: flex !important;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0 !important;
+    margin: 0 !important;
+    border-top: 1px solid #e6ecf5 !important;
+    float: none !important;
+    width: auto !important;
+    box-sizing: border-box;
+}
+.sot-sp-summary .bundle_sells_form > .bundled_product:first-child {
+    border-top: 0 !important;
+}
+.sot-sp-summary .bundled_product_images,
+.sot-sp-summary .bundled_product .images {
+    flex: 0 0 64px !important;
+    width: 64px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+}
+.sot-sp-summary .bundled_product_image,
+.sot-sp-summary .bundled_product_images figure {
+    margin: 0 !important;
+}
+.sot-sp-summary .bundled_product_images img {
+    width: 64px !important;
+    height: auto !important;
+    border-radius: 8px;
+}
+.sot-sp-summary .bundled_product .details {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+}
+.sot-sp-summary .bundled_product_title {
+    font-size: 0.9rem;
+    line-height: 1.35;
+    margin: 0 0 4px !important;
+}
+.sot-sp-summary .bundled_product_optional_checkbox {
+    display: block;
+    font-size: 0.85rem;
+    margin: 0;
+}
+/* Bundle-Preise klein halten (Haupt-Preis-Regel greift nur direkt im Summary) */
+.sot-sp-summary .bundled_product .price {
+    display: inline !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: #1f2937 !important;
+    margin: 0 !important;
+}
+.sot-sp-summary .bundled_product .price .shipping-notice,
+.sot-sp-summary .bundled_product .price.shipping-notice {
+    display: none !important;
+}
+.sot-sp-summary .bundled_product .stock {
+    font-size: 0.8rem;
+    margin: 4px 0 0;
 }
 
 /* Verfügbarkeit bleibt auf Desktop neben dem Label; die Wert-Spalte ist
