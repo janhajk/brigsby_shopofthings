@@ -104,6 +104,40 @@ function sot_frontpage_body_class( $classes ) {
 }
 add_filter( 'body_class', 'sot_frontpage_body_class' );
 
+/**
+ * Shop-Seiten (Produktliste + Einzelprodukt): Body-Klasse + eigenes CSS.
+ */
+function sot_is_shop_view() {
+    return function_exists( 'is_shop' ) && ( is_shop() || is_product_taxonomy() || is_product() );
+}
+
+function sot_shop_body_class( $classes ) {
+    if ( sot_is_shop_view() ) {
+        $classes[] = 'sot-shop-page';
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'sot_shop_body_class' );
+
+function sot_enqueue_shop_styles() {
+    if ( sot_is_shop_view() ) {
+        wp_enqueue_style(
+            'sot-shop',
+            get_stylesheet_directory_uri() . '/css/shop.css',
+            array( 'hybridextend-child-style' ),
+            '1.0.0'
+        );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'sot_enqueue_shop_styles' );
+
+/**
+ * Warenkorb- und Vergleichs-Button in der Produktliste in eine
+ * Aktionsleiste (.sot-card-actions) am Kartenende wrappen.
+ */
+add_action( 'woocommerce_after_shop_loop_item', function () { echo '<div class="sot-card-actions">'; }, 6 );
+add_action( 'woocommerce_after_shop_loop_item', function () { echo '</div>'; }, 99 );
+
 
 
 /*
@@ -157,16 +191,10 @@ add_filter( 'woocommerce_product_description_heading', '__return_null' );
 remove_action('woocommerce_shop_loop_item_title','woocommerce_template_loop_product_title',10);
 add_action('woocommerce_shop_loop_item_title','sot_custom_loop_title',10);
 function sot_custom_loop_title() {
-   $MAX_LEN = 60;
    global $product;
-   $title = get_the_title();
-   $len = strlen($title);
    $link = apply_filters( 'woocommerce_loop_product_link', get_the_permalink(), $product );
-   $title = substr($title, 0, $MAX_LEN);
-      if ($len >= $MAX_LEN) {
-         $title .= '...';
-   }
-   echo '<h3 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '" style="height:55px;overflow-y:hidden"><a href="' . esc_url( $link ) . '" class="woocommerce-LoopProduct-link-title woocommerce-loop-product__title_ink">' . $title . '</a></h3>';
+   // Titel ohne harte Zeichen-Kürzung; Begrenzung auf 2 Zeilen via CSS (.sot-loop-title)
+   echo '<h3 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title sot-loop-title' ) ) . '"><a href="' . esc_url( $link ) . '" class="woocommerce-LoopProduct-link-title woocommerce-loop-product__title_ink">' . esc_html( get_the_title() ) . '</a></h3>';
 }
 
 
@@ -414,10 +442,10 @@ remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_r
  *
  */
 
+// Add-to-Cart-Beschriftung: Standardtext (z. B. „In den Warenkorb" / „Optionen wählen")
 add_filter('woocommerce_product_add_to_cart_text','sot_customize_add_to_cart_button_woocommerce');
-function sot_customize_add_to_cart_button_woocommerce(){
-      return '&#128722;';
-      // return __('Add to cart', 'woocommer');
+function sot_customize_add_to_cart_button_woocommerce($text){
+      return $text;
 }
 
 

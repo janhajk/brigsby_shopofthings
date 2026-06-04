@@ -1,0 +1,300 @@
+/*
+ * Shop – Produktliste (Archiv/Kategorie) + Einzelprodukt
+ * Lädt nur auf Shop-Views (body.sot-shop-page).
+ */
+
+/* ── Vollbreiter weisser Hintergrund + Content-Shell wie Startseite ──── */
+body.sot-shop-page {
+    background: #fff;
+}
+
+.sot-shop-page #page-wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+}
+
+.sot-shop-page .hgrid.main-content-grid {
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .sot-shop-page .hgrid.main-content-grid {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+/* ── Produktraster: modernes CSS-Grid statt Float ───────────────────── */
+.sot-shop-page ul.products {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    margin: 24px 0 30px;
+    padding: 0;
+    list-style: none;
+}
+
+/* WooCommerce-Clearfix (würde leere Grid-Zellen erzeugen) entfernen */
+.sot-shop-page ul.products::before,
+.sot-shop-page ul.products::after {
+    content: none !important;
+    display: none !important;
+}
+
+.sot-shop-page ul.products li.product {
+    width: auto !important;
+    margin: 0 !important;
+    float: none !important;
+    clear: none !important;
+    padding: 14px;
+    background: #fff;
+    border: 1px solid #e6ecf5;
+    border-radius: 14px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(29, 46, 124, 0.04);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.sot-shop-page ul.products li.product:hover {
+    box-shadow: 0 12px 28px rgba(29, 46, 124, 0.12);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 1024px) {
+    .sot-shop-page ul.products {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sot-shop-page ul.products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+    .sot-shop-page ul.products li.product {
+        padding: 10px;
+    }
+}
+
+/* ── Karteninhalt ───────────────────────────────────────────────────── */
+.sot-shop-page li.product > div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sot-shop-page li.product .woocommerce-LoopProduct-link {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+.sot-shop-page li.product img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 8px;
+    margin: 0 0 10px;
+}
+
+/* Titel auf 2 Zeilen begrenzen */
+.sot-shop-page li.product .sot-loop-title {
+    margin: 0 0 4px;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    font-weight: 600;
+    min-height: 2.6em;
+}
+
+.sot-shop-page li.product .sot-loop-title a {
+    color: #1f2937;
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sot-shop-page li.product .sot-loop-title a:hover {
+    color: var(--SOT---blue-deep, #1D2E7C);
+}
+
+.sot-shop-page li.product .star-rating {
+    font-size: 0.8rem;
+    margin: 2px 0 4px;
+}
+
+/* ── Preis: CHF klein · Betrag · exkl. MWST sehr klein ──────────────── */
+.sot-shop-page li.product .price {
+    margin: auto 0 0;        /* Preis an den unteren Rand des Link-Bereichs */
+    padding-top: 8px;
+    color: var(--SOT---blue-deep, #1D2E7C);
+    font-weight: 800;
+    font-size: 1.2rem;
+    line-height: 1.15;
+}
+
+.sot-shop-page li.product .price .woocommerce-Price-currencySymbol {
+    font-size: 0.6em;
+    font-weight: 600;
+    vertical-align: 0.18em;
+    margin-right: 2px;
+}
+
+.sot-shop-page li.product .price del {
+    color: #9aa3b2;
+    font-weight: 500;
+    font-size: 0.8rem;
+    margin-right: 4px;
+}
+
+.sot-shop-page li.product .price ins {
+    text-decoration: none;
+}
+
+.sot-shop-page li.product .price .woocommerce-price-suffix {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: #8a93a6;
+    margin-top: 1px;
+    letter-spacing: 0.01em;
+}
+
+/* ── Aktionsleiste: breiter Warenkorb-Button + Compare-Icon ─────────── */
+.sot-shop-page li.product .sot-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.sot-shop-page li.product .sot-card-actions .button {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    padding: 9px 12px;
+    border-radius: 30px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-align: center;
+    background: var(--SOT---blue-deep, #1D2E7C);
+    color: #fff;
+    border: 2px solid var(--SOT---blue-deep, #1D2E7C);
+    line-height: 1.2;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sot-shop-page li.product .sot-card-actions .button:hover {
+    background: #fff;
+    color: var(--SOT---blue-deep, #1D2E7C);
+}
+
+.sot-shop-page li.product .sot-card-actions .button.loading,
+.sot-shop-page li.product .sot-card-actions .button.added {
+    opacity: 0.85;
+}
+
+.sot-shop-page li.product .sot-card-actions .compare-btn {
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--sot-violet, #7b5dc7);
+    color: var(--sot-violet, #7b5dc7);
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sot-shop-page li.product .sot-card-actions .compare-btn:hover {
+    background: var(--sot-violet, #7b5dc7);
+    color: #fff;
+}
+
+/* „added to cart"-Folge-Link von WooCommerce ausblenden (kompakt halten) */
+.sot-shop-page li.product .sot-card-actions .added_to_cart {
+    display: none;
+}
+
+/* ── Lager-Badge + Tooltip (wie Top-Bar) ────────────────────────────── */
+.sot-shop-page li.product .sot-stock-badge {
+    z-index: 3;
+}
+
+.sot-tip {
+    position: relative;
+}
+
+.sot-tip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    width: max-content;
+    max-width: 220px;
+    padding: 6px 10px;
+    background: var(--SOT---blue-deep, #1D2E7C);
+    color: #fff;
+    font-size: 0.72rem;
+    line-height: 1.3;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    white-space: normal;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    z-index: 1000;
+}
+
+.sot-tip:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Lager-Badge sitzt oben rechts -> Tooltip rechtsbündig, damit er nicht
+   über den Kartenrand ragt */
+.sot-stock-badge.sot-tip::after {
+    left: auto;
+    right: 0;
+    transform: translateY(4px);
+}
+.sot-stock-badge.sot-tip:hover::after {
+    transform: translateY(0);
+}
+
+/* ── Ergebnis-Zähler / Sortierung dezenter ──────────────────────────── */
+.sot-shop-page .woocommerce-result-count,
+.sot-shop-page .woocommerce-ordering {
+    margin-bottom: 16px;
+}
+
+/* ── Einzelprodukt: Inhalt auf Shell, weisser Hintergrund (Layout
+   bleibt ansonsten wie gehabt aus woocommerce-customizations.css) ───── */
+.sot-shop-page .product-hgrid {
+    background: #fff;
+}
