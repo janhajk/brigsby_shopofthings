@@ -11,6 +11,7 @@
 
 /* ── Header-Reihe: Logo links, Menü rechts ───────────────────────────── */
 .sot-header-row {
+    position: relative; /* Anker für das Mega-Panel (volle Shell-Breite) */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -21,6 +22,15 @@
 .sot-header-row .site-branding {
     margin: 0;
     flex: 0 0 auto;
+}
+
+/* Header kompakter: Logo-Abstände raus */
+.sot-header-row #site-logo,
+.sot-header-row .site-logo-image,
+.sot-header-row #site-title,
+.sot-header-row #site-description {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 /* Top-Bar & Header gleiche Breite + gleicher Seitenrand wie der Content */
@@ -35,13 +45,20 @@
 }
 
 #header-primary {
-    padding-top: 12px !important;
-    padding-bottom: 12px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+/* Header-Bereiche dürfen das Mega-Panel nicht abschneiden */
+#header,
+#header-primary,
+.sot-header-row {
+    overflow: visible;
 }
 
 /* ── Navigationsleiste ───────────────────────────────────────────────── */
 .sot-nav {
-    position: relative;
+    position: static;
 }
 
 .sot-nav-list {
@@ -55,6 +72,12 @@
 
 .sot-nav-item {
     position: relative;
+}
+
+/* Mega-Panel an der Header-Reihe (Shell) ausrichten statt am Punkt,
+   damit es bei schmaleren Fenstern nicht über den Rand läuft */
+.sot-nav-item.type-mega {
+    position: static;
 }
 
 .sot-nav-link {
@@ -131,8 +154,7 @@
     display: grid;
     grid-template-columns: 300px 1fr 240px;
     gap: 22px;
-    width: 940px;
-    max-width: calc(100vw - 40px);
+    width: min(1080px, calc(100vw - 60px));
     background: #fff;
     border-radius: 18px;
     box-shadow: 0 24px 60px rgba(10, 31, 61, 0.16);
@@ -321,6 +343,12 @@
 
 /* ── Mobile ──────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
+    /* kein horizontales Scrollen auf Mobile */
+    html,
+    body {
+        overflow-x: hidden;
+    }
+
     .sot-header-row {
         gap: 14px;
     }
@@ -342,13 +370,20 @@
         padding: 78px 16px 28px;
         overflow-y: auto;
         box-shadow: -12px 0 44px rgba(10, 31, 61, 0.22);
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
         z-index: 99998;
+        display: none;
     }
 
     .sot-nav.open .sot-nav-list {
-        transform: translateX(0);
+        display: flex;
+    }
+
+    /* Top-Bar-Links zuoberst, Sprache zuunterst */
+    .sot-nav-extra {
+        order: -1;
+    }
+    .sot-nav-extra-lang {
+        order: 1;
     }
 
     .sot-nav-item {
@@ -396,22 +431,17 @@
         padding: 0 0 0 8px;
     }
 
-    /* Im Hamburger: Gruppen-Umschalter weg, ALLE Listen mit Überschrift zeigen */
-    .mega-groups .mega-group {
-        display: none;
+    /* Im Hamburger: Gruppen als Akkordeon – nur die getippte Gruppe öffnet
+       ihre Liste (mega-list.active), gesteuert per JS. */
+    .mega-group {
+        width: 100%;
+        justify-content: flex-start;
     }
-    .mega-list {
-        display: block !important;
-        padding: 0 0 6px;
-    }
-    .mega-list-head {
-        display: block;
-        font-weight: 700;
-        color: #0a1f3d;
-        padding: 12px 8px 4px;
+    .mega-group-arrow {
+        margin-left: auto;
     }
     .mega-cta {
-        margin: 4px 0 10px;
+        margin: 6px 0 10px;
     }
     .mega-lists {
         padding: 0 0 0 12px;

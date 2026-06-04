@@ -93,8 +93,7 @@ if ( empty( $items ) ) { return; }
             </li>
         <?php endforeach; ?>
 
-        <?php /* Nur Mobile: Top-Bar-Inhalte als Links im Hamburger-Menü */ ?>
-        <li class="sot-nav-extra sot-nav-extra-info">Schweizer Lager – Versand innert 48 h<br><a href="tel:+41615514107">+41 61 55 14 107</a></li>
+        <?php /* Nur Mobile: Top-Bar-Inhalte als Links im Hamburger-Menü (oben, vor den Menüpunkten) */ ?>
         <li class="sot-nav-extra"><a href="<?php echo esc_url( function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '/cart/' ); ?>">Warenkorb</a></li>
         <li class="sot-nav-extra"><a href="/my-account">Mein Konto</a></li>
         <li class="sot-nav-extra"><a href="/produktvergleich">Produktvergleich</a></li>

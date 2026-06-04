@@ -49,6 +49,13 @@
                 l.classList.toggle( 'active', l.id === target );
             } );
         }
+        function collapseAll() {
+            groups.forEach( function ( g ) { g.classList.remove( 'active' ); } );
+            lists.forEach( function ( l ) { l.classList.remove( 'active' ); } );
+        }
+
+        // Auf Mobile starten alle Untermenüs geschlossen
+        if ( isMobile() ) { collapseAll(); }
 
         groups.forEach( function ( g ) {
             var target = g.getAttribute( 'data-target' );
@@ -56,9 +63,15 @@
                 if ( ! isMobile() ) { activate( target ); }
             } );
             g.addEventListener( 'click', function ( e ) {
-                // Auf Mobile nur umschalten, nicht navigieren
-                if ( isMobile() ) { e.preventDefault(); }
-                activate( target );
+                if ( isMobile() ) {
+                    e.preventDefault();
+                    // Akkordeon: nur eines offen, erneutes Tippen schliesst
+                    var wasActive = g.classList.contains( 'active' );
+                    collapseAll();
+                    if ( ! wasActive ) { activate( target ); }
+                } else {
+                    activate( target );
+                }
             } );
         } );
     } );
@@ -76,10 +89,15 @@
 
         nav.querySelectorAll( '.sot-nav-item.has-panel > .sot-nav-link' ).forEach( function ( link ) {
             link.addEventListener( 'click', function ( e ) {
-                if ( isMobile() ) {
-                    e.preventDefault();
-                    link.parentNode.classList.toggle( 'open' );
-                }
+                if ( ! isMobile() ) { return; }
+                e.preventDefault();
+                var li       = link.parentNode;
+                var willOpen = ! li.classList.contains( 'open' );
+                // Akkordeon: andere offene Punkte schliessen, nur einer offen
+                nav.querySelectorAll( '.sot-nav-item.open' ).forEach( function ( o ) {
+                    if ( o !== li ) { o.classList.remove( 'open' ); }
+                } );
+                li.classList.toggle( 'open', willOpen );
             } );
         } );
     } );
