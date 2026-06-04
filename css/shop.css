@@ -395,16 +395,16 @@ body.sot-shop-page {
 }
 
 /* Einzelprodukt: keine Sidebar + volle Breite (Sidebar-Layout aufheben) */
-.sot-shop-page.single-product #sidebar-primary,
-.sot-shop-page.single-product #sidebar-secondary,
-.sot-shop-page.single-product .sidebar {
+.sot-shop-page.singular-product #sidebar-primary,
+.sot-shop-page.singular-product #sidebar-secondary,
+.sot-shop-page.singular-product .sidebar {
     display: none !important;
 }
-.sot-shop-page.single-product .main-content-grid {
+.sot-shop-page.singular-product .main-content-grid {
     display: block !important;
 }
-.sot-shop-page.single-product #content,
-.sot-shop-page.single-product main.content {
+.sot-shop-page.singular-product #content,
+.sot-shop-page.singular-product main.content {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
@@ -413,7 +413,7 @@ body.sot-shop-page {
 
 /* doppelter Produkttitel (Theme-loop-meta) auf der Produktseite ausblenden
    – der Titel steht bereits oben im Kopf (.sot-shop-header) */
-.sot-shop-page.single-product #loop-meta {
+.sot-shop-page.singular-product #loop-meta {
     display: none !important;
 }
 
@@ -455,12 +455,12 @@ body.sot-shop-page {
 }
 
 /* ── Produktliste: Sidebars (links + rechts) etwas breiter ──────────── */
-.sot-shop-page:not(.single-product) #content {
+.sot-shop-page:not(.singular-product) #content {
     flex-basis: 56% !important;
     max-width: 56% !important;
 }
-.sot-shop-page:not(.single-product) #sidebar-primary,
-.sot-shop-page:not(.single-product) #sidebar-secondary {
+.sot-shop-page:not(.singular-product) #sidebar-primary,
+.sot-shop-page:not(.singular-product) #sidebar-secondary {
     flex-basis: 21% !important;
     max-width: 21% !important;
 }

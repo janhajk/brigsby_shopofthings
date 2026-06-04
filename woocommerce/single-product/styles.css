@@ -6,7 +6,7 @@
 
 .sot-sp {
     display: grid;
-    grid-template-columns: minmax(0, 700px) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     grid-template-areas:
         "gallery summary"
         "below   summary";
