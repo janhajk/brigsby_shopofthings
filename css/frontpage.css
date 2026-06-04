@@ -11,6 +11,7 @@
     --fp-gray: #5b6577;
     --fp-card: #eef4fb;
     --fp-line: #e3e9f4;
+    --fp-violet: #7b5dc7;
 }
 
 /* ── Vollbreite, weisser Hintergrund (Theme-Boxed-Layout aufheben) ────── */
@@ -277,12 +278,19 @@ body.sot-frontpage-page {
 }
 
 .sot-tiles .tile {
+    position: relative;
     background: var(--fp-card);
     border-radius: 18px;
-    padding: 28px 26px;
-    display: flex;
-    flex-direction: column;
-    min-height: 300px;
+    padding: 28px 26px 24px;
+    min-height: 330px;
+    overflow: hidden;
+}
+
+/* Titel/Text bleiben links, damit das Bild rechts daran vorbei kann */
+.sot-tiles .tile-body {
+    position: relative;
+    z-index: 2;
+    max-width: 68%;
 }
 
 .sot-tiles .tile h3 {
@@ -297,38 +305,46 @@ body.sot-frontpage-page {
     font-size: 0.95rem;
 }
 
+/* Produktbild (transparenter Hintergrund): gross, rechts, am Text vorbei */
 .sot-tiles .tile-media {
-    flex: 1;
+    position: absolute;
+    right: -6px;
+    bottom: 28px;
+    width: 74%;
+    max-width: 290px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 14px 0;
-    min-height: 120px;
+    align-items: flex-end;
+    justify-content: flex-end;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .sot-tiles .tile-media img {
-    max-width: 100%;
-    max-height: 150px;
-    width: auto;
+    width: 100%;
+    max-height: 215px;
     height: auto;
     object-fit: contain;
 }
 
+/* Button liegt über dem Bild, schlanker, violette Umrandung */
 .sot-tiles .tile-btn {
-    align-self: flex-start;
-    border: 1px solid var(--fp-navy);
-    color: var(--fp-navy);
-    background: #fff;
+    position: absolute;
+    left: 26px;
+    bottom: 22px;
+    z-index: 3;
+    border: 1.5px solid var(--fp-violet);
+    color: var(--fp-violet);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 40px;
-    padding: 9px 20px;
+    padding: 7px 18px;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     text-decoration: none;
     transition: background 0.2s ease, color 0.2s ease;
 }
 
 .sot-tiles .tile-btn:hover {
-    background: var(--fp-navy);
+    background: var(--fp-violet);
     color: #fff;
 }
 
@@ -764,12 +780,12 @@ body.sot-frontpage-page {
     }
 
     .sot-target-groups .card,
-    .sot-why-us .why-item,
-    .sot-tiles .tile {
+    .sot-why-us .why-item {
         padding: 24px;
     }
+    /* Kachel behält ihre Höhe für Bild + überlappenden Button */
     .sot-tiles .tile {
-        min-height: 0;
+        min-height: 300px;
     }
 
     .sot-cta .cta-box {
