@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.26
+ Version:       3.1.27
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -866,14 +866,36 @@ input.product-search-field {
     font-weight: bold;
 }
 
+/* Footer-Inhalt auf dieselbe Breite wie Header/Content bringen */
+.site-footer .col-full {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+
 .footer-main {
-    padding: 60px 20px;
+    padding: 60px 0;
 }
 
 .footer-columns {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+}
+
+@media (max-width: 900px) {
+    .footer-columns {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 36px;
+    }
+}
+
+@media (max-width: 560px) {
+    .footer-columns {
+        grid-template-columns: 1fr;
+    }
 }
 
 .footer-column h4 {

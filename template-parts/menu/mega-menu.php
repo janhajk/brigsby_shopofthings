@@ -68,6 +68,7 @@ if ( empty( $items ) ) { return; }
                             <div class="mega-lists">
                                 <?php foreach ( $groups as $gi => $g ) : ?>
                                     <ul class="mega-list<?php echo 0 === $gi ? ' active' : ''; ?>" id="mega-<?php echo (int) $idx . '-' . (int) $gi; ?>">
+                                        <li class="mega-list-head"><?php echo esc_html( $g['label'] ); ?></li>
                                         <?php if ( ! empty( $g['url'] ) ) : ?>
                                             <li class="mega-list-all"><a href="<?php echo esc_url( $g['url'] ); ?>"><?php echo esc_html( $g['label'] ); ?> – alle</a></li>
                                         <?php endif; ?>
@@ -91,5 +92,13 @@ if ( empty( $items ) ) { return; }
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>
+
+        <?php /* Nur Mobile: Top-Bar-Inhalte als Links im Hamburger-Menü */ ?>
+        <li class="sot-nav-extra sot-nav-extra-info">Schweizer Lager – Versand innert 48 h<br><a href="tel:+41615514107">+41 61 55 14 107</a></li>
+        <li class="sot-nav-extra"><a href="<?php echo esc_url( function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '/cart/' ); ?>">Warenkorb</a></li>
+        <li class="sot-nav-extra"><a href="/my-account">Mein Konto</a></li>
+        <li class="sot-nav-extra"><a href="/produktvergleich">Produktvergleich</a></li>
+        <li class="sot-nav-extra"><a href="/kontakt/?angebot=1">Angebot anfordern</a></li>
+        <li class="sot-nav-extra sot-nav-extra-lang"><span>Sprache: DE</span></li>
     </ul>
 </nav>

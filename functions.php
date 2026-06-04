@@ -63,13 +63,13 @@ function sot_enqueue_menu_assets() {
         'sot-menu',
         get_stylesheet_directory_uri() . '/css/menu.css',
         array( 'hybridextend-child-style' ),
-        '1.0.0'
+        '1.1.0'
     );
     wp_enqueue_script(
         'sot-menu',
         get_stylesheet_directory_uri() . '/css/menu.js',
         array(),
-        '1.0.0',
+        '1.1.0',
         true
     );
 }

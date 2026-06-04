@@ -23,12 +23,15 @@
     flex: 0 0 auto;
 }
 
-/* Top-Bar & Header gleiche Breite wie der Content; Header näher an Top-Bar */
+/* Top-Bar & Header gleiche Breite + gleicher Seitenrand wie der Content */
 .sot-topbar-fixed .hgrid,
 #header .hgrid {
     max-width: 1320px;
     margin-left: auto;
     margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
 }
 
 #header-primary {
@@ -306,6 +309,16 @@
     border-radius: 2px;
 }
 
+/* Standardmässig (Desktop) ausgeblendet – nur im mobilen Menü sichtbar */
+.sot-nav-extra,
+.mega-list-head {
+    display: none;
+}
+
+#sot-mobile-search {
+    display: none;
+}
+
 /* ── Mobile ──────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
     .sot-header-row {
@@ -383,20 +396,80 @@
         padding: 0 0 0 8px;
     }
 
-    .mega-groups {
-        gap: 2px;
+    /* Im Hamburger: Gruppen-Umschalter weg, ALLE Listen mit Überschrift zeigen */
+    .mega-groups .mega-group {
+        display: none;
     }
-
-    .mega-group {
-        font-size: 0.95rem;
-        padding: 10px 8px;
+    .mega-list {
+        display: block !important;
+        padding: 0 0 6px;
     }
-
+    .mega-list-head {
+        display: block;
+        font-weight: 700;
+        color: #0a1f3d;
+        padding: 12px 8px 4px;
+    }
+    .mega-cta {
+        margin: 4px 0 10px;
+    }
     .mega-lists {
-        padding: 6px 0 6px 12px;
+        padding: 0 0 0 12px;
     }
-
     .mega-featured {
         margin-top: 12px;
+    }
+
+    /* Top-Bar ausblenden – ihre Inhalte erscheinen als Links im Menü */
+    .sot-topbar-fixed {
+        display: none !important;
+    }
+    body {
+        padding-top: 0 !important;
+    }
+
+    /* Suchfeld unter dem Header (Widget wird per JS hierher verschoben) */
+    #sot-mobile-search {
+        display: block;
+        padding: 12px 16px;
+        background: #fff;
+        border-bottom: 1px solid #eef1f7;
+    }
+    #sot-mobile-search .sot-search-dropdown {
+        width: 100% !important;
+        opacity: 1 !important;
+        overflow: visible !important;
+        position: relative;
+    }
+    #sot-mobile-search .widget_woocommerce_product_search_widget,
+    #sot-mobile-search .product-search,
+    #sot-mobile-search .product-search-form,
+    #sot-mobile-search input.product-search-field {
+        width: 100%;
+        max-width: none;
+    }
+
+    /* Top-Bar-Links als Einträge im Hamburger */
+    .sot-nav-extra {
+        display: block;
+        border-bottom: 1px solid #eef1f7;
+    }
+    .sot-nav-extra > a,
+    .sot-nav-extra > span {
+        display: block;
+        padding: 14px 6px;
+        color: #3a4256;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .sot-nav-extra-info {
+        padding: 16px 6px 8px;
+        color: #6b7280;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+    .sot-nav-extra-info a {
+        color: var(--nav-navy);
+        font-weight: 600;
     }
 }

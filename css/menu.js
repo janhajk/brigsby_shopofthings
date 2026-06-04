@@ -6,6 +6,36 @@
         return window.matchMedia( '(max-width: 1024px)' ).matches;
     };
 
+    /* Suchfeld zwischen Top-Bar (Desktop) und Bereich unter dem Header (Mobile)
+       verschieben – nur EIN Widget, daher keine doppelten IDs. */
+    function placeSearch() {
+        var search = document.querySelector( '.sot-search-dropdown' );
+        var mobile = document.getElementById( 'sot-mobile-search' );
+        if ( ! search || ! mobile ) { return; }
+
+        if ( isMobile() ) {
+            if ( search.parentNode !== mobile ) { mobile.appendChild( search ); }
+            search.classList.add( 'active' ); // immer sichtbar
+        } else {
+            var right = document.querySelector( '.sot-topbar-right' );
+            if ( right && search.parentNode === mobile ) {
+                var toggle = right.querySelector( '.sot-search-toggle' );
+                if ( toggle && toggle.nextSibling ) {
+                    right.insertBefore( search, toggle.nextSibling );
+                } else {
+                    right.appendChild( search );
+                }
+                search.classList.remove( 'active' );
+            }
+        }
+    }
+    placeSearch();
+    var resizeTimer;
+    window.addEventListener( 'resize', function () {
+        clearTimeout( resizeTimer );
+        resizeTimer = setTimeout( placeSearch, 150 );
+    } );
+
     /* Mega-Panel: Gruppe wechselt die mittlere Liste */
     document.querySelectorAll( '.sot-nav-mega' ).forEach( function ( mega ) {
         var groups = mega.querySelectorAll( '.mega-group' );

@@ -90,6 +90,9 @@
         </div>
     </header>
 
+    <!-- Mobile: Suchfeld unterhalb des Headers (Search-Widget wird per JS hierher verschoben) -->
+    <div id="sot-mobile-search" aria-label="Suche"></div>
+
     <?php hybridextend_get_sidebar( 'below-header' ); ?>
 
     <div <?php hybridextend_attr( 'main' ); ?>>
