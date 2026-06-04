@@ -26,6 +26,8 @@ $order = ! empty( $fp['section_order'] ) ? (array) $fp['section_order'] : array(
         if ( empty( $fp['sections'][ $slug ] ) ) {
             continue; // Sektion ausgeblendet
         }
+        // Anker-Ziel für seiteninterne Links (#sektion-<slug>)
+        echo '<span id="sektion-' . esc_attr( $slug ) . '" class="sot-fp-anchor" aria-hidden="true"></span>';
         get_template_part( 'template-parts/frontpage/' . $slug );
     }
     ?>

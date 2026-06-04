@@ -62,7 +62,7 @@ function sot_enqueue_frontpage_styles() {
             'sot-frontpage',
             get_stylesheet_directory_uri() . '/css/frontpage.css',
             array( 'hybridextend-child-style' ), // nach der globalen style.css laden
-            '1.3.1',
+            '1.4.0',
             'all'
         );
     }

@@ -44,7 +44,7 @@ function sot_fp_defaults() {
         'hero_btn1_text' => 'Produkte entdecken',
         'hero_btn1_url'  => '/produkt-kategorie/typ/nodes/',
         'hero_btn2_text' => 'Projekt starten',
-        'hero_btn2_url'  => '/projekt-starten/',
+        'hero_btn2_url'  => '#sektion-zielgruppen',
         'hero_image'     => 0,
         'hero_badges'    => array( 'Schweizer Lager', 'Offizieller Distributor', 'Schnelle Lieferung & Support' ),
 
@@ -488,6 +488,12 @@ function sot_fp_render_page() {
             sot_fp_text( 'hero_btn2_text', 'Button 2 – Text', $o['hero_btn2_text'] );
             sot_fp_text( 'hero_btn2_url', 'Button 2 – Link', $o['hero_btn2_url'] );
             echo '</div></div>';
+            echo '<p class="description">Tipp: Als Link kannst du auch zu einer Sektion auf der Startseite springen (sanftes Scrollen). Verfügbare Anker: ';
+            $anchors = array();
+            foreach ( array_keys( sot_fp_sections() ) as $slug ) {
+                $anchors[] = '<code>#sektion-' . esc_html( $slug ) . '</code>';
+            }
+            echo implode( ' ', $anchors ) . '</p>';
             sot_fp_media_single( 'hero_image', 'Hero-Bild (leer = Standardbild des Themes)', $o['hero_image'] );
             echo '<p style="margin-top:16px"><strong>Badges (unter den Buttons)</strong></p>';
             for ( $i = 0; $i < 3; $i++ ) {

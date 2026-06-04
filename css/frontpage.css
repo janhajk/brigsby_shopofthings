@@ -60,6 +60,16 @@ body.sot-frontpage-page {
     padding: 80px 0;
 }
 
+/* Sanftes Scrollen zu Sektionen via Anker-Links (#sektion-…) */
+html {
+    scroll-behavior: smooth;
+}
+.sot-fp-anchor {
+    display: block;
+    height: 0;
+    scroll-margin-top: 70px; /* Versatz wegen der fixierten Top-Bar */
+}
+
 /* Hero behält sein eigenes Layout aus der globalen style.css */
 .sot-frontpage .sot-hero {
     padding: 0;
@@ -484,36 +494,26 @@ body.sot-frontpage-page {
 }
 
 /* ── Partner-Logos ────────────────────────────────────────────────────── */
+/* Partner-Logos als Karten – wie „Kunden", aber farblich invertiert:
+   Sektion weiss, Karten hellblau (heben sich vom weissen Grund ab). */
 .sot-partners .partner-logos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    align-items: center;
-    gap: 40px;
-    margin-top: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 22px;
+    margin-top: 20px;
 }
 
-.sot-partners .partner-logos > .logo-link,
-.sot-partners .partner-logos > img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.sot-partners .partner-logos > .logo-link {
+    display: block;
 }
 
 .sot-partners .partner-logos img {
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    max-height: 72px;
-    margin: 0 auto;
+    background: var(--fp-card);
+    border-radius: 16px;
+    padding: 26px;
+    width: 100%;
+    height: 130px;
     object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.8;
-    transition: filter 0.2s ease, opacity 0.2s ease;
-}
-
-.sot-partners .partner-logos img:hover {
-    filter: grayscale(0);
-    opacity: 1;
 }
 
 /* ── Kunden-Logos (weisse Karten auf hellem Grund) ────────────────────── */
@@ -761,6 +761,10 @@ body.sot-frontpage-page {
     .sot-frontpage section {
         padding: 52px 0;
     }
+    /* höherer Anker-Versatz (Top-Bar auf Mobile höher) */
+    .sot-fp-anchor {
+        scroll-margin-top: 110px;
+    }
     /* schmalerer Seitenrand auf dem Handy */
     .sot-frontpage .hgrid:not(.hero-grid) {
         padding-left: 18px;
@@ -849,7 +853,8 @@ body.sot-frontpage-page {
     .sot-customers .customer-logos {
         grid-template-columns: repeat(2, 1fr);
     }
-    .sot-customers .customer-logos img {
+    .sot-customers .customer-logos img,
+    .sot-partners .partner-logos img {
         height: 96px;
         padding: 16px;
     }
