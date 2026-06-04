@@ -49,6 +49,26 @@ add_action('wp_enqueue_scripts', 'sot_custom_scripts');
 // invoke landing page functions
 require get_stylesheet_directory() . '/inc/template-landing-page-functions.php';
 
+// Startseiten-Einstellungen (eigene Admin-Seite „Startseite")
+require get_stylesheet_directory() . '/inc/frontpage/frontpage-settings.php';
+
+/**
+ * Frontpage-CSS nur auf der Startseite / im Startseiten-Template laden
+ * (Performance: nicht auf jeder Seite mitschleppen).
+ */
+function sot_enqueue_frontpage_styles() {
+    if ( is_front_page() || is_page_template( 'page-frontpage-test.php' ) ) {
+        wp_enqueue_style(
+            'sot-frontpage',
+            get_stylesheet_directory_uri() . '/css/frontpage.css',
+            array(),
+            '1.0.0',
+            'all'
+        );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'sot_enqueue_frontpage_styles' );
+
 
 
 /*

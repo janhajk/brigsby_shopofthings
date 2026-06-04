@@ -1,0 +1,283 @@
+/*
+ * Startseite – Sektions-Styles
+ * Wird nur auf der Startseite / im Startseiten-Template geladen.
+ * Der Hero ist bereits in der globalen style.css gestylt; hier werden
+ * die übrigen Sektionen vervollständigt. Alles unter .sot-frontpage.
+ */
+
+.sot-frontpage section {
+    padding: 70px 0;
+}
+
+.sot-frontpage section:nth-of-type(even) {
+    background: var(--SOT---light-gray, #F4F9FC);
+}
+
+/* Hero hat eigenen Hintergrund – Zebra nicht auf ihn anwenden */
+.sot-frontpage .sot-hero {
+    padding: 0;
+    background: #ffffff;
+}
+
+.sot-frontpage section h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    line-height: 1.2;
+    color: var(--SOT---blue-deep, #1D2E7C);
+    margin: 0 0 0.6rem;
+}
+
+.sot-frontpage .section-intro {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 1.5rem;
+    color: #4b5563;
+    font-size: 1.05rem;
+}
+
+/* ── Zielgruppen / Karten ─────────────────────────────────────────────── */
+.sot-target-groups .card {
+    background: #fff;
+    border: 1px solid #e6ecf5;
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 6px 20px rgba(29, 46, 124, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.sot-target-groups .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 34px rgba(29, 46, 124, 0.12);
+}
+
+.sot-target-groups .card h3 {
+    color: var(--SOT---blue-deep, #1D2E7C);
+    margin: 0 0 0.6rem;
+    font-size: 1.3rem;
+}
+
+.sot-target-groups .card p {
+    color: #4b5563;
+    margin: 0 0 1.2rem;
+    flex: 1;
+}
+
+.sot-target-groups .card-link {
+    font-weight: 600;
+    color: var(--SOT---blue-deep, #1D2E7C);
+    text-decoration: none;
+}
+
+.sot-target-groups .card-link:hover {
+    text-decoration: underline;
+}
+
+/* ── Prozess / Schritte ───────────────────────────────────────────────── */
+.sot-process .step {
+    background: #fff;
+    border: 1px solid #e6ecf5;
+    border-radius: 14px;
+    padding: 28px 24px;
+    text-align: center;
+    position: relative;
+}
+
+.sot-process .step-number {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--SOT---blue-deep, #1D2E7C);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+}
+
+.sot-process .step h3 {
+    color: var(--SOT---blue-deep, #1D2E7C);
+    font-size: 1.2rem;
+    margin: 0 0 0.4rem;
+}
+
+.sot-process .step .step-lead {
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 0.3rem;
+}
+
+.sot-process .step p {
+    color: #4b5563;
+    margin: 0 0 0.8rem;
+    font-size: 0.95rem;
+}
+
+.sot-process .step a {
+    font-weight: 600;
+    color: var(--SOT---blue-deep, #1D2E7C);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* ── Kategorien (WooCommerce-Produkte) ────────────────────────────────── */
+.sot-categories .products {
+    margin-top: 30px;
+}
+
+/* ── Warum ShopOfThings ───────────────────────────────────────────────── */
+.sot-why-us .why-item {
+    background: #fff;
+    border: 1px solid #e6ecf5;
+    border-radius: 14px;
+    padding: 26px;
+    text-align: center;
+}
+
+.sot-why-us .why-item .icon {
+    font-size: 2.2rem;
+    line-height: 1;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.sot-why-us .why-item h3 {
+    color: var(--SOT---blue-deep, #1D2E7C);
+    font-size: 1.15rem;
+    margin: 0 0 0.4rem;
+}
+
+.sot-why-us .why-item p {
+    color: #4b5563;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* ── Partner- / Kunden-Logos ──────────────────────────────────────────── */
+.sot-partners .partner-logos,
+.sot-customers .customer-logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    align-items: center;
+    gap: 24px;
+    margin-top: 36px;
+}
+
+.sot-partners .partner-logos img,
+.sot-customers .customer-logos img {
+    max-width: 100%;
+    height: auto;
+    max-height: 70px;
+    margin: 0 auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+}
+
+.sot-partners .partner-logos img:hover,
+.sot-customers .customer-logos img:hover {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+/* ── Stats / Zahlen ───────────────────────────────────────────────────── */
+.sot-frontpage section.sot-stats {
+    background: var(--SOT---blue-deep, #1D2E7C);
+    color: #fff;
+}
+
+.sot-stats h2 {
+    color: #fff;
+}
+
+.sot-stats .stat {
+    text-align: center;
+}
+
+.sot-stats .stat .number {
+    display: block;
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #fff;
+}
+
+.sot-stats .stat p {
+    margin: 8px 0 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+}
+
+/* ── News ─────────────────────────────────────────────────────────────── */
+.sot-news .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 36px;
+}
+
+.sot-news .news-item {
+    background: #fff;
+    border: 1px solid #e6ecf5;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.sot-news .news-thumb {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #f4f9fc;
+}
+
+.sot-news .news-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sot-news .news-item time {
+    display: block;
+    color: #6b7280;
+    font-size: 0.82rem;
+    padding: 16px 20px 0;
+}
+
+.sot-news .news-item h3 {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    margin: 6px 0 12px;
+    padding: 0 20px;
+}
+
+.sot-news .news-item h3 a {
+    color: var(--SOT---blue-deep, #1D2E7C);
+    text-decoration: none;
+}
+
+.sot-news .news-more {
+    margin: auto 20px 18px;
+    font-weight: 600;
+    color: var(--SOT---blue-deep, #1D2E7C);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .sot-frontpage section {
+        padding: 48px 0;
+    }
+    .sot-frontpage section h2 {
+        font-size: 1.7rem;
+    }
+    .sot-stats .stat .number {
+        font-size: 2.2rem;
+    }
+}
