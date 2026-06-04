@@ -904,3 +904,103 @@ html {
         padding: 52px 18px;
     }
 }
+
+
+/* =========================================================================
+   Hover-Effekte (Startseite)
+   ========================================================================= */
+
+/* Hero-Buttons: violetter Kreis wächst aus der Mitte, bis der Button gefüllt ist */
+.sot-hero .hero-buttons .btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+.sot-hero .hero-buttons .btn::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: var(--fp-violet, #7b5dc7);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    z-index: -1;
+}
+.sot-hero .hero-buttons .btn:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+.sot-hero .hero-buttons .btn-primary:hover,
+.sot-hero .hero-buttons .btn-secondary:hover {
+    background-color: var(--SOT---blue-deep, #1d2e7c) !important;
+    color: #fff !important;
+    border-color: var(--fp-violet, #7b5dc7);
+}
+
+/* Zielgruppen-Karten: bei Hover violett→navy Verlauf, Text weiss */
+.sot-target-groups .card {
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.sot-target-groups .card:hover {
+    background: linear-gradient(135deg, var(--fp-violet, #7b5dc7) 0%, #2a3da8 40%, var(--fp-navy-2, #16236b) 100%);
+    box-shadow: 0 16px 36px rgba(29, 46, 124, 0.22);
+}
+.sot-target-groups .card:hover h3 { color: #fff; }
+.sot-target-groups .card:hover p { color: rgba(255, 255, 255, 0.85); }
+.sot-target-groups .card:hover .card-link { color: #fff; }
+
+/* Prozess-Schritte: violetter Verlauf oben links, h3 hoch, Pfeil nach rechts */
+.sot-process .step { transition: background 0.3s ease; }
+.sot-process .step h3 { transition: transform 0.25s ease; }
+.sot-process .step-link { display: inline-block; transition: transform 0.25s ease; }
+.sot-process .step:hover {
+    background: linear-gradient(135deg, var(--fp-violet, #7b5dc7) 0%, #2a3da8 34%, var(--fp-navy-2, #16236b) 100%);
+}
+.sot-process .step:hover h3 { transform: translateY(-4px); }
+.sot-process .step:hover .step-link { transform: translateX(5px); }
+
+/* Kacheln/Produkte: bei Hover hell-violett, Button gefüllt violett */
+.sot-tiles .tile { transition: background 0.25s ease, box-shadow 0.25s ease; }
+.sot-tiles .tile:hover {
+    background: #e7e1f4;
+    box-shadow: 0 14px 30px rgba(123, 93, 199, 0.18);
+}
+.sot-tiles .tile:hover .tile-btn {
+    background: var(--fp-violet, #7b5dc7);
+    color: #fff;
+    border-color: var(--fp-violet, #7b5dc7);
+}
+
+/* Technologiepartner: einfacher Grow-Effekt */
+.sot-partners .partner-logos > .logo-link,
+.sot-partners .partner-logos > img {
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
+.sot-partners .partner-logos > .logo-link:hover,
+.sot-partners .partner-logos > img:hover {
+    transform: scale(1.08);
+}
+
+/* Blog/News: Kalender-Icon vor dem Datum + bei Hover violette Karte, weisser Text */
+.sot-news .news-item time::before {
+    content: "\f133";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 7px;
+    font-size: 0.85em;
+}
+.sot-news .news-item { transition: background 0.25s ease, box-shadow 0.25s ease; }
+.sot-news .news-item:hover {
+    background: var(--fp-violet, #7b5dc7);
+    box-shadow: 0 14px 30px rgba(123, 93, 199, 0.22);
+}
+.sot-news .news-item:hover time,
+.sot-news .news-item:hover h3 a,
+.sot-news .news-item:hover p,
+.sot-news .news-item:hover .news-more {
+    color: #fff;
+}
