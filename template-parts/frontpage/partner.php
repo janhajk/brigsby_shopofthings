@@ -4,7 +4,7 @@
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 $fp    = sot_fp();
-$logos = array_filter( array_map( 'absint', (array) $fp['partner_logos'] ) );
+$logos = (array) $fp['partner_logos'];
 ?>
 <section class="sot-partners">
     <div class="hgrid">
@@ -13,9 +13,13 @@ $logos = array_filter( array_map( 'absint', (array) $fp['partner_logos'] ) );
 
         <?php if ( ! empty( $logos ) ) : ?>
             <div class="partner-logos">
-                <?php foreach ( $logos as $id ) {
-                    echo wp_get_attachment_image( $id, 'medium', false, array( 'loading' => 'lazy', 'class' => 'partner-logo', 'alt' => '' ) );
-                } ?>
+                <?php foreach ( $logos as $logo ) :
+                    $id = absint( is_array( $logo ) ? ( $logo['id'] ?? 0 ) : $logo );
+                    if ( ! $id ) { continue; }
+                    $url = is_array( $logo ) ? ( $logo['url'] ?? '' ) : '';
+                    $img = wp_get_attachment_image( $id, 'medium', false, array( 'loading' => 'lazy', 'class' => 'partner-logo', 'alt' => '' ) );
+                    echo $url ? '<a class="logo-link" href="' . esc_url( $url ) . '">' . $img . '</a>' : $img;
+                endforeach; ?>
             </div>
         <?php endif; ?>
     </div>

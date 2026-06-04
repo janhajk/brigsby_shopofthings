@@ -202,7 +202,7 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
     }
     wp_enqueue_media();
     wp_enqueue_script( 'jquery-ui-sortable' );
-    wp_enqueue_script( 'sot-frontpage-admin', get_stylesheet_directory_uri() . '/inc/frontpage/frontpage-admin.js', array( 'jquery', 'jquery-ui-sortable' ), '1.1.0', true );
+    wp_enqueue_script( 'sot-frontpage-admin', get_stylesheet_directory_uri() . '/inc/frontpage/frontpage-admin.js', array( 'jquery', 'jquery-ui-sortable' ), '1.2.0', true );
 } );
 
 /* ==========================================================================
@@ -289,9 +289,9 @@ function sot_fp_sanitize( $input ) {
     // Partner / Kunden
     $out['partner_eyebrow'] = sanitize_text_field( $input['partner_eyebrow'] ?? '' );
     $out['partner_heading'] = sanitize_text_field( $input['partner_heading'] ?? '' );
-    $out['partner_logos']   = sot_fp_sanitize_ids( $input['partner_logos'] ?? '' );
+    $out['partner_logos']   = sot_fp_sanitize_gallery( $input['partner_logos'] ?? array() );
     $out['kunden_heading']  = sanitize_text_field( $input['kunden_heading'] ?? '' );
-    $out['kunden_logos']    = sot_fp_sanitize_ids( $input['kunden_logos'] ?? '' );
+    $out['kunden_logos']    = sot_fp_sanitize_gallery( $input['kunden_logos'] ?? array() );
 
     // Stats
     $out['stats_heading'] = sanitize_text_field( $input['stats_heading'] ?? '' );
@@ -347,16 +347,23 @@ function sot_fp_sanitize_rows( $rows, $text_keys, $url_keys, $int_keys = array()
     return $clean;
 }
 
-function sot_fp_sanitize_ids( $value ) {
-    $parts = is_array( $value ) ? $value : explode( ',', (string) $value );
-    $ids   = array();
-    foreach ( $parts as $p ) {
-        $p = absint( $p );
-        if ( $p > 0 ) {
-            $ids[] = $p;
-        }
+/** Galerie sanitisieren: Array von { id, url } (tolerant ggü. altem [int]-Format) */
+function sot_fp_sanitize_gallery( $rows ) {
+    $clean = array();
+    if ( ! is_array( $rows ) ) {
+        return $clean;
     }
-    return $ids;
+    foreach ( $rows as $row ) {
+        $id = absint( is_array( $row ) ? ( $row['id'] ?? 0 ) : $row );
+        if ( ! $id ) {
+            continue;
+        }
+        $clean[] = array(
+            'id'  => $id,
+            'url' => esc_url_raw( is_array( $row ) ? ( $row['url'] ?? '' ) : '' ),
+        );
+    }
+    return $clean;
 }
 
 /* ==========================================================================
@@ -401,21 +408,40 @@ function sot_fp_media_single( $key, $label, $value ) {
     echo '</div>';
 }
 
-function sot_fp_render_logos( $key, $ids ) {
-    $target = 'sot-fp-' . $key;
+/**
+ * Logo-/Bilder-Galerie mit Sortierung (Drag&Drop), Einzel-Entfernen und
+ * optionalem Link pro Bild. Speichert je Eintrag { id, url }.
+ */
+function sot_fp_render_gallery( $key, $items ) {
     ?>
-    <div class="sot-fp-media" data-multiple="1" data-target="#<?php echo esc_attr( $target ); ?>">
-        <input type="hidden" id="<?php echo esc_attr( $target ); ?>" name="<?php echo esc_attr( sot_fp_field_name( $key ) ); ?>" value="<?php echo esc_attr( implode( ',', array_map( 'absint', $ids ) ) ); ?>">
-        <div class="sot-fp-preview" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px">
-            <?php foreach ( $ids as $id ) :
-                $src = wp_get_attachment_image_url( absint( $id ), 'thumbnail' );
-                if ( ! $src ) { continue; } ?>
-                <span style="display:inline-block"><img src="<?php echo esc_url( $src ); ?>" style="width:70px;height:70px;object-fit:contain;border:1px solid #dcdcde;border-radius:6px;background:#fff"></span>
-            <?php endforeach; ?>
-        </div>
-        <button type="button" class="button sot-fp-media-add">Logos hinzufügen</button>
-        <button type="button" class="button sot-fp-media-clear">Alle entfernen</button>
+    <div class="sot-fp-gallery" data-key="<?php echo esc_attr( $key ); ?>">
+        <ul class="sot-fp-gallery-list" style="list-style:none;margin:0 0 10px;padding:0;display:flex;flex-wrap:wrap;gap:10px">
+            <?php foreach ( (array) $items as $i => $it ) :
+                $id  = absint( is_array( $it ) ? ( $it['id'] ?? 0 ) : $it );
+                $url = is_array( $it ) ? ( $it['url'] ?? '' ) : '';
+                if ( ! $id ) { continue; }
+                sot_fp_gallery_item( $key, $i, $id, $url );
+            endforeach; ?>
+        </ul>
+        <button type="button" class="button sot-fp-gallery-add">Bilder hinzufügen</button>
+        <p class="description">Drag &amp; Drop zum Sortieren · Link pro Bild optional.</p>
     </div>
+    <?php
+}
+
+function sot_fp_gallery_item( $key, $idx, $id, $url ) {
+    $src  = wp_get_attachment_image_url( absint( $id ), 'thumbnail' );
+    $base = 'sot_frontpage[' . $key . '][' . $idx . ']';
+    ?>
+    <li class="sot-fp-gallery-item" style="border:1px solid #dcdcde;border-radius:8px;padding:8px;width:150px;background:#fff">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+            <span class="dashicons dashicons-move sot-fp-gallery-handle" style="cursor:move;color:#888"></span>
+            <button type="button" class="button-link sot-fp-gallery-remove" style="color:#b32d2e">Entfernen</button>
+        </div>
+        <img src="<?php echo esc_url( $src ); ?>" alt="" style="width:100%;height:80px;object-fit:contain;background:#f6f7f7;border-radius:4px">
+        <input type="hidden" class="g-id" name="<?php echo esc_attr( $base . '[id]' ); ?>" value="<?php echo esc_attr( absint( $id ) ); ?>">
+        <input type="url" class="g-url" name="<?php echo esc_attr( $base . '[url]' ); ?>" value="<?php echo esc_attr( $url ); ?>" placeholder="Link (optional)" style="width:100%;margin-top:6px;font-size:11px">
+    </li>
     <?php
 }
 
@@ -555,13 +581,13 @@ function sot_fp_render_page() {
             <?php
             sot_fp_text( 'partner_eyebrow', 'Kleine Überschrift (Eyebrow)', $o['partner_eyebrow'] );
             sot_fp_textarea( 'partner_heading', 'Grosse Überschrift', $o['partner_heading'] );
-            sot_fp_render_logos( 'partner_logos', (array) $o['partner_logos'] );
+            sot_fp_render_gallery( 'partner_logos', (array) $o['partner_logos'] );
             ?>
 
             <hr><h2 class="title">Kunden-Logos</h2>
             <?php
             sot_fp_text( 'kunden_heading', 'Überschrift', $o['kunden_heading'] );
-            sot_fp_render_logos( 'kunden_logos', (array) $o['kunden_logos'] );
+            sot_fp_render_gallery( 'kunden_logos', (array) $o['kunden_logos'] );
             ?>
 
             <hr><h2 class="title">Zahlen / Statistiken</h2>

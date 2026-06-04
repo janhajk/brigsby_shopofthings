@@ -62,12 +62,24 @@ function sot_enqueue_frontpage_styles() {
             'sot-frontpage',
             get_stylesheet_directory_uri() . '/css/frontpage.css',
             array( 'hybridextend-child-style' ), // nach der globalen style.css laden
-            '1.1.0',
+            '1.2.0',
             'all'
         );
     }
 }
 add_action( 'wp_enqueue_scripts', 'sot_enqueue_frontpage_styles' );
+
+/**
+ * Body-Klasse für die Startseite / das Startseiten-Template, damit das
+ * Theme-Layout (boxed) für die Vollbreiten-Startseite überschrieben werden kann.
+ */
+function sot_frontpage_body_class( $classes ) {
+    if ( is_front_page() || is_page_template( 'page-frontpage-test.php' ) ) {
+        $classes[] = 'sot-frontpage-page';
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'sot_frontpage_body_class' );
 
 
 

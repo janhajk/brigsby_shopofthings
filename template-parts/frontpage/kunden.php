@@ -4,16 +4,22 @@
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 $fp    = sot_fp();
-$logos = array_filter( array_map( 'absint', (array) $fp['kunden_logos'] ) );
-if ( empty( $logos ) ) { return; } // leere Sektion gar nicht ausgeben
+$logos = (array) $fp['kunden_logos'];
 ?>
 <section class="sot-customers">
     <div class="hgrid">
         <?php if ( ! empty( $fp['kunden_heading'] ) ) : ?><h2><?php echo esc_html( $fp['kunden_heading'] ); ?></h2><?php endif; ?>
-        <div class="customer-logos">
-            <?php foreach ( $logos as $id ) {
-                echo wp_get_attachment_image( $id, 'medium', false, array( 'loading' => 'lazy', 'class' => 'customer-logo', 'alt' => '' ) );
-            } ?>
-        </div>
+
+        <?php if ( ! empty( $logos ) ) : ?>
+            <div class="customer-logos">
+                <?php foreach ( $logos as $logo ) :
+                    $id = absint( is_array( $logo ) ? ( $logo['id'] ?? 0 ) : $logo );
+                    if ( ! $id ) { continue; }
+                    $url = is_array( $logo ) ? ( $logo['url'] ?? '' ) : '';
+                    $img = wp_get_attachment_image( $id, 'medium', false, array( 'loading' => 'lazy', 'class' => 'customer-logo', 'alt' => '' ) );
+                    echo $url ? '<a class="logo-link" href="' . esc_url( $url ) . '">' . $img . '</a>' : $img;
+                endforeach; ?>
+            </div>
+        <?php endif; ?>
     </div>
 </section>
