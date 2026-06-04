@@ -16,6 +16,9 @@ if ( empty( $items ) ) { return; }
 
     <ul class="sot-nav-list">
         <?php foreach ( $items as $idx => $item ) :
+            if ( array_key_exists( 'enabled', $item ) && empty( $item['enabled'] ) ) {
+                continue; // Punkt deaktiviert
+            }
             $type     = $item['type'] ?? 'dropdown';
             $label    = $item['label'] ?? '';
             $url      = $item['url'] ?? '';

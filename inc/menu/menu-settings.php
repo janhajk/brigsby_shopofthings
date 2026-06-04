@@ -176,7 +176,7 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
     }
     wp_enqueue_media();
     wp_enqueue_script( 'jquery-ui-sortable' );
-    wp_enqueue_script( 'sot-menu-admin', get_stylesheet_directory_uri() . '/inc/menu/menu-admin.js', array( 'jquery', 'jquery-ui-sortable' ), '1.0.0', true );
+    wp_enqueue_script( 'sot-menu-admin', get_stylesheet_directory_uri() . '/inc/menu/menu-admin.js', array( 'jquery', 'jquery-ui-sortable' ), '1.0.1', true );
 } );
 
 /* ==========================================================================
@@ -232,6 +232,7 @@ function sot_menu_sanitize( $input ) {
         $out['items'][] = array(
             'type'     => $type,
             'label'    => $label,
+            'enabled'  => ! empty( $item['enabled'] ) ? 1 : 0,
             'url'      => esc_url_raw( $item['url'] ?? '' ),
             'groups'   => $groups,
             'featured' => $featured,
@@ -297,13 +298,17 @@ function sot_menu_render_page() {
             <ul id="sot-menu-items" style="list-style:none;margin:0;padding:0;max-width:760px">
                 <?php
                 for ( $i = 0; $i < SOT_MENU_MAX_ITEMS; $i++ ) :
-                    $it    = $items[ $i ] ?? array();
-                    $type  = $it['type'] ?? 'dropdown';
-                    $base  = 'items][' . $i;
+                    $it      = $items[ $i ] ?? array();
+                    $type    = $it['type'] ?? 'dropdown';
+                    $enabled = array_key_exists( 'enabled', $it ) ? ! empty( $it['enabled'] ) : true;
+                    $base    = 'items][' . $i;
                     ?>
-                    <li class="sot-menu-item" style="<?php echo esc_attr( $fs ); ?>">
+                    <li class="sot-menu-item<?php echo $enabled ? '' : ' is-disabled'; ?>" style="<?php echo esc_attr( $fs ); ?>">
                         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
                             <span class="dashicons dashicons-move sot-menu-handle" style="cursor:move;color:#888"></span>
+                            <label style="display:flex;align-items:center;gap:5px;white-space:nowrap;font-size:12px;color:#50575e" title="Punkt anzeigen / ausblenden">
+                                <input type="checkbox" name="<?php echo esc_attr( sot_menu_field( $base . '][enabled' ) ); ?>" value="1" <?php checked( $enabled ); ?> class="sot-menu-enabled"> aktiv
+                            </label>
                             <input type="text" name="<?php echo esc_attr( sot_menu_field( $base . '][label' ) ); ?>" value="<?php echo esc_attr( $it['label'] ?? '' ); ?>" placeholder="Bezeichnung (leer = ausgeblendet)" style="font-weight:600;flex:1">
                             <select name="<?php echo esc_attr( sot_menu_field( $base . '][type' ) ); ?>" class="sot-menu-type">
                                 <option value="mega" <?php selected( $type, 'mega' ); ?>>Mega-Panel</option>
@@ -363,6 +368,7 @@ function sot_menu_render_page() {
         .sot-menu-admin .sot-menu-item[data-type="link"] .sot-menu-pane-link,
         .sot-menu-admin .sot-menu-item[data-type="dropdown"] .sot-menu-pane-dropdown,
         .sot-menu-admin .sot-menu-item[data-type="mega"] .sot-menu-pane-mega { display:block; }
+        .sot-menu-admin .sot-menu-item.is-disabled { opacity:.55; }
     </style>
     <?php
 }

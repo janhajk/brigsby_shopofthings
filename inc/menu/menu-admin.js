@@ -11,6 +11,11 @@
         applyType( $( this ).closest( '.sot-menu-item' ) );
     } );
 
+    /* aktiv/inaktiv live spiegeln */
+    $( document ).on( 'change', '.sot-menu-enabled', function () {
+        $( this ).closest( '.sot-menu-item' ).toggleClass( 'is-disabled', ! this.checked );
+    } );
+
     /* Top-Punkte sortieren */
     if ( $.fn.sortable ) {
         $( '#sot-menu-items' ).sortable( { items: '> li', handle: '.sot-menu-handle', axis: 'y' } );
