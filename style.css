@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.22
+ Version:       3.1.23
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -1078,9 +1078,16 @@ input.product-search-field {
 }
 
 .sot-search-dropdown.active {
-    width: 300px;
+    width: 320px;
     opacity: 1;
     overflow: visible;         /* Resultate dürfen herausragen */
+}
+
+/* Breiteres Feld auf grossen Bildschirmen – feste Maximalbreite */
+@media (min-width: 1200px) {
+    .sot-search-dropdown.active {
+        width: 440px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1131,6 +1138,48 @@ input.product-search-field {
     border-radius: 30px;
     cursor: pointer;
     font-weight: 600;
+}
+
+/* Eckigen Rahmen/Schatten des Plugin-Wrappers im Top-Bar entfernen –
+   das runde Input-Feld bringt seinen eigenen Rahmen mit */
+.sot-search-dropdown .product-search-form {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+/* Live-Suchresultate aus dem Fluss nehmen, damit Cart/Account/Buttons
+   nicht nach unten rutschen, + eigener Hintergrund */
+.sot-search-dropdown .product-search {
+    position: relative;
+    width: 100%;
+}
+
+.sot-search-dropdown .product-search-results {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 440px;
+    max-width: 92vw;
+    max-height: 70vh;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #e0e7ff;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    z-index: 100000;
+    text-align: left;
+}
+
+.sot-search-dropdown .product-search-results-content {
+    padding: 6px 0;
+}
+
+/* etwas Innenabstand für die einzelnen Resultat-Zeilen (tolerant
+   gegenüber der konkreten Markup-Struktur des Plugins) */
+.sot-search-dropdown .product-search-results-content > * {
+    padding-left: 14px;
+    padding-right: 14px;
 }
 
 /* Mobile: Buttons verstecken, Icons zentrieren */
