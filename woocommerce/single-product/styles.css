@@ -53,6 +53,71 @@
 }
 
 
+/* ── Einzelprodukt: Sidebar-Layout des Parent-Themes aufheben ─────────
+   Parent: .hgrid-span-9 { width:75% } + .content.layout-narrow-left { float:right }
+   -> #content nutzt die volle Breite (kein leerer Streifen links) ────── */
+.product-hgrid {
+    display: block !important;
+    max-width: 1600px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+    box-sizing: border-box;
+}
+.product-hgrid #content,
+.product-hgrid main#content {
+    width: 100% !important;
+    max-width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* doppelter Produkttitel (Theme-Block #loop-meta) ausblenden –
+   der Titel steht bereits oben im Seitenkopf (.sot-shop-header) */
+.product-hgrid #loop-meta {
+    display: none !important;
+}
+
+/* Lupe ausblenden – Klick aufs Bild öffnet die Lightbox (swipebox) */
+.woocommerce-product-gallery__trigger {
+    display: none !important;
+}
+.sot-sp-gallery .woocommerce-product-gallery__image a {
+    cursor: zoom-in;
+}
+
+/* Beschreibungs-„Mehr anzeigen" optisch wie das Details-„Mehr anzeigen" */
+.sot-sp-below .show-more-content {
+    display: block;
+    width: auto;
+    text-align: center;
+    margin: 12px auto 0;
+    font-weight: 600;
+    color: rgb(15, 88, 148);
+    text-decoration: none;
+}
+.sot-sp-below .show-more-content::before {
+    content: "+";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    border: 1px solid rgb(15, 88, 148);
+    border-radius: 50%;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Abstand nach den Details */
+.sot-sp-below {
+    margin-bottom: 44px;
+}
+
+
 /* ── Meta-Tabelle in der Info-Spalte (unverändert übernommen) ────────── */
 .product-meta-table .special-row div {
     display: flex;
