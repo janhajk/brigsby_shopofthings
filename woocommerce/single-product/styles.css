@@ -6,7 +6,7 @@
 
 .sot-sp {
     display: grid;
-    grid-template-columns: minmax(0, 620px) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 700px) minmax(0, 1fr);
     grid-template-areas:
         "gallery summary"
         "below   summary";
@@ -18,8 +18,20 @@
     grid-area: gallery;
 }
 
+/* WooCommerce-Core gibt der Galerie width:48% + float -> aufheben,
+   damit sie ihre Grid-Spalte voll ausfüllt */
+.sot-sp-gallery .woocommerce-product-gallery,
+.sot-sp .woocommerce-product-gallery.images {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+}
+
 .sot-sp-summary {
     grid-area: summary;
+    width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
     padding: 0;
     min-height: 0;
 }
