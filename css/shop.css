@@ -90,10 +90,13 @@ body.sot-shop-page {
 }
 
 /* ── Karteninhalt ───────────────────────────────────────────────────── */
+/* innerer Container: kein Theme-Rahmen (graue Linie rechts) / kein Doppel-Padding */
 .sot-shop-page li.product > div {
     display: flex;
     flex-direction: column;
     height: 100%;
+    border: 0 !important;
+    padding: 0 !important;
 }
 
 .sot-shop-page li.product .woocommerce-LoopProduct-link {
@@ -104,14 +107,29 @@ body.sot-shop-page {
     color: inherit;
 }
 
-.sot-shop-page li.product img {
+/* Bild-Wrapper: leichter Zoom, Überstand wird beschnitten */
+.sot-shop-page li.product .sot-loop-thumb {
     width: 100%;
-    height: auto;
     aspect-ratio: 1 / 1;
-    object-fit: contain;
-    background: #fff;
+    overflow: hidden;
     border-radius: 8px;
+    background: #fff;
     margin: 0 0 10px;
+}
+
+.sot-shop-page li.product .sot-loop-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.12);
+    transition: transform 0.35s ease;
+    margin: 0;
+    border-radius: 0;
+}
+
+.sot-shop-page li.product:hover .sot-loop-thumb img {
+    transform: scale(1.2);
 }
 
 /* Titel auf 2 Zeilen begrenzen */
@@ -189,8 +207,8 @@ body.sot-shop-page {
 
 .sot-shop-page li.product .sot-card-actions .button.sot-cart-btn {
     flex: 0 0 auto;
-    width: 46px;
-    height: 38px;
+    width: 40px;
+    height: 32px;
     padding: 0;
     margin: 0;
     border-radius: 30px;
@@ -204,7 +222,7 @@ body.sot-shop-page {
 }
 
 .sot-shop-page li.product .sot-card-actions .button.sot-cart-btn i {
-    font-size: 1rem;
+    font-size: 0.85rem;
 }
 
 .sot-shop-page li.product .sot-card-actions .button.sot-cart-btn:hover {
@@ -219,8 +237,8 @@ body.sot-shop-page {
 
 .sot-shop-page li.product .sot-card-actions .compare-btn {
     flex: 0 0 auto;
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -228,7 +246,7 @@ body.sot-shop-page {
     color: var(--sot-violet, #7b5dc7);
     border-radius: 50%;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     transition: background 0.2s ease, color 0.2s ease;
 }
 
@@ -242,11 +260,7 @@ body.sot-shop-page {
     display: none;
 }
 
-/* Abo-/Subscription-Produkte: komplexe Preisangabe im Raster ausblenden */
-.sot-shop-page li.product .price:has(.ywsbs-price-detail),
-.sot-shop-page li.product .price:has(.price_time_opt) {
-    display: none;
-}
+/* (Abo-/Subscription-Preise werden serverseitig ausgeblendet, siehe functions.php) */
 
 /* ── Lager-Badge + Tooltip (wie Top-Bar) ────────────────────────────── */
 .sot-shop-page li.product .sot-stock-badge {
