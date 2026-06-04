@@ -28,7 +28,7 @@ add_action( 'after_setup_theme', 'sot_add_woocommerce_support' );
  */
 function sot_enqueue_styles() {
     // Registrieren und einbinden der zusätzlichen CSS-Datei
-    wp_enqueue_style('sot-single-product', get_stylesheet_directory_uri() . '/woocommerce/single-product/styles.css', array(), '1.0.30', 'all');
+    wp_enqueue_style('sot-single-product', get_stylesheet_directory_uri() . '/woocommerce/single-product/styles.css', array(), '1.0.31', 'all');
     wp_enqueue_style('sot-landing-page-style', get_stylesheet_directory_uri() . '/css/template-landing-page.css', array(), '1.0.4', 'all');
 
 }
@@ -128,11 +128,45 @@ function sot_enqueue_shop_styles() {
             'sot-shop',
             get_stylesheet_directory_uri() . '/css/shop.css',
             array( 'hybridextend-child-style' ),
-            '1.7.0'
+            '1.8.0'
         );
     }
 }
 add_action( 'wp_enqueue_scripts', 'sot_enqueue_shop_styles' );
+
+/**
+ * Mobile: Produktfilter (WooCommerce Product Filters) hinter einen
+ * „Filter"-Button einklappen (oberhalb der Produktliste).
+ */
+add_action( 'wp_footer', function () {
+    if ( ! ( function_exists( 'is_shop' ) && ( is_shop() || is_product_taxonomy() ) ) ) {
+        return;
+    }
+    ?>
+    <script>
+    (function () {
+        function initSotFilter() {
+            var filter = document.querySelector('.wcpf-filter');
+            if ( ! filter || document.querySelector('.sot-filter-toggle') ) { return; }
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'sot-filter-toggle';
+            btn.setAttribute('aria-expanded', 'false');
+            btn.innerHTML = '<i class="fas fa-sliders-h" aria-hidden="true"></i> Filter';
+            filter.classList.add('sot-filter-collapsed');
+            filter.parentNode.insertBefore(btn, filter);
+            btn.addEventListener('click', function () {
+                var collapsed = filter.classList.toggle('sot-filter-collapsed');
+                btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+                btn.classList.toggle('open', ! collapsed);
+            });
+        }
+        if ( document.readyState !== 'loading' ) { initSotFilter(); }
+        else { document.addEventListener('DOMContentLoaded', initSotFilter); }
+    })();
+    </script>
+    <?php
+}, 50 );
 
 /**
  * Warenkorb- und Vergleichs-Button in der Produktliste in eine
@@ -156,7 +190,7 @@ add_action( 'after_setup_theme', function () {
 add_action( 'wp', function () {
     if ( function_exists( 'add_compare_button_singleProduct' ) ) {
         remove_action( 'woocommerce_single_product_summary', 'add_compare_button_singleProduct', 35 );
-        add_action( 'woocommerce_single_product_summary', 'add_compare_button_singleProduct', 11 );
+        add_action( 'woocommerce_single_product_summary', 'add_compare_button_singleProduct', 31 );
     }
 }, 30 );
 

@@ -361,9 +361,11 @@
 .sot-sp-summary .stock.out-of-stock { color: #c0392b !important; font-weight: 600; }
 .sot-sp-summary .stock.available-on-backorder { color: #b8860b !important; font-weight: 600; }
 
-/* Verfügbarkeits-Tabelle: klare Karte statt kaum sichtbarer Linien */
+/* Verfügbarkeits-Tabelle: klare Karte statt kaum sichtbarer Linien,
+   volle Breite der Info-Spalte (nur kleiner Rand links/rechts) */
 .sot-sp-summary .lieferinfo-table {
-    width: 100%;
+    width: calc(100% - 8px) !important;
+    max-width: none !important;
     border: 1px solid #e3e9f3 !important;
     border-radius: 10px;
     border-collapse: separate !important;
@@ -371,7 +373,7 @@
     overflow: hidden;
     background: #fff;
     font-size: 0.9rem;
-    margin-top: 6px;
+    margin: 6px 4px 4px 4px;
 }
 .sot-sp-summary .lieferinfo-table td {
     border: 0 !important;

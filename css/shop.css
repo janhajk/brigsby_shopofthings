@@ -465,12 +465,47 @@ body.sot-shop-page {
     max-width: 21% !important;
 }
 
-/* Mobile (Produktliste): Content volle Breite – die 56%-Regel galt sonst auch hier */
+/* Filter-Toggle (nur Mobile sichtbar) */
+.sot-filter-toggle {
+    display: none;
+}
+
+/* Mobile (Produktliste): Content + Sidebars volle Breite, Kategorien weg, Filter einklappbar */
 @media (max-width: 900px) {
     .sot-shop-page:not(.singular-product) #content,
-    .sot-shop-page:not(.singular-product) main.content {
+    .sot-shop-page:not(.singular-product) main.content,
+    .sot-shop-page:not(.singular-product) #sidebar-primary,
+    .sot-shop-page:not(.singular-product) #sidebar-secondary,
+    .sot-shop-page:not(.singular-product) .sidebar {
         flex-basis: 100% !important;
         max-width: 100% !important;
         width: 100% !important;
+    }
+
+    /* Produktkategorien-Menü auf Mobile ganz ausblenden */
+    .sot-shop-page:not(.singular-product) .widget_product_categories,
+    .sot-shop-page:not(.singular-product) .widget_nav_menu {
+        display: none !important;
+    }
+
+    /* Filter-Button + eingeklappter Filter */
+    .sot-filter-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 12px 16px;
+        margin: 0 0 14px;
+        background: var(--SOT---blue-deep, #1D2E7C);
+        color: #fff;
+        border: 0;
+        border-radius: 40px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+    }
+    .sot-shop-page .wcpf-filter.sot-filter-collapsed {
+        display: none !important;
     }
 }
