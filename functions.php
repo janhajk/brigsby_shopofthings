@@ -55,6 +55,9 @@ require get_stylesheet_directory() . '/inc/frontpage/frontpage-settings.php';
 // Menü-Einstellungen (eigene Admin-Seite „Menü") + eigenes Mega-Menü
 require get_stylesheet_directory() . '/inc/menu/menu-settings.php';
 
+// ShopOfThings-Einstellungen (B2B-Box-Widget etc.)
+require get_stylesheet_directory() . '/inc/shopofthings-settings.php';
+
 /**
  * Eigenes Mega-Menü: CSS/JS global laden.
  */
@@ -125,7 +128,7 @@ function sot_enqueue_shop_styles() {
             'sot-shop',
             get_stylesheet_directory_uri() . '/css/shop.css',
             array( 'hybridextend-child-style' ),
-            '1.0.0'
+            '1.1.0'
         );
     }
 }

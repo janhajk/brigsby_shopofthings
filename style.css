@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.28
+ Version:       3.1.29
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -930,6 +930,41 @@ input.product-search-field {
     border-top: 1px solid rgba(255,255,255,0.1);
     font-size: 0.9rem;
     opacity: 0.8;
+}
+
+
+/* B2B-/Export-Box (Widget „ShopOfThings: B2B-Box") */
+.sot-b2b-box {
+    background: linear-gradient(135deg, #2a3da8 0%, #16236b 100%);
+    color: #fff;
+    border-radius: 14px;
+    padding: 22px 20px;
+}
+.sot-b2b-box h4 {
+    color: #fff;
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.sot-b2b-box p {
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 14px;
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+.sot-b2b-box .sot-b2b-btn {
+    display: inline-block;
+    background: #fff;
+    color: var(--SOT---blue-deep, #1D2E7C);
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+.sot-b2b-box .sot-b2b-btn:hover {
+    background: rgba(255, 255, 255, 0.88);
 }
 
 /* Responsive Anpassungen */

@@ -39,8 +39,8 @@ body.sot-shop-page {
 .sot-shop-page ul.products {
     display: grid !important;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 24px;
-    margin: 24px 0 30px;
+    gap: 14px;
+    margin: 20px 0 30px;
     padding: 0;
     list-style: none;
 }
@@ -59,7 +59,8 @@ body.sot-shop-page {
     clear: none !important;
     padding: 14px;
     background: #fff;
-    border: 1px solid #e6ecf5;
+    /* einheitlicher Rahmen, überschreibt Theme-border-right (graue Linie) */
+    border: 1px solid #e6ecf5 !important;
     border-radius: 14px;
     position: relative;
     box-shadow: 0 2px 10px rgba(29, 46, 124, 0.04);
@@ -74,14 +75,14 @@ body.sot-shop-page {
 @media (max-width: 1024px) {
     .sot-shop-page ul.products {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
+        gap: 12px;
     }
 }
 
 @media (max-width: 768px) {
     .sot-shop-page ul.products {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
+        gap: 10px;
     }
     .sot-shop-page ul.products li.product {
         padding: 10px;
@@ -177,37 +178,42 @@ body.sot-shop-page {
     letter-spacing: 0.01em;
 }
 
-/* ── Aktionsleiste: breiter Warenkorb-Button + Compare-Icon ─────────── */
+/* ── Aktionsleiste: kompakte Icon-Buttons (Warenkorb + Vergleich) ───── */
 .sot-shop-page li.product .sot-card-actions {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 8px;
-    margin-top: 12px;
+    margin-top: 10px;
 }
 
-.sot-shop-page li.product .sot-card-actions .button {
-    flex: 1 1 auto;
-    min-width: 0;
+.sot-shop-page li.product .sot-card-actions .button.sot-cart-btn {
+    flex: 0 0 auto;
+    width: 46px;
+    height: 38px;
+    padding: 0;
     margin: 0;
-    padding: 9px 12px;
     border-radius: 30px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: var(--SOT---blue-deep, #1D2E7C);
     color: #fff;
     border: 2px solid var(--SOT---blue-deep, #1D2E7C);
-    line-height: 1.2;
     transition: background 0.2s ease, color 0.2s ease;
 }
 
-.sot-shop-page li.product .sot-card-actions .button:hover {
+.sot-shop-page li.product .sot-card-actions .button.sot-cart-btn i {
+    font-size: 1rem;
+}
+
+.sot-shop-page li.product .sot-card-actions .button.sot-cart-btn:hover {
     background: #fff;
     color: var(--SOT---blue-deep, #1D2E7C);
 }
 
-.sot-shop-page li.product .sot-card-actions .button.loading,
-.sot-shop-page li.product .sot-card-actions .button.added {
+.sot-shop-page li.product .sot-card-actions .button.sot-cart-btn.loading,
+.sot-shop-page li.product .sot-card-actions .button.sot-cart-btn.added {
     opacity: 0.85;
 }
 
@@ -233,6 +239,12 @@ body.sot-shop-page {
 
 /* „added to cart"-Folge-Link von WooCommerce ausblenden (kompakt halten) */
 .sot-shop-page li.product .sot-card-actions .added_to_cart {
+    display: none;
+}
+
+/* Abo-/Subscription-Produkte: komplexe Preisangabe im Raster ausblenden */
+.sot-shop-page li.product .price:has(.ywsbs-price-detail),
+.sot-shop-page li.product .price:has(.price_time_opt) {
     display: none;
 }
 
@@ -291,6 +303,69 @@ body.sot-shop-page {
 .sot-shop-page .woocommerce-result-count,
 .sot-shop-page .woocommerce-ordering {
     margin-bottom: 16px;
+}
+
+/* Tooltips in der Aktionsleiste nach oben (sonst ragen sie unter die Karte) */
+.sot-shop-page .sot-card-actions .sot-tip::after {
+    top: auto;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%) translateY(-4px);
+}
+.sot-shop-page .sot-card-actions .sot-tip:hover::after {
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ── Shop-/Kategorie-Kopf: kleiner Breadcrumb + moderner Titel ──────── */
+.sot-shop-header {
+    padding: 26px 0 4px;
+}
+
+.sot-shop-header .hgrid {
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+
+.sot-shop-header .woocommerce-breadcrumb {
+    font-size: 0.8rem;
+    color: #8a93a6;
+    margin: 0 0 10px;
+}
+
+.sot-shop-header .woocommerce-breadcrumb a {
+    color: #8a93a6;
+    text-decoration: none;
+}
+
+.sot-shop-header .woocommerce-breadcrumb a:hover {
+    color: var(--SOT---blue-deep, #1D2E7C);
+}
+
+.sot-shop-header .sot-shop-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #0a1f3d;
+    line-height: 1.15;
+    margin: 0;
+}
+
+.sot-shop-header .sot-shop-desc {
+    margin: 12px 0 0;
+    color: #5b6577;
+    max-width: 820px;
+}
+
+@media (max-width: 768px) {
+    .sot-shop-header .hgrid {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .sot-shop-header .sot-shop-title {
+        font-size: 1.6rem;
+    }
 }
 
 /* ── Einzelprodukt: Inhalt auf Shell, weisser Hintergrund (Layout

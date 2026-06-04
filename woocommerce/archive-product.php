@@ -9,16 +9,25 @@
 <?php get_header( 'shop' ); ?>
 
 <?php
-// Dispay Loop Meta at top
-hoot_display_loop_title_content( 'pre', 'archive-product.php' );
-if ( hoot_page_header_attop() ) {
-	get_template_part( 'template-parts/loop-meta', 'shop' ); // Loads the template-parts/loop-meta-shop.php template to display Title Area with Meta Info (of the loop)
-	hoot_display_loop_title_content( 'post', 'archive-product.php' );
-}
+// Standard-Breadcrumb im Content deaktivieren – wir zeigen ihn klein oben im Kopf.
+remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 
 // Template modification Hook
 do_action( 'hoot_template_before_content_grid', 'archive-product.php' );
 ?>
+
+<header class="sot-shop-header">
+	<div class="hgrid">
+		<?php woocommerce_breadcrumb(); ?>
+		<h1 class="sot-shop-title"><?php echo wp_kses_post( woocommerce_page_title( false ) ); ?></h1>
+		<?php
+		$sot_term = ( is_product_category() || is_product_tag() ) ? get_queried_object() : null;
+		if ( $sot_term && ! empty( $sot_term->description ) ) {
+			echo '<div class="sot-shop-desc">' . wp_kses_post( wpautop( $sot_term->description ) ) . '</div>';
+		}
+		?>
+	</div>
+</header>
 
 <div class="hgrid main-content-grid">
 
@@ -52,12 +61,6 @@ do_action( 'hoot_template_before_content_grid', 'archive-product.php' );
 		do_action( 'woocommerce_before_main_content' );
 
 		if ( ( function_exists( 'woocommerce_product_loop' ) && woocommerce_product_loop() ) || have_posts() ) :
-
-			// Dispay Loop Meta in content wrap
-			if ( ! hoot_page_header_attop() ) {
-				hoot_display_loop_title_content( 'post', 'archive-product.php' );
-				get_template_part( 'template-parts/loop-meta', 'shop' ); // Loads the template-parts/loop-meta-shop.php template to display Title Area with Meta Info (of the loop)
-			}
 			?>
 
 			<div id="content-wrap">
