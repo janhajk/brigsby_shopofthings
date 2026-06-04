@@ -80,16 +80,14 @@
     <?php get_template_part( 'template-parts/topbar' ); ?>
 
     <header <?php hybridextend_attr( 'header' ); ?>>
-        <?php hoot_secondary_menu( 'top' ); ?>
         <div <?php hybridextend_attr( 'header-part', 'primary' ); ?>>
             <div class="hgrid">
-                <div class="table hgrid-span-12">
+                <div class="sot-header-row">
                     <?php hoot_header_branding(); ?>
-                    <?php hoot_header_aside(); ?>
+                    <?php get_template_part( 'template-parts/menu/mega-menu' ); ?>
                 </div>
             </div>
         </div>
-        <?php hoot_secondary_menu( 'bottom' ); ?>
     </header>
 
     <?php hybridextend_get_sidebar( 'below-header' ); ?>

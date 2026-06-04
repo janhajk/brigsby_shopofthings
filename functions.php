@@ -52,6 +52,29 @@ require get_stylesheet_directory() . '/inc/template-landing-page-functions.php';
 // Startseiten-Einstellungen (eigene Admin-Seite „Startseite")
 require get_stylesheet_directory() . '/inc/frontpage/frontpage-settings.php';
 
+// Menü-Einstellungen (eigene Admin-Seite „Menü") + eigenes Mega-Menü
+require get_stylesheet_directory() . '/inc/menu/menu-settings.php';
+
+/**
+ * Eigenes Mega-Menü: CSS/JS global laden.
+ */
+function sot_enqueue_menu_assets() {
+    wp_enqueue_style(
+        'sot-menu',
+        get_stylesheet_directory_uri() . '/css/menu.css',
+        array( 'hybridextend-child-style' ),
+        '1.0.0'
+    );
+    wp_enqueue_script(
+        'sot-menu',
+        get_stylesheet_directory_uri() . '/css/menu.js',
+        array(),
+        '1.0.0',
+        true
+    );
+}
+add_action( 'wp_enqueue_scripts', 'sot_enqueue_menu_assets' );
+
 /**
  * Frontpage-CSS nur auf der Startseite / im Startseiten-Template laden
  * (Performance: nicht auf jeder Seite mitschleppen).
