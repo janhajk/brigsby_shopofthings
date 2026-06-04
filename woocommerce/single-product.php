@@ -8,16 +8,19 @@
 <?php get_header( 'shop' ); ?>
 
 <?php
-// Dispay Loop Meta at top
-hoot_display_loop_title_content( 'pre', 'single-product.php' );
-if ( hoot_page_header_attop() ) {
-	get_template_part( 'template-parts/loop-meta', 'shop' ); // Loads the template-parts/loop-meta-shop.php template to display Title Area with Meta Info (of the loop)
-	hoot_display_loop_title_content( 'post', 'single-product.php' );
-}
+// Standard-Breadcrumb im Content deaktivieren – wir zeigen ihn klein oben im Kopf.
+remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 
 // Template modification Hook
 do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 ?>
+
+<header class="sot-shop-header sot-single-header">
+	<div class="hgrid">
+		<?php woocommerce_breadcrumb(); ?>
+		<h1 class="sot-shop-title"><?php the_title(); ?></h1>
+	</div>
+</header>
 
 <div class="hgrid main-content-grid product-hgrid">
 

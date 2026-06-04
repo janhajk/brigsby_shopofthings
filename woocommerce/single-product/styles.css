@@ -1,142 +1,59 @@
 /*
-  Single product page formating
+  Single product page – Grid-Layout
+  Galerie oben links, Info-Spalte rechts (über beide Reihen),
+  Beschreibung + Details schliessen unter der Galerie an.
 */
 
-
-
-/*Wechsel von wide auf mobile bildschirme v.a. für main content*/
-
-#sot-single-product-top {
-      display: flex;
-      flex-wrap: nowrap;
+.sot-sp {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-areas:
+        "gallery summary"
+        "below   summary";
+    gap: 14px 40px;
+    align-items: start;
 }
 
-
-#sot-single-product-top .woocommerce-product-gallery {
-      flex-basis: 70%;
-      /* 66% Breite */
+.sot-sp-gallery {
+    grid-area: gallery;
 }
 
-#sot-single-product-top .entry-summary {
-      flex-basis: 30%;
-      padding: 15px;
-      /* 33% Breite */
+.sot-sp-summary {
+    grid-area: summary;
+    padding: 0;
+    min-height: 0;
 }
 
-.wc-tabs-wrapper {
-      width: 70%;
+.sot-sp-below {
+    grid-area: below;
+    margin-top: 18px;
 }
 
-
-
-/* Mobil-Ansicht bei max-width: 800px */
-
-@media only screen and (max-width: 800px) {
-      #sot-single-product-top {
-            flex-wrap: wrap;
-            /* erlaube das Umbrechen */
-      }
-
-     #sot-single-product-top .woocommerce-product-gallery,
-     #sot-single-product-top .entry-summary {
-            flex-basis: 100%;
-            /* beide nehmen die volle Breite ein */
-      }
-
-      .product-hgrid #sidebar-primary {
-            display: none;
-      }
-
-      .wc-tabs-wrapper, #wpshopofthingstools-specifications-wrapper, .show-more {
-            width: 100%;
-      }
-}
-
-
-/*******************************************/
-/*------ TEST ------*/
-/*******************************************/
-/* Desktop-Standard */
-.entry.product.type-product #sot-single-product-top {
-    display: flex;
-    justify-content: space-between;
-}
-
-.entry.product.type-product .woocommerce-product-gallery {
-    flex-basis: 70%;
-    margin-right: 2%;
-}
-
-.entry.product.type-product .entry-summary {
-    flex-basis: 30%;
-    order: 1;  /* Die Reihenfolge verschieben, damit es rechts angezeigt wird */
-    min-height: 1000px;
-}
-
-.entry.product.type-product .wc-tabs-wrapper {
-    width: 68%; /* Die gewünschte Breite */
-}
-
-/* Mobile-Ansicht für Geräte mit einer Breite von 800px oder weniger */
-@media screen and (max-width: 800px) {
-    .entry.product.type-product #sot-single-product-top {
-        display: flex;
-        flex-direction: column;
+/* Mobile: zuerst Bild, dann Info-Spalte, dann Beschreibung/Details */
+@media (max-width: 900px) {
+    .sot-sp {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "gallery"
+            "summary"
+            "below";
+        gap: 22px;
     }
-
-    .entry.product.type-product .wc-tabs-wrapper {
-        order: 1; /* Zwischen den beiden divs */
-        margin-top: 0;
-        width: 100%;
-    }
-
-    .entry.product.type-product .woocommerce-product-gallery {
-        order: 0; /* Das erste Element */
-        flex-basis: 100%;
-        margin-right: 0; /* Entfernt den Rand für die mobile Ansicht */
-    }
-
-    .entry.product.type-product .entry-summary {
-        order: 2; /* Das letzte Element */
-        flex-basis: 100%;
-        min-height: auto;
+    .sot-sp-below {
+        margin-top: 2px;
     }
 }
 
+/* Galerie-Thumbnails */
 .woocommerce div.product div.images .flex-control-thumbs li {
-    width: 14%;
+    width: 16%;
 }
-
-/*.woocommerce div.product div.images .flex-viewport {*/
-/*      max-height: 720px;*/
-/*}*/
-
 .woocommerce div.product .woocommerce-product-gallery--columns-4 .flex-control-thumbs li:nth-child(4n+1) {
     clear: none;
 }
-.woocommerce div.product .woocommerce-product-gallery--columns-4 .flex-control-thumbs li:nth-child(7n+1) {
-    clear: left;
-}
 
 
-/*******************************************/
-/*----- END TEST -------*/
-/*******************************************/
-
-
-
-/* Media Query für Bildschirmbreiten von 700px und darunter */
-@media only screen and (max-width: 769px) {
-    .product-hgrid #content {
-        flex-basis: 100% !important; /* Nimmt die volle Breite des Containers ein */
-    }
-}
-
-
-
-
-
-/* Allgemeiner Stil für spezielle Zeilen */
+/* ── Meta-Tabelle in der Info-Spalte (unverändert übernommen) ────────── */
 .product-meta-table .special-row div {
     display: flex;
     align-items: center;
@@ -144,40 +61,35 @@
     flex-wrap: wrap;
 }
 
-
-/* is a tr */
 .product-meta-table .special-row {
     border-bottom: 1px solid gray;
     border-top: 1px solid gray;
 }
 
-/* grössere zeilen */
-.product-meta-table .special-row td, .product-meta-table .special-row th {
-      padding-top: 0.7em;
-      padding-bottom: 0.7em;
+.product-meta-table .special-row td,
+.product-meta-table .special-row th {
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
 }
-.product-meta-table #special-row-stock td, .product-meta-table #special-row-stock th {
-      padding-top: 1em;
-      padding-bottom: 1em;
+
+.product-meta-table #special-row-stock td,
+.product-meta-table #special-row-stock th {
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 .product-meta-table .special-row .icon-link img {
     max-height: 25px;
-    /*margin-right: 5px;*/
 }
 
 .product-meta-table .special-row .text-link {
     margin-right: 5px;
-    border: 1px solid #999;  /* Randfarbe - du kannst dies nach Bedarf ändern */
-    border-radius: 5px;  /* Runde Ecken */
-    padding: 2px 4px 2px 4px;  /* Abstand zwischen Text und Rand */
-    display: inline-block;  /* Damit padding und border korrekt angewendet werden */
+    border: 1px solid #999;
+    border-radius: 5px;
+    padding: 2px 4px;
+    display: inline-block;
 }
 
-/* Ein optionaler Stil, um den Abstand zwischen den Icons (a-Elementen innerhalb des icon-containers) zu setzen */
 .product-meta-table .icon-container a {
-    margin-left: 10px; /* Setzen Sie den Abstand nach Ihrem Geschmack */
+    margin-left: 10px;
 }
-
-
-

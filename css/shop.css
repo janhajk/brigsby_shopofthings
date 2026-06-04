@@ -382,8 +382,66 @@ body.sot-shop-page {
     }
 }
 
-/* ── Einzelprodukt: Inhalt auf Shell, weisser Hintergrund (Layout
-   bleibt ansonsten wie gehabt aus woocommerce-customizations.css) ───── */
+/* ── Einzelprodukt: Inhalt auf Shell, weisser Hintergrund ───────────── */
 .sot-shop-page .product-hgrid {
     background: #fff;
+}
+
+/* Einzelprodukt: keine Sidebar -> volle Breite */
+.sot-shop-page.single-product #sidebar-primary,
+.sot-shop-page.single-product #sidebar-secondary {
+    display: none !important;
+}
+.sot-shop-page.single-product #content {
+    flex-basis: 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* Lupe ausblenden – Klick aufs Bild öffnet die Lightbox */
+.sot-shop-page .woocommerce-product-gallery__trigger {
+    display: none !important;
+}
+.sot-shop-page .woocommerce-product-gallery__image a,
+.sot-shop-page .woocommerce-product-gallery img {
+    cursor: zoom-in;
+}
+
+/* Beschreibungs-„Mehr anzeigen" optisch wie das Details-„Mehr anzeigen" */
+.sot-shop-page .show-more-content {
+    display: block;
+    width: auto;
+    text-align: center;
+    margin: 12px auto 0;
+    font-weight: 600;
+    color: rgb(15, 88, 148);
+    text-decoration: none;
+}
+.sot-shop-page .show-more-content::before {
+    content: "+";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    border: 1px solid rgb(15, 88, 148);
+    border-radius: 50%;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Abstand nach den Details */
+.sot-shop-page .sot-sp-below {
+    margin-bottom: 44px;
+}
+
+/* ── Produktliste: Sidebars (links + rechts) etwas breiter ──────────── */
+.sot-shop-page:not(.single-product) #content {
+    flex-basis: 56% !important;
+    max-width: 56% !important;
+}
+.sot-shop-page:not(.single-product) #sidebar-primary,
+.sot-shop-page:not(.single-product) #sidebar-secondary {
+    flex-basis: 21% !important;
+    max-width: 21% !important;
 }
