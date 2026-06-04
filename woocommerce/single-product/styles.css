@@ -121,18 +121,7 @@
     color: rgb(15, 88, 148);
     text-decoration: none;
 }
-.sot-sp-below .show-more-content::before {
-    content: "+";
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 6px;
-    border: 1px solid rgb(15, 88, 148);
-    border-radius: 50%;
-    line-height: 20px;
-    text-align: center;
-    vertical-align: middle;
-}
+/* der +/–-Kreis kommt jetzt aus dem Markup/JS (description.php), nicht mehr per ::before */
 
 /* Abstand nach den Details */
 .sot-sp-below {
@@ -404,6 +393,22 @@
     color: #1D2E7C;
 }
 
+/* Verfügbarkeit: breite Tabelle unter das Label „Verfügbarkeit:" setzen */
+.sot-sp-summary .product-meta-table #special-row-stock th,
+.sot-sp-summary .product-meta-table #special-row-stock td {
+    display: block;
+    width: 100%;
+    padding-left: 0 !important;
+}
+.sot-sp-summary .product-meta-table #special-row-stock th {
+    padding-bottom: 6px;
+}
+
+/* Abstand zwischen Hauptbild und Thumbnail-Leiste */
+.sot-sp-gallery .flex-control-nav.flex-control-thumbs {
+    margin-top: 14px;
+}
+
 /* ── Mobile: nichts darf aus dem Viewport laufen ───────────── */
 @media (max-width: 900px) {
     .product-hgrid {
@@ -416,20 +421,47 @@
         min-width: 0;
         max-width: 100%;
     }
-    .sot-sp-below table,
-    .sot-sp-summary table {
+    .sot-sp-below table {
         width: 100% !important;
         table-layout: fixed;
     }
     .sot-sp-below table td,
-    .sot-sp-below table th,
-    .sot-sp-summary table td,
-    .sot-sp-summary table th {
+    .sot-sp-below table th {
         word-break: break-word;
         overflow-wrap: anywhere;
     }
+    /* Meta-Tabelle: SKU/P/N etc. NICHT umbrechen – Label + Wert auf einer Zeile */
+    .sot-sp-summary .product-meta-table {
+        table-layout: auto !important;
+        width: 100% !important;
+    }
     .sot-sp-summary .product-meta-table th {
-        white-space: normal;
+        display: table-cell !important;
+        white-space: nowrap !important;
+        width: 1px;
+        padding-right: 14px !important;
+    }
+    .sot-sp-summary .product-meta-table td {
+        display: table-cell !important;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+    /* Verfügbarkeit bleibt gestapelt (Tabelle unter dem Label) */
+    .sot-sp-summary .product-meta-table #special-row-stock th,
+    .sot-sp-summary .product-meta-table #special-row-stock td {
+        display: block !important;
+        width: 100% !important;
+    }
+    /* Verfügbarkeits-Tabelle nicht über den Rand */
+    .sot-sp-summary .lieferinfo-table {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+    }
+    .sot-sp-summary .lieferinfo-table td {
+        box-sizing: border-box;
+        word-break: break-word;
+        overflow-wrap: anywhere;
     }
     .sot-sp-below .wp-block-table,
     .sot-sp-below figure.wp-block-table {

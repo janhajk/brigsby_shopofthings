@@ -30,4 +30,4 @@ $heading = apply_filters( 'woocommerce_product_description_heading', __( 'Descri
 <div class="product-main-content">
 <?php the_content(); ?>
 </div>
-<a class="show-more-content" href="#">Mehr anzeigen</a>
+<a class="show-more-content" href="#"><span style="display:inline-block;width:20px;height:20px;border:1px solid rgb(15,88,148);border-radius:50%;text-align:center;line-height:20px;">+</span> Mehr anzeigen</a>

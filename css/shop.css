@@ -464,3 +464,13 @@ body.sot-shop-page {
     flex-basis: 21% !important;
     max-width: 21% !important;
 }
+
+/* Mobile (Produktliste): Content volle Breite – die 56%-Regel galt sonst auch hier */
+@media (max-width: 900px) {
+    .sot-shop-page:not(.singular-product) #content,
+    .sot-shop-page:not(.singular-product) main.content {
+        flex-basis: 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}

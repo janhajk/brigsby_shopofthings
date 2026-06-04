@@ -71,17 +71,18 @@
 
 .tooltip-box {
     position: absolute;
-    background: #69b3e7;
-    /* Mittel-hellblau */
-    color: var(--wc-primary-text, #fff);
-    padding: 10px 14px;
-    border-radius: 4px;
-    font-size: 13px;
+    background: #1D2E7C;
+    /* tiefblau – einheitlich mit .sot-tip */
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 7px;
+    font-size: 0.78rem;
+    font-weight: 500;
     z-index: 1000;
     display: none;
-    max-width: 250px;
+    max-width: 260px;
     text-align: left;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
     line-height: 1.4;
 }
 
@@ -98,8 +99,8 @@
     left: 50%;
     margin-left: -5px;
     border: 5px solid transparent;
-    border-top-color: #69b3e7;
-    /* Mittel-hellblau für den Pfeil */
+    border-top-color: #1D2E7C;
+    /* tiefblau für den Pfeil */
 }
 
 
