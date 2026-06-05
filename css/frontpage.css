@@ -1073,7 +1073,7 @@ html {
 .hero-bridge {
     /* --- Lage/Grösse der Brücke (bitte im Browser feinjustieren) --- */
     --br-left: 39%;   /* wie Wasser-Element */
-    --br-top:  54%;   /* knapp ÜBER dem Wasserfall (--wf-top: 57%) */
+    --br-top:  49.7%; /* knapp ÜBER dem Wasserfall (--wf-top: 57%) */
     --br-w:    17%;   /* Breite ~ wie Wasser-Element */
     --br-h:    4%;    /* dünnes Band */
     --arch:    2px;   /* leichte Krümmung der Brücke (negativ = nach unten) */
@@ -1122,12 +1122,12 @@ html {
 
 /* Timing + Lanes pro Element -> wirkt zufällig (Autos auf der „Strasse",
    Personen leicht versetzt gestapelt) */
-.hero-bridge .bm:nth-child(1) { animation-duration: 9s;  animation-delay: 0s;   top: 53%; }
-.hero-bridge .bm:nth-child(2) { animation-duration: 13s; animation-delay: 3.5s; top: 40%; }
-.hero-bridge .bm:nth-child(3) { animation-duration: 11s; animation-delay: 7s;   top: 60%; }
-.hero-bridge .bm:nth-child(4) { animation-duration: 8s;  animation-delay: 10s;  top: 53%; }
-.hero-bridge .bm:nth-child(5) { animation-duration: 15s; animation-delay: 2s;   top: 46%; }
-.hero-bridge .bm:nth-child(6) { animation-duration: 12s; animation-delay: 5.5s; top: 64%; }
+.hero-bridge .bm:nth-child(1) { animation-duration: 9s;  animation-delay: 0s;   top: 53%; background: #34406a; } /* Auto: dunkelblau */
+.hero-bridge .bm:nth-child(2) { animation-duration: 13s; animation-delay: 3.5s; top: 40%; background: #2c2c2c; } /* Person: dunkelgrau */
+.hero-bridge .bm:nth-child(3) { animation-duration: 11s; animation-delay: 7s;   top: 60%; background: #3a5a3a; } /* Person: dunkelgrün */
+.hero-bridge .bm:nth-child(4) { animation-duration: 8s;  animation-delay: 10s;  top: 53%; background: #7a2f3a; } /* Auto: dunkelrot */
+.hero-bridge .bm:nth-child(5) { animation-duration: 15s; animation-delay: 2s;   top: 46%; background: #6b4a2f; } /* Person: braun */
+.hero-bridge .bm:nth-child(6) { animation-duration: 12s; animation-delay: 5.5s; top: 64%; background: #43507a; } /* Person: gedämpftes blau */
 
 /* links -> rechts (Querung in den ersten ~56% der Dauer, danach off-screen) */
 @keyframes sotBridgeLR {
