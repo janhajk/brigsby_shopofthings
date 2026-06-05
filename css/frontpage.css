@@ -1004,3 +1004,62 @@ html {
 .sot-news .news-item:hover .news-more {
     color: #fff;
 }
+
+
+/* =========================================================================
+   Hero-Wasserfall „lebt": Lichtschlieren laufen nach unten, schwebt mit dem
+   Bild mit (gleiche Float-Keyframes wie .hero-image img). Position in % der
+   .hero-image -> die 4 --wf-* Werte im Browser feinjustieren.
+   ========================================================================= */
+.sot-frontpage .hero-image { position: relative; }
+
+.hero-water {
+    --wf-left: 39%;
+    --wf-top:  57%;
+    --wf-w:    17%;
+    --wf-h:    15%;
+
+    position: absolute;
+    left: var(--wf-left);
+    top:  var(--wf-top);
+    width:  var(--wf-w);
+    height: var(--wf-h);
+    pointer-events: none;
+    z-index: 2;
+
+    /* feine, helle vertikale Schlieren */
+    background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0)    0px,
+        rgba(255, 255, 255, 0.16) 2px,
+        rgba(255, 255, 255, 0)    5px,
+        rgba(255, 255, 255, 0)    10px
+    );
+    background-size: 100% 40px;
+    background-repeat: repeat;
+
+    /* weich in die Umgebung blenden (keine harten Kanten) */
+    -webkit-mask: radial-gradient(ellipse at 50% 45%, #000 45%, transparent 100%);
+            mask: radial-gradient(ellipse at 50% 45%, #000 45%, transparent 100%);
+    mix-blend-mode: screen;
+    opacity: 0.45;
+    filter: blur(0.4px);
+
+    /* 1) Float-Sync mit dem Bild, 2) Schlieren nach unten */
+    animation:
+        heroFloatRandom 12s ease-in-out infinite,
+        sotWaterFlow     7s linear      infinite;
+}
+
+@keyframes sotWaterFlow {
+    from { background-position: 0 0; }
+    to   { background-position: 0 40px; }
+}
+
+/* Mobile + Reduced-Motion: aus */
+@media (max-width: 992px) {
+    .hero-water { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-water { animation: none; }
+}

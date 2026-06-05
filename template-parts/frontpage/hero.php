@@ -45,6 +45,7 @@ $badges      = array_values( array_filter( (array) $fp['hero_badges'], 'strlen' 
 
         <div class="hero-image hgrid-span-5 hgrid-span-tablet-12">
             <img src="<?php echo esc_url( $hero_src ); ?>" alt="<?php echo esc_attr( $hero_alt ); ?>" loading="eager" fetchpriority="high" width="560" height="612">
+            <span class="hero-water" aria-hidden="true"></span>
         </div>
 
     </div>
