@@ -46,6 +46,22 @@ function sot_custom_scripts() {
 add_action('wp_enqueue_scripts', 'sot_custom_scripts');
 
 
+/**
+ * Read-More-Link in Beitrags-Auszügen entfernen (nur Text, kein <a>).
+ *
+ * Das Parent-Theme (brigsby) baut in hoot_modify_read_more_link() den
+ * "Read More"-Text in einen <a class="more-link">-Link und gibt ihn über den
+ * Filter 'hoot_readmore' aus. Früher war das direkt im Parent auskommentiert –
+ * das ging bei jedem Parent-Update verloren. Jetzt sauber im Child via Filter,
+ * der den Link strippt und nur den Text behält. Deckt Excerpt- und
+ * <!--more-->-Pfad ab. Für komplett ohne Read-More-Text: `return '';`.
+ */
+function sot_strip_readmore_link( $read_more ) {
+    return wp_strip_all_tags( $read_more );
+}
+add_filter( 'hoot_readmore', 'sot_strip_readmore_link', 20 );
+
+
 // invoke landing page functions
 require get_stylesheet_directory() . '/inc/template-landing-page-functions.php';
 
