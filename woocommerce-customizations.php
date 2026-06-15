@@ -230,8 +230,18 @@ function sot_show_product_meta_custom() {
     );
 
     if ($marke) {
+        // get_term_link() erwartet Slug/ID/Objekt – der Attributwert ist aber der Name.
+        // Erst per Slug, dann per Name auflösen; scheitert beides, ohne Link ausgeben
+        // (sonst landet ein WP_Error in esc_url() -> Fatal).
         $marke_link = get_term_link($marke, 'pa_brand');
-        echo '<tr><th scope="row">' . __('Marke:', 'shopofthings') . '</th><td><a href="' . esc_url($marke_link) . '">' . $marke . '</a>';
+        if (is_wp_error($marke_link)) {
+            $marke_term = get_term_by('name', $marke, 'pa_brand');
+            $marke_link = ($marke_term && !is_wp_error($marke_term)) ? get_term_link($marke_term) : '';
+        }
+        $marke_has_link = ($marke_link && !is_wp_error($marke_link));
+
+        echo '<tr><th scope="row">' . __('Marke:', 'shopofthings') . '</th><td>'
+            . ($marke_has_link ? '<a href="' . esc_url($marke_link) . '">' . $marke . '</a>' : $marke);
 
         // Überprüfen, ob die Marke in der Partner-Liste ist
         if (in_array(strtolower($marke), $partner_brands)) {
