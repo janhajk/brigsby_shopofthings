@@ -517,24 +517,9 @@ function woo_cart_but_icon ( $items, $args ) {
 
 
 
-/**
- *
- * Add B2B Javascript
- *
- * inkl. MWST / exkl. MWST Buttons
- *
- *
- */
-function shopofthings_add_b2b_script() {
-      // Register js file
-      wp_register_script( 'shopofthings-b2b', get_stylesheet_directory_uri().'/b2b.js', false, '1.10', true );
-
-      // Enqueue the registered script file
-      wp_enqueue_script('shopofthings-b2b');
-}
-
-// add script
-// add_action('wp_enqueue_scripts', 'shopofthings_add_b2b_script');
+/* B2B-Preis-Umschalter (b2b.js) entfernt 2026-08-03 — war deaktiviert (Enqueue
+   auskommentiert), nutzte veralteten MwSt-Satz 7.7% und manipulierte Preise
+   client-seitig. Brutto/Netto läuft jetzt server-seitig via vat-display-Plugin. */
 
 
 
