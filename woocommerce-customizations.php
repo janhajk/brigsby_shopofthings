@@ -271,7 +271,7 @@ function sot_show_product_meta_custom() {
     $stock_info = get_stock_info($product);
 
     if (!$product->is_type('variable')) {
-        echo '<tr id="special-row-stock"><th scope="row">' . __('Verfügbarkeit:', 'shopofthings') . '</th><td>' . $stock_info['lieferinfo_html'] . '</td></tr>';
+        echo '<tr id="special-row-stock"><th scope="row">' . __('Verfügbarkeit CH:', 'shopofthings') . '</th><td>' . $stock_info['lieferinfo_html'] . '</td></tr>';
     }
 
     // Ende der Tabelle
