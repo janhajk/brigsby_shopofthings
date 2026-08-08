@@ -413,6 +413,56 @@
     color: #1D2E7C;
 }
 
+/* Label „Verfügbarkeit CH:" auf Höhe der Kartenzeile (th ist sonst top-aligned) */
+.sot-sp-summary .product-meta-table #special-row-stock th,
+.sot-sp-summary .product-meta-table #special-row-stock td {
+    vertical-align: middle;
+}
+
+/* ── Zeile „Ab externem Lager" (#special-row-extern) ──────────────────
+   Im Wertfeld liegt keine Tabelle, sondern .sot-ext-group-Blöcke (gebaut in
+   wpshopofthingstools/lieferzeit/lieferzeit.php bzw. im mu-plugin
+   procurement-countdown.php). Grund: die Regel
+   `.lieferinfo-table td { border-top: … !important }` oben hätte innerhalb einer
+   Tabelle jede zusammengehörende Gruppe wieder mit einer Linie aufgetrennt.
+   Gestaltet wird JEDE Gruppe als eigene kleine Karte im Stil der CH-Karte –
+   passt damit zum übrigen Design der Info-Spalte, und die Zugehörigkeit der
+   beiden Zeilen einer Gruppe ist auch ohne Trennlinie sofort sichtbar. */
+.sot-sp-summary .product-meta-table #special-row-extern {
+    border-top: 0 !important;   /* gehört optisch zur CH-Zeile darüber */
+}
+.sot-sp-summary .product-meta-table #special-row-extern th {
+    vertical-align: top;
+    padding-top: 14px;          /* = Karten-Abstand 6px + Rahmen 1px + Innenabstand 7px */
+    padding-bottom: 1em;
+}
+.sot-sp-summary .product-meta-table #special-row-extern td {
+    padding-top: 0;
+    padding-bottom: 1em;
+}
+.sot-sp-summary .sot-ext-group {
+    box-sizing: border-box;
+    width: calc(100% - 8px);
+    margin: 6px 4px 0 4px;
+    padding: 7px 13px;
+    background: #fff;
+    border: 1px solid #e3e9f3;
+    border-radius: 10px;
+}
+/* Trennung zwischen den Gruppen macht hier der Kartenrahmen, nicht eine Linie
+   (überschreibt die schlichte Variante aus add_lieferinfo_css()). */
+.sot-sp-summary .sot-ext-group + .sot-ext-group {
+    margin-top: 6px;
+    padding-top: 7px;
+    border-top: 1px solid #e3e9f3;
+}
+.sot-sp-summary .sot-ext-lbl {
+    color: #5b6577;
+}
+.sot-sp-summary .sot-ext-val {
+    color: #1D2E7C;
+}
+
 /* ── „passend dazu" (WooCommerce Product Bundles) sauber als Liste ──── */
 .sot-sp-summary .bundle_sells_title h3 {
     font-size: 1rem;
@@ -536,11 +586,18 @@
         word-break: break-word;
         overflow-wrap: anywhere;
     }
-    /* Verfügbarkeit bleibt gestapelt (Tabelle unter dem Label) */
+    /* Verfügbarkeit bleibt gestapelt (Tabelle/Blöcke unter dem Label) */
     .sot-sp-summary .product-meta-table #special-row-stock th,
-    .sot-sp-summary .product-meta-table #special-row-stock td {
+    .sot-sp-summary .product-meta-table #special-row-stock td,
+    .sot-sp-summary .product-meta-table #special-row-extern th,
+    .sot-sp-summary .product-meta-table #special-row-extern td {
         display: block !important;
         width: 100% !important;
+    }
+    /* Label steht mobil über den Blöcken – dann kein Sonder-Innenabstand */
+    .sot-sp-summary .product-meta-table #special-row-extern th {
+        padding-top: 4px;
+        padding-bottom: 0;
     }
     /* Verfügbarkeits-Tabelle nicht über den Rand */
     .sot-sp-summary .lieferinfo-table {

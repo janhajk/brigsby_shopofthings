@@ -272,6 +272,18 @@ function sot_show_product_meta_custom() {
 
     if (!$product->is_type('variable')) {
         echo '<tr id="special-row-stock"><th scope="row">' . __('Verfügbarkeit CH:', 'shopofthings') . '</th><td>' . $stock_info['lieferinfo_html'] . '</td></tr>';
+
+        // Zweite Zeile: Nachlieferung ab externem Lager. Das Label steht links wie
+        // „Verfügbarkeit CH:" (früher war es eine Kopfzeile innerhalb der Tabelle),
+        // im Wertfeld liegen `.sot-ext-group`-Blöcke – keine Tabelle, damit die
+        // Karten-Borderregeln zusammengehörende Angaben nicht auftrennen.
+        // Leer (z. B. virtuelles Produkt) → Zeile entfällt komplett.
+        if (!empty($stock_info['lieferinfo_extern_html'])) {
+            echo '<tr id="special-row-extern" class="special-row"><th scope="row" title="'
+                . esc_attr__('Ware, die wir für Sie beim Hersteller nachbestellen.', 'shopofthings') . '">'
+                . __('Ab externem Lager:', 'shopofthings') . '</th><td>'
+                . $stock_info['lieferinfo_extern_html'] . '</td></tr>';
+        }
     }
 
     // Ende der Tabelle
@@ -283,7 +295,14 @@ add_filter('woocommerce_get_availability', 'remove_default_stock_display', 1, 2)
 function remove_default_stock_display($availability, $_product) {
     if ($_product->is_type('variation')) {
         $stock_info = get_stock_info($_product);
+        // Variationen haben keine eigene Meta-Tabellenzeile: hier gibt es nur EIN
+        // Ausgabefeld. Darum CH-Tabelle und Extern-Blöcke aneinanderhängen, sonst
+        // würde die Info „Ab externem Lager" bei Varianten verloren gehen.
         $availability['availability'] = $stock_info['lieferinfo_html'];
+        if (!empty($stock_info['lieferinfo_extern_html'])) {
+            $availability['availability'] .= '<div class="sot-ext-blocks">'
+                . $stock_info['lieferinfo_extern_html'] . '</div>';
+        }
     }
     return $availability;
 }
