@@ -74,6 +74,9 @@ require get_stylesheet_directory() . '/inc/menu/menu-settings.php';
 // ShopOfThings-Einstellungen (B2B-Box-Widget etc.)
 require get_stylesheet_directory() . '/inc/shopofthings-settings.php';
 
+// Dokumente je Produkt (Datenblatt, Decoder, Anleitungen) als eigener Reiter.
+require get_stylesheet_directory() . '/inc/produkt-dokumente.php';
+
 /**
  * Eigenes Mega-Menü: CSS/JS global laden.
  */

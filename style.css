@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.30
+ Version:       3.1.32
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -781,10 +781,122 @@ input.product-search-field {
   .spec-table td {
     padding: 10px;
   }
-  /* 
-    Auf kleineren Bildschirmen werden Abstände und Schriftgrößen reduziert, 
+  /*
+    Auf kleineren Bildschirmen werden Abstände und Schriftgrößen reduziert,
     um die Lesbarkeit zu bewahren und Platz zu sparen. Die Struktur bleibt erhalten.
   */
+}
+
+/* Kennzahlen-Kacheln: die 3-5 haertesten Werte direkt unter dem Management Summary.
+   Der Leser erfasst sie in zwei Sekunden, ohne dass die Zahlen im Fliesstext wiederholt
+   werden muessen (siehe docs/produktseiten/TEMPLATE-PROMPT.md, Regel gegen Doppelungen). */
+.kennzahlen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 0 0 2.5rem;
+  padding: 0;
+  list-style: none !important;
+}
+
+.kennzahlen li {
+  background-color: #f7f9fc;
+  border: 1px solid #e6e6e6;
+  border-top: 3px solid #0052cc;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 0;
+  /* Spalte + margin-top:auto am Label haelt die Beschriftungen auf einer Linie,
+     auch wenn ein Wert zweizeilig umbricht. */
+  display: flex;
+  flex-direction: column;
+}
+
+.kennzahl-wert {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #0052cc;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+
+.kennzahl-label {
+  display: block;
+  margin-top: auto;
+  padding-top: 6px;
+  font-size: 0.85rem;
+  color: #4a4a4a;
+  line-height: 1.4;
+}
+
+/* Hinweisbox: abgesetzte Einordnung - Auswahlhilfe, Abgrenzung, Praxiswarnung.
+   Bewusst zurueckhaltend gestaltet, damit sie den Text ergaenzt und nicht uebertoent. */
+.hinweis-box {
+  background-color: #f7f9fc;
+  border-left: 4px solid #0052cc;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #333333;
+}
+
+.hinweis-box strong {
+  color: #1a1a1a;
+}
+
+/* Dokumente-Reiter auf der Produktseite (siehe inc/produkt-dokumente.php):
+   Datenblatt, Decoder, Anleitungen - je Produkt gepflegt. */
+.sot-dokumente {
+  list-style: none !important;
+  padding: 0;
+  margin: 0;
+}
+
+.sot-dokumente li {
+  padding: 12px 0;
+  border-bottom: 1px solid #e6e6e6;
+  line-height: 1.6;
+}
+
+.sot-dokumente li:last-child {
+  border-bottom: none;
+}
+
+.sot-dokumente a {
+  font-weight: 600;
+}
+
+.sot-dokumente a::before {
+  content: '\f019';            /* Font Awesome: Download */
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  margin-right: 8px;
+  color: #0052cc;
+}
+
+.sot-dokument-meta {
+  color: #6b7280;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .kennzahlen {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+  }
+
+  .kennzahl-wert {
+    font-size: 1.15rem;
+  }
+
+  .hinweis-box {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
 }
 
 
