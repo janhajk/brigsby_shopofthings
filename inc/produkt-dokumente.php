@@ -1,17 +1,23 @@
 <?php
 /**
- * Dokumente je Produkt
- * ====================
+ * Zusatzreiter je Produkt: Dokumente und Lieferumfang
+ * ===================================================
  *
+ * DOKUMENTE
  * Haengt an jedes Produkt eine beliebige Liste von Dokumenten (Datenblatt, Decoder,
  * Anleitung, Konformitaetserklaerung ...) und zeigt sie als eigenen Reiter "Dokumente"
  * auf der Produktseite - neben Beschreibung und den technischen Details.
- *
- * Pflege: Metabox "Dokumente" auf der Produktbearbeitungsseite (eine Zeile je Dokument).
  * Speicherung: Post-Meta `_sot_dokumente` als Array von
  *   [ 'titel' => string, 'url' => string, 'typ' => string, 'hinweis' => string ]
  *
- * Befuellen laesst sich das Feld auch per WP-CLI, z. B.:
+ * LIEFERUMFANG
+ * Reiter direkt nach "Dokumente": was tatsaechlich in der Packung liegt.
+ * Speicherung: Post-Meta `_sot_lieferumfang` als Array von Zeilen (Strings).
+ * WICHTIG: nur befuellen, wenn der Hersteller den Lieferumfang klar und eindeutig
+ * angibt. Lieber leer lassen als raten - ein falscher Lieferumfang erzeugt
+ * Reklamationen und Retouren.
+ *
+ * Befuellen laesst sich beides auch per WP-CLI oder Woo-API, z. B.:
  *   wp post meta update <ID> _sot_dokumente '<json>' --format=json
  */
 
@@ -20,6 +26,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 const SOT_DOKUMENTE_META = '_sot_dokumente';
+const SOT_LIEFERUMFANG_META = '_sot_lieferumfang';
+
+/**
+ * Gespeicherten Lieferumfang eines Produkts holen (Array von Zeilen).
+ *
+ * @param int $post_id
+ * @return array
+ */
+function sot_get_lieferumfang( $post_id ) {
+    $zeilen = get_post_meta( $post_id, SOT_LIEFERUMFANG_META, true );
+    if ( ! is_array( $zeilen ) ) {
+        return array();
+    }
+    return array_values( array_filter( array_map( 'trim', $zeilen ), 'strlen' ) );
+}
 
 /**
  * Gespeicherte Dokumente eines Produkts holen (immer ein sauberes Array).
@@ -109,6 +130,59 @@ function sot_dokumente_metabox_callback( $post ) {
     <?php
 }
 
+function sot_lieferumfang_metabox() {
+    add_meta_box(
+        'sot_lieferumfang',
+        'Lieferumfang (nur bei klarer Herstellerangabe)',
+        'sot_lieferumfang_metabox_callback',
+        'product',
+        'normal',
+        'default'
+    );
+}
+add_action( 'add_meta_boxes_product', 'sot_lieferumfang_metabox' );
+
+function sot_lieferumfang_metabox_callback( $post ) {
+    $zeilen = sot_get_lieferumfang( $post->ID );
+    wp_nonce_field( 'sot_lieferumfang_speichern', 'sot_lieferumfang_nonce' );
+    ?>
+    <p style="margin-top:0;color:#666">
+        Eine Position je Zeile, so wie sie der Hersteller angibt (z. B. "Sensoreinheit",
+        "Nivellierteller mit Libelle", "2 Batterien Typ C"). <strong>Nur ausfuellen, wenn der
+        Lieferumfang eindeutig dokumentiert ist</strong> - im Zweifel leer lassen. Ist das Feld
+        leer, erscheint der Reiter gar nicht.
+    </p>
+    <textarea name="sot_lieferumfang" rows="6" style="width:100%;font-family:monospace"
+        placeholder="Sensoreinheit&#10;Nivellierteller mit Libelle&#10;5 m Anschlusskabel"><?php
+        echo esc_textarea( implode( "\n", $zeilen ) );
+    ?></textarea>
+    <?php
+}
+
+function sot_lieferumfang_speichern( $post_id ) {
+    if ( ! isset( $_POST['sot_lieferumfang_nonce'] ) || ! wp_verify_nonce( $_POST['sot_lieferumfang_nonce'], 'sot_lieferumfang_speichern' ) ) {
+        return;
+    }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+
+    $roh    = isset( $_POST['sot_lieferumfang'] ) ? wp_unslash( $_POST['sot_lieferumfang'] ) : '';
+    $zeilen = array_values( array_filter( array_map( function ( $z ) {
+        return sanitize_text_field( trim( $z ) );
+    }, preg_split( '/\r\n|\r|\n/', (string) $roh ) ), 'strlen' ) );
+
+    if ( empty( $zeilen ) ) {
+        delete_post_meta( $post_id, SOT_LIEFERUMFANG_META );
+    } else {
+        update_post_meta( $post_id, SOT_LIEFERUMFANG_META, $zeilen );
+    }
+}
+add_action( 'save_post_product', 'sot_lieferumfang_speichern' );
+
 function sot_dokumente_speichern( $post_id ) {
     if ( ! isset( $_POST['sot_dokumente_nonce'] ) || ! wp_verify_nonce( $_POST['sot_dokumente_nonce'], 'sot_dokumente_speichern' ) ) {
         return;
@@ -151,16 +225,42 @@ add_action( 'save_post_product', 'sot_dokumente_speichern' );
 
 function sot_dokumente_tab( $tabs ) {
     global $post;
-    if ( $post && sot_get_dokumente( $post->ID ) ) {
+    if ( ! $post ) {
+        return $tabs;
+    }
+    if ( sot_get_dokumente( $post->ID ) ) {
         $tabs['sot_dokumente'] = array(
             'title'    => __( 'Dokumente', 'brigsby' ),
             'priority' => 25,   // nach "Beschreibung" (10), vor "Zusaetzliche Informationen" (30)
             'callback' => 'sot_dokumente_tab_inhalt',
         );
     }
+    if ( sot_get_lieferumfang( $post->ID ) ) {
+        $tabs['sot_lieferumfang'] = array(
+            'title'    => __( 'Lieferumfang', 'brigsby' ),
+            'priority' => 26,   // direkt nach "Dokumente"
+            'callback' => 'sot_lieferumfang_tab_inhalt',
+        );
+    }
     return $tabs;
 }
 add_filter( 'woocommerce_product_tabs', 'sot_dokumente_tab' );
+
+function sot_lieferumfang_tab_inhalt() {
+    global $post;
+    $zeilen = sot_get_lieferumfang( $post->ID );
+    if ( ! $zeilen ) {
+        return;
+    }
+    echo '<h2>Lieferumfang</h2>';
+    echo '<ul class="sot-lieferumfang">';
+    foreach ( $zeilen as $z ) {
+        echo '<li>' . esc_html( $z ) . '</li>';
+    }
+    echo '</ul>';
+    echo '<p class="sot-lieferumfang-hinweis">Angaben gemaess Hersteller. Batterien, SIM-Karten und '
+        . 'Montagematerial sind nur enthalten, wenn sie oben ausdruecklich aufgefuehrt sind.</p>';
+}
 
 /**
  * Dateigroesse eines Anhangs aus der Mediathek ermitteln - nur fuer eigene Dateien,

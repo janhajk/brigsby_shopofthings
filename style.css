@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.32
+ Version:       3.1.33
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -881,6 +881,38 @@ input.product-search-field {
   color: #6b7280;
   font-size: 0.875rem;
   white-space: nowrap;
+}
+
+/* Lieferumfang-Reiter (siehe inc/produkt-dokumente.php): was in der Packung liegt. */
+.sot-lieferumfang {
+  list-style: none !important;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.sot-lieferumfang li {
+  position: relative;
+  padding: 8px 0 8px 1.75rem;
+  border-bottom: 1px solid #e6e6e6;
+  line-height: 1.6;
+}
+
+.sot-lieferumfang li:last-child {
+  border-bottom: none;
+}
+
+.sot-lieferumfang li::before {
+  content: '\f466';            /* Font Awesome: Box */
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  color: #0052cc;
+}
+
+.sot-lieferumfang-hinweis {
+  color: #6b7280;
+  font-size: 0.875rem;
 }
 
 @media (max-width: 768px) {
