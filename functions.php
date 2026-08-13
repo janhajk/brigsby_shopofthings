@@ -77,6 +77,9 @@ require get_stylesheet_directory() . '/inc/shopofthings-settings.php';
 // Dokumente je Produkt (Datenblatt, Decoder, Anleitungen) als eigener Reiter.
 require get_stylesheet_directory() . '/inc/produkt-dokumente.php';
 
+// Bestellfeld „Referenz / Anmerkung" im Bestell-Editor bearbeitbar machen.
+require get_stylesheet_directory() . '/inc/bestellung-referenzfeld.php';
+
 /**
  * Eigenes Mega-Menü: CSS/JS global laden.
  */
