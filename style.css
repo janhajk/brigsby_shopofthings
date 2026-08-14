@@ -5,7 +5,7 @@
  Author:        shopofthings
  Author URI:    https://shopofthings.ch
  Template:      brigsby
- Version:       3.1.35
+ Version:       3.1.36
  License:       GNU General Public License v2 or later
  License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:   brigsby
@@ -1381,7 +1381,10 @@ input.product-search-field {
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
-    width: 440px;
+    /* 520 statt 440: Geraetenamen sind hier lang („Milesight EM300-TH Temperatur- und
+       Luftfeuchtigkeitssensor IP67 LoRaWAN"). Bei 440 brach fast jeder Name auf zwei Zeilen
+       und wurde dann noch abgeschnitten. */
+    width: 520px;
     max-width: 92vw;
     max-height: 70vh;
     overflow-y: auto;
@@ -1476,6 +1479,34 @@ input.product-search-field {
     font-size: 0.8rem !important;
     font-weight: 700;
     color: var(--SOT---blue-deep, #1D2E7C) !important;
+    /* Preis und Lagerangabe auf einer Linie, mit Abstand statt Leerzeichen */
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Lagerangabe neben dem Preis (kommt aus sot-ai-search.php im Preisfeld mit).
+   Bewusst zurueckhaltend: Sie soll die Zeile ergaenzen, nicht mit dem Preis konkurrieren. */
+.sot-search-dropdown .product-search-results .sot-tref-lager {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 1px 7px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+.sot-search-dropdown .product-search-results .sot-tref-lager--ja {
+    color: #14663d;
+    background: #e7f6ee;
+}
+.sot-search-dropdown .product-search-results .sot-tref-lager--nach {
+    color: #6b5a20;
+    background: #fbf3dd;
+}
+.sot-search-dropdown .product-search-results .sot-tref-lager--nein {
+    color: #6b7280;
+    background: #f1f3f7;
 }
 
 /* evtl. vorhandener „mehr Resultate"-Link unterhalb der Tabelle */
