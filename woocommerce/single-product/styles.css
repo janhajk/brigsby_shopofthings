@@ -429,7 +429,12 @@
    passt damit zum übrigen Design der Info-Spalte, und die Zugehörigkeit der
    beiden Zeilen einer Gruppe ist auch ohne Trennlinie sofort sichtbar. */
 .sot-sp-summary .product-meta-table #special-row-extern {
-    border-top: 0 !important;   /* gehört optisch zur CH-Zeile darüber */
+    /* Trennlinie wie zwischen den übrigen Metazeilen (Kategorien, Sensoren …).
+       Vorher stand hier bewusst `border-top: 0` — die beiden Zeilen sollten optisch
+       zusammengehören. Am 14.08.2026 umgedreht: Seit unter „Ab externem Lager" auch
+       der Mengenhinweis steht, muss klar sein, worauf er sich bezieht. Ohne Linie
+       liest sich der Hinweis wie eine Fussnote zur Lagerzeile darüber. */
+    border-top: 1px solid #e6ecf5 !important;
 }
 .sot-sp-summary .product-meta-table #special-row-extern th {
     vertical-align: top;
