@@ -66,7 +66,11 @@
                     <a href="/my-account" class="sot-icon" aria-label="<?php echo esc_attr( sot_topbar( 'tt_account' ) ); ?>" data-tooltip="<?php echo esc_attr( sot_topbar( 'tt_account' ) ); ?>"><i class="far fa-user"></i></a>
 
                     <!-- Sprache -->
-                    <span class="sot-language" data-tooltip="<?php echo esc_attr( sot_topbar( 'tt_language' ) ); ?>">DE</span>
+                    <?php
+                    // Filter `sot_language_switch`: Plugins (z. B. sot-landingpages) können auf mehrsprachigen
+                    // Seiten einen echten Sprachwähler einsetzen. Standard: statisches „DE“.
+                    echo apply_filters( 'sot_language_switch', '<span class="sot-language" data-tooltip="' . esc_attr( sot_topbar( 'tt_language' ) ) . '">DE</span>' );
+                    ?>
 
                     <!-- Buttons -->
                     <a href="<?php echo esc_url( sot_topbar( 'compare_url' ) ); ?>" class="sot-btn sot-btn-compare" data-tooltip="<?php echo esc_attr( sot_topbar( 'compare_tooltip' ) ); ?>"><?php echo esc_html( sot_topbar( 'compare_text' ) ); ?></a>
