@@ -38,23 +38,40 @@ if ( empty( $items ) ) { return; }
                     <div class="sot-nav-dropdown">
                         <ul>
                             <?php foreach ( $links as $l ) : ?>
+                                <?php if ( 0 === strpos( $l['label'], '## ' ) ) : // Zwischenüberschrift, Eingabe im Admin: "## Software" ?>
+                                <li class="sot-nav-heading" style="padding:10px 16px 4px;margin-top:6px;border-top:1px solid #e3e9f4;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8a93a5;"><?php echo esc_html( substr( $l['label'], 3 ) ); ?></li>
+                                <?php else : ?>
                                 <li><a href="<?php echo esc_url( $l['url'] ); ?>"><?php echo esc_html( $l['label'] ); ?></a></li>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         </ul>
                     </div>
                 <?php elseif ( $has_mega ) :
-                    $featured = $item['featured'] ?? array();
-                    $cta      = $item['cta'] ?? array();
-                    $has_feat = ! empty( $featured['title'] ) || ! empty( $featured['image'] );
+                    $cta            = $item['cta'] ?? array();
+                    $featured_items = function_exists( 'sot_menu_featured_items' ) ? sot_menu_featured_items( $item ) : array();
+                    $brand_feats    = function_exists( 'sot_menu_featured_brands' ) ? sot_menu_featured_brands() : array();
+                    $has_feat       = ! empty( $featured_items );
+                    $has_feat_col   = $has_feat || ! empty( $brand_feats );
+                    $feat_eyebrow  = '';
+                    foreach ( $featured_items as $ff ) {
+                        if ( ! empty( $ff['eyebrow'] ) ) {
+                            $feat_eyebrow = $ff['eyebrow'];
+                            break;
+                        }
+                    }
+                    if ( '' === $feat_eyebrow || 0 === strcasecmp( $feat_eyebrow, 'Top Seller' ) ) {
+                        $feat_eyebrow = 'Bestseller';
+                    }
                     ?>
                     <div class="sot-nav-mega">
-                        <div class="mega-inner">
+                        <div class="mega-inner<?php echo $has_feat_col ? ' has-featured' : ''; ?>">
 
                             <div class="mega-groups">
                                 <?php foreach ( $groups as $gi => $g ) :
-                                    $icon = ! empty( $g['icon'] ) ? wp_get_attachment_image( absint( $g['icon'] ), 'thumbnail', false, array( 'alt' => '' ) ) : ''; ?>
-                                    <button type="button" class="mega-group<?php echo 0 === $gi ? ' active' : ''; ?>" data-target="mega-<?php echo (int) $idx . '-' . (int) $gi; ?>">
-                                        <span class="mega-group-icon"><?php echo $icon ? $icon : sot_menu_default_icon(); // phpcs:ignore ?></span>
+                                    $gpanel = ( 'brands' === sot_menu_category_slug_from_url( $g['url'] ?? '' ) ) ? 'brands' : 'products';
+                                    ?>
+                                    <button type="button" class="mega-group<?php echo 0 === $gi ? ' active' : ''; ?>" data-target="mega-<?php echo (int) $idx . '-' . (int) $gi; ?>" data-panel="<?php echo esc_attr( $gpanel ); ?>">
+                                        <span class="mega-group-icon"><?php echo sot_menu_group_icon_html( $g ); // phpcs:ignore ?></span>
                                         <span class="mega-group-label"><?php echo esc_html( $g['label'] ); ?></span>
                                         <span class="mega-group-arrow" aria-hidden="true">›</span>
                                     </button>
@@ -66,25 +83,94 @@ if ( empty( $items ) ) { return; }
                             </div>
 
                             <div class="mega-lists">
-                                <?php foreach ( $groups as $gi => $g ) : ?>
-                                    <ul class="mega-list<?php echo 0 === $gi ? ' active' : ''; ?>" id="mega-<?php echo (int) $idx . '-' . (int) $gi; ?>">
-                                        <li class="mega-list-head"><?php echo esc_html( $g['label'] ); ?></li>
+                                <?php foreach ( $groups as $gi => $g ) :
+                                    $glinks = sot_menu_group_links( $g );
+                                    $gcount = count( $glinks );
+                                    $gslug  = function_exists( 'sot_menu_category_slug_from_url' ) ? sot_menu_category_slug_from_url( $g['url'] ?? '' ) : '';
+                                    $gcols  = 1;
+                                    if ( in_array( $gslug, array( 'brands', 'sensorik' ), true ) || $gcount > 8 ) {
+                                        $gcols = 2;
+                                    }
+                                    ?>
+                                    <div class="mega-list cols-<?php echo (int) $gcols; ?><?php echo 0 === $gi ? ' active' : ''; ?>" id="mega-<?php echo (int) $idx . '-' . (int) $gi; ?>">
+                                        <div class="mega-list-head"><?php echo esc_html( $g['label'] ); ?></div>
                                         <?php if ( ! empty( $g['url'] ) ) : ?>
-                                            <li class="mega-list-all"><a href="<?php echo esc_url( $g['url'] ); ?>"><?php echo esc_html( $g['label'] ); ?> – alle</a></li>
+                                            <a class="mega-list-all" href="<?php echo esc_url( $g['url'] ); ?>"><?php echo esc_html( $g['label'] ); ?> – alle</a>
                                         <?php endif; ?>
-                                        <?php foreach ( sot_menu_parse_links( $g['links'] ?? '' ) as $l ) : ?>
-                                            <li><a href="<?php echo esc_url( $l['url'] ); ?>"><?php echo esc_html( $l['label'] ); ?></a></li>
-                                        <?php endforeach; ?>
-                                    </ul>
+                                        <?php
+                                        $chunks = ( 2 === $gcols && $gcount > 1 )
+                                            ? array_chunk( $glinks, (int) ceil( $gcount / 2 ) )
+                                            : array( $glinks );
+                                        ?>
+                                        <div class="mega-list-grid">
+                                            <?php foreach ( $chunks as $chunk ) : ?>
+                                                <ul>
+                                                    <?php foreach ( $chunk as $l ) : ?>
+                                                        <?php sot_menu_echo_sublink( $l ); ?>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
                                 <?php endforeach; ?>
                             </div>
 
-                            <?php if ( $has_feat ) : ?>
-                                <a class="mega-featured" href="<?php echo esc_url( $featured['url'] ); ?>">
-                                    <?php if ( ! empty( $featured['eyebrow'] ) ) : ?><span class="mega-featured-eyebrow"><?php echo esc_html( $featured['eyebrow'] ); ?></span><?php endif; ?>
-                                    <?php if ( ! empty( $featured['image'] ) ) { echo wp_get_attachment_image( absint( $featured['image'] ), 'medium', false, array( 'class' => 'mega-featured-img', 'alt' => '' ) ); } ?>
-                                    <?php if ( ! empty( $featured['title'] ) ) : ?><span class="mega-featured-title"><?php echo esc_html( $featured['title'] ); ?></span><?php endif; ?>
-                                </a>
+                            <?php if ( $has_feat_col ) : ?>
+                                <div class="mega-featured-slot">
+                                <?php if ( $has_feat ) : ?>
+                                    <div class="mega-featured is-active" data-panel="products">
+                                        <div class="mega-featured-head">
+                                            <span class="mega-featured-mark" aria-hidden="true"></span>
+                                            <span class="mega-featured-eyebrow"><?php echo esc_html( $feat_eyebrow ); ?></span>
+                                        </div>
+                                        <?php
+                                        $fi = 0;
+                                        foreach ( $featured_items as $ff ) :
+                                            $fsrc = sot_menu_featured_image_url( $ff );
+                                            if ( empty( $ff['title'] ) && ! $fsrc ) {
+                                                continue;
+                                            }
+                                            $ftag    = sot_menu_featured_tag( $ff );
+                                            $is_lead = ( 0 === $fi );
+                                            $fi++;
+                                            ?>
+                                            <a class="<?php echo $is_lead ? 'mega-featured-lead' : 'mega-featured-item'; ?>" href="<?php echo esc_url( $ff['url'] ?? '' ); ?>">
+                                                <?php if ( $fsrc ) : ?>
+                                                    <span class="mega-featured-photo">
+                                                        <img src="<?php echo esc_url( $fsrc ); ?>" alt="" width="<?php echo $is_lead ? 200 : 48; ?>" height="<?php echo $is_lead ? 160 : 48; ?>" loading="lazy">
+                                                    </span>
+                                                <?php endif; ?>
+                                                <span class="mega-featured-copy">
+                                                    <?php if ( ! empty( $ff['title'] ) ) : ?>
+                                                        <span class="mega-featured-title"><?php echo esc_html( $ff['title'] ); ?></span>
+                                                    <?php endif; ?>
+                                                    <?php if ( $ftag ) : ?>
+                                                        <span class="mega-featured-tag"><?php echo esc_html( $ftag ); ?></span>
+                                                    <?php endif; ?>
+                                                </span>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ( $brand_feats ) : ?>
+                                    <div class="mega-featured mega-featured-brands" data-panel="brands">
+                                        <div class="mega-featured-head">
+                                            <span class="mega-featured-mark" aria-hidden="true"></span>
+                                            <span class="mega-featured-eyebrow">Bestseller Hersteller</span>
+                                        </div>
+                                        <?php foreach ( $brand_feats as $bf ) : ?>
+                                            <a class="mega-featured-brand is-brand-<?php echo esc_attr( $bf['slug'] ); ?>" href="<?php echo esc_url( $bf['url'] ); ?>">
+                                                <?php if ( ! empty( $bf['icon'] ) ) : ?>
+                                                    <img src="<?php echo esc_url( $bf['icon'] ); ?>" alt="<?php echo esc_attr( $bf['title'] ); ?>" width="180" height="48" loading="lazy">
+                                                <?php else : ?>
+                                                    <span class="mega-featured-title"><?php echo esc_html( $bf['title'] ); ?></span>
+                                                <?php endif; ?>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+                                </div>
                             <?php endif; ?>
 
                         </div>
