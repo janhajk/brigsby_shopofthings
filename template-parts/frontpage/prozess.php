@@ -21,7 +21,7 @@ $steps = (array) $fp['pr_steps'];
                         </div>
                         <?php if ( ! empty( $s['line1'] ) ) : ?><h3><?php echo esc_html( $s['line1'] ); ?></h3><?php endif; ?>
                         <?php if ( ! empty( $s['line2'] ) ) : ?><p><?php echo esc_html( $s['line2'] ); ?></p><?php endif; ?>
-                        <?php if ( ! empty( $s['url'] ) ) : ?><a href="<?php echo esc_url( $s['url'] ); ?>" class="step-link">Mehr erfahren →</a><?php endif; ?>
+                        <?php if ( ! empty( $s['url'] ) ) : ?><a href="<?php echo esc_url( $s['url'] ); ?>" class="step-link"><?php echo esc_html( function_exists( 'sot_fp_t' ) ? sot_fp_t( 'more' ) : 'Mehr erfahren →' ); ?></a><?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>

@@ -34,7 +34,7 @@ $idx   = 0;
                             <time><?php echo esc_html( get_the_date() ); ?></time>
                             <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                             <p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 24 ) ); ?></p>
-                            <a class="news-more" href="<?php the_permalink(); ?>">Mehr lesen →</a>
+                            <a class="news-more" href="<?php the_permalink(); ?>"><?php echo esc_html( function_exists( 'sot_fp_t' ) ? sot_fp_t( 'read' ) : 'Mehr lesen →' ); ?></a>
                         </div>
                     </article>
                     <?php if ( $total > 1 ) : ?><div class="news-rest"><?php endif; ?>
@@ -44,7 +44,7 @@ $idx   = 0;
                             <time><?php echo esc_html( get_the_date() ); ?></time>
                             <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                             <p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 22 ) ); ?></p>
-                            <a class="news-more" href="<?php the_permalink(); ?>">Mehr lesen →</a>
+                            <a class="news-more" href="<?php the_permalink(); ?>"><?php echo esc_html( function_exists( 'sot_fp_t' ) ? sot_fp_t( 'read' ) : 'Mehr lesen →' ); ?></a>
                         </div>
                     </article>
                 <?php endif; ?>

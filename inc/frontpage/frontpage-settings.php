@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+require_once __DIR__ . '/frontpage-i18n.php'; // Mehrsprachige Startseite (FR/IT/EN)
+
 /* ==========================================================================
    Liste / Beschriftung der Sektionen (Reihenfolge = Default-Reihenfolge)
    ========================================================================== */
@@ -173,7 +175,9 @@ function sot_fp() {
             }
         }
     }
-    return $opts;
+    // Mehrsprachige Startseite: während des Renderns einer FR/IT/EN-Variante die Übersetzungen
+    // aus inc/frontpage/frontpage-i18n.php darüberlegen (die Admin-Seite bleibt deutsch).
+    return function_exists( 'sot_fp_localize' ) ? sot_fp_localize( $opts ) : $opts;
 }
 
 function sot_fp_get( $key, $fallback = '' ) {
